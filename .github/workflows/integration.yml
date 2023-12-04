@@ -4,10 +4,11 @@ jobs:
 
   build-and-run-webapi:
     runs-on: windows-latest
-
+    
     defaults:
-        run:
-            working-directory: server
+      run:
+        shell: bash
+        working-directory: ./server
 
     steps:
       - run: dir
@@ -39,8 +40,9 @@ jobs:
     runs-on: ubuntu-latest
     
     defaults:
-        run:
-            working-directory: client
+      run:
+        shell: bash
+        working-directory: ./client
 
     steps:
       - run: ls
