@@ -23,7 +23,7 @@ Welcome to Gemeinschaftskochbuch, a community cookbook project where users can s
 - Each user should have the ability to *exclude recipes* from *search results* based on the *recipe's author*. This setting should not be visible to other users.
 - Consider implementing a *Like/Dislike system* for recipes. Only positive likes should be public, while dislikes remain for private use.
 
-> Note/ToDo: There are additional requirements documented in Confluence that need to be added here. Big sorry.
+> Note/ToDo: There are additional requirements documented in Confluence => Which are now avilable in the pdf located in the root of this repository.
 
 ## Project Structure
 
