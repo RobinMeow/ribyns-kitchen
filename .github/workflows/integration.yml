@@ -1,0 +1,72 @@
+name: Build and Deploy Angular and .NET Web API
+on: push
+jobs:
+
+  build-and-run-webapi:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore NuGet packages
+        run: dotnet restore
+
+      - name: Build .NET Web API
+        run: dotnet build
+
+      - name: Run .NET Web API Tests
+        run: dotnet test
+
+      - name: Run .NET Web API
+        run: dotnet run
+
+  build-and-serve-angular:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.0'
+
+      - name: Install Angular dependencies
+        run: npm ci
+
+      - name: Build Angular app
+        run: ng build
+
+      - name: Build Angular app
+        run: npm run build
+
+      - name: Serve Angular app
+        run: npm start
+
+      # - name: Deploy Angular app
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: angular-dist
+      #     path: dist
+
+  cypress-run:
+    name: Cypress run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6.6.0
+        with:
+          spec: cypress/e2e/**/*.cy.ts
+          if-no-files-found: error
+          browser: chrome
+          wait-on: "http://localhost:4200"
