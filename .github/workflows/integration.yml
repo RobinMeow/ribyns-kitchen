@@ -7,7 +7,7 @@ jobs:
 
     defaults:
         run:
-            working-directory: server\
+            working-directory: server
 
     steps:
       - run: dir
@@ -40,9 +40,8 @@ jobs:
     
     defaults:
         run:
-            working-directory: ./client
+            working-directory: client
 
-  
     steps:
       - run: ls
   
