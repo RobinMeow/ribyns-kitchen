@@ -1,0 +1,28 @@
+<h2 data-cy-title>Account löschen</h2>
+
+<form
+  [formGroup]="deleteAccountForm"
+  (submit)="onSubmit()"
+  data-cy-delete-account-form
+>
+  <div class="forms-column">
+    <mat-form-field>
+      <mat-label>Passwort</mat-label>
+      <input
+        matInput
+        [formControl]="deleteAccountForm.controls.password"
+        placeholder="iLoveJesus<3"
+        type="password"
+        data-cy-password-input
+      />
+    </mat-form-field>
+  </div>
+  <button
+    [disabled]="deleteAccountForm.invalid"
+    mat-raised-button
+    color="primary"
+    type="submit"
+  >
+    Unwiderruflich löschen
+  </button>
+</form>

@@ -1,0 +1,31 @@
+<div class="auth-wrapper">
+  @if (tokenSignal() === null) {
+    <button
+      mat-flat-button
+      color="accent"
+      routerLink="/register"
+      data-cy-register-button
+    >
+      Account erstellen
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      routerLink="/login"
+      data-cy-login-button
+    >
+      Einloggen
+    </button>
+  } @else if (tokenSignal() === undefined) {
+    <!-- show nothing, while evaluating if the user is logged in -->
+  } @else {
+    <button
+      mat-stroked-button
+      color="accent"
+      (click)="logout()"
+      data-cy-logout-button
+    >
+      Ausloggen
+    </button>
+  }
+</div>

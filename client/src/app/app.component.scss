@@ -1,0 +1,19 @@
+@use '../varibales';
+
+.wrapper {
+	height: 100%;
+}
+
+.menu {
+	padding: 0;
+}
+
+.router-outlet-defaults {
+	margin: #{varibales.$spacing};
+}
+
+@media(max-width: 600px){
+	.menu {
+		width: 100%;
+	}
+}
