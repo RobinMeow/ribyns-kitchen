@@ -8,7 +8,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: server
+        # working-directory: server
 
     steps:
       - run: ls
@@ -42,7 +42,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: client
+        # working-directory: client
 
     steps:
       - run: ls
