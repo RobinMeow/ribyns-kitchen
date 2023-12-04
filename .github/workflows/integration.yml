@@ -105,25 +105,19 @@ jobs:
     - name: Git checkout
       uses: actions/checkout@v4
 
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18.16.0'
-
     - name: Start MongoDB
       uses: supercharge/mongodb-github-action@1.10.0
       with:
         mongodb-version: '6.0'
 
   cypress-e2e:
+    name: Cypress run
+    runs-on: ubuntu-latest
 
     defaults:
       run:
         shell: bash
         working-directory: client
-
-    name: Cypress run
-    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
