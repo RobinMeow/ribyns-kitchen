@@ -2,62 +2,62 @@ name: Build and Deploy Angular and .NET Web API
 on: push
 jobs:
 
-  # build-and-run-webapi:
-  #   runs-on: windows-latest
+  build-and-run-webapi:
+    runs-on: windows-latest
     
-  #   defaults:
-  #     run:
-  #       shell: bash
-  #       working-directory: server
+    defaults:
+      run:
+        shell: bash
+        working-directory: server
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  #     - run: ls
-  #     - name: Setup .NET Core
-  #       uses: actions/setup-dotnet@v3
-  #       with:
-  #         dotnet-version: 8.0.x
+      - run: ls
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
 
-  #     - run: ls
-  #     - name: Restore NuGet packages
-  #       run: dotnet restore
+      - run: ls
+      - name: Restore NuGet packages
+        run: dotnet restore
 
-  #     - name: Build .NET Web API
-  #       run: dotnet build
+      - name: Build .NET Web API
+        run: dotnet build
 
-  #     - name: Run .NET Web API
-  #       run: dotnet run
+      - name: Run .NET Web API
+        run: dotnet run &
 
-  # build-and-run-webapi-tests:
-  #   runs-on: windows-latest
+  build-and-run-webapi-tests:
+    runs-on: windows-latest
     
-  #   defaults:
-  #     run:
-  #       shell: bash
-  #       working-directory: server.tests
+    defaults:
+      run:
+        shell: bash
+        working-directory: server.tests
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  #     - run: ls
-  #     - name: Setup .NET Core
-  #       uses: actions/setup-dotnet@v3
-  #       with:
-  #         dotnet-version: 8.0.x
+      - run: ls
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
 
-  #     - run: ls
-  #     - name: Restore NuGet packages
-  #       run: dotnet restore
+      - run: ls
+      - name: Restore NuGet packages
+        run: dotnet restore
 
-  #     - name: Build .NET Web API
-  #       run: dotnet build
+      - name: Build .NET Web API
+        run: dotnet build
 
-  #     - run: dir
-  #     - name: Run .NET Web API Tests
-  #       run: dotnet test
+      - run: dir
+      - name: Run .NET Web API Tests
+        run: dotnet test
 
   build-and-serve-angular:
     runs-on: ubuntu-latest
