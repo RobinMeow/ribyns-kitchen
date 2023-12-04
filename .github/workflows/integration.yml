@@ -82,9 +82,6 @@ jobs:
         run: npm ci
 
       - name: Build Angular app
-        run: ng build
-
-      - name: Build Angular app
         run: npm run build
 
       - name: Serve Angular app
