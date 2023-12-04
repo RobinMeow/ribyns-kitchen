@@ -14,13 +14,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - run: ls
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
 
-      - run: ls
       - name: Restore NuGet packages
         run: dotnet restore
 
@@ -42,13 +40,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - run: ls
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
 
-      - run: ls
       - name: Restore NuGet packages
         run: dotnet restore
 
@@ -76,8 +72,6 @@ jobs:
         with:
           node-version: '18.16.0'
 
-      - run: ls
-  
       - name: Install Angular dependencies
         run: npm ci
 
@@ -85,8 +79,8 @@ jobs:
         run: npm run build
 
       - name: Serve Angular app
-        run: npm start
-
+        run: npm start &
+        
   # cypress-run:
   #   name: Cypress run
   #   runs-on: ubuntu-latest
