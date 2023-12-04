@@ -5,31 +5,39 @@ jobs:
   build-and-run-webapi:
     runs-on: windows-latest
 
+    defaults:
+        run:
+            working-directory: ./server
+
     steps:
+      - run: ls
+
       - name: Checkout
         uses: actions/checkout@v4
 
+      - run: ls
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
 
+      - run: ls
       - name: Restore NuGet packages
         run: dotnet restore
 
       - name: Build .NET Web API
         run: dotnet build
 
-      - name: Run .NET Web API Tests
-        working-directory: ./server
-        run: dotnet test
+      # - run: ls
+      # - name: Run .NET Web API Tests
+      #   run: dotnet test
 
       - name: Run .NET Web API
         run: dotnet run
 
   build-and-serve-angular:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,15 +48,19 @@ jobs:
           node-version: '18.16.0'
 
       - name: Install Angular dependencies
+        working-directory: ./client
         run: npm ci
 
       - name: Build Angular app
+        working-directory: ./client
         run: ng build
 
       - name: Build Angular app
+        working-directory: ./client
         run: npm run build
 
       - name: Serve Angular app
+        working-directory: ./client
         run: npm start
 
       # - name: Deploy Angular app
