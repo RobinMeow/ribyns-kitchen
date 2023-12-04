@@ -40,7 +40,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        # working-directory: client
+        working-directory: client
 
     steps:
       - name: Checkout
