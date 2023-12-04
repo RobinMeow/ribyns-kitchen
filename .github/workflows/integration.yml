@@ -8,21 +8,21 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./server
+        working-directory: server
 
     steps:
-      - run: dir
+      - run: ls
 
       - name: Checkout
         uses: actions/checkout@v4
 
-      - run: dir
+      - run: ls
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
 
-      - run: dir
+      - run: ls
       - name: Restore NuGet packages
         run: dotnet restore
 
@@ -42,7 +42,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./client
+        working-directory: client
 
     steps:
       - run: ls
