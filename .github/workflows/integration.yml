@@ -21,6 +21,7 @@ jobs:
         run: dotnet build
 
       - name: Run .NET Web API Tests
+        working-directory: ./server
         run: dotnet test
 
       - name: Run .NET Web API
