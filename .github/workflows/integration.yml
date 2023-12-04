@@ -96,3 +96,48 @@ jobs:
   #         if-no-files-found: error
   #         browser: chrome
   #         wait-on: "http://localhost:4200"
+
+
+  setup-mongodb:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+        mongodb-version: ['4.2', '4.4', '5.0', '6.0']
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.10.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
+
+    - run: npm install
+
+    - run: npm test
+      env:
+        CI: true
+
+  cypress-run:
+    name: Cypress run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6.6.0
+        with:
+          spec: cypress/e2e/**/*.cy.ts
+          if-no-files-found: error
+          browser: chrome
+          build: npm run build
+          start: npm start
+          wait-on: "http://localhost:4200"
