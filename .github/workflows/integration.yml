@@ -8,11 +8,9 @@ jobs:
     defaults:
       run:
         shell: bash
-        # working-directory: server
+        working-directory: server
 
     steps:
-      - run: ls
-
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -45,8 +43,6 @@ jobs:
         # working-directory: client
 
     steps:
-      - run: ls
-  
       - name: Checkout
         uses: actions/checkout@v4
 
