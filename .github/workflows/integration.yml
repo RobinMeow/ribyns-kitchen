@@ -122,7 +122,4 @@ jobs:
           spec: cypress/e2e/**/*.cy.ts
           # if-no-files-found: error
           browser: chrome
-          wait-on: |
-            "http://localhost:4200"
-            "http://localhost:5126"
-            "http://127.0.0.1:21017"
+          wait-on: 'http://localhost:4200, http://localhost:5126, http://127.0.0.1:21017'
