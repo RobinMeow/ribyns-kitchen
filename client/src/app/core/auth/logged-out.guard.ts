@@ -1,11 +1,16 @@
 import { inject } from '@angular/core';
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthDomainService } from './auth.domain.service';
 
 export const loggedOutGuard: CanActivateFn = (route, state) => {
-  const authService = inject(AuthDomainService);
-  const signal = authService.getCurrentUserSignal();
-  console.log('authService.getCurrentUserSignal()', signal());
+  const router = inject(Router);
 
-  return signal() === null;
+  const currentUserSignal = inject(AuthDomainService).getCurrentUserSignal()();
+  const isLoggedOut = currentUserSignal === null;
+
+  if (!isLoggedOut) {
+    router.navigateByUrl('/');
+  }
+
+  return isLoggedOut;
 };

@@ -104,7 +104,10 @@ function createTestUser() {
 
     cy.getByAttr('register-form').submit();
 
-    cy.wait('@registerAsync');
+    cy.wait('@registerAsync').then(() => {
+      // I dont know why, but this is os required, else the "login redirects when logged in already" - test fails
+      cy.url().should('not.include', 'register');
+    });
   });
 }
 
