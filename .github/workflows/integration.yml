@@ -95,10 +95,6 @@ jobs:
   cypress-e2e:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: client
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -106,6 +102,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.0
         with:
+          working-directory: client
           spec: cypress/e2e/**/*.cy.ts
           # if-no-files-found: error
           browser: chrome
