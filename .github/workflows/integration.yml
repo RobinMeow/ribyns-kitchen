@@ -116,6 +116,6 @@ jobs:
         with:
           working-directory: client
           spec: cypress/e2e/**/*.cy.ts
-          # if-no-files-found: error
+          if-no-files-found: error
           browser: chrome
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
