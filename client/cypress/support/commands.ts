@@ -114,6 +114,7 @@ Cypress.Commands.add('createTestUser', createTestUser);
 
 function deleteTestUser() {
   cy.fixture('test-user.json').as('user');
+
   cy.get('@user').then((user) => {
     const { password }: any = user;
     cy.visit('/delete-account');
