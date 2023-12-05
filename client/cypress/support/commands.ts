@@ -105,6 +105,8 @@ function createTestUser() {
     cy.getByAttr('register-form').submit();
 
     cy.wait('@registerAsync');
+    // I dont know why, but this is required, else the "login redirects when logged in already" - test fails
+    cy.url().should('not.include', 'register');
   });
 }
 
@@ -112,6 +114,7 @@ Cypress.Commands.add('createTestUser', createTestUser);
 
 function deleteTestUser() {
   cy.fixture('test-user.json').as('user');
+
   cy.get('@user').then((user) => {
     const { password }: any = user;
     cy.visit('/delete-account');

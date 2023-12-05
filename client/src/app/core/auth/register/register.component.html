@@ -32,6 +32,7 @@
       <button
         mat-icon-button
         matSuffix
+        type="button"
         (click)="hidePassword = !hidePassword"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hidePassword"
@@ -48,6 +49,7 @@
         matInput
         [formControl]="registerForm.controls.email"
         placeholder="be.blessed@nd.loved"
+        data-cy-email-input
       />
       <mat-hint
         matTooltip="Wird eventuell zukünftig verwendet um Benachritigungen zu schicken. (Welche Benachrichtungen werden dann frei wählbar sein)"
