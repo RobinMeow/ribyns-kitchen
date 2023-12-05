@@ -2,7 +2,7 @@ name: Build and Deploy Angular and .NET Web API
 on: push
 jobs:
 
-  build-and-run-server:
+  build-server:
     runs-on: windows-latest
     
     defaults:
@@ -24,9 +24,6 @@ jobs:
 
       - name: Build .NET Web API
         run: dotnet build
-
-      - name: Run .NET Web API
-        run: dotnet run &
 
   build-and-run-server-tests:
     runs-on: windows-latest
@@ -54,7 +51,7 @@ jobs:
       - name: Run .NET Web API Tests
         run: dotnet test
 
-  build-and-serve-angular:
+  build-angular:
     runs-on: ubuntu-latest
     
     defaults:
@@ -77,20 +74,17 @@ jobs:
       - name: Build Angular app
         run: npm run build
 
-      - name: Serve Angular app
-        run: npm start &
+  # setup-mongodb:
+  #   runs-on: ubuntu-latest
 
-  setup-mongodb:
-    runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Git checkout
+  #     uses: actions/checkout@v4
 
-    steps:
-    - name: Git checkout
-      uses: actions/checkout@v4
-
-    - name: Start MongoDB
-      uses: supercharge/mongodb-github-action@1.10.0
-      with:
-        mongodb-version: '6.0'
+  #   - name: Start MongoDB
+  #     uses: supercharge/mongodb-github-action@1.10.0
+  #     with:
+  #       mongodb-version: '6.0'
 
   cypress-e2e:
     runs-on: ubuntu-latest
@@ -98,6 +92,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.0'
+
+      - name: start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+        with:
+          mongodb-version: '6.0'
+
+      - name: serve Front-End
+        working-directory: client
+        run: |
+          npm ci
+          npm start
+
+      - name: Build and Run Back-End
+        working-directory: server
+        run: |
+          dotnet build
+          dotnet run
+
+      - name: Build and Run Back-End
+        working-directory: server
+        run: |
+          dotnet build
+          dotnet run
 
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.0
