@@ -105,17 +105,9 @@ jobs:
           npm start &
 
       - name: start MongoDB
-        uses: supercharge/mongodb-github-action@1.10.0
+        uses: supercharge/mongodb-github-action@1.10.0 # already includes "Waiting for MongoDB to accept connections" at the end
         with:
           mongodb-version: '6.0'
-
-      - name: Wait for MongoDb
-        uses: cygnetdigital/wait_for_response@v2.0.0
-        with:
-          url: 'http://127.0.0.1:21017'
-          responseCode: '200'
-          timeout: 10000
-          interval: 500
 
       - name: Build and Run Back-End
         working-directory: server
