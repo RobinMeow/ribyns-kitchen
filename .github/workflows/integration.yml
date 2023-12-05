@@ -1,4 +1,4 @@
-name: Build and Deploy Angular and .NET Web API
+name: Build, UnitTests and End-2-end tests
 on: push
 jobs:
 
