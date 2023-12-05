@@ -111,9 +111,7 @@ jobs:
 
       - name: Build and Run Back-End
         working-directory: server
-        run: |
-          dotnet build
-          dotnet run &
+        run: dotnet build && dotnet run &
 
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.0
