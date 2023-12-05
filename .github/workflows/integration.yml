@@ -119,3 +119,5 @@ jobs:
           if-no-files-found: error
           browser: chrome
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
+
+## TODO: Move into seperate files and reuse them, to make this more readable?
