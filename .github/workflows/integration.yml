@@ -107,19 +107,13 @@ jobs:
         working-directory: client
         run: |
           npm ci
-          npm start
+          npm start &
 
       - name: Build and Run Back-End
         working-directory: server
         run: |
           dotnet build
-          dotnet run
-
-      - name: Build and Run Back-End
-        working-directory: server
-        run: |
-          dotnet build
-          dotnet run
+          dotnet run &
 
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.0
