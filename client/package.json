@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test-headless": "ng test --browsers ChromeHeadless",
     "lint": "ng lint",
     "api-generation": "openapi-generator-cli generate -g typescript-angular --remove-operation-id-prefix -i http://localhost:5126/Swagger/v1/swagger.json -o ./src/app/openapi-services",
     "e2e": "ng e2e",
