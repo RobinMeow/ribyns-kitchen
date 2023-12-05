@@ -3,11 +3,10 @@ on: push
 jobs:
 
   build-server:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     defaults:
       run:
-        shell: bash
         working-directory: server
 
     steps:
@@ -26,12 +25,11 @@ jobs:
         run: dotnet build
 
   build-and-run-server-tests:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     
     defaults:
       run:
-        shell: bash
-        working-directory: server.tests
+        working-directory: 'server.tests'
 
     steps:
       - name: Checkout
@@ -120,4 +118,4 @@ jobs:
           spec: cypress/e2e/**/*.cy.ts
           # if-no-files-found: error
           browser: chrome
-          wait-on: 'http://localhost:5126, http://localhost:4200'
+          wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
