@@ -46,7 +46,9 @@ I might even explore build pipelines using services like ~~Azure or Bitbucket~~ 
 
 ## License
 
-Gemeinschaftskochbuch is available under the [MIT license](LICENSE).
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobinMeow/CommunityCookbook/blob/master/LICENSE)
+
+This project is licensed under the terms of the [MIT license](LICENSE).
 
 ## Contact
 
