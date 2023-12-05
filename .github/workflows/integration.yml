@@ -98,22 +98,24 @@ jobs:
         with:
           node-version: '18.16.0'
 
-      - name: start MongoDB
-        uses: supercharge/mongodb-github-action@1.10.0
-        with:
-          mongodb-version: '6.0'
-
       - name: serve Front-End
         working-directory: client
         run: |
           npm ci
           npm start &
 
+      - name: start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+        with:
+          mongodb-version: '6.0'
+
       - name: Build and Run Back-End
         working-directory: server
         run: |
           dotnet build
           dotnet run &
+        with:
+          wait-on: 'http://127.0.0.1:21017'
 
       - name: Cypress run
         uses: cypress-io/github-action@v6.6.0
@@ -122,4 +124,4 @@ jobs:
           spec: cypress/e2e/**/*.cy.ts
           # if-no-files-found: error
           browser: chrome
-          wait-on: 'http://localhost:4200, http://localhost:5126, http://127.0.0.1:21017'
+          wait-on: 'http://localhost:5126, http://localhost:4200'
