@@ -2,7 +2,7 @@ name: Build and Deploy Angular and .NET Web API
 on: push
 jobs:
 
-  build-and-run-webapi:
+  build-and-run-server:
     runs-on: windows-latest
     
     defaults:
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .NET Core
+      - name: Setup .NET 8.0.x
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
@@ -28,7 +28,7 @@ jobs:
       - name: Run .NET Web API
         run: dotnet run &
 
-  build-and-run-webapi-tests:
+  build-and-run-server-tests:
     runs-on: windows-latest
     
     defaults:
@@ -51,7 +51,6 @@ jobs:
       - name: Build .NET Web API
         run: dotnet build
 
-      - run: dir
       - name: Run .NET Web API Tests
         run: dotnet test
 
@@ -80,23 +79,6 @@ jobs:
 
       - name: Serve Angular app
         run: npm start &
-        
-  # cypress-run:
-  #   name: Cypress run
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - run: dir
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-
-  #     - name: Cypress run
-  #       uses: cypress-io/github-action@v6.6.0
-  #       with:
-  #         spec: cypress/e2e/**/*.cy.ts
-  #         if-no-files-found: error
-  #         browser: chrome
-  #         wait-on: "http://localhost:4200"
-
 
   setup-mongodb:
     runs-on: ubuntu-latest
@@ -111,12 +93,10 @@ jobs:
         mongodb-version: '6.0'
 
   cypress-e2e:
-    name: Cypress run
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        shell: bash
         working-directory: client
 
     steps:
