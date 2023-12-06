@@ -2,9 +2,7 @@ import { HomeComponent } from './home.component';
 
 describe('home should', () => {
   beforeEach('mount', () => {
-    cy.mount(HomeComponent, {
-      imports: [],
-    });
+    cy.mount(HomeComponent);
   });
 
   it('be visible', () => {
