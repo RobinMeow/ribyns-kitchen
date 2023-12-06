@@ -123,8 +123,8 @@ jobs:
           browser: chrome
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
 
-  cypress-e2e-firefox:
-    runs-on: ubuntu-latest
+  cypress-e2e-macos-safari:
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
@@ -156,7 +156,7 @@ jobs:
           working-directory: client
           spec: cypress/e2e/**/*.cy.ts
           if-no-files-found: error
-          browser: firefox
+          browser: safari
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
 
   cypress-component-tests-chrome:
@@ -196,8 +196,8 @@ jobs:
           browser: chrome
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
 
-  cypress-component-tests-firefox:
-    runs-on: ubuntu-latest
+  cypress-component-tests-macos-safari:
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
@@ -230,7 +230,7 @@ jobs:
           spec: src/app/**/*.cy.ts
           component: true
           if-no-files-found: error
-          browser: firefox
+          browser: safari
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
 
 ## TODO: Move into seperate files and reuse them, to make this more readable? or make use of matrixes for multi browser
