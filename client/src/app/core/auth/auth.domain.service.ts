@@ -7,11 +7,10 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { firstValueFrom, tap } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import {
   AuthService,
   DeleteChefDto,
-  ProblemDetails,
   RegisterChefDto,
 } from 'src/app/openapi-services';
 import { RegisterChef } from './register/RegisterChef';
@@ -20,7 +19,6 @@ import { TokenStorage } from './token.storage';
 import { Chef } from './Chef';
 import { JwtDecoderService } from './jwt-decoder.service';
 import { DecodedToken } from './DecodedToken';
-import { HttpResponse, HttpStatusCode } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',

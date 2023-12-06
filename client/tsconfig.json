@@ -30,7 +30,7 @@
     "strictTemplates": true
   },
   "exclude": [
-    "./cypress.config.ts", 
-    "./cypress"
+    // "./cypress.config.ts", 
+    // "./cypress"
   ]
 }
