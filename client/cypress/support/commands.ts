@@ -98,9 +98,10 @@ function createTestUser() {
     cy.getByAttr('register-name-input').type(chefname);
     cy.getByAttr('password-input').type(password);
 
-    cy.intercept('http://localhost:5126/Auth/RegisterAsync').as(
-      'registerAsync',
-    );
+    cy.intercept({
+      path: 'Auth/RegisterAsync',
+      times: 1,
+    }).as('registerAsync');
 
     cy.getByAttr('register-form').submit();
 
@@ -119,7 +120,10 @@ function deleteTestUser() {
     const { password }: any = user;
     cy.visit('/delete-account');
     cy.getByAttr('password-input').type(password);
-    cy.intercept('http://localhost:5126/Auth/DeleteAsync').as('deleteAsync');
+    cy.intercept({
+      path: '/Auth/DeleteAsync',
+      times: 1,
+    }).as('deleteAsync');
     cy.getByAttr('delete-account-form').submit();
     cy.wait('@deleteAsync');
   });
