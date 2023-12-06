@@ -1,3 +1,4 @@
+/// <reference types="jest" />
 import { TestBed } from '@angular/core/testing';
 import { AuthDomainService } from './auth.domain.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
