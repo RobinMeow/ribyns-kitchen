@@ -1,4 +1,4 @@
-# NoahsKitchen API
+# API
 
 ## (Layered) Architecture
 

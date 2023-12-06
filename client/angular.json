@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "NoahsKitchen": {
+    "CommunityCookbook": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -26,7 +26,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/noahs-kitchen",
+            "outputPath": "dist/community-cookbook",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -79,10 +79,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "NoahsKitchen:build:production"
+              "buildTarget": "CommunityCookbook:build:production"
             },
             "development": {
-              "buildTarget": "NoahsKitchen:build:development"
+              "buildTarget": "CommunityCookbook:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -90,7 +90,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "NoahsKitchen:build"
+            "buildTarget": "CommunityCookbook:build"
           }
         },
         "test": {
@@ -115,11 +115,11 @@
         "cypress-run": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "NoahsKitchen:serve"
+            "devServerTarget": "CommunityCookbook:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "NoahsKitchen:serve:production"
+              "devServerTarget": "CommunityCookbook:serve:production"
             }
           }
         },
@@ -133,27 +133,27 @@
         "ct": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "NoahsKitchen:serve",
+            "devServerTarget": "CommunityCookbook:serve",
             "watch": true,
             "headless": false,
             "testingType": "component"
           },
           "configurations": {
             "development": {
-              "devServerTarget": "NoahsKitchen:serve:development"
+              "devServerTarget": "CommunityCookbook:serve:development"
             }
           }
         },
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "NoahsKitchen:serve",
+            "devServerTarget": "CommunityCookbook:serve",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "NoahsKitchen:serve:production"
+              "devServerTarget": "CommunityCookbook:serve:production"
             }
           }
         }
