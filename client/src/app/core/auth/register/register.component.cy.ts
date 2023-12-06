@@ -28,7 +28,7 @@ function stubHttp() {
 }
 
 describe('stubbed auth should', () => {
-  it('send form submit when enter is pressed in password input with valid data', () => {
+  beforeEach('mount', () => {
     cy.mount(RegisterComponent, {
       providers: [
         provideNoopAnimations(),
@@ -36,7 +36,13 @@ describe('stubbed auth should', () => {
         AuthDomainService,
       ],
     });
+  });
 
+  it('have title', () => {
+    cy.getByAttr('title').should('be.visible');
+  });
+
+  it('send form submit when enter is pressed in password input with valid data', () => {
     stubHttp();
     cy.getByAttr('register-name-input').type('1234');
     cy.getByAttr('password-input').type('5678');

@@ -1,5 +1,3 @@
-import { config } from '../config';
-
 describe('delete-account should', () => {
   it('redirect to home', () => {
     cy.visit('/delete-account');
