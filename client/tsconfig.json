@@ -31,7 +31,7 @@
   },
   "exclude": [
     // Commented out for cypress component tests. Comment it back in, when you do .spec.ts tests for no compile errors.
-    // "./cypress.config.ts", 
-    // "./cypress"
+    "./cypress.config.ts", 
+    "./cypress"
   ]
 }
