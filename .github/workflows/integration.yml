@@ -87,7 +87,7 @@ jobs:
   #     with:
   #       mongodb-version: '6.0'
 
-  cypress-e2e:
+  cypress-tests-chrome:
     runs-on: ubuntu-latest
 
     steps:
@@ -114,7 +114,7 @@ jobs:
         working-directory: server
         run: dotnet build && dotnet run &
 
-      - name: Cypress run
+      - name: run cypress e2e
         uses: cypress-io/github-action@v6.6.0
         with:
           working-directory: client
@@ -123,4 +123,14 @@ jobs:
           browser: chrome
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
 
-## TODO: Move into seperate files and reuse them, to make this more readable?
+      - name: run cypress component tests
+        uses: cypress-io/github-action@v6.6.0
+        with:
+          working-directory: client
+          spec: src/app/**/*.cy.ts
+          component: true
+          if-no-files-found: error
+          browser: chrome
+          wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
+
+## TODO: Move into seperate files and reuse them, to make this more readable? or make use of matrixes for multi browser
