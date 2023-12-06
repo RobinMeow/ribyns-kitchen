@@ -99,7 +99,7 @@ function createTestUser() {
     cy.getByAttr('password-input').type(password);
 
     cy.intercept({
-      path: 'Auth/RegisterAsync',
+      path: '/Auth/RegisterAsync',
       times: 1,
     }).as('registerAsync');
 

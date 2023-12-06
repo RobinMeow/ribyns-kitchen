@@ -15,7 +15,7 @@ describe('auth-corner should', () => {
     cy.url().should('include', 'register');
   });
 
-  it('contain login button with routerLink', () => {
+  it('contain logout button', () => {
     cy.createTestUser();
 
     cy.getByAttr('logout-button')

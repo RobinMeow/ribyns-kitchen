@@ -87,7 +87,7 @@ jobs:
   #     with:
   #       mongodb-version: '6.0'
 
-  cypress-e2e:
+  cypress-e2e-chrome:
     runs-on: ubuntu-latest
 
     steps:
@@ -123,7 +123,43 @@ jobs:
           browser: chrome
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
 
-  cypress-component-tests:
+  cypress-e2e-firefox:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.0'
+
+      - name: serve Front-End
+        working-directory: client
+        run: |
+          npm ci
+          npm start &
+
+      - name: start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0 # already includes "Waiting for MongoDB to accept connections" at the end
+        with:
+          mongodb-version: '6.0'
+
+      - name: Build and Run Back-End
+        working-directory: server
+        run: dotnet build && dotnet run &
+
+      - name: run cypress e2e
+        uses: cypress-io/github-action@v6.6.0
+        with:
+          working-directory: client
+          spec: cypress/e2e/**/*.cy.ts
+          if-no-files-found: error
+          browser: firefox
+          wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
+
+  cypress-component-tests-chrome:
     runs-on: ubuntu-latest
 
     steps:
@@ -158,6 +194,43 @@ jobs:
           component: true
           if-no-files-found: error
           browser: chrome
+          wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
+
+  cypress-component-tests-firefox:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.16.0'
+
+      - name: serve Front-End
+        working-directory: client
+        run: |
+          npm ci
+          npm start &
+
+      - name: start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0 # already includes "Waiting for MongoDB to accept connections" at the end
+        with:
+          mongodb-version: '6.0'
+
+      - name: Build and Run Back-End
+        working-directory: server
+        run: dotnet build && dotnet run &
+
+      - name: run cypress component tests
+        uses: cypress-io/github-action@v6.6.0
+        with:
+          working-directory: client
+          spec: src/app/**/*.cy.ts
+          component: true
+          if-no-files-found: error
+          browser: firefox
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
 
 ## TODO: Move into seperate files and reuse them, to make this more readable? or make use of matrixes for multi browser
