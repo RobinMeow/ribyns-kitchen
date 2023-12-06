@@ -23,7 +23,7 @@ describe('AppTitleStrategyService should', () => {
     const title = TestBed.inject(Title);
     const setTitleSpy = jest.spyOn(title, 'setTitle');
 
-    const routerStateSnapshot = { url: '/' } as RouterStateSnapshot;
+    const routerStateSnapshot = {} as RouterStateSnapshot;
 
     strategy.updateTitle(routerStateSnapshot);
 
