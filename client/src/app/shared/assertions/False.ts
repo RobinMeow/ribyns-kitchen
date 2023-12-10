@@ -1,5 +1,3 @@
-// this class uses PascalCasing and wierd names to avoid conflicts with other libraries.
-
 import { True } from './True';
 
 /**
@@ -8,6 +6,6 @@ import { True } from './True';
  * @param message the message to print out if the condition is not met.
  * @note Also removes itself from the stack trace.
  */
-export default function False(condition: boolean, message: string): void {
+export function False(condition: boolean, message: string): void {
   True(!condition, message);
 }

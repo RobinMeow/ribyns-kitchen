@@ -1,3 +1,6 @@
+import { logAssertion } from './logAssertion';
+import { logIfRecommendedMessageFormatIsNotMet } from './logIfRecommendedMessageFormatIsNotMet';
+
 /**
  * prints out a message in red, to the console, if the condition is not met, and throw an error to break code flow.
  * @param str the string to check against

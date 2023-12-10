@@ -1,4 +1,4 @@
-function logIfRecommendedMessageFormatIsNotMet(message: string) {
+export function logIfRecommendedMessageFormatIsNotMet(message: string) {
   console.assert(message.endsWith('.'), 'assertions should end with a period.');
   console.assert(
     !message.startsWith(' '),
