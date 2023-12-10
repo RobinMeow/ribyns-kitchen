@@ -111,11 +111,15 @@ describe('AuthDomainService', () => {
     },
   );
 
-  it('throw on logout when unauthorized', async () => {
+  it('throw on logout when unauthorized', () => {
     expect(authDomainService.logout).toThrow(Error);
   });
 
-  it('should be unauthorized', async () => {
+  it('should be unauthorized', () => {
     expect(authDomainService.isAuthorizedSignal()()).toBe(false);
+  });
+
+  it('should return no chef', () => {
+    expect(authDomainService.currentUserSignal()()).toBe(null);
   });
 });
