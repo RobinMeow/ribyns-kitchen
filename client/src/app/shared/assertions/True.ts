@@ -1,5 +1,7 @@
+import { DomainAssertionError } from './DomainAssertionError';
 import { logAssertion } from './logAssertion';
 import { logIfRecommendedMessageFormatIsNotMet } from './logIfRecommendedMessageFormatIsNotMet';
+import { removeLastStackTraceEntry } from './removeLastStackTraceEntry';
 
 /**
  * prints out a message in red, to the console, if the condition is not met, and throw an error to break code flow.
@@ -12,10 +14,7 @@ export function True(condition: boolean, message: string) {
   if (!condition) {
     logAssertion(message);
     const err = new DomainAssertionError(message);
-    const stackTrace = err.stack!;
-    let arr = stackTrace.split('\n');
-    arr.splice(1, 1);
-    err.stack = arr.join('\n');
+    removeLastStackTraceEntry(err);
     throw err;
   }
 }
