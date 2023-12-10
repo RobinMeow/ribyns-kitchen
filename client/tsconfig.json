@@ -30,9 +30,8 @@
     "strictTemplates": true
   },
   "exclude": [
-    // when writing cypress component tests, comment activate it. When writing spec tests, comment it out (you can use /// <reference types="cypress" /> at the top of each file to help out the typing system a bit, but doesnt seem to work fully)
-    // what would also work, to avoid compile errors at all times is, importing the functions you are using, using the normal typescript imports, but that is clunky, and annoying to type out
-    // https://github.com/microsoft/TypeScript/issues/37053
+    // Comment out, if you write jest tests ".spec.ts" // https://github.com/microsoft/TypeScript/issues/37053 (╯‵□′)╯︵┻━┻
+    // and restart vscode. (I dont think it mattes, how you check it in, but try to keep git changes minimal. Preferable keep it commented out, because I use cypress component test more then spec tests)
     // "./cypress.config.ts", 
     // "./cypress"
   ]

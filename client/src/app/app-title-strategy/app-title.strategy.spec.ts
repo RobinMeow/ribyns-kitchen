@@ -1,4 +1,3 @@
-/// <reference types="jest" />
 import { TestBed } from '@angular/core/testing';
 
 import { AppTitleStrategy } from './app-title.strategy';
