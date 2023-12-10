@@ -5,12 +5,16 @@ import { provideHttpClient } from '@angular/common/http';
 import { AuthService, RegisterChefDto } from 'src/app/openapi-services';
 import { RegisterChef } from './register/RegisterChef';
 import { of } from 'rxjs';
+import { Credentials } from './Credentials';
 
 describe('AuthService', () => {
   let authDomainService: AuthDomainService;
   let authServiceStub = {
     registerAsync() {
       return of(undefined);
+    },
+    loginAsync() {
+      return of('tokenStub');
     },
   };
 
@@ -34,6 +38,7 @@ describe('AuthService', () => {
     expect(authDomainService).toBeTruthy();
   });
 
+  // password, should never be trimmed
   const whiteSpaceValues = [
     ['TestChef ', 'TestPassword ', 'test@example.com '], // trailing space
     [' TestChef', ' TestPassword', ' test@example.com'], // leading space
@@ -45,9 +50,8 @@ describe('AuthService', () => {
     ['\nTestChef\n', '\nTestPassword\n', '\ntest@example.com\n'], // trailing and leading line breaks
     ['\n\tTestChef\n \t', ' \tTestPassword \t', ' \t \ntest@example.com \t \n'], // some mixed combinations
   ];
-
   it.each(whiteSpaceValues)(
-    'should make an API call with the values trimmed',
+    'should make an API call with the values trimmed (exept password)',
     async (name, password, email) => {
       // Arrange
       const registerChef: RegisterChef = {
@@ -58,7 +62,7 @@ describe('AuthService', () => {
 
       const trimmedValues: RegisterChefDto = {
         name: 'TestChef',
-        password: 'TestPassword',
+        password: password,
         email: 'test@example.com',
       };
 
@@ -70,6 +74,49 @@ describe('AuthService', () => {
       // Assert
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(trimmedValues);
+    },
+  );
+
+  it('throw with empty name in credentials', async () => {
+    const creds: Credentials = {
+      name: '',
+      password: 'iLoveJesus<3!',
+    };
+    await expect(authDomainService.loginAsync(creds)).rejects.toThrow(/name/);
+  });
+
+  it('throw with empty password in credentials', async () => {
+    const creds: Credentials = {
+      name: 'Weinberg des Herrn',
+      password: '',
+    };
+    await expect(authDomainService.loginAsync(creds)).rejects.toThrow(
+      /password/,
+    );
+  });
+
+  it.each([
+    ['name', 'password'],
+    ['name', ' untrimmed password '],
+  ])(
+    'authService.loginAsync is called with credentials',
+    async (name, password) => {
+      // Arrange
+      const creds: Credentials = {
+        name,
+        password,
+      };
+
+      const expctedCreds = JSON.parse(JSON.stringify(creds));
+
+      const spy = jest.spyOn(authServiceStub, 'loginAsync');
+
+      // Act
+      await authDomainService.loginAsync(creds);
+
+      // Assert
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(expctedCreds);
     },
   );
 });

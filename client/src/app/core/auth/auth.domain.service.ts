@@ -61,7 +61,7 @@ export class AuthDomainService {
   registerAsync(chef: RegisterChef): Promise<void> {
     const dto: RegisterChefDto = {
       name: chef.name.trim(),
-      password: chef.password.trim(),
+      password: chef.password,
     };
 
     if (chef.email) {
@@ -73,7 +73,7 @@ export class AuthDomainService {
 
   async loginAsync(credentials: Credentials): Promise<void> {
     if (credentials.name.length === 0)
-      throw new Error('Login name may not be missing.');
+      throw new Error('Login name may not be empty.');
 
     if (credentials.password.length === 0)
       throw new Error('Login password may not be empty.');
