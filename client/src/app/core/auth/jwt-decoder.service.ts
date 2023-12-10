@@ -6,7 +6,7 @@ import { DecodedToken } from './DecodedToken';
   providedIn: 'root',
 })
 export class JwtDecoderService {
-  private readonly _jwtHelperService = new JwtHelperService();
+  private readonly _jwtHelperService = new JwtHelperService(); // thrid party library.
 
   decode(token: string): DecodedToken {
     const untypedDecodedToken = this._jwtHelperService.decodeToken(token);
