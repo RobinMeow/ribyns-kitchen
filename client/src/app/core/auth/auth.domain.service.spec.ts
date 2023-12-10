@@ -79,7 +79,7 @@ describe('AuthDomainService', () => {
   it.each([
     ['', 'iLoveJesus<3!'],
     ['Weinberg des Herrn', ''],
-  ])('throws with empty name in credentials', async (name, password) => {
+  ])('throws with empty credentials', async (name, password) => {
     await expect(
       authDomainService.loginAsync({
         name,
@@ -113,5 +113,9 @@ describe('AuthDomainService', () => {
 
   it('throw on logout when unauthorized', async () => {
     expect(authDomainService.logout).toThrow(Error);
+  });
+
+  it('should be unauthorized', async () => {
+    expect(authDomainService.isAuthorizedSignal()()).toBe(false);
   });
 });
