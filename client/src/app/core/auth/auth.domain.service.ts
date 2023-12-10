@@ -20,6 +20,7 @@ import { TokenStorage } from './token.storage';
 import { Chef } from './Chef';
 import { JwtDecoderService } from './jwt-decoder.service';
 import { DecodedToken } from './DecodedToken';
+import { NotEmpty, True } from '@assertions';
 
 @Injectable({
   providedIn: 'root',
@@ -77,11 +78,8 @@ export class AuthDomainService {
   }
 
   async loginAsync(credentials: Credentials): Promise<void> {
-    if (credentials.name.length === 0)
-      throw new Error('Login name may not be empty.');
-
-    if (credentials.password.length === 0)
-      throw new Error('Login password may not be empty.');
+    NotEmpty(credentials.name, 'Login name may not be empty.');
+    NotEmpty(credentials.password, 'Login password may not be empty.');
 
     const token = await firstValueFrom(
       this._authService.loginAsync(credentials),
@@ -91,9 +89,7 @@ export class AuthDomainService {
   }
 
   logout(): void {
-    if (!this._isAuthorizedSignal()) {
-      throw new Error('Need to be authorized, to log out.');
-    }
+    True(this._isAuthorizedSignal(), 'Need to be authorized, to log out.');
     this._tokenSignal.set(null);
   }
 
@@ -106,11 +102,8 @@ export class AuthDomainService {
   }
 
   async removeAsync(credentials: Credentials): Promise<void> {
-    if (credentials.name.length === 0)
-      throw new Error('Cannot delete a Chef without name.');
-
-    if (credentials.password.length === 0)
-      throw new Error('Cannot delete a Chef without password confirmation.');
+    NotEmpty(credentials.name, 'Chefname may not be empty.');
+    NotEmpty(credentials.password, 'Chef password may not be empty.');
 
     const deleteChefDto: DeleteChefDto = {
       ...credentials,
