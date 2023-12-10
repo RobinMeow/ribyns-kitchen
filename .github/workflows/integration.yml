@@ -1,9 +1,12 @@
 name: Build, UnitTests and End-2-end tests
-on: push
+on:
+  push:
+    branches-ignore:
+      - 'master'
 jobs:
 
   build-server:
-    runs-on: ubuntu-23.10
+    runs-on: ubuntu-22.04
     
     defaults:
       run:
@@ -25,7 +28,7 @@ jobs:
         run: dotnet build
 
   run-server-tests:
-    runs-on: ubuntu-23.10
+    runs-on: ubuntu-22.04
     
     defaults:
       run:
@@ -50,7 +53,7 @@ jobs:
         run: dotnet test
 
   build-and-test-client:
-    runs-on: ubuntu-23.10
+    runs-on: ubuntu-22.04
     
     defaults:
       run:
@@ -76,7 +79,7 @@ jobs:
         run: npm run test
 
   cypress-e2e-and-component-tests-on-google-chrome:
-    runs-on: ubuntu-23.10
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
