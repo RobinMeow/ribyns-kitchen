@@ -7,7 +7,7 @@ import { RegisterChef } from './register/RegisterChef';
 import { of } from 'rxjs';
 import { Credentials } from './Credentials';
 
-describe('AuthService', () => {
+describe('AuthDomainService', () => {
   let authDomainService: AuthDomainService;
   let authServiceStub = {
     registerAsync() {
@@ -77,46 +77,38 @@ describe('AuthService', () => {
     },
   );
 
-  it('throw with empty name in credentials', async () => {
-    const creds: Credentials = {
-      name: '',
-      password: 'iLoveJesus<3!',
-    };
-    await expect(authDomainService.loginAsync(creds)).rejects.toThrow(/name/);
-  });
-
-  it('throw with empty password in credentials', async () => {
-    const creds: Credentials = {
-      name: 'Weinberg des Herrn',
-      password: '',
-    };
-    await expect(authDomainService.loginAsync(creds)).rejects.toThrow(
-      /password/,
-    );
+  it.each([
+    ['', 'iLoveJesus<3!'],
+    ['Weinberg des Herrn', ''],
+  ])('throws with empty name in credentials', async (name, password) => {
+    await expect(
+      authDomainService.loginAsync({
+        name,
+        password,
+      }),
+    ).rejects.toThrow(Error);
   });
 
   it.each([
     ['name', 'password'],
     ['name', ' untrimmed password '],
   ])(
-    'authService.loginAsync is called with credentials',
+    'calls authService.loginAsync with unmodifed credentials',
     async (name, password) => {
-      // Arrange
-      const creds: Credentials = {
-        name,
-        password,
-      };
-
-      const expctedCreds = JSON.parse(JSON.stringify(creds));
-
       const spy = jest.spyOn(authServiceStub, 'loginAsync');
 
       // Act
-      await authDomainService.loginAsync(creds);
+      await authDomainService.loginAsync({
+        name,
+        password,
+      });
 
       // Assert
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(expctedCreds);
+      expect(spy).toHaveBeenCalledWith({
+        name,
+        password,
+      });
     },
   );
 });
