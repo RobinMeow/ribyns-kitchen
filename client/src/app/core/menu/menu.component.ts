@@ -14,5 +14,5 @@ import { AuthCornerComponent } from './auth-corner/auth-corner.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent {
-  @Input() drawer!: MatDrawer;
+  @Input({ required: true }) drawer!: MatDrawer;
 }

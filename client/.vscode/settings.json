@@ -37,5 +37,10 @@
 	},
 	"[csharp]": {
 		"editor.tabSize": 4,
+	},
+	"[html][typescript]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": "explicit"
+		}
 	}
 }

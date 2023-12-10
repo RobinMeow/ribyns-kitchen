@@ -3,6 +3,7 @@ import {
   Injectable,
   Signal,
   WritableSignal,
+  computed,
   effect,
   inject,
   signal,
@@ -29,6 +30,10 @@ export class AuthDomainService {
   private readonly _tokenDecoder = inject(JwtDecoderService);
   private readonly _tokenSignal: WritableSignal<string | null | undefined> =
     signal(undefined);
+  private readonly _isAuthorizedSignal: Signal<boolean> = computed(() => {
+    const token = this._tokenSignal();
+    return token !== null && token !== undefined;
+  });
 
   private readonly _onTokenChanged: EffectRef = effect(
     () => {
@@ -60,12 +65,12 @@ export class AuthDomainService {
 
   registerAsync(chef: RegisterChef): Promise<void> {
     const dto: RegisterChefDto = {
-      name: chef.name,
+      name: chef.name.trim(),
       password: chef.password,
     };
 
     if (chef.email) {
-      dto.email = chef.email;
+      dto.email = chef.email.trim();
     }
 
     return firstValueFrom(this._authService.registerAsync(dto));
@@ -73,7 +78,7 @@ export class AuthDomainService {
 
   async loginAsync(credentials: Credentials): Promise<void> {
     if (credentials.name.length === 0)
-      throw new Error('Login name may not be missing.');
+      throw new Error('Login name may not be empty.');
 
     if (credentials.password.length === 0)
       throw new Error('Login password may not be empty.');
@@ -86,18 +91,17 @@ export class AuthDomainService {
   }
 
   logout(): void {
+    if (!this._isAuthorizedSignal()) {
+      throw new Error('Need to be authorized, to log out.');
+    }
     this._tokenSignal.set(null);
   }
 
-  /**
-   * @returns the token string when the chef is logged in or null if not.
-   * If it is undefined the tokenStorage has not been retrieved yet.
-   */
-  public getTokenSignal(): Signal<string | null | undefined> {
-    return this._tokenSignal.asReadonly();
+  isAuthorizedSignal(): Signal<boolean> {
+    return this._isAuthorizedSignal;
   }
 
-  public getCurrentUserSignal(): Signal<Chef | null> {
+  public currentUserSignal(): Signal<Chef | null> {
     return this._currentUserSignal.asReadonly();
   }
 

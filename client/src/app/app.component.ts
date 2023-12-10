@@ -18,6 +18,4 @@ import { MenuComponent } from './core/menu/menu.component';
     HeaderComponent,
   ],
 })
-export class AppComponent {
-  protected readonly NoahsKitchenName: string = 'NoahsKitchen.Name';
-}
+export class AppComponent {}

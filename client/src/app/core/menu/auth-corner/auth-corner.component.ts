@@ -1,12 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   Signal,
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDrawer } from '@angular/material/sidenav';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthDomainService } from '../../auth/auth.domain.service';
@@ -20,12 +18,10 @@ import { AuthDomainService } from '../../auth/auth.domain.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthCornerComponent {
-  @Input() drawer!: MatDrawer;
-
   private readonly _authService = inject(AuthDomainService);
 
-  protected tokenSignal: Signal<string | null | undefined> =
-    this._authService.getTokenSignal();
+  protected isAuthorizedSignal: Signal<boolean> =
+    this._authService.isAuthorizedSignal();
 
   protected logout(): void {
     this._authService.logout();

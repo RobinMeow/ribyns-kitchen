@@ -14,6 +14,8 @@ export class AppTitleStrategy extends TitleStrategy {
 
     if (title !== undefined) {
       this._title.setTitle(`${title} - ${applicationName}`);
+    } else {
+      this._title.setTitle(applicationName);
     }
   }
 }

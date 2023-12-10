@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { TokenStorage } from './token.storage';
 
-describe('TokenStorage', () => {
+describe('TokenStorage should', () => {
   let service: TokenStorage;
 
   beforeEach(() => {
@@ -10,7 +10,27 @@ describe('TokenStorage', () => {
     service = TestBed.inject(TokenStorage);
   });
 
-  it('should be created', () => {
+  it('be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('store and retrieve a value', () => {
+    expect(() => service.store('value')).not.toThrow();
+    expect(service.retrieve()).toBe('value');
+  });
+
+  it('store only one value', () => {
+    expect(() => service.store('value1')).not.toThrow();
+    expect(() => service.store('value2')).not.toThrow();
+    expect(service.retrieve()).toBe('value2');
+  });
+
+  it('clear the value', () => {
+    expect(() => {
+      service.store('value1');
+      service.clear();
+    }).not.toThrow();
+
+    expect(service.retrieve()).toBe(null);
   });
 });

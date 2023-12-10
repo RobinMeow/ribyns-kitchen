@@ -1,5 +1,14 @@
 <div class="auth-wrapper" data-cy-auth-corner>
-  @if (tokenSignal() === null) {
+  @if (isAuthorizedSignal()) {
+    <button
+      mat-stroked-button
+      color="accent"
+      (click)="logout()"
+      data-cy-logout-button
+    >
+      Ausloggen
+    </button>
+  } @else {
     <button
       mat-flat-button
       color="accent"
@@ -15,17 +24,6 @@
       data-cy-login-button
     >
       Einloggen
-    </button>
-  } @else if (tokenSignal() === undefined) {
-    <!-- show nothing, while evaluating if the user is logged in -->
-  } @else {
-    <button
-      mat-stroked-button
-      color="accent"
-      (click)="logout()"
-      data-cy-logout-button
-    >
-      Ausloggen
     </button>
   }
 </div>
