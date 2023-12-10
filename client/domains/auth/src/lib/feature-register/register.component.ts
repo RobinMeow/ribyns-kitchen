@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthDomainService } from '../auth.domain.service';
+import { AuthDomainService } from '../utils/auth.domain.service';
 import { RegisterChef } from './RegisterChef';
 import { Router } from '@angular/router';
 import {
@@ -13,8 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ChefFromControlFactory } from '../ChefFormControlFactory';
-import { ChefConstraints } from '../ChefConstraints';
+import { ChefFromControlFactory } from '../utils/ChefFormControlFactory';
+import { ChefConstraints } from '../utils/ChefConstraints';
 
 @Component({
   selector: 'auth-register',
@@ -29,7 +29,7 @@ import { ChefConstraints } from '../ChefConstraints';
     MatTooltipModule,
   ],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss', '../auth.scss'],
+  styleUrls: ['./register.component.scss', '../ui/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent {

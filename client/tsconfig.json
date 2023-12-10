@@ -26,8 +26,8 @@
       "@assertions": [
         "src/app/shared/assertions/index"
       ],
-      "auth": [
-        "./dist/auth"
+      "@auth": [
+        "./domains/auth/src/public-api"
       ]
     }
   },
