@@ -164,6 +164,39 @@
           }
         }
       }
+    },
+    "auth": {
+      "projectType": "library",
+      "root": "domains/auth",
+      "sourceRoot": "domains/auth/src",
+      "prefix": "auth",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "domains/auth/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "domains/auth/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "domains/auth/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:jest",
+          "options": {
+            "tsConfig": "domains/auth/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
