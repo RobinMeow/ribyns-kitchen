@@ -17,6 +17,9 @@
         },
         "@schematics/angular:guard": {
           "functional": true
+        },
+        "@schematics/angular:library": {
+          "standalone": true
         }
       },
       "root": "",
