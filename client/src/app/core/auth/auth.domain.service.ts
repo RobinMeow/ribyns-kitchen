@@ -91,6 +91,9 @@ export class AuthDomainService {
   }
 
   logout(): void {
+    if (!this._isAuthorizedSignal()) {
+      throw new Error('Need to be authorized, to log out.');
+    }
     this._tokenSignal.set(null);
   }
 

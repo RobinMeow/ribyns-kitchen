@@ -5,7 +5,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { AuthService, RegisterChefDto } from 'src/app/openapi-services';
 import { RegisterChef } from './register/RegisterChef';
 import { of } from 'rxjs';
-import { Credentials } from './Credentials';
 
 describe('AuthDomainService', () => {
   let authDomainService: AuthDomainService;
@@ -111,4 +110,8 @@ describe('AuthDomainService', () => {
       });
     },
   );
+
+  it('throw on logout when unauthorized', async () => {
+    expect(authDomainService.logout).toThrow(Error);
+  });
 });
