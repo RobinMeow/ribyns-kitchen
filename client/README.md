@@ -8,7 +8,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## ToDo
 
-- Look into [Karma](https://karma-runner.github.io) and [Jasmine](https://jasmine.github.io/) and make some proper unit tests (and e2e tests).
 - Set up an HTTP error handler and message service properly and implement some (back-end?) logging for errors.
 - For more, [see requirements](../README.md#requirements)
 
@@ -19,3 +18,18 @@ Actually, haven't done anything in the front end, except set up a simple text fi
 ## Deployment
 
 run `ng build --configuration=production`, then `firebase deploy`. Make sure you are logged in, in the correct firebase account `firebase login`, and have the correct firebase project selected. `ng deploy` will not work, because it is not set up (I need to delete all firebase stuff in the ui folder and rerun `firebase init` or so idk, tbh, last time ng deploy was automatically set up).
+
+## Generating a new domain library
+
+example uses "auth" as domain
+
+1. run `ng g lib auth --prefix auth --project-root domains/auth`.
+    - library name and folder name should be the same. prefix, preferable short but regonizable.  
+  `ng g lib library-name --prefix short --project-root domains/folder-name`.
+2. go to the read me and remove karma related texts.
+3. replace `jasmine` types in the `tsconfig.spec.ts` with `jest` types
+4. go to angular json and change the test builder from `karma` to `jest`
+5. remove the empty component and service in the lib folder
+    - remove the exports in the index file of the just deleted component and service.
+
+> The order of these steps dont matter.

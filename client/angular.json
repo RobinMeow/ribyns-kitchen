@@ -19,7 +19,10 @@
           "functional": true
         },
         "@schematics/angular:library": {
-          "standalone": true
+          "standalone": true,
+          "skipInstall": true,
+          "skipPackageJson": true,
+          "skipTsConfig": false
         }
       },
       "root": "",
