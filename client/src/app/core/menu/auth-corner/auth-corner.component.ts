@@ -20,8 +20,8 @@ import { AuthDomainService } from '../../auth/auth.domain.service';
 export class AuthCornerComponent {
   private readonly _authService = inject(AuthDomainService);
 
-  protected tokenSignal: Signal<string | null | undefined> =
-    this._authService.getTokenSignal();
+  protected isAuthorizedSignal: Signal<boolean> =
+    this._authService.isAuthorizedSignal();
 
   protected logout(): void {
     this._authService.logout();

@@ -1,40 +1,39 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './auth/auth.guard';
-import { loggedOutGuard } from './auth/logged-out.guard';
+import { authorizedGuard } from './auth/guards/authorized.guard';
+import { unauthorizedGuard } from './auth/guards/unauthorized.guard';
 
 export const CORE_ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('src/app/core/home/home.component').then((c) => c.HomeComponent),
+    loadComponent: async () =>
+      (await import('src/app/core/home/home.component')).HomeComponent,
     title: 'Startseite',
   },
   {
     path: 'login',
-    canActivate: [loggedOutGuard],
-    loadComponent: () =>
-      import('src/app/core/auth/login/login.component').then(
-        (c) => c.LoginComponent,
-      ),
+    canActivate: [unauthorizedGuard],
+    loadComponent: async () =>
+      (await import('src/app/core/auth/login/login.component')).LoginComponent,
     title: 'Einloggen',
   },
   {
     path: 'register',
-    canActivate: [loggedOutGuard],
-    loadComponent: () =>
-      import('src/app/core/auth/register/register.component').then(
-        (c) => c.RegisterComponent,
-      ),
+    canActivate: [unauthorizedGuard],
+    loadComponent: async () =>
+      (await import('src/app/core/auth/register/register.component'))
+        .RegisterComponent,
     title: 'Registrieren',
   },
   {
     path: 'delete-account',
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('src/app/core/auth/delete-account/delete-account.component').then(
-        (c) => c.DeleteAccountComponent,
-      ),
+    canActivate: [authorizedGuard],
+    loadComponent: async () =>
+      (
+        await import(
+          'src/app/core/auth/delete-account/delete-account.component'
+        )
+      ).DeleteAccountComponent,
     title: 'Account löschen',
   },
   {

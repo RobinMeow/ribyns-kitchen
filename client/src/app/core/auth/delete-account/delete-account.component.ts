@@ -44,7 +44,7 @@ export class DeleteAccountComponent {
   });
 
   private readonly _chefSignal: Signal<Chef | null> =
-    this._authService.getCurrentUserSignal();
+    this._authService.currentUserSignal();
 
   protected async onSubmit(): Promise<void> {
     if (this.deleteAccountForm.invalid) return;
