@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "api-generation": "openapi-generator-cli generate -g typescript-angular --remove-operation-id-prefix -i http://localhost:5126/Swagger/v1/swagger.json -o ./src/infrastructure/open-api",
+    "api-generation": "openapi-generator-cli generate -g typescript-angular --remove-operation-id-prefix -i http://localhost:5126/Swagger/v1/swagger.json -o ./src/infrastructure/open-api --skip-validate-spec",
     "e2e": "ng e2e",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
