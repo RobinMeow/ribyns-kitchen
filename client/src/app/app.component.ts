@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { HeaderComponent } from './core/header/header.component';
-import { MenuComponent } from './core/menu/menu.component';
+import { HeaderComponent, MenuComponent } from '@core';
 
 @Component({
   selector: 'app-root',
