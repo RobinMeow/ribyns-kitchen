@@ -69,6 +69,7 @@ jobs:
         with:
           node-version: '18.16.0'
           cache: 'yarn'
+          cache-dependency-paht: 'client/yarn.lock'
   
       - name: install dependencies
         run: yarn install --frozen-lockfile
@@ -91,6 +92,7 @@ jobs:
         with:
           node-version: '18.16.0'
           cache: 'yarn'
+          cache-dependency-paht: 'client/yarn.lock'
 
       - name: serve Front-End
         working-directory: client
