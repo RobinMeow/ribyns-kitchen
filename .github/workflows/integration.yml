@@ -73,7 +73,7 @@ jobs:
       - run: npm install -g yarn
   
       - name: install dependencies
-        run: yarn ci
+        run: yarn install --frozen-lockfile
 
       - name: build
         run: yarn run build
@@ -99,7 +99,7 @@ jobs:
       - name: serve Front-End
         working-directory: client
         run: |
-          yarn ci
+          yarn install --frozen-lockfile
           yarn start &
 
       - name: start MongoDB
