@@ -43,8 +43,8 @@
     "strictTemplates": true
   },
   "exclude": [
-    // Comment out, if you write jest tests ".spec.ts" // https://github.com/microsoft/TypeScript/issues/37053 (╯‵□′)╯︵┻━┻
-    // and restart vscode. (I dont think it mattes, how you check it in, but try to keep git changes minimal. Preferable keep it commented out, because I use cypress component test more then spec tests)
+    // if you write jest tests ".spec.ts", activate those two lines, to make use of jest types.
+    // https://github.com/microsoft/TypeScript/issues/37053 (╯‵□′)╯︵┻━┻
     // "./cypress.config.ts", 
     // "./cypress"
   ]

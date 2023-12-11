@@ -68,15 +68,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.16.0'
-
+          cache: 'yarn'
+          cache-dependency-path: 'client/yarn.lock'
+  
       - name: install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: build
-        run: npm run build
+        run: yarn run build
 
       - name: run jest tests
-        run: npm run test
+        run: yarn run test
 
   cypress-e2e-and-component-tests-on-google-chrome:
     runs-on: ubuntu-22.04
@@ -89,12 +91,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.16.0'
+          cache: 'yarn'
+          cache-dependency-path: 'client/yarn.lock'
 
       - name: serve Front-End
         working-directory: client
         run: |
-          npm ci
-          npm start &
+          yarn install --frozen-lockfile
+          yarn start &
 
       - name: start MongoDB
         uses: supercharge/mongodb-github-action@1.10.0 # already includes "Waiting for MongoDB to accept connections" at the end
@@ -118,7 +122,7 @@ jobs:
         uses: cypress-io/github-action@v6.6.0
         with:
           working-directory: client
-          spec: src/app/**/*.cy.ts
+          spec: src/**/*.cy.ts
           component: true
           if-no-files-found: error
           browser: chrome
