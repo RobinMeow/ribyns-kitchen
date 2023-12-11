@@ -1,5 +1,5 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
-import { BASE_PATH } from '@open-api';
+import { BASE_PATH } from '@infrastructure/open-api';
 import { environment } from 'src/environments/environment';
 
 export const provideApi = function (): EnvironmentProviders {

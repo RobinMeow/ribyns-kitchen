@@ -11,8 +11,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (!token) return next(req);
 
-  console.log('Authorization header appended');
-
   return next(
     req.clone({
       setHeaders: {

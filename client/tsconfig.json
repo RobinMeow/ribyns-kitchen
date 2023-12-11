@@ -23,12 +23,17 @@
       "dom"
     ],
     "paths": {
+      // shared
       "@shared/assertions": [ "src/domains/shared/assertions/index" ],
+      "@shared/common": [ "src/domains/shared/common/index" ],
+      // infrastructure
+      "@infrastructure/open-api": [ "src/infrastructure/open-api/index" ],
+      // domains
+      "@core": [ "src/domains/core/index" ],
       "@auth": [ "src/domains/auth/index" ],
-      "@open-api": [ "src/infrastructure/open-api/index" ],
-      "@testing": [ "src/domains/auth/utils/auth.service" ],
       "@api": [ "src/domains/api/index" ],
-      "@shared/common": [ "src/domains/shared/common/index" ]
+      // testing, special case to bypass rules, for dependency injections in testing.
+      "@testing": [ "src/domains/auth/utils/auth.service" ],
     }
   },
   "angularCompilerOptions": {

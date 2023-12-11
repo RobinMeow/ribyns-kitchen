@@ -1,3 +1,3 @@
-import { RegisterChefDto } from '@open-api';
+import { RegisterChefDto } from '@infrastructure/open-api';
 
 export type RegisterChef = RegisterChefDto;
