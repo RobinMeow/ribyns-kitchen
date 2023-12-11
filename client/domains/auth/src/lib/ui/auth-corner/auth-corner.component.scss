@@ -1,0 +1,9 @@
+@use '../../../../../../src/varibales';
+// TODO Move variables to shared folder? 
+
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: #{varibales.$spacing};
+  margin: #{varibales.$spacing};
+}

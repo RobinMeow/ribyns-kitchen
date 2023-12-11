@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { authorizedGuard } from './auth/guards/authorized.guard';
-import { unauthorizedGuard } from './auth/guards/unauthorized.guard';
 
 export const CORE_ROUTES: Routes = [
   {
@@ -11,30 +9,8 @@ export const CORE_ROUTES: Routes = [
     title: 'Startseite',
   },
   {
-    path: 'login',
-    canActivate: [unauthorizedGuard],
-    loadComponent: async () =>
-      (await import('src/app/core/auth/login/login.component')).LoginComponent,
-    title: 'Einloggen',
-  },
-  {
-    path: 'register',
-    canActivate: [unauthorizedGuard],
-    loadComponent: async () =>
-      (await import('src/app/core/auth/register/register.component'))
-        .RegisterComponent,
-    title: 'Registrieren',
-  },
-  {
-    path: 'delete-account',
-    canActivate: [authorizedGuard],
-    loadComponent: async () =>
-      (
-        await import(
-          'src/app/core/auth/delete-account/delete-account.component'
-        )
-      ).DeleteAccountComponent,
-    title: 'Account löschen',
+    path: '',
+    loadChildren: async () => (await import('@auth')).AUTH_ROUTES,
   },
   {
     path: '**',

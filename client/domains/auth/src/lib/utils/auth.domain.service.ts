@@ -14,7 +14,7 @@ import {
   DeleteChefDto,
   RegisterChefDto,
 } from 'src/app/openapi-services';
-import { RegisterChef } from './register/RegisterChef';
+import { RegisterChef } from '../feature-register/RegisterChef';
 import { Credentials } from './Credentials';
 import { TokenStorage } from './token.storage';
 import { Chef } from './Chef';
