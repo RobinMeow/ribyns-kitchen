@@ -13,7 +13,7 @@ import {
   AuthService as GeneratedAuthService,
   DeleteChefDto,
   RegisterChefDto,
-} from '@generated-api';
+} from '@open-api';
 import { Credentials } from './Credentials';
 import { TokenStorage } from './token.storage';
 import { Chef } from './Chef';

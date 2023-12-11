@@ -25,8 +25,10 @@
     "paths": {
       "@shared/assertions": [ "src/domains/shared/assertions/index" ],
       "@auth": [ "src/domains/auth/index" ],
-      "@generated-api": [ "src/domains/generated-api/index" ],
-      "@testing": [ "src/domains/auth/utils/auth.service" ]
+      "@open-api": [ "src/infrastructure/open-api/index" ],
+      "@testing": [ "src/domains/auth/utils/auth.service" ],
+      "@api": [ "src/domains/api/index" ],
+      "@shared/common": [ "src/domains/shared/common/index" ]
     }
   },
   "angularCompilerOptions": {

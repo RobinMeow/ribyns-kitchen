@@ -5,7 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 import {
   AuthService as GeneratedAuthService,
   RegisterChefDto,
-} from '@generated-api';
+} from '@open-api';
 import { RegisterChef } from '../feature-register/RegisterChef';
 import { of } from 'rxjs';
 

@@ -1,16 +1,12 @@
 import { Routes } from '@angular/router';
 
-export const CORE_ROUTES: Routes = [
+export const coreRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
     loadComponent: async () =>
       (await import('src/app/core/home/home.component')).HomeComponent,
     title: 'Startseite',
-  },
-  {
-    path: '',
-    loadChildren: async () => (await import('@auth')).AUTH_ROUTES,
   },
   {
     path: '**',

@@ -5,18 +5,19 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { CORE_ROUTES } from './core/core.routes';
-import { authInterceptor } from '@auth';
+import { authInterceptor, authRoutes } from '@auth';
 import { provideAppTitleStrategy } from './app-title-strategy/provideAppTitleStrategy';
-import { provideOpenApiBasePath } from 'src/domains/provideOpenApiBasePath';
+import { provideApi } from '@api';
+import { coreRoutes } from './core/core.routes';
+import { withRoutes } from '@shared/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideOpenApiBasePath(),
+    provideApi(),
     provideHttpClient(withInterceptors([authInterceptor])),
     importProvidersFrom(BrowserModule),
     provideAnimations(),
-    provideRouter(CORE_ROUTES),
+    provideRouter(withRoutes(authRoutes, coreRoutes)),
     provideAppTitleStrategy(),
   ],
 };
