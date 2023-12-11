@@ -23,7 +23,8 @@
       "dom"
     ],
     "paths": {
-      "@assertions": [ "src/app/shared/assertions/index" ]
+      "@shared/assertions": [ "src/domains/shared/assertions/index" ],
+      "@auth": [ "src/domains/auth/index" ]
     }
   },
   "angularCompilerOptions": {

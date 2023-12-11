@@ -9,11 +9,11 @@ import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ChefFromControlFactory } from '../ChefFormControlFactory';
-import { AuthDomainService } from '../auth.domain.service';
-import { Credentials } from '../Credentials';
+import { ChefFromControlFactory } from '../utils/ChefFormControlFactory';
+import { AuthDomainService } from '../utils/auth.domain.service';
+import { Credentials } from '../utils/Credentials';
 import { Router } from '@angular/router';
-import { Chef } from '../Chef';
+import { Chef } from '../utils/Chef';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
@@ -28,7 +28,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
   ],
   templateUrl: './delete-account.component.html',
-  styleUrls: ['./delete-account.component.scss', '../auth.scss'],
+  styleUrls: ['./delete-account.component.scss', '../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteAccountComponent {

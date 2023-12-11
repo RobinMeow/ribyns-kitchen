@@ -7,7 +7,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthDomainService } from '../../auth/auth.domain.service';
+import { AuthDomainService } from '../../utils/auth.domain.service';
 
 @Component({
   selector: 'auth-corner',

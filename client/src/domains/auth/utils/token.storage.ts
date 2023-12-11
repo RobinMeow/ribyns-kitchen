@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NotEmpty } from '@assertions';
+import { NotEmpty } from '@shared/assertions';
 
 @Injectable({
   providedIn: 'root',

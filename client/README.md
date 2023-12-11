@@ -8,7 +8,6 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## ToDo
 
-- Look into [Karma](https://karma-runner.github.io) and [Jasmine](https://jasmine.github.io/) and make some proper unit tests (and e2e tests).
 - Set up an HTTP error handler and message service properly and implement some (back-end?) logging for errors.
 - For more, [see requirements](../README.md#requirements)
 

@@ -14,13 +14,13 @@ import {
   DeleteChefDto,
   RegisterChefDto,
 } from 'src/app/openapi-services';
-import { RegisterChef } from './register/RegisterChef';
 import { Credentials } from './Credentials';
 import { TokenStorage } from './token.storage';
 import { Chef } from './Chef';
 import { JwtDecoderService } from './jwt-decoder.service';
 import { DecodedToken } from './DecodedToken';
-import { NotEmpty, True } from '@assertions';
+import { NotEmpty, True } from '@shared/assertions';
+import { RegisterChef } from '../feature-register/RegisterChef';
 
 @Injectable({
   providedIn: 'root',

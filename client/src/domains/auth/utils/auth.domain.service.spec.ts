@@ -3,7 +3,7 @@ import { AuthDomainService } from './auth.domain.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { AuthService, RegisterChefDto } from 'src/app/openapi-services';
-import { RegisterChef } from './register/RegisterChef';
+import { RegisterChef } from '../feature-register/RegisterChef';
 import { of } from 'rxjs';
 
 describe('AuthDomainService', () => {

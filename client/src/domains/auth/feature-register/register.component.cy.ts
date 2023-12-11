@@ -1,5 +1,5 @@
 import { RegisterComponent } from './register.component';
-import { AuthDomainService } from '../auth.domain.service';
+import { AuthDomainService } from '../utils/auth.domain.service';
 import { provideHttpClient } from '@angular/common/http';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 

@@ -1,8 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
 import { AuthCornerComponent } from './auth-corner.component';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
-import { AuthDomainService } from '../../auth/auth.domain.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AuthDomainService } from '../../utils/auth.domain.service';
 
 describe('auth-corner should', () => {
   beforeEach('mount', () => {

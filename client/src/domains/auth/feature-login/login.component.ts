@@ -8,11 +8,11 @@ import {
 } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { AuthDomainService } from '../auth.domain.service';
+import { AuthDomainService } from '../utils/auth.domain.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { ChefFromControlFactory } from '../ChefFormControlFactory';
-import { ChefConstraints } from '../ChefConstraints';
+import { ChefFromControlFactory } from '../utils/ChefFormControlFactory';
+import { ChefConstraints } from '../utils/ChefConstraints';
 
 @Component({
   selector: 'auth-login',
@@ -26,7 +26,7 @@ import { ChefConstraints } from '../ChefConstraints';
     MatButtonModule,
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss', '../auth.scss'],
+  styleUrls: ['./login.component.scss', '../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
