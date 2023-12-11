@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { applicationName } from 'src/globals';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { APP_NAME } from '../provideAppName';
 
 @Component({
   selector: 'core-home',
@@ -9,5 +9,5 @@ import { applicationName } from 'src/globals';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  protected readonly applicationName = applicationName;
+  protected readonly appName = inject(APP_NAME);
 }
