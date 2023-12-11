@@ -45,7 +45,7 @@
   "exclude": [
     // Comment out, if you write jest tests ".spec.ts" // https://github.com/microsoft/TypeScript/issues/37053 (╯‵□′)╯︵┻━┻
     // and restart vscode. (I dont think it mattes, how you check it in, but try to keep git changes minimal. Preferable keep it commented out, because I use cypress component test more then spec tests)
-    // "./cypress.config.ts", 
-    // "./cypress"
+    "./cypress.config.ts", 
+    "./cypress"
   ]
 }
