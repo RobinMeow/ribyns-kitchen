@@ -1,8 +1,11 @@
+import { provideAppName } from '../provideAppName';
 import { HomeComponent } from './home.component';
 
 describe('home should', () => {
   beforeEach('mount', () => {
-    cy.mount(HomeComponent);
+    cy.mount(HomeComponent, {
+      providers: [provideAppName()],
+    });
   });
 
   it('be visible', () => {

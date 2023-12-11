@@ -1,3 +1,4 @@
+import { provideAppName } from '../../provideAppName';
 import { HeaderComponent } from './header.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -5,6 +6,7 @@ describe('header should', () => {
   beforeEach('mount', () => {
     cy.mount(HeaderComponent, {
       imports: [RouterTestingModule],
+      providers: [provideAppName()],
     });
   });
 
