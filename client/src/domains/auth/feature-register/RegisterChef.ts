@@ -1,3 +1,3 @@
-import { RegisterChefDto } from 'src/app/openapi-services';
+import { RegisterChefDto } from '@generated-api';
 
 export type RegisterChef = RegisterChefDto;

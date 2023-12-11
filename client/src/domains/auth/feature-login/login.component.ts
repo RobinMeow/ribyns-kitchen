@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { AuthDomainService } from '../utils/auth.domain.service';
+import { AuthService } from '../utils/auth.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ChefFromControlFactory } from '../utils/ChefFormControlFactory';
@@ -30,7 +30,7 @@ import { ChefConstraints } from '../utils/ChefConstraints';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  private readonly _authService = inject(AuthDomainService);
+  private readonly _authService = inject(AuthService);
   private readonly _router = inject(Router);
   private readonly _nnfb = inject(NonNullableFormBuilder);
 

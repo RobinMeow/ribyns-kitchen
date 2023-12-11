@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ChefFromControlFactory } from '../utils/ChefFormControlFactory';
-import { AuthDomainService } from '../utils/auth.domain.service';
+import { AuthService } from '../utils/auth.service';
 import { Credentials } from '../utils/Credentials';
 import { Router } from '@angular/router';
 import { Chef } from '../utils/Chef';
@@ -32,7 +32,7 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteAccountComponent {
-  private readonly _authService = inject(AuthDomainService);
+  private readonly _authService = inject(AuthService);
   private readonly _router = inject(Router);
   private readonly _nnfb = inject(NonNullableFormBuilder);
   private readonly _chefFormControlFactory = new ChefFromControlFactory(

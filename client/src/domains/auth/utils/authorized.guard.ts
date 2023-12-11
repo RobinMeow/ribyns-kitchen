@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
-import { AuthDomainService } from '../utils/auth.domain.service';
+import { AuthService } from './auth.service';
 
 export const authorizedGuard: CanActivateFn = (route, state) => {
-  return inject(AuthDomainService).isAuthorizedSignal()();
+  return inject(AuthService).isAuthorizedSignal()();
 };

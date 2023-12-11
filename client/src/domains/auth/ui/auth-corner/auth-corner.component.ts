@@ -7,7 +7,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthDomainService } from '../../utils/auth.domain.service';
+import { AuthService } from '../../utils/auth.service';
 
 @Component({
   selector: 'auth-corner',
@@ -18,7 +18,7 @@ import { AuthDomainService } from '../../utils/auth.domain.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthCornerComponent {
-  private readonly _authService = inject(AuthDomainService);
+  private readonly _authService = inject(AuthService);
 
   protected isAuthorizedSignal: Signal<boolean> =
     this._authService.isAuthorizedSignal();

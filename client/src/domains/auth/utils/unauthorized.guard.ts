@@ -1,12 +1,12 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthDomainService } from './auth.domain.service';
+import { AuthService } from './auth.service';
 
 /** redirects to home, if authorized to protect the route which is reserved for unauthorized users. Like login. */
 export const unauthorizedGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
-  const isAuthorized = inject(AuthDomainService).isAuthorizedSignal()();
+  const isAuthorized = inject(AuthService).isAuthorizedSignal()();
 
   if (isAuthorized) {
     router.navigateByUrl('/');

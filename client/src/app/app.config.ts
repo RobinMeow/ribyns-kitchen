@@ -6,9 +6,9 @@ import { provideRouter } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { CORE_ROUTES } from './core/core.routes';
-import { provideOpenApiBasePath } from './providers/provideOpenApiBasePath';
 import { authInterceptor } from '@auth';
 import { provideAppTitleStrategy } from './app-title-strategy/provideAppTitleStrategy';
+import { provideOpenApiBasePath } from 'src/domains/provideOpenApiBasePath';
 
 export const appConfig: ApplicationConfig = {
   providers: [

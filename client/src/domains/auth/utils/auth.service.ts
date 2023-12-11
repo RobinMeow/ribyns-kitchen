@@ -10,10 +10,10 @@ import {
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import {
-  AuthService,
+  AuthService as GeneratedAuthService,
   DeleteChefDto,
   RegisterChefDto,
-} from 'src/app/openapi-services';
+} from '@generated-api';
 import { Credentials } from './Credentials';
 import { TokenStorage } from './token.storage';
 import { Chef } from './Chef';
@@ -25,8 +25,8 @@ import { RegisterChef } from '../feature-register/RegisterChef';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthDomainService {
-  private readonly _authService = inject(AuthService);
+export class AuthService {
+  private readonly _authService = inject(GeneratedAuthService);
   private readonly _tokenStorage = inject(TokenStorage);
   private readonly _tokenDecoder = inject(JwtDecoderService);
   private readonly _tokenSignal: WritableSignal<string | null | undefined> =

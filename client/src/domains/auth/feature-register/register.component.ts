@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthDomainService } from '../utils/auth.domain.service';
+import { AuthService } from '../utils/auth.service';
 import { RegisterChef } from './RegisterChef';
 import { Router } from '@angular/router';
 import {
@@ -33,7 +33,7 @@ import { ChefConstraints } from '../utils/ChefConstraints';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent {
-  private readonly _authService = inject(AuthDomainService);
+  private readonly _authService = inject(AuthService);
   private readonly _router = inject(Router);
   private readonly _nnfb = inject(NonNullableFormBuilder);
 

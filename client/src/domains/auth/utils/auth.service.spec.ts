@@ -1,14 +1,17 @@
 import { TestBed } from '@angular/core/testing';
-import { AuthDomainService } from './auth.domain.service';
+import { AuthService } from './auth.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { AuthService, RegisterChefDto } from 'src/app/openapi-services';
+import {
+  AuthService as GeneratedAuthService,
+  RegisterChefDto,
+} from '@generated-api';
 import { RegisterChef } from '../feature-register/RegisterChef';
 import { of } from 'rxjs';
 
-describe('AuthDomainService', () => {
-  let authDomainService: AuthDomainService;
-  let authServiceStub = {
+describe('AuthService', () => {
+  let authService: AuthService;
+  let generatedAuthServiceStub = {
     registerAsync() {
       return of(undefined);
     },
@@ -22,11 +25,11 @@ describe('AuthDomainService', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: AuthService, useValue: authServiceStub },
+        { provide: GeneratedAuthService, useValue: generatedAuthServiceStub },
       ],
     });
 
-    authDomainService = TestBed.inject(AuthDomainService);
+    authService = TestBed.inject(AuthService);
   });
 
   afterEach(() => {
@@ -34,7 +37,7 @@ describe('AuthDomainService', () => {
   });
 
   it('should be created', () => {
-    expect(authDomainService).toBeTruthy();
+    expect(authService).toBeTruthy();
   });
 
   // password, should never be trimmed
@@ -65,10 +68,10 @@ describe('AuthDomainService', () => {
         email: 'test@example.com',
       };
 
-      const spy = jest.spyOn(authServiceStub, 'registerAsync');
+      const spy = jest.spyOn(generatedAuthServiceStub, 'registerAsync');
 
       // Act
-      await authDomainService.registerAsync(registerChef);
+      await authService.registerAsync(registerChef);
 
       // Assert
       expect(spy).toHaveBeenCalledTimes(1);
@@ -81,7 +84,7 @@ describe('AuthDomainService', () => {
     ['Weinberg des Herrn', ''],
   ])('throws with empty credentials', async (name, password) => {
     await expect(
-      authDomainService.loginAsync({
+      authService.loginAsync({
         name,
         password,
       }),
@@ -94,10 +97,10 @@ describe('AuthDomainService', () => {
   ])(
     'calls authService.loginAsync with unmodifed credentials',
     async (name, password) => {
-      const spy = jest.spyOn(authServiceStub, 'loginAsync');
+      const spy = jest.spyOn(generatedAuthServiceStub, 'loginAsync');
 
       // Act
-      await authDomainService.loginAsync({
+      await authService.loginAsync({
         name,
         password,
       });
@@ -112,14 +115,14 @@ describe('AuthDomainService', () => {
   );
 
   it('throw on logout when unauthorized', () => {
-    expect(authDomainService.logout).toThrow(Error);
+    expect(authService.logout).toThrow(Error);
   });
 
   it('should be unauthorized', () => {
-    expect(authDomainService.isAuthorizedSignal()()).toBe(false);
+    expect(authService.isAuthorizedSignal()()).toBe(false);
   });
 
   it('should return no chef', () => {
-    expect(authDomainService.currentUserSignal()()).toBe(null);
+    expect(authService.currentUserSignal()()).toBe(null);
   });
 });
