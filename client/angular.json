@@ -9,8 +9,7 @@
         "@schematics/angular:component": {
           "style": "scss",
           "changeDetection": "OnPush",
-          "standalone": true,
-          "prefix": "apple"
+          "standalone": true
         },
         "@schematics/angular:interceptor": {
           "functional": true
@@ -24,7 +23,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "apple",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -89,12 +88,6 @@
             }
           },
           "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "CommunityCookbook:build"
-          }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:jest",

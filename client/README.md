@@ -26,3 +26,7 @@ The incrastructure contains 3rd-party libraries, like i18n or open-api generated
 
 The domain contains `feature-`'s (usually smart components which are routable, and hard to reuse).
 As well as `ui`'s (usually dumb components, reuseable) and utils which usually contains pipes (relating to the domain) and such.
+
+## ng generate x into domains folder
+
+generating stuff into the domains folder like this `ng g c ../domains/my-component --prefix ...`

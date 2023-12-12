@@ -1,0 +1,45 @@
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
+import { PasswordComponent } from './password.component';
+import { FormControl } from '@angular/forms';
+
+function getPasswordInput() {
+  return cy.getByAttr('password-input');
+}
+
+function getEyeToggleButton() {
+  return cy.getByAttr('password-eye-toggle');
+}
+
+describe('password should', () => {
+  beforeEach('mount', () => {
+    cy.mount(PasswordComponent, {
+      providers: [provideNoopAnimations()],
+      componentProperties: {
+        passwordControl: new FormControl<string>('', {
+          nonNullable: true,
+        }),
+      },
+    });
+  });
+
+  it('render', () => {
+    getPasswordInput().should('be.visible');
+    getEyeToggleButton().should('be.visible');
+  });
+
+  it('toggle text visibility on eye-toggle', () => {
+    getPasswordInput()
+      .as('password-input')
+      .should('have.attr', 'type')
+      .should('equal', 'password');
+
+    // this is only for the screenshot, and not required for this test.
+    cy.get('@password-input').type('iLoveJesus<3!');
+
+    getEyeToggleButton().click();
+
+    cy.get('@password-input')
+      .should('have.attr', 'type')
+      .should('equal', 'text');
+  });
+});

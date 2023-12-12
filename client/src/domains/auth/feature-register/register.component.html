@@ -19,29 +19,10 @@
       <mat-hint>Zwischen 3 und 20 Zeichen</mat-hint>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Passwort</mat-label>
-      <input
-        matInput
-        [formControl]="registerForm.controls.password"
-        placeholder="iLoveJesus<3"
-        [type]="hidePassword ? 'password' : 'text'"
-        data-cy-password-input
-      />
-      <mat-hint>Zwischen 4 und 50 Zeichen</mat-hint>
-      <button
-        mat-icon-button
-        matSuffix
-        type="button"
-        (click)="hidePassword = !hidePassword"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hidePassword"
-      >
-        <mat-icon>{{
-          hidePassword ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </button>
-    </mat-form-field>
+    <auth-password
+      [passwordControl]="registerForm.controls.password"
+      showHint
+    />
 
     <mat-form-field>
       <mat-label>E-Mail Adresse</mat-label>
