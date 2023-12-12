@@ -24,16 +24,14 @@
     ],
     "paths": {
       // shared
-      "@shared/assertions": [ "src/domains/shared/assertions/index" ],
-      "@shared/common": [ "src/domains/shared/common/index" ],
+      "@shared/assertions": [ "src/domains/shared/assertions/index.ts" ],
+      "@shared/common": [ "src/domains/shared/common/index.ts" ],
       // infrastructure
-      "@infrastructure/open-api": [ "src/infrastructure/open-api/index" ],
+      "@infrastructure/open-api": [ "src/infrastructure/open-api/index.ts" ],
       // domains
-      "@core": [ "src/domains/core/index" ],
-      "@auth": [ "src/domains/auth/index" ],
-      "@api": [ "src/domains/api/index" ],
-      // testing, special case to bypass rules, for dependency injections in testing.
-      "@testing": [ "src/domains/auth/utils/auth.service" ],
+      "@core": [ "src/domains/core/index.ts" ],
+      "@auth": [ "src/domains/auth/index.ts" ],
+      "@api": [ "src/domains/api/index.ts" ],
     }
   },
   "angularCompilerOptions": {

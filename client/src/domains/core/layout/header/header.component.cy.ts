@@ -1,4 +1,4 @@
-import { provideAppName } from '../../provideAppName';
+import { provideAppName } from '@core';
 import { HeaderComponent } from './header.component';
 import { RouterTestingModule } from '@angular/router/testing';
 

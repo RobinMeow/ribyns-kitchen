@@ -19,7 +19,7 @@ import { TokenStorage } from './token.storage';
 import { Chef } from './Chef';
 import { JwtDecoderService } from './jwt-decoder.service';
 import { DecodedToken } from './DecodedToken';
-import { NotEmpty, True } from '@shared/assertions';
+import { notEmpty_checked, true_checked } from '@shared/assertions';
 import { RegisterChef } from '../feature-register/RegisterChef';
 
 @Injectable({
@@ -78,8 +78,8 @@ export class AuthService {
   }
 
   async loginAsync(credentials: Credentials): Promise<void> {
-    NotEmpty(credentials.name, 'Login name may not be empty.');
-    NotEmpty(credentials.password, 'Login password may not be empty.');
+    notEmpty_checked(credentials.name, 'Login name may not be empty.');
+    notEmpty_checked(credentials.password, 'Login password may not be empty.');
 
     const token = await firstValueFrom(
       this._authService.loginAsync(credentials),
@@ -89,7 +89,10 @@ export class AuthService {
   }
 
   logout(): void {
-    True(this._isAuthorizedSignal(), 'Need to be authorized, to log out.');
+    true_checked(
+      this._isAuthorizedSignal(),
+      'Need to be authorized, to log out.',
+    );
     this._tokenSignal.set(null);
   }
 
@@ -102,8 +105,8 @@ export class AuthService {
   }
 
   async removeAsync(credentials: Credentials): Promise<void> {
-    NotEmpty(credentials.name, 'Chefname may not be empty.');
-    NotEmpty(credentials.password, 'Chef password may not be empty.');
+    notEmpty_checked(credentials.name, 'Chefname may not be empty.');
+    notEmpty_checked(credentials.password, 'Chef password may not be empty.');
 
     const deleteChefDto: DeleteChefDto = {
       ...credentials,

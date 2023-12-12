@@ -1,4 +1,4 @@
-import { provideAppName } from '../provideAppName';
+import { provideAppName } from '@core';
 import { HomeComponent } from './home.component';
 
 describe('home should', () => {
