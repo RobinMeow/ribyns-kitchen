@@ -11,7 +11,7 @@ import { of } from 'rxjs';
 
 describe('AuthService', () => {
   let authService: AuthService;
-  let generatedAuthServiceStub = {
+  const generatedAuthServiceStub = {
     registerAsync() {
       return of(undefined);
     },
