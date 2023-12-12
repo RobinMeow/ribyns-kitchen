@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NotEmpty } from '@shared/assertions';
+import { notEmpty_checked } from '@shared/assertions';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ export class TokenStorage {
   private readonly _key: string = 'token';
 
   store(token: string): void {
-    NotEmpty(token, 'token may not be an empty string.');
+    notEmpty_checked(token, 'token may not be an empty string.');
     localStorage.setItem(this._key, token);
   }
 
