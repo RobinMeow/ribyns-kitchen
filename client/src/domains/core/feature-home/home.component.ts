@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { APP_NAME } from '../provideAppName';
+import { APP_NAME } from '@core';
 
 @Component({
   selector: 'core-home',
