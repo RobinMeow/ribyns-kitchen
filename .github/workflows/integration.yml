@@ -52,7 +52,7 @@ jobs:
       - name: Run .NET Web API Tests
         run: dotnet test
 
-  build-and-test-client:
+  lint-and-build-and-test-client:
     runs-on: ubuntu-22.04
     
     defaults:
@@ -73,6 +73,9 @@ jobs:
   
       - name: install dependencies
         run: yarn install --frozen-lockfile
+
+      - name: lint
+        run: yarn lint
 
       - name: build
         run: yarn run build
