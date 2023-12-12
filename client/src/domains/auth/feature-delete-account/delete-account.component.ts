@@ -15,6 +15,7 @@ import { Credentials } from '../utils/Credentials';
 import { Router } from '@angular/router';
 import { Chef } from '../utils/Chef';
 import { MatInputModule } from '@angular/material/input';
+import { PasswordComponent } from '../ui/password/password.component';
 
 @Component({
   selector: 'auth-delete-account',
@@ -26,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    PasswordComponent,
   ],
   templateUrl: './delete-account.component.html',
   styleUrls: ['./delete-account.component.scss', '../utils/auth.scss'],

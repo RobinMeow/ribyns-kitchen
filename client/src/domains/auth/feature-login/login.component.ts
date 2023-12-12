@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ChefFromControlFactory } from '../utils/ChefFormControlFactory';
 import { ChefConstraints } from '../utils/ChefConstraints';
+import { PasswordComponent } from '../ui/password/password.component';
 
 @Component({
   selector: 'auth-login',
@@ -24,6 +25,7 @@ import { ChefConstraints } from '../utils/ChefConstraints';
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
+    PasswordComponent,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss', '../utils/auth.scss'],
@@ -50,8 +52,6 @@ export class LoginComponent {
 
   protected readonly passwordControl: FormControl<string> =
     this.loginForm.controls.password;
-
-  protected hidePassword = true;
 
   protected async onSubmit(): Promise<void> {
     if (this.loginForm.invalid) return;

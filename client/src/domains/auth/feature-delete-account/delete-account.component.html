@@ -6,16 +6,7 @@
   data-cy-delete-account-form
 >
   <div class="forms-column">
-    <mat-form-field>
-      <mat-label>Passwort</mat-label>
-      <input
-        matInput
-        [formControl]="deleteAccountForm.controls.password"
-        placeholder="iLoveJesus<3"
-        type="password"
-        data-cy-password-input
-      />
-    </mat-form-field>
+    <auth-password [passwordControl]="deleteAccountForm.controls.password" />
   </div>
   <button
     [disabled]="deleteAccountForm.invalid"

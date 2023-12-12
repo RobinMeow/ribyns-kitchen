@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChefFromControlFactory } from '../utils/ChefFormControlFactory';
 import { ChefConstraints } from '../utils/ChefConstraints';
+import { PasswordComponent } from '../ui/password/password.component';
 
 @Component({
   selector: 'auth-register',
@@ -27,6 +28,7 @@ import { ChefConstraints } from '../utils/ChefConstraints';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    PasswordComponent,
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss', '../utils/auth.scss'],
