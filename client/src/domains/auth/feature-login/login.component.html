@@ -22,7 +22,7 @@
       >
     </mat-form-field>
 
-    <auth-password [passwordControl]="passwordControl" />
+    <auth-password [passwordControl]="loginForm.controls.password" />
   </div>
   <button
     [disabled]="loginForm.invalid"
