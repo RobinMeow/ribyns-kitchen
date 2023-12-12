@@ -32,8 +32,6 @@
       "@core": [ "src/domains/core/index.ts" ],
       "@auth": [ "src/domains/auth/index.ts" ],
       "@api": [ "src/domains/api/index.ts" ],
-      // testing, special case to bypass rules, for dependency injections in testing.
-      "@testing": [ "src/domains/auth/utils/auth.service.ts" ],
     }
   },
   "angularCompilerOptions": {

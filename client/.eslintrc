@@ -70,7 +70,7 @@
       }
     },
     {
-      "files": ["*.ts"],
+      "files": ["*[!*.cy].ts"],
       "extends": ["plugin:@softarc/sheriff/default"]
     }
   ]
