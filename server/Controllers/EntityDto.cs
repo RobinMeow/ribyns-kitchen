@@ -1,11 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using api.Domain;
 
 namespace api.Controllers;
 
 public abstract class EntityDto
 {
     [Required]
-    public string Id { get; set; } = default!;
+    public string Id { get; set; } = EntityId.New();
 
     /// <summary>
     /// make sure to add the <see cref="RequiredAttribute"/> on overriding.
@@ -14,5 +15,5 @@ public abstract class EntityDto
     public abstract int ModelVersion { get; init; }
 
     [Required]
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.MinValue;
 }

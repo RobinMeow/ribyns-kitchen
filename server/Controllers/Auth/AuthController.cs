@@ -1,14 +1,12 @@
 using System.ComponentModel.DataAnnotations;
-using System.Net.Mime;
 using api.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace api.Controllers.Auth;
 
 [ApiController]
-[Produces(MediaTypeNames.Application.Json)]
-[Consumes(MediaTypeNames.Application.Json)]
 [Route("[controller]")]
 public sealed class AuthController(
     DbContext _context,
@@ -29,9 +27,10 @@ public sealed class AuthController(
     /// <returns>201 Created</returns>
     [HttpPost(nameof(RegisterAsync))]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IResult> RegisterAsync([Required] RegisterChefDto newChef)
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
+    public async Task<IActionResult> RegisterAsync([Required] RegisterChefDto newChef)
     {
         string chefname = newChef.Name;
 
@@ -40,14 +39,14 @@ public sealed class AuthController(
             Chef? chefWithSameName = await _chefRepository.GetByNameAsync(chefname);
 
             if (chefWithSameName != null)
-                return Results.BadRequest($"Chefname ist bereits vergeben.");
+                return BadRequest($"Chefname ist bereits vergeben.");
 
             if (newChef.Email != null)
             {
                 Chef? chefWithSameEmail = await _chefRepository.GetByEmailAsync(newChef.Email);
 
                 if (chefWithSameEmail != null)
-                    return Results.BadRequest($"Email ist bereits vergeben.");
+                    return BadRequest($"Email ist bereits vergeben.");
             }
 
             Chef chef = new Chef(
@@ -62,18 +61,20 @@ public sealed class AuthController(
 
             await _chefRepository.AddAsync(chef).ConfigureAwait(false);
 
-            return Results.Created();
+            return Created();
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, CreateErrorMessage(nameof(AuthController), nameof(RegisterAsync)), newChef);
-            return Results.StatusCode(StatusCodes.Status500InternalServerError);
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 
     [HttpPost(nameof(LoginAsync))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType<string>(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesDefaultResponseType]
     public async Task<ActionResult<string>> LoginAsync([Required] CredentialsDto credentials)
     {
         try
@@ -99,13 +100,15 @@ public sealed class AuthController(
         catch (Exception ex)
         {
             _logger.LogError(ex, CreateErrorMessage(nameof(AuthController), nameof(LoginAsync)), credentials);
-            return Status_500_Internal_Server_Error;
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 
     [HttpPost(nameof(DeleteAsync))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesDefaultResponseType]
     public async Task<IActionResult> DeleteAsync([Required] CredentialsDto credentials)
     {
         try
@@ -131,7 +134,7 @@ public sealed class AuthController(
         catch (Exception ex)
         {
             _logger.LogError(ex, CreateErrorMessage(nameof(AuthController), nameof(DeleteAsync)), credentials);
-            return Status_500_Internal_Server_Error;
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 }

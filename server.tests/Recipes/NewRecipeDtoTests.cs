@@ -1,4 +1,5 @@
 ﻿using api.Controllers.Recipes;
+using System.ComponentModel.DataAnnotations;
 
 namespace server.tests.Recipes;
 
@@ -14,7 +15,8 @@ public sealed class NewRecipeDtoTests : DataAnnotationTests
             Name = name!,
         };
 
-        Equal(1, ValidateAmountFailed(dto));
+        IList<ValidationResult> validationResults = ValidationResults(dto);
+        True(HasInvalidMember(validationResults, nameof(NewRecipeDto.Name)));
     }
 
     [Theory]
@@ -27,6 +29,6 @@ public sealed class NewRecipeDtoTests : DataAnnotationTests
             Name = name,
         };
 
-        Equal(0, ValidateAmountFailed(dto));
+        Empty(ValidationResults(dto));
     }
 }

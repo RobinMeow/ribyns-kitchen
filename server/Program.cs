@@ -1,5 +1,7 @@
+using System.Net.Mime;
 using api.Domain;
 using api.Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 
 namespace api;
 
@@ -11,7 +13,11 @@ internal class Program
 
         builder.Services.Configure<PersistenceSettings>(builder.Configuration.GetSection(nameof(PersistenceSettings)));
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers(options =>
+        {
+            options.Filters.Add(new ProducesAttribute(MediaTypeNames.Application.Json));
+            options.Filters.Add(new ConsumesAttribute(MediaTypeNames.Application.Json));
+        });
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
 

@@ -4,7 +4,7 @@ namespace server.tests;
 
 public abstract class DataAnnotationTests
 {
-    protected static IList<ValidationResult> ValidateModel(object model)
+    protected static IList<ValidationResult> ValidationResults(object model)
     {
         var validationResults = new List<ValidationResult>();
         var ctx = new ValidationContext(model, null, null);
@@ -12,10 +12,15 @@ public abstract class DataAnnotationTests
         return validationResults;
     }
 
-    protected static int ValidateAmountFailed(object dto)
+    //protected static int ValidateAmountFailed(object dto)
+    //{
+    //    IList<ValidationResult> validationResults = ValidateModel(dto);
+    //    int invalidMembers = validationResults.Where(vr => vr.MemberNames.Any()).Count();
+    //    return invalidMembers;
+    //}
+
+    protected static bool HasInvalidMember(IList<ValidationResult> validationResults, string memberName)
     {
-        IList<ValidationResult> validationResults = ValidateModel(dto);
-        int invalidMembers = validationResults.Where(vr => vr.MemberNames.Any()).Count();
-        return invalidMembers;
+        return validationResults.Any(vr => vr.MemberNames.Contains(memberName));
     }
 }

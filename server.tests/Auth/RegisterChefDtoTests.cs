@@ -1,4 +1,5 @@
 ﻿using api.Controllers.Auth;
+using System.ComponentModel.DataAnnotations;
 
 namespace server.tests.Auth;
 
@@ -16,7 +17,10 @@ public sealed class RegisterChefDtoTests : DataAnnotationTests
             Email = email
         };
 
-        Equal(3, ValidateAmountFailed(dto));
+        IList<ValidationResult> validationResults = ValidationResults(dto);
+        True(HasInvalidMember(validationResults, nameof(RegisterChefDto.Name)));
+        True(HasInvalidMember(validationResults, nameof(RegisterChefDto.Password)));
+        True(HasInvalidMember(validationResults, nameof(RegisterChefDto.Email)));
     }
 
     [Theory]
@@ -31,6 +35,6 @@ public sealed class RegisterChefDtoTests : DataAnnotationTests
             Email = email
         };
 
-        Equal(0, ValidateAmountFailed(dto));
+        Empty(ValidationResults(dto));
     }
 }

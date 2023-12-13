@@ -60,17 +60,17 @@ public static class ProgrammExtensions
 
     public static IServiceCollection AddSwaggerStuff(this IServiceCollection services)
     {
-        services.AddSwaggerGen(c =>
+        services.AddSwaggerGen(o =>
         {
-            c.SupportNonNullableReferenceTypes();
+            o.SupportNonNullableReferenceTypes();
 
-            c.CustomOperationIds((ApiDescription apiDescription) =>
+            o.CustomOperationIds((ApiDescription apiDescription) =>
             {
                 return apiDescription.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.Name : null;
             });
 
             // Avoid having to type out the "Bearer " https://stackoverflow.com/a/64899768
-            c.SwaggerDoc("v1", new OpenApiInfo
+            o.SwaggerDoc("v1", new OpenApiInfo
             {
                 Title = "Community Cookbook",
                 Version = "v1",
@@ -83,17 +83,21 @@ public static class ProgrammExtensions
                 License = new OpenApiLicense()
                 {
                     Name = "MIT License",
-                    // Url = 
+                    Url = new Uri("https://github.com/RobinMeow/CommunityCookbook/blob/master/LICENSE")
                 }
             });
 
             string xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             string xmlDocumentationPath = Path.Combine(AppContext.BaseDirectory, xmlFilename);
-            c.IncludeXmlComments(xmlDocumentationPath);
+            o.IncludeXmlComments(xmlDocumentationPath);
 
-            c.OperationFilter<SecurityRequirementsOperationFilter>();
+            o.OperationFilter<SecurityRequirementsOperationFilter>();
 
-            c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            // https://github.com/vernou/Vernou.Swashbuckle.HttpResultsAdapter
+            // not working for me sadly.
+            // TypedResults metadata are not inferred for API Controllers: https://github.com/dotnet/aspnetcore/issues/44988
+
+            o.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
             {
                 Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
                 In = ParameterLocation.Header,

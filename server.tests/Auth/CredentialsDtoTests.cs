@@ -1,4 +1,5 @@
 ﻿using api.Controllers.Auth;
+using System.ComponentModel.DataAnnotations;
 
 namespace server.tests.Auth;
 
@@ -15,7 +16,9 @@ public sealed class CredentialsDtoTests : DataAnnotationTests
             Password = password!,
         };
 
-        Equal(2, ValidateAmountFailed(dto));
+        IList<ValidationResult> validationResults = ValidationResults(dto);
+        True(HasInvalidMember(validationResults, nameof(CredentialsDto.Name)));
+        True(HasInvalidMember(validationResults, nameof(CredentialsDto.Password)));
     }
 
     [Fact]
@@ -27,6 +30,6 @@ public sealed class CredentialsDtoTests : DataAnnotationTests
             Password = "meow",
         };
 
-        Equal(0, ValidateAmountFailed(dto));
+        Empty(ValidationResults(dto));
     }
 }

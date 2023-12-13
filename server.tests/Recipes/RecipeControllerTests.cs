@@ -1,7 +1,7 @@
 using api.Controllers.Recipes;
 using api.Domain;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 
@@ -29,8 +29,8 @@ public sealed class RecipeControllerTests
             Name = "My Recipe",
         };
 
-        IResult createdResult = await _recipeController.AddAsync(requestDto);
-        IsAssignableFrom<Created<RecipeDto>>(createdResult);
+        ActionResult<RecipeDto> createdResult = await _recipeController.AddAsync(requestDto);
+        IsType<CreatedResult>(createdResult.Result);
     }
 
     [Theory]
@@ -43,7 +43,7 @@ public sealed class RecipeControllerTests
             Name = name!,
         };
 
-        IResult result = await _recipeController.AddAsync(requestDto);
-        IsAssignableFrom<BadRequest>(result);
+        ActionResult<RecipeDto> result = await _recipeController.AddAsync(requestDto);
+        IsType<BadRequestResult>(result.Result);
     }
 }
