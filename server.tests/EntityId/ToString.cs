@@ -1,6 +1,6 @@
 using api.Domain;
 
-namespace server.tests.entitiyId;
+namespace server.tests.EntityId_specs;
 
 public sealed class ToString
 {

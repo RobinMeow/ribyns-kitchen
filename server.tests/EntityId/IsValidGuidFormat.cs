@@ -1,6 +1,6 @@
 using api.Domain;
 
-namespace server.tests.entitiyId;
+namespace server.tests.EntityId_specs;
 
 public sealed class IsValidGuidFormat : _testData
 {
@@ -43,10 +43,7 @@ public sealed class IsValidGuidFormat : _testData
 
     public static IEnumerable<object[]> GetIdsWithInvalidFormat()
     {
-        object? meow = null;
-        #pragma warning disable CS8619 // Possible null reference return.
-        yield return new [] { meow };
-        #pragma warning restore CS8619 // Possible null reference return.
+        yield return new object[] { null! };
         yield return new [] { "" };
         yield return new [] { " " };
         yield return new [] { "invalid" };

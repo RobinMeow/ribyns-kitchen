@@ -1,13 +1,10 @@
-using System;
-
 namespace api.Domain;
 
 public sealed record EntityId
 {
-    static readonly IdentifierSpecification[] _identifierSpecifications = new IdentifierSpecification[] {
+    static readonly IdentifierSpecification[] s_identifierSpecifications = [
         new GuidEntityIdSpecification(),
-        new ChefIdSpecification()
-    };
+    ];
 
     readonly string _id = "00000000-0000-0000-0000-000000000000";
 
@@ -18,9 +15,9 @@ public sealed record EntityId
     public EntityId(string id)
     {
         bool validId = false;
-        for (int i = 0; i < _identifierSpecifications.Length; i++)
+        for (int i = 0; i < s_identifierSpecifications.Length; i++)
         {
-            if (_identifierSpecifications[i].IsSatisfiedBy(id))
+            if (s_identifierSpecifications[i].IsSatisfiedBy(id))
             {
                 validId = true;
                 break;

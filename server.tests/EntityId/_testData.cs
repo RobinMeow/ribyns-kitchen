@@ -1,6 +1,6 @@
 using api.Domain;
 
-namespace server.tests.entitiyId;
+namespace server.tests.EntityId_specs;
 
 public abstract class _testData
 {
@@ -12,6 +12,9 @@ public abstract class _testData
 
     public static IEnumerable<object[]> GetInvalidIds()
     {
+        yield return new object[] { null! };
+        yield return new [] { "" };
+        yield return new[] { " " };
         yield return new [] { "invalid" };
         yield return new [] { "00000000-0000-0000-0000-00000000000G" };
         yield return new [] { "ZZZZZZZZ-ZZZZ-ZZZZ-ZZZZ-ZZZZZZZZZZZZ" };
