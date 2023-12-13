@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using api.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 
 namespace api.Controllers.Recipes;
 
@@ -12,7 +11,7 @@ namespace api.Controllers.Recipes;
 public sealed class RecipeController(
     DbContext _context,
     ILogger<RecipeController> logger
-    ) : GkbController
+    ) : CcController
 {
     readonly ILogger<RecipeController> _logger = logger;
     readonly IRecipeRepository _recipeRepository = _context.RecipeRepository;

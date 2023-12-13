@@ -5,11 +5,11 @@ namespace api.Domain;
 
 public sealed class IsoDateTime
 {
-    static readonly CultureInfo InvariantCulture = CultureInfo.InvariantCulture; // cache for performance
+    static readonly CultureInfo s_invariantCulture = CultureInfo.InvariantCulture; // cache for performance
 
     ///<summary>Array of allowed ISO 8601 date-time formats ordered in likelihood to occur.</summary>
-    static readonly string[] AllowedIsoFormats = new[]
-    {
+    static readonly string[] s_allowedIsoFormats =
+    [
         "yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'",
         "yyyy-MM-dd'T'HH:mm:ss.ffffff'Z'",
         "yyyy-MM-dd'T'HH:mm:ss.fffff'Z'",
@@ -18,9 +18,9 @@ public sealed class IsoDateTime
         "yyyy-MM-dd'T'HH:mm:ss.ff'Z'",
         "yyyy-MM-dd'T'HH:mm:ss.f'Z'",
         "yyyy-MM-dd'T'HH:mm:ss'Z'"
-    };
+    ];
 
-    DateTime _dateTime = DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc);
+    readonly DateTime _dateTime = DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc);
 
     private IsoDateTime()
     {
@@ -36,7 +36,7 @@ public sealed class IsoDateTime
 
     /// <summary>
     /// Converts the specified string in ISO 8601 format to a <see cref="DateTime"/> with <see cref="DateTimeKind.Utc"/>.
-    /// <para>The provided string has to be in a format specified in <see cref="AllowedIsoFormats"/></para>
+    /// <para>The provided string has to be in a format specified in <see cref="s_allowedIsoFormats"/></para>
     /// <code>
     /// yyyy-MM-dd'T'HH:mm:ss.fffffff'Z' <br />
     /// yyyy-MM-dd'T'HH:mm:ss.ffffff'Z' <br />
@@ -50,7 +50,7 @@ public sealed class IsoDateTime
     /// </summary>
     public IsoDateTime(string isoString)
     {
-        DateTime dateTimeUnspecified = DateTime.ParseExact(isoString, AllowedIsoFormats, InvariantCulture, DateTimeStyles.AdjustToUniversal);
+        DateTime dateTimeUnspecified = DateTime.ParseExact(isoString, s_allowedIsoFormats, s_invariantCulture, DateTimeStyles.AdjustToUniversal);
         _dateTime = DateTime.SpecifyKind(dateTimeUnspecified, DateTimeKind.Utc);
     }
 
@@ -76,6 +76,6 @@ public sealed class IsoDateTime
     /// </summary>
     public override string ToString()
     {
-        return _dateTime.ToString("o", InvariantCulture);
+        return _dateTime.ToString("o", s_invariantCulture);
     }
 }

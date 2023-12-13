@@ -1,6 +1,5 @@
 using api.Controllers.Recipes;
 using api.Domain;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -45,5 +44,12 @@ public sealed class RecipeControllerTests
 
         ActionResult<RecipeDto> result = await _recipeController.AddAsync(requestDto);
         IsType<BadRequestResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task GetAllAsync_returns_OkObject()
+    {
+        ActionResult<IEnumerable<RecipeDto>> result = await _recipeController.GetAllAsync();
+        IsType<OkObjectResult>(result.Result);
     }
 }

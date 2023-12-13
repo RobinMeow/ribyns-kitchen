@@ -1,5 +1,4 @@
 ﻿using api.Controllers;
-using api.Domain;
 using System.ComponentModel.DataAnnotations;
 
 namespace server.tests;

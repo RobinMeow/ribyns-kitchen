@@ -12,13 +12,6 @@ public abstract class DataAnnotationTests
         return validationResults;
     }
 
-    //protected static int ValidateAmountFailed(object dto)
-    //{
-    //    IList<ValidationResult> validationResults = ValidateModel(dto);
-    //    int invalidMembers = validationResults.Where(vr => vr.MemberNames.Any()).Count();
-    //    return invalidMembers;
-    //}
-
     protected static bool HasInvalidMember(IList<ValidationResult> validationResults, string memberName)
     {
         return validationResults.Any(vr => vr.MemberNames.Contains(memberName));

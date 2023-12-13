@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using api.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 
 namespace api.Controllers.Auth;
 
@@ -13,7 +12,7 @@ public sealed class AuthController(
     ILogger<AuthController> _logger,
     IPasswordHasher _passwordHasher,
     IJwtFactory _jwtFactory
-    ) : GkbController
+    ) : CcController
 {
     readonly IChefRepository _chefRepository = _context.ChefRepository;
     readonly ILogger<AuthController> _logger = _logger;
@@ -49,7 +48,7 @@ public sealed class AuthController(
                     return BadRequest($"Email ist bereits vergeben.");
             }
 
-            Chef chef = new Chef(
+            var chef = new Chef(
                 chefname,
                 EntityId.New()
             )
