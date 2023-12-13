@@ -1,8 +1,11 @@
 using api.Controllers.Auth;
 using api.Domain;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
+using System.ComponentModel.DataAnnotations;
 
 namespace Auth;
 
@@ -23,7 +26,7 @@ public sealed class ControllerTests
     }
 
     [Fact]
-    public async Task Register()
+    public async Task Register_returns_created_with_valid_request_dto()
     {
         var requestDto = new RegisterChefDto()
         {
@@ -31,15 +34,13 @@ public sealed class ControllerTests
             Password = "Password"
         };
 
-        var expectedCreatedResult = new CreatedResult();
+        IResult createdResult = await _authController.RegisterAsync(requestDto);
 
-        CreatedResult? createdResult = await _authController.RegisterAsync(requestDto) as CreatedResult;
-
-        Equal(expectedCreatedResult.StatusCode, createdResult?.StatusCode);
+        IsType<Created>(createdResult);
     }
 
     [Fact]
-    public async Task Register_With_Null_Throws()
+    public async Task Register_throws_without_request_dto()
     {
         await ThrowsAnyAsync<NullReferenceException>(async () => await _authController.RegisterAsync(null!));
     }
