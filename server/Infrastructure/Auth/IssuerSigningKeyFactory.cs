@@ -4,19 +4,14 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace api.Infrastructure.Auth;
 
-public sealed class IssuerSigningKeyFactory : IIssuerSigningKeyFactory
+public sealed class IssuerSigningKeyFactory(BearerConfig bearerConfig) : IIssuerSigningKeyFactory
 {
-    private readonly BearerConfig _bearerConfig;
+    readonly BearerConfig _bearerConfig = bearerConfig;
 
     public IssuerSigningKeyFactory(IConfiguration configuration)
     : this(configuration.GetSection(nameof(BearerConfig)).Get<BearerConfig>()
             ?? throw new ArgumentException($"Couldnt not find {nameof(BearerConfig)} in configuration."))
     {
-    }
-
-    public IssuerSigningKeyFactory(BearerConfig bearerConfig)
-    {
-        _bearerConfig = bearerConfig;
     }
 
     public SecurityKey Create()
