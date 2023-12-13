@@ -20,7 +20,7 @@ public sealed class NewRecipeDtoTests : DataAnnotationTests
     }
 
     [Theory]
-    [InlineData("12")] // I dont know a recipe with two characters actually..
+    [InlineData("Egg")]
     [InlineData("Sumptuous Southern-Style Pulled Pork BBQ with Aromatics, Sweet and Tangy Sauce, and a Twist of Creole Spice")] // 107
     public void successfully_validates_all_members(string name)
     {
