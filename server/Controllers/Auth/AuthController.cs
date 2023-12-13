@@ -48,11 +48,9 @@ public sealed class AuthController(
                     return BadRequest($"Email ist bereits vergeben.");
             }
 
-            var chef = new Chef(
-                chefname,
-                EntityId.New()
-            )
+            var chef = new Chef()
             {
+                Name = chefname,
                 Email = newChef.Email
             };
 
@@ -85,7 +83,7 @@ public sealed class AuthController(
                 return BadRequest("User not found.");
             }
 
-            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef, chef.PasswordHash, credentials.Password);
+            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef.PasswordHash, credentials.Password);
 
             if (passwordVerificationResult == PasswordVerificationResult.Failed)
             {
@@ -119,7 +117,7 @@ public sealed class AuthController(
                 return BadRequest("User not found.");
             }
 
-            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef, chef.PasswordHash, credentials.Password);
+            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef.PasswordHash, credentials.Password);
 
             if (passwordVerificationResult == PasswordVerificationResult.Failed)
             {

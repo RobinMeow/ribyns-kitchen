@@ -44,7 +44,7 @@ public sealed class RecipeController(
     static Recipe Create(NewRecipeDto newRecipe)
     {
         System.Diagnostics.Debug.Assert(newRecipe.Name != null);
-        return new Recipe(EntityId.New())
+        return new Recipe()
         {
             CreatedAt = IsoDateTime.Now,
             Name = newRecipe.Name!

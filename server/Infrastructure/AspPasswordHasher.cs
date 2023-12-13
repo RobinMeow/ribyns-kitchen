@@ -5,9 +5,14 @@ namespace api.Infrastructure;
 
 public sealed class AspPasswordHasher : IPasswordHasher
 {
-    static readonly PasswordHasher<Chef> s_passwordHasher = new();
+    static readonly PasswordHasher<object> s_passwordHasher = new();
 
-    public string Hash(Chef chef, string password) => s_passwordHasher.HashPassword(chef, password);
+    // https://github.com/dotnet/aspnetcore/blob/main/src/Identity/Extensions.Core/src/PasswordHasher.cs
+    // :table_flip:
+    static readonly object s_user = null!;
 
-    public PasswordVerificationResult VerifyHashedPassword(Chef chef, string hashedPassword, string providedPassword) => s_passwordHasher.VerifyHashedPassword(chef, hashedPassword, providedPassword);
+    public string Hash(string password) => s_passwordHasher.HashPassword(s_user, password);
+
+    public PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string providedPassword)
+        => s_passwordHasher.VerifyHashedPassword(s_user, hashedPassword, providedPassword);
 }

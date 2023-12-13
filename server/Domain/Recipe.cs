@@ -1,6 +1,6 @@
 namespace api.Domain;
 
-public sealed class Recipe(EntityId entityId) : Entity(entityId)
+public sealed class Recipe() : Entity()
 {
     public const int MODEL_VERSION = 0;
 

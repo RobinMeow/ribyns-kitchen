@@ -6,12 +6,6 @@ namespace server.tests.Infrastructure;
 
 public sealed class AspPasswordHasherTests
 {
-    readonly Chef _chef = new ("Chef", EntityId.New());
-
-    public AspPasswordHasherTests()
-    {
-        
-    }
     [Fact]
     public void returns_non_null_string()
     {
@@ -20,7 +14,7 @@ public sealed class AspPasswordHasherTests
         var password = "iLoveJesus<3!";
 
         // Act
-        var hashedPassword = aspPasswordHasher.Hash(_chef, password);
+        var hashedPassword = aspPasswordHasher.Hash(password);
 
         // Assert
         NotNull(hashedPassword);
@@ -32,10 +26,10 @@ public sealed class AspPasswordHasherTests
         // Arrange
         var aspPasswordHasher = new AspPasswordHasher();
         var password = "iLoveJesus<3!";
-        var hashedPassword = aspPasswordHasher.Hash(_chef, password);
+        var hashedPassword = aspPasswordHasher.Hash(password);
 
         // Act
-        var verificationResult = aspPasswordHasher.VerifyHashedPassword(_chef, hashedPassword, password);
+        var verificationResult = aspPasswordHasher.VerifyHashedPassword(hashedPassword, password);
 
         // Assert
         Equal(PasswordVerificationResult.Success, verificationResult);
@@ -47,10 +41,10 @@ public sealed class AspPasswordHasherTests
         // Arrange
         var aspPasswordHasher = new AspPasswordHasher();
         var password = "iLoveJesus<3!";
-        var hashedPassword = aspPasswordHasher.Hash(_chef, password);
+        var hashedPassword = aspPasswordHasher.Hash(password);
 
         // Act
-        var verificationResult = aspPasswordHasher.VerifyHashedPassword(_chef, hashedPassword, "wrongPassword");
+        var verificationResult = aspPasswordHasher.VerifyHashedPassword(hashedPassword, "wrongPassword");
 
         // Assert
         Equal(PasswordVerificationResult.Failed, verificationResult);
