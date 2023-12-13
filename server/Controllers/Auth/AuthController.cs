@@ -74,18 +74,18 @@ public sealed class AuthController(
     [HttpPost(nameof(LoginAsync))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType<string>(StatusCodes.Status200OK)]
-    public async Task<ActionResult<string>> LoginAsync([Required] LoginDto login)
+    public async Task<ActionResult<string>> LoginAsync([Required] CredentialsDto credentials)
     {
         try
         {
-            Chef? chef = await _chefRepository.GetByNameAsync(login.Name);
+            Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name);
 
             if (chef == null)
             {
                 return BadRequest("User not found.");
             }
 
-            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef, chef.PasswordHash, login.Password);
+            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef, chef.PasswordHash, credentials.Password);
 
             if (passwordVerificationResult == PasswordVerificationResult.Failed)
             {
@@ -98,7 +98,7 @@ public sealed class AuthController(
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, CreateErrorMessage(nameof(AuthController), nameof(LoginAsync)), login);
+            _logger.LogError(ex, CreateErrorMessage(nameof(AuthController), nameof(LoginAsync)), credentials);
             return Status_500_Internal_Server_Error;
         }
     }
@@ -106,31 +106,31 @@ public sealed class AuthController(
     [HttpPost(nameof(DeleteAsync))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> DeleteAsync([Required] DeleteChefDto deleteChef)
+    public async Task<IActionResult> DeleteAsync([Required] CredentialsDto credentials)
     {
         try
         {
-            Chef? chef = await _chefRepository.GetByNameAsync(deleteChef.Name);
+            Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name);
 
             if (chef == null)
             {
                 return BadRequest("User not found.");
             }
 
-            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef, chef.PasswordHash, deleteChef.Password);
+            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef, chef.PasswordHash, credentials.Password);
 
             if (passwordVerificationResult == PasswordVerificationResult.Failed)
             {
                 return BadRequest("Invalid password.");
             }
 
-            await _chefRepository.RemoveAsync(deleteChef.Name);
+            await _chefRepository.RemoveAsync(credentials.Name);
 
             return Ok();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, CreateErrorMessage(nameof(AuthController), nameof(DeleteAsync)), deleteChef);
+            _logger.LogError(ex, CreateErrorMessage(nameof(AuthController), nameof(DeleteAsync)), credentials);
             return Status_500_Internal_Server_Error;
         }
     }

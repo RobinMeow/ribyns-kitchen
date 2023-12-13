@@ -11,7 +11,7 @@
  */
 
 
-export interface LoginDto { 
+export interface CredentialsDto { 
     name: string;
     password: string;
 }

@@ -2,14 +2,14 @@
 
 namespace server.tests.Auth;
 
-public sealed class DeleteChefDtoTests : DataAnnotationTests
+public sealed class CredentialsDtoTests : DataAnnotationTests
 {
     [Theory]
     [InlineData("", "")]
     [InlineData(null, null)]
     public void fails_all_member_validations(string? name, string? password)
     {
-        var dto = new DeleteChefDto()
+        var dto = new CredentialsDto()
         {
             Name = name!,
             Password = password!,
@@ -21,7 +21,7 @@ public sealed class DeleteChefDtoTests : DataAnnotationTests
     [Fact]
     public void successfully_validates_all_members()
     {
-        var dto = new DeleteChefDto()
+        var dto = new CredentialsDto()
         {
             Name = "meow",
             Password = "meow",

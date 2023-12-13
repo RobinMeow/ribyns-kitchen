@@ -11,7 +11,6 @@ import {
 import { firstValueFrom } from 'rxjs';
 import {
   AuthService as GeneratedAuthService,
-  DeleteChefDto,
   RegisterChefDto,
 } from '@infrastructure/open-api';
 import { Credentials } from './Credentials';
@@ -108,12 +107,8 @@ export class AuthService {
     notEmpty_checked(credentials.name, 'Chefname may not be empty.');
     notEmpty_checked(credentials.password, 'Chef password may not be empty.');
 
-    const deleteChefDto: DeleteChefDto = {
-      ...credentials,
-    };
-
     return await firstValueFrom(
-      this._authService.deleteAsync(deleteChefDto),
+      this._authService.deleteAsync(credentials),
     ).then(() => {
       this.logout();
     });
