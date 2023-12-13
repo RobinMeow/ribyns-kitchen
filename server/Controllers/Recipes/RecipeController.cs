@@ -9,31 +9,34 @@ namespace api.Controllers.Recipes;
 [ApiController]
 [Route("[controller]")]
 public sealed class RecipeController(
-    ILogger<RecipeController> logger,
-    DbContext _context
+    DbContext _context,
+    ILogger<RecipeController> logger
     ) : GkbController
 {
     readonly ILogger<RecipeController> _logger = logger;
     readonly IRecipeRepository _recipeRepository = _context.RecipeRepository;
 
     [HttpPost(nameof(AddAsync))]
-    public IActionResult AddAsync([Required] NewRecipeDto newRecipe)
+    [ProducesResponseType<RecipeDto>(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IResult> AddAsync([Required] NewRecipeDto newRecipe)
     {
         try
         {
             var newRecipeSpecification = new NewRecipeSpecification(newRecipe);
             if (!newRecipeSpecification.IsSatisfied())
-                return BadRequest(newRecipe);
+                return Results.BadRequest();
 
             Recipe recipe = Create(newRecipe);
-            _recipeRepository.Add(recipe);
+            await _recipeRepository.AddAsync(recipe);
 
-            return Ok(recipe.ToDto());
+            return Results.Created(string.Empty, recipe.ToDto()); // ToDo: Use CreatedAt, to msomehow make use of id creation in back end. and eable front end navigation
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, CreateErrorMessage(nameof(RecipeController), nameof(AddAsync)), newRecipe);
-            return Status_500_Internal_Server_Error;
+            return Results.StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 

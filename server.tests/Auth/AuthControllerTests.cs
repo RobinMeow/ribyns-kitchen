@@ -2,18 +2,16 @@ using api.Controllers.Auth;
 using api.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using System.ComponentModel.DataAnnotations;
 
 namespace Auth;
 
-public sealed class ControllerTests
+public sealed class AuthControllerTests
 {
     readonly AuthController _authController;
 
-    public ControllerTests()
+    public AuthControllerTests()
     {
         DbContext dbContext = Substitute.For<DbContext>();
 

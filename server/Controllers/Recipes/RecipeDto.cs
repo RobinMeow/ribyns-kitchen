@@ -4,6 +4,7 @@ namespace api.Controllers.Recipes;
 
 public sealed class RecipeDto : EntityDto
 {
+    [Required]
     public override int ModelVersion { get; init; } = Domain.Recipe.MODEL_VERSION;
 
     [Required]

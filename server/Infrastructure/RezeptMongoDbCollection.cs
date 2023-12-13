@@ -14,9 +14,9 @@ public sealed class RecipeMongoDbCollection : IRecipeRepository
 		_collection = database.GetCollection<Recipe>("recipes");
 	}
 
-	public async void Add(Recipe recipe)
+	public Task AddAsync(Recipe recipe)
 	{
-		await _collection.InsertOneAsync(recipe);
+		return _collection.InsertOneAsync(recipe);
 	}
 
 	public async Task<IEnumerable<Recipe>> GetAllAsync()

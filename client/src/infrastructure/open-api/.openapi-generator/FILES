@@ -13,6 +13,7 @@ model/credentialsDto.ts
 model/models.ts
 model/newRecipeDto.ts
 model/problemDetails.ts
+model/recipeDto.ts
 model/registerChefDto.ts
 param.ts
 variables.ts
