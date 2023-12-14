@@ -21,24 +21,30 @@ public sealed class ChefMongoDbCollection : IChefRepository
     {
         IAsyncCursor<Chef> asyncCursor = await _collection
             .FindAsync((Chef chef) => chef.Name == name,
-            cancellationToken: cancellationToken);
-        return await asyncCursor.FirstOrDefaultAsync(cancellationToken);
+            cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
+
+        return await asyncCursor.FirstOrDefaultAsync(cancellationToken)
+            .ConfigureAwait(false);
     }
 
     public async Task<Chef?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
         IAsyncCursor<Chef> asyncCursor = await _collection
             .FindAsync((Chef chef) => chef.Email == email,
-            cancellationToken: cancellationToken);
-        return await asyncCursor.FirstOrDefaultAsync(cancellationToken);
+            cancellationToken: cancellationToken)
+            .ConfigureAwait(false);
+
+        return await asyncCursor.FirstOrDefaultAsync(cancellationToken)
+            .ConfigureAwait(false);
     }
 
     public async Task<IEnumerable<Chef>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
         return await _collection
             .Find<Chef>(_ => true)
-            .ToListAsync(cancellationToken);
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
     }
 
     public Task<Chef> GetAsync(string name, CancellationToken cancellationToken = default)

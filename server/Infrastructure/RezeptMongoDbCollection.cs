@@ -14,13 +14,13 @@ public sealed class RecipeMongoDbCollection : IRecipeRepository
 
 	public Task AddAsync(Recipe recipe, CancellationToken cancellationToken = default)
 	{
-		return _collection.InsertOneAsync(recipe, cancellationToken: cancellationToken);
+        return _collection.InsertOneAsync(recipe, cancellationToken: cancellationToken);
 	}
 
 	public async Task<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
-	{
+    {
         return await _collection
             .Find<Recipe>(_ => true)
-            .ToListAsync(cancellationToken);
+            .ToListAsync(cancellationToken).ConfigureAwait(false);
 	}
 }

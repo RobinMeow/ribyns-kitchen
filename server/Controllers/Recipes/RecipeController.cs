@@ -29,11 +29,13 @@ public sealed class RecipeController(
     {
         try
         {
+            cancellationToken.ThrowIfCancellationRequested();
             var newRecipeSpecification = new NewRecipeSpecification(newRecipe);
             if (!newRecipeSpecification.IsSatisfied())
                 return BadRequest();
 
             Recipe recipe = Create(newRecipe);
+            cancellationToken.ThrowIfCancellationRequested();
             await _recipeRepository.AddAsync(recipe, cancellationToken);
 
             return Created(string.Empty, recipe.ToDto()); // ToDo: Use CreatedAt, to msomehow make use of id creation in back end. and eable front end navigation
@@ -66,6 +68,7 @@ public sealed class RecipeController(
     {
         try
         {
+            cancellationToken.ThrowIfCancellationRequested();
             IEnumerable<Recipe> recipe = await _recipeRepository.GetAllAsync(cancellationToken);
             IEnumerable<RecipeDto> recipeDtos = recipe.ToDto();
             return Ok(recipeDtos);

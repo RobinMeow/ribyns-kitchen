@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using api.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using server.Domain;
 
 namespace api.Controllers.Auth;
 
@@ -34,6 +33,7 @@ public sealed class AuthController(
 
         try
         {
+            cancellationToken.ThrowIfCancellationRequested();
             Chef? chefWithSameName = await _chefRepository.GetByNameAsync(chefname, cancellationToken);
 
             if (chefWithSameName != null)
@@ -54,10 +54,9 @@ public sealed class AuthController(
                 Email = newChef.Email
             };
 
-            cancellationToken.ThrowIfCancellationRequested();
-
             chef.SetPassword(newChef.Password, _passwordHasher);
 
+            cancellationToken.ThrowIfCancellationRequested();
             await _chefRepository.AddAsync(chef, cancellationToken);
 
             return Created();
@@ -82,6 +81,7 @@ public sealed class AuthController(
     {
         try
         {
+            cancellationToken.ThrowIfCancellationRequested();
             Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name, cancellationToken);
 
             if (chef == null)
@@ -119,6 +119,7 @@ public sealed class AuthController(
     {
         try
         {
+            cancellationToken.ThrowIfCancellationRequested();
             Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name, cancellationToken);
 
             if (chef == null)
@@ -133,6 +134,7 @@ public sealed class AuthController(
                 return BadRequest("Invalid password.");
             }
 
+            cancellationToken.ThrowIfCancellationRequested();
             await _chefRepository.RemoveAsync(credentials.Name, cancellationToken);
 
             return Ok();
