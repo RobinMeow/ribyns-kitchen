@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using api.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using server.Domain;
 
 namespace api.Controllers.Auth;
 
@@ -19,12 +20,9 @@ public sealed class AuthController(
     readonly IPasswordHasher _passwordHasher = _passwordHasher;
     readonly IJwtFactory _jwtFactory = _jwtFactory;
 
-    /// <summary>
-    /// sign up a new user
-    /// </summary>
-    /// <param name="newChef">the user to sign up</param>
+    /// <summary>sign up a new account.</summary>
+    /// <param name="newChef">the data to create an account from.</param>
     /// <param name="cancellationToken"></param>
-    /// <returns>201 Created</returns>
     [HttpPost(nameof(RegisterAsync))]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -71,16 +69,20 @@ public sealed class AuthController(
         }
     }
 
+    /// <summary>log in using an existing account.</summary>
+    /// <param name="credentials">credentials to check against and generate a JWT from.</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>a JWT for client side usage to keep the user logged in over a longer period of time.</returns>
     [HttpPost(nameof(LoginAsync))]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult<string>> LoginAsync([Required] CredentialsDto credentials)
+    public async Task<ActionResult<string>> LoginAsync([Required] CredentialsDto credentials, CancellationToken cancellationToken = default)
     {
         try
         {
-            Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name);
+            Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name, cancellationToken);
 
             if (chef == null)
             {
@@ -105,16 +107,19 @@ public sealed class AuthController(
         }
     }
 
+    /// <summary>delete an existing account.</summary>
+    /// <param name="credentials">the credentials to check against which account to delete and if the provided password matches the account.</param>
+    /// <param name="cancellationToken"></param>
     [HttpPost(nameof(DeleteAsync))]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> DeleteAsync([Required] CredentialsDto credentials)
+    public async Task<IActionResult> DeleteAsync([Required] CredentialsDto credentials, CancellationToken cancellationToken = default)
     {
         try
         {
-            Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name);
+            Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name, cancellationToken);
 
             if (chef == null)
             {
@@ -128,7 +133,7 @@ public sealed class AuthController(
                 return BadRequest("Invalid password.");
             }
 
-            await _chefRepository.RemoveAsync(credentials.Name);
+            await _chefRepository.RemoveAsync(credentials.Name, cancellationToken);
 
             return Ok();
         }

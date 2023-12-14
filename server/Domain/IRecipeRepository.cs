@@ -2,6 +2,6 @@ namespace api.Domain;
 
 public interface IRecipeRepository
 {
-    Task AddAsync(Recipe recipe);
-    Task<IEnumerable<Recipe>> GetAllAsync();
+    Task AddAsync(Recipe recipe, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default);
 }
