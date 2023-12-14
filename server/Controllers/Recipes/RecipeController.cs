@@ -55,7 +55,7 @@ public sealed class RecipeController(
         };
     }
 
-    /// <summary>retrive all recipes.</summary>
+    /// <summary>retrieve all recipes.</summary>
     /// <param name="cancellationToken"></param>
     /// <returns>all recipes.</returns>
     [HttpGet(nameof(GetAllAsync))]

@@ -96,7 +96,8 @@ export class AuthService {
     }
 
     /**
-     * @param credentialsDto 
+     * delete an existing account.
+     * @param credentialsDto the credentials to check against which account to delete and if the provided password matches the account.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -164,7 +165,8 @@ export class AuthService {
     }
 
     /**
-     * @param credentialsDto 
+     * log in using an existing account.
+     * @param credentialsDto credentials to check against and generate a JWT from.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -232,8 +234,8 @@ export class AuthService {
     }
 
     /**
-     * sign up a new user
-     * @param registerChefDto the user to sign up
+     * sign up a new account.
+     * @param registerChefDto the data to create an account from.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
