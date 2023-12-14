@@ -11,8 +11,10 @@
  */
 
 
-export interface DeleteChefDto { 
+export interface RecipeDto { 
+    id: string;
+    createdAt: string;
+    modelVersion: number;
     name: string;
-    password: string;
 }
 

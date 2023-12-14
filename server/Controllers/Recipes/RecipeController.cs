@@ -9,38 +9,42 @@ namespace api.Controllers.Recipes;
 [ApiController]
 [Route("[controller]")]
 public sealed class RecipeController(
-    ILogger<RecipeController> logger,
-    DbContext _context
-    ) : GkbController
+    DbContext _context,
+    ILogger<RecipeController> logger
+    ) : CcController
 {
     readonly ILogger<RecipeController> _logger = logger;
     readonly IRecipeRepository _recipeRepository = _context.RecipeRepository;
 
     [HttpPost(nameof(AddAsync))]
-    public IActionResult AddAsync([Required] NewRecipeDto newRecipe)
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult<RecipeDto>> AddAsync([Required] NewRecipeDto newRecipe)
     {
         try
         {
             var newRecipeSpecification = new NewRecipeSpecification(newRecipe);
             if (!newRecipeSpecification.IsSatisfied())
-                return BadRequest(newRecipe);
+                return BadRequest();
 
             Recipe recipe = Create(newRecipe);
-            _recipeRepository.Add(recipe);
+            await _recipeRepository.AddAsync(recipe);
 
-            return Ok(recipe.ToDto());
+            return Created(string.Empty, recipe.ToDto()); // ToDo: Use CreatedAt, to msomehow make use of id creation in back end. and eable front end navigation
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, CreateErrorMessage(nameof(RecipeController), nameof(AddAsync)), newRecipe);
-            return Status_500_Internal_Server_Error;
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 
     static Recipe Create(NewRecipeDto newRecipe)
     {
         System.Diagnostics.Debug.Assert(newRecipe.Name != null);
-        return new Recipe(EntityId.New())
+        return new Recipe()
         {
             CreatedAt = IsoDateTime.Now,
             Name = newRecipe.Name!
@@ -48,17 +52,21 @@ public sealed class RecipeController(
     }
 
     [HttpGet(nameof(GetAllAsync))]
-    public async ValueTask<IActionResult> GetAllAsync()
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetAllAsync()
     {
         try
         {
             IEnumerable<Recipe> recipe = await _recipeRepository.GetAllAsync();
-            return Ok(recipe.ToDto());
+            IEnumerable<RecipeDto> recipeDtos = recipe.ToDto();
+            return Ok(recipeDtos);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, CreateErrorMessage(nameof(RecipeController), nameof(GetAllAsync)));
-            return Status_500_Internal_Server_Error;
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 }

@@ -6,11 +6,11 @@ using NSubstitute;
 
 namespace Auth;
 
-public sealed class ControllerTests
+public sealed class AuthControllerTests
 {
     readonly AuthController _authController;
 
-    public ControllerTests()
+    public AuthControllerTests()
     {
         DbContext dbContext = Substitute.For<DbContext>();
 
@@ -23,7 +23,7 @@ public sealed class ControllerTests
     }
 
     [Fact]
-    public async Task Register()
+    public async Task Register_returns_created_with_valid_request_dto()
     {
         var requestDto = new RegisterChefDto()
         {
@@ -31,15 +31,12 @@ public sealed class ControllerTests
             Password = "Password"
         };
 
-        var expectedCreatedResult = new CreatedResult();
-
-        CreatedResult? createdResult = await _authController.RegisterAsync(requestDto) as CreatedResult;
-
-        Equal(expectedCreatedResult.StatusCode, createdResult?.StatusCode);
+        IActionResult createdResult = await _authController.RegisterAsync(requestDto);
+        IsAssignableFrom<CreatedResult>(createdResult);
     }
 
     [Fact]
-    public async Task Register_With_Null_Throws()
+    public async Task Register_throws_without_request_dto()
     {
         await ThrowsAnyAsync<NullReferenceException>(async () => await _authController.RegisterAsync(null!));
     }

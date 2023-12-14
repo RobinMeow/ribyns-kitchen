@@ -1,4 +1,5 @@
 .gitignore
+.openapi-generator-ignore
 README.md
 api.module.ts
 api/api.ts
@@ -8,11 +9,11 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
-model/deleteChefDto.ts
-model/loginDto.ts
+model/credentialsDto.ts
 model/models.ts
 model/newRecipeDto.ts
 model/problemDetails.ts
+model/recipeDto.ts
 model/registerChefDto.ts
 param.ts
 variables.ts

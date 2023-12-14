@@ -1,5 +1,5 @@
-export * from './deleteChefDto';
-export * from './loginDto';
+export * from './credentialsDto';
 export * from './newRecipeDto';
 export * from './problemDetails';
+export * from './recipeDto';
 export * from './registerChefDto';
