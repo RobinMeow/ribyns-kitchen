@@ -21,16 +21,16 @@ public sealed class ChefMongoDbCollection : IChefRepository
     {
         IAsyncCursor<Chef> asyncCursor = await _collection
             .FindAsync((Chef chef) => chef.Name == name,
-            cancellationToken: cancellationToken).ConfigureAwait(false); // Im Expecting this to throw an NullRef error.
-        return await asyncCursor.FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
+            cancellationToken: cancellationToken);
+        return await asyncCursor.FirstOrDefaultAsync(cancellationToken);
     }
 
     public async Task<Chef?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
         IAsyncCursor<Chef> asyncCursor = await _collection
             .FindAsync((Chef chef) => chef.Email == email,
-            cancellationToken: cancellationToken).ConfigureAwait(false); // Im Expecting this to throw an NullRef error.
-        return await asyncCursor.FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
+            cancellationToken: cancellationToken);
+        return await asyncCursor.FirstOrDefaultAsync(cancellationToken);
     }
 
     public async Task<IEnumerable<Chef>> GetAllAsync(CancellationToken cancellationToken = default)
@@ -38,7 +38,7 @@ public sealed class ChefMongoDbCollection : IChefRepository
         cancellationToken.ThrowIfCancellationRequested();
         return await _collection
             .Find<Chef>(_ => true)
-            .ToListAsync(cancellationToken).ConfigureAwait(false);
+            .ToListAsync(cancellationToken);
     }
 
     public Task<Chef> GetAsync(string name, CancellationToken cancellationToken = default)

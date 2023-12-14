@@ -34,7 +34,7 @@ public sealed class AuthController(
 
         try
         {
-            Chef? chefWithSameName = await _chefRepository.GetByNameAsync(chefname, cancellationToken).ConfigureAwait(false);
+            Chef? chefWithSameName = await _chefRepository.GetByNameAsync(chefname, cancellationToken);
 
             if (chefWithSameName != null)
                 return BadRequest($"Chefname ist bereits vergeben.");
@@ -42,7 +42,7 @@ public sealed class AuthController(
             if (newChef.Email != null)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                Chef? chefWithSameEmail = await _chefRepository.GetByEmailAsync(newChef.Email, cancellationToken).ConfigureAwait(false);
+                Chef? chefWithSameEmail = await _chefRepository.GetByEmailAsync(newChef.Email, cancellationToken);
 
                 if (chefWithSameEmail != null)
                     return BadRequest($"Email ist bereits vergeben.");
@@ -58,7 +58,7 @@ public sealed class AuthController(
 
             chef.SetPassword(newChef.Password, _passwordHasher);
 
-            await _chefRepository.AddAsync(chef, cancellationToken).ConfigureAwait(false);
+            await _chefRepository.AddAsync(chef, cancellationToken);
 
             return Created();
         }
