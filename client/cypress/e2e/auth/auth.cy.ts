@@ -14,7 +14,13 @@ describe('auth should', () => {
     cy.getByAttr('password-input').type(credentials.password);
 
     cy.get('@submit-btn').should('be.enabled');
+    cy.intercept({
+      path: '/Auth/RegisterAsync',
+      times: 1,
+    }).as('register-http-request');
     cy.get('@submit-btn').click(); // should redirect somewhere in success
+    cy.wait('@register-http-request');
+
     cy.url().should('not.include', 'register');
     cy.getByAttr('auth-corner')
       .getByAttr('logout-button')
@@ -36,7 +42,12 @@ describe('auth should', () => {
     // Delete the just registered account
     cy.visit('/delete-account');
     cy.getByAttr('password-input').type(credentials.password);
+    cy.intercept({
+      path: '/Auth/DeleteAsync',
+      times: 1,
+    }).as('delete-http-request');
     cy.getByAttr('delete-account-form').submit(); // redirect on success
+    cy.wait('@delete-http-request');
     cy.url().should('not.include', 'delete-account');
     cy.getByAttr('auth-corner').getByAttr('login-button');
   });

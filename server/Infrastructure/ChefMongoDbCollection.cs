@@ -12,39 +12,44 @@ public sealed class ChefMongoDbCollection : IChefRepository
         _collection = database.GetCollection<Chef>("chefs");
     }
 
-    public Task AddAsync(Chef chef)
+    public Task AddAsync(Chef chef, CancellationToken cancellationToken = default)
     {
-        return _collection.InsertOneAsync(chef);
+        return _collection.InsertOneAsync(chef, cancellationToken: cancellationToken);
     }
 
-    public async Task<Chef?> GetByNameAsync(string name)
+    public async Task<Chef?> GetByNameAsync(string name, CancellationToken cancellationToken = default)
     {
-        IAsyncCursor<Chef> asyncCursor = await _collection.FindAsync((Chef chef) => chef.Name == name);
-        return await asyncCursor.FirstOrDefaultAsync();
+        IAsyncCursor<Chef> asyncCursor = await _collection
+            .FindAsync((Chef chef) => chef.Name == name,
+            cancellationToken: cancellationToken).ConfigureAwait(false); // Im Expecting this to throw an NullRef error.
+        return await asyncCursor.FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    public async Task<Chef?> GetByEmailAsync(string email)
+    public async Task<Chef?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
-        IAsyncCursor<Chef> asyncCursor = await _collection.FindAsync((Chef chef) => chef.Email == email);
-        return await asyncCursor.FirstOrDefaultAsync();
+        IAsyncCursor<Chef> asyncCursor = await _collection
+            .FindAsync((Chef chef) => chef.Email == email,
+            cancellationToken: cancellationToken).ConfigureAwait(false); // Im Expecting this to throw an NullRef error.
+        return await asyncCursor.FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    public async Task<IEnumerable<Chef>> GetAllAsync()
+    public async Task<IEnumerable<Chef>> GetAllAsync(CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
         return await _collection
             .Find<Chef>(_ => true)
-            .ToListAsync();
+            .ToListAsync(cancellationToken).ConfigureAwait(false);
     }
 
-    public async Task<Chef> GetAsync(string name)
+    public Task<Chef> GetAsync(string name, CancellationToken cancellationToken = default)
     {
-        return await _collection
+        return _collection
             .Find<Chef>(chef => chef.Name == name)
-            .SingleOrDefaultAsync();
+            .SingleOrDefaultAsync(cancellationToken);
     }
 
-    public Task RemoveAsync(string chefname)
+    public Task RemoveAsync(string chefname, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteOneAsync(chef => chef.Name == chefname);
+        return _collection.DeleteOneAsync(chef => chef.Name == chefname, cancellationToken);
     }
 }

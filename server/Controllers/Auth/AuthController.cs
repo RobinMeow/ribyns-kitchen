@@ -23,26 +23,28 @@ public sealed class AuthController(
     /// sign up a new user
     /// </summary>
     /// <param name="newChef">the user to sign up</param>
+    /// <param name="cancellationToken"></param>
     /// <returns>201 Created</returns>
     [HttpPost(nameof(RegisterAsync))]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> RegisterAsync([Required] RegisterChefDto newChef)
+    public async Task<IActionResult> RegisterAsync([Required] RegisterChefDto newChef, CancellationToken cancellationToken = default)
     {
         string chefname = newChef.Name;
 
         try
         {
-            Chef? chefWithSameName = await _chefRepository.GetByNameAsync(chefname);
+            Chef? chefWithSameName = await _chefRepository.GetByNameAsync(chefname, cancellationToken).ConfigureAwait(false);
 
             if (chefWithSameName != null)
                 return BadRequest($"Chefname ist bereits vergeben.");
 
             if (newChef.Email != null)
             {
-                Chef? chefWithSameEmail = await _chefRepository.GetByEmailAsync(newChef.Email);
+                cancellationToken.ThrowIfCancellationRequested();
+                Chef? chefWithSameEmail = await _chefRepository.GetByEmailAsync(newChef.Email, cancellationToken).ConfigureAwait(false);
 
                 if (chefWithSameEmail != null)
                     return BadRequest($"Email ist bereits vergeben.");
@@ -54,9 +56,11 @@ public sealed class AuthController(
                 Email = newChef.Email
             };
 
+            cancellationToken.ThrowIfCancellationRequested();
+
             chef.SetPassword(newChef.Password, _passwordHasher);
 
-            await _chefRepository.AddAsync(chef).ConfigureAwait(false);
+            await _chefRepository.AddAsync(chef, cancellationToken).ConfigureAwait(false);
 
             return Created();
         }

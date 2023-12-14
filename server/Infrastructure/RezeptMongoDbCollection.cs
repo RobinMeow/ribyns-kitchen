@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using api.Domain;
 using MongoDB.Driver;
 
@@ -21,8 +19,8 @@ public sealed class RecipeMongoDbCollection : IRecipeRepository
 
 	public async Task<IEnumerable<Recipe>> GetAllAsync()
 	{
-		return await _collection
-	  .Find<Recipe>(_ => true)
-	  .ToListAsync();
+        return await _collection
+            .Find<Recipe>(_ => true)
+            .ToListAsync();
 	}
 }
