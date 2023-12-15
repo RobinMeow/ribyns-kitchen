@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using api.Domain;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using static api.Controllers.ExceptionFilterUtility;
 
 namespace api.Controllers.Auth;
 
@@ -23,11 +25,8 @@ public sealed class AuthController(
     /// <param name="newChef">the data to create an account from.</param>
     /// <param name="cancellationToken"></param>
     [HttpPost(nameof(RegisterAsync))]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    [ProducesDefaultResponseType]
-    public async Task<IActionResult> RegisterAsync([Required] RegisterChefDto newChef, CancellationToken cancellationToken = default)
+    [ProducesResponseType<ChefDto>(StatusCodes.Status201Created)]
+    public async Task<Results<Created<ChefDto>, BadRequest, BadRequest<string>, StatusCodeHttpResult>> RegisterAsync([Required] RegisterChefDto newChef, CancellationToken cancellationToken = default)
     {
         string chefname = newChef.Name;
 
@@ -37,7 +36,7 @@ public sealed class AuthController(
             Chef? chefWithSameName = await _chefRepository.GetByNameAsync(chefname, cancellationToken);
 
             if (chefWithSameName != null)
-                return BadRequest($"Chefname ist bereits vergeben.");
+                return TypedResults.BadRequest($"Chefname ist bereits vergeben.");
 
             if (newChef.Email != null)
             {
@@ -45,7 +44,7 @@ public sealed class AuthController(
                 Chef? chefWithSameEmail = await _chefRepository.GetByEmailAsync(newChef.Email, cancellationToken);
 
                 if (chefWithSameEmail != null)
-                    return BadRequest($"Email ist bereits vergeben.");
+                    return TypedResults.BadRequest($"Email ist bereits vergeben.");
             }
 
             var chef = new Chef()
@@ -53,18 +52,24 @@ public sealed class AuthController(
                 Name = chefname,
                 Email = newChef.Email
             };
-
+            
             chef.SetPassword(newChef.Password, _passwordHasher);
 
             cancellationToken.ThrowIfCancellationRequested();
             await _chefRepository.AddAsync(chef, cancellationToken);
 
-            return Created();
+            string? moew = null;
+            return TypedResults.Created(moew, new ChefDto
+            {
+                Id = chef.Id,
+                Email = chef.Email,
+                CreatedAt = chef.CreatedAt,
+                ModelVersion = chef.ModelVersion
+            });
         }
-        catch (Exception ex)
+        catch (Exception ex) when (True(() => _logger.LogError(ex, "An unexpected error occured.", [newChef])))
         {
-            _logger.LogError(ex, CreateErrorMessage(nameof(AuthController), nameof(RegisterAsync)), newChef);
-            return StatusCode(StatusCodes.Status500InternalServerError);
+            return TypedResults.StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 

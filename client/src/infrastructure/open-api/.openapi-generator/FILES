@@ -9,6 +9,7 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/chefDto.ts
 model/credentialsDto.ts
 model/models.ts
 model/newRecipeDto.ts
