@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     importProvidersFrom(BrowserModule),
     provideAnimations(),
-    provideRouter(withRoutes(authRoutes, coreRoutes, recipeRoutes)),
+    provideRouter(withRoutes(authRoutes, recipeRoutes, coreRoutes)),
     provideAppTitleStrategy(),
   ],
 };

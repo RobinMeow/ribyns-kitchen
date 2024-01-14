@@ -19,7 +19,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": ["app", "core", "auth", "recipe"],
+            "prefix": ["app", "core", "auth", "common", "recipe"],
             "style": "camelCase"
           }
         ],
@@ -27,7 +27,7 @@
           "error",
           {
             "type": "element",
-            "prefix": ["app", "core", "auth", "recipe"],
+            "prefix": ["app", "core", "auth", "common", "recipe"],
             "style": "kebab-case"
           }
         ],
