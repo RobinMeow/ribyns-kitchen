@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { notEmpty_checked } from '@shared/assertions';
+import { notEmpty_checked } from 'src/app/shared/assertions';
 
 @Injectable({
   providedIn: 'root',

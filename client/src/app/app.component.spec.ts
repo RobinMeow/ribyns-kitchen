@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { provideAppName } from '@core';
+import { provideAppName } from 'src/app/core';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {

@@ -11,7 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { APP_NAME } from '@core';
+import { APP_NAME } from 'src/app/core';
 
 @Component({
   selector: 'core-header',

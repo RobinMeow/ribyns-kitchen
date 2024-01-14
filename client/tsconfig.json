@@ -24,14 +24,14 @@
     ],
     "paths": {
       // shared
-      "@shared/assertions": [ "src/domains/shared/assertions/index.ts" ],
-      "@shared/common": [ "src/domains/shared/common/index.ts" ],
+      "@shared/assertions": [ "src/app/shared/assertions/index.ts" ],
+      "@shared/common": [ "src/app/shared/common/index.ts" ],
       // infrastructure
       "@infrastructure/open-api": [ "src/infrastructure/open-api/index.ts" ],
       // domains
-      "@core": [ "src/domains/core/index.ts" ],
-      "@auth": [ "src/domains/auth/index.ts" ],
-      "@api": [ "src/domains/api/index.ts" ],
+      "@core": [ "src/app/core/index.ts" ],
+      "@auth": [ "src/app/auth/index.ts" ],
+      "@api": [ "src/app/api/index.ts" ],
     }
   },
   "angularCompilerOptions": {

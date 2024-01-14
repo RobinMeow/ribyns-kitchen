@@ -4,10 +4,14 @@ import { ApplicationConfig } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { authInterceptor, authRoutes } from '@auth';
-import { provideApi } from '@api';
-import { withRoutes } from '@shared/common';
-import { coreRoutes, provideAppName, provideAppTitleStrategy } from '@core';
+import { authInterceptor, authRoutes } from 'src/app/auth';
+import { provideApi } from 'src/app/api';
+import { withRoutes } from 'src/app/shared/common';
+import {
+  coreRoutes,
+  provideAppName,
+  provideAppTitleStrategy,
+} from 'src/app/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { AppTitleStrategy } from './app-title.strategy';
 import { RouterStateSnapshot } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { APP_NAME, provideAppName } from '@core';
+import { APP_NAME, provideAppName } from 'src/app/core';
 
 describe('AppTitleStrategyService should', () => {
   let strategy: AppTitleStrategy;
