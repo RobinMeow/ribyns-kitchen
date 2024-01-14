@@ -33,6 +33,7 @@
       "@auth": [ "src/app/auth/index.ts" ],
       "@api": [ "src/app/api/index.ts" ],
       "@recipe": [ "src/app/recipe/index.ts" ],
+      "@common": [ "src/app/shared/common/index.ts" ],
     }
   },
   "angularCompilerOptions": {

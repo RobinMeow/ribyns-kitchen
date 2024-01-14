@@ -81,14 +81,14 @@ public sealed class AuthController(
 
         if (chef == null)
         {
-            return BadRequest("User not found.");
+            return BadRequest("Benutzer existiert nicht.");
         }
 
         PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef.PasswordHash, credentials.Password);
 
         if (passwordVerificationResult == PasswordVerificationResult.Failed)
         {
-            return BadRequest("Invalid password.");
+            return BadRequest("Falsches Passwort.");
         }
 
         string token = _jwtFactory.Create(chef);
