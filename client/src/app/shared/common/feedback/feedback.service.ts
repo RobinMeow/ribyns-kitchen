@@ -10,7 +10,7 @@ export class FeedbackService {
   private readonly _snackBar = inject(MatSnackBar);
 
   show(message: string) {
-    const feedbackMessage: FeedbackData = {
+    const feedbackData: FeedbackData = {
       message,
     };
     const threeSeconds = 3000;
@@ -18,8 +18,7 @@ export class FeedbackService {
       duration: threeSeconds,
       verticalPosition: 'bottom',
       horizontalPosition: 'right',
-      announcementMessage: 'announcementMessage',
-      data: feedbackMessage,
+      data: feedbackData,
     });
   }
 }
