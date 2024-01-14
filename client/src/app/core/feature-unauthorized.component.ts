@@ -7,8 +7,6 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './feature-unauthorized.component.html',
   styleUrl: './feature-unauthorized.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeatureUnauthorizedComponent {
-
-}
+export class FeatureUnauthorizedComponent {}
