@@ -3,7 +3,6 @@ using api.Domain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using static api.Controllers.ExceptionFilterUtility;
 
 namespace api.Controllers.Auth;
 
@@ -14,7 +13,7 @@ public sealed class AuthController(
     ILogger<AuthController> _logger,
     IPasswordHasher _passwordHasher,
     IJwtFactory _jwtFactory
-    ) : CcController
+    ) : ControllerBase
 {
     readonly IChefRepository _chefRepository = _context.ChefRepository;
     readonly ILogger<AuthController> _logger = _logger;
@@ -30,47 +29,40 @@ public sealed class AuthController(
     {
         string chefname = newChef.Name;
 
-        try
+        cancellationToken.ThrowIfCancellationRequested();
+        Chef? chefWithSameName = await _chefRepository.GetByNameAsync(chefname, cancellationToken);
+
+        if (chefWithSameName != null)
+            return TypedResults.BadRequest($"Chefname ist bereits vergeben.");
+
+        if (newChef.Email != null)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            Chef? chefWithSameName = await _chefRepository.GetByNameAsync(chefname, cancellationToken);
+            Chef? chefWithSameEmail = await _chefRepository.GetByEmailAsync(newChef.Email, cancellationToken);
 
-            if (chefWithSameName != null)
-                return TypedResults.BadRequest($"Chefname ist bereits vergeben.");
+            if (chefWithSameEmail != null)
+                return TypedResults.BadRequest($"Email ist bereits vergeben.");
+        }
 
-            if (newChef.Email != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                Chef? chefWithSameEmail = await _chefRepository.GetByEmailAsync(newChef.Email, cancellationToken);
-
-                if (chefWithSameEmail != null)
-                    return TypedResults.BadRequest($"Email ist bereits vergeben.");
-            }
-
-            var chef = new Chef()
-            {
-                Name = chefname,
-                Email = newChef.Email
-            };
+        var chef = new Chef()
+        {
+            Name = chefname,
+            Email = newChef.Email
+        };
             
-            chef.SetPassword(newChef.Password, _passwordHasher);
+        chef.SetPassword(newChef.Password, _passwordHasher);
 
-            cancellationToken.ThrowIfCancellationRequested();
-            await _chefRepository.AddAsync(chef, cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
+        await _chefRepository.AddAsync(chef, cancellationToken);
 
-            string? uri = null;
-            return TypedResults.Created(uri, new ChefDto
-            {
-                Id = chef.Id,
-                Email = chef.Email,
-                CreatedAt = chef.CreatedAt,
-                ModelVersion = chef.ModelVersion
-            });
-        }
-        catch (Exception ex) when (True(() => _logger.LogError(ex, "An unexpected error occured.", [newChef])))
+        string? uri = null;
+        return TypedResults.Created(uri, new ChefDto
         {
-            return TypedResults.StatusCode(StatusCodes.Status500InternalServerError);
-        }
+            Id = chef.Id,
+            Email = chef.Email,
+            CreatedAt = chef.CreatedAt,
+            ModelVersion = chef.ModelVersion
+        });
     }
 
     /// <summary>log in using an existing account.</summary>
@@ -84,32 +76,24 @@ public sealed class AuthController(
     [ProducesDefaultResponseType]
     public async Task<ActionResult<string>> LoginAsync([Required] CredentialsDto credentials, CancellationToken cancellationToken = default)
     {
-        try
+        cancellationToken.ThrowIfCancellationRequested();
+        Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name, cancellationToken);
+
+        if (chef == null)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-            Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name, cancellationToken);
-
-            if (chef == null)
-            {
-                return BadRequest("User not found.");
-            }
-
-            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef.PasswordHash, credentials.Password);
-
-            if (passwordVerificationResult == PasswordVerificationResult.Failed)
-            {
-                return BadRequest("Invalid password.");
-            }
-
-            string token = _jwtFactory.Create(chef);
-
-            return Ok(token);
+            return BadRequest("User not found.");
         }
-        catch (Exception ex)
+
+        PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef.PasswordHash, credentials.Password);
+
+        if (passwordVerificationResult == PasswordVerificationResult.Failed)
         {
-            _logger.LogError(ex, CreateErrorMessage(nameof(AuthController), nameof(LoginAsync)), credentials);
-            return StatusCode(StatusCodes.Status500InternalServerError);
+            return BadRequest("Invalid password.");
         }
+
+        string token = _jwtFactory.Create(chef);
+
+        return Ok(token);
     }
 
     /// <summary>delete an existing account.</summary>
@@ -122,32 +106,24 @@ public sealed class AuthController(
     [ProducesDefaultResponseType]
     public async Task<IActionResult> DeleteAsync([Required] CredentialsDto credentials, CancellationToken cancellationToken = default)
     {
-        try
+        cancellationToken.ThrowIfCancellationRequested();
+        Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name, cancellationToken);
+
+        if (chef == null)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-            Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name, cancellationToken);
-
-            if (chef == null)
-            {
-                return BadRequest("User not found.");
-            }
-
-            PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef.PasswordHash, credentials.Password);
-
-            if (passwordVerificationResult == PasswordVerificationResult.Failed)
-            {
-                return BadRequest("Invalid password.");
-            }
-
-            cancellationToken.ThrowIfCancellationRequested();
-            await _chefRepository.RemoveAsync(credentials.Name, cancellationToken);
-
-            return Ok();
+            return BadRequest("User not found.");
         }
-        catch (Exception ex)
+
+        PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef.PasswordHash, credentials.Password);
+
+        if (passwordVerificationResult == PasswordVerificationResult.Failed)
         {
-            _logger.LogError(ex, CreateErrorMessage(nameof(AuthController), nameof(DeleteAsync)), credentials);
-            return StatusCode(StatusCodes.Status500InternalServerError);
+            return BadRequest("Invalid password.");
         }
+
+        cancellationToken.ThrowIfCancellationRequested();
+        await _chefRepository.RemoveAsync(credentials.Name, cancellationToken);
+
+        return Ok();
     }
 }
