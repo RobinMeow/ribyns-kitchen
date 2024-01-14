@@ -1,6 +1,6 @@
 import { AddRecipeComponent } from './add-recipe.component';
 
-describe('login should', () => {
+describe('add-recipe should', () => {
   beforeEach('mount', () => {
     cy.mount(AddRecipeComponent, {
       providers: [],
@@ -8,6 +8,6 @@ describe('login should', () => {
   });
 
   it('render', () => {
-    cy.visit('/add-recipe');
+    cy.contains('add-recipe works!');
   });
 });
