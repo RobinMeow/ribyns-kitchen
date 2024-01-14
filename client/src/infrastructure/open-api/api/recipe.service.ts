@@ -96,7 +96,8 @@ export class RecipeService {
     }
 
     /**
-     * @param newRecipeDto 
+     * add a new recipe.
+     * @param newRecipeDto the recipe to add.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -171,6 +172,7 @@ export class RecipeService {
     }
 
     /**
+     * retrieve all recipes.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */

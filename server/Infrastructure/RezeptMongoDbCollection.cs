@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using api.Domain;
 using MongoDB.Driver;
 
@@ -14,15 +12,15 @@ public sealed class RecipeMongoDbCollection : IRecipeRepository
 		_collection = database.GetCollection<Recipe>("recipes");
 	}
 
-	public Task AddAsync(Recipe recipe)
+	public Task AddAsync(Recipe recipe, CancellationToken cancellationToken = default)
 	{
-		return _collection.InsertOneAsync(recipe);
+        return _collection.InsertOneAsync(recipe, cancellationToken: cancellationToken);
 	}
 
-	public async Task<IEnumerable<Recipe>> GetAllAsync()
-	{
-		return await _collection
-	  .Find<Recipe>(_ => true)
-	  .ToListAsync();
+	public async Task<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await _collection
+            .Find<Recipe>(_ => true)
+            .ToListAsync(cancellationToken).ConfigureAwait(false);
 	}
 }

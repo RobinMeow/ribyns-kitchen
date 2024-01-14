@@ -1,6 +1,7 @@
+using api.Controllers;
 using api.Controllers.Auth;
 using api.Domain;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 
@@ -31,8 +32,8 @@ public sealed class AuthControllerTests
             Password = "Password"
         };
 
-        IActionResult createdResult = await _authController.RegisterAsync(requestDto);
-        IsAssignableFrom<CreatedResult>(createdResult);
+        Results<Created<ChefDto>, BadRequest, BadRequest<string>, StatusCodeHttpResult> createdResult = await _authController.RegisterAsync(requestDto);
+        IsType<Created<ChefDto>>(createdResult.Result);
     }
 
     [Fact]

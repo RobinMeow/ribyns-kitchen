@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import {
+  ChefDto,
   AuthService as GeneratedAuthService,
   RegisterChefDto,
 } from '@infrastructure/open-api';
@@ -63,7 +64,7 @@ export class AuthService {
     this._tokenSignal.set(token);
   }
 
-  registerAsync(chef: RegisterChef): Promise<void> {
+  registerAsync(chef: RegisterChef): Promise<ChefDto> {
     const dto: RegisterChefDto = {
       name: chef.name.trim(),
       password: chef.password,

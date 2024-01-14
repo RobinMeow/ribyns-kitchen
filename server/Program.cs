@@ -23,7 +23,7 @@ internal class Program
 
         builder.Services.AddSwaggerStuff();
         builder.Services.AddJwtAuthetication(builder.Configuration);
-
+        builder.Services.AddExceptionHandler<ExceptionHandler>();
         builder.AddFrontEndOriginsCors();
 
         builder.Services.AddSingleton<DbContext, MongoDbContext>(); // Transient: instance per code request. Scoped: instance per HTTP request
@@ -43,6 +43,7 @@ internal class Program
         app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
+        app.UseExceptionHandler((_) => { });
         app.MapControllers();
 
         app.Run();

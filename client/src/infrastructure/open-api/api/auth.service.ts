@@ -19,6 +19,8 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { ChefDto } from '../model/chefDto';
+// @ts-ignore
 import { CredentialsDto } from '../model/credentialsDto';
 // @ts-ignore
 import { ProblemDetails } from '../model/problemDetails';
@@ -96,7 +98,8 @@ export class AuthService {
     }
 
     /**
-     * @param credentialsDto 
+     * delete an existing account.
+     * @param credentialsDto the credentials to check against which account to delete and if the provided password matches the account.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -164,7 +167,8 @@ export class AuthService {
     }
 
     /**
-     * @param credentialsDto 
+     * log in using an existing account.
+     * @param credentialsDto credentials to check against and generate a JWT from.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -232,14 +236,14 @@ export class AuthService {
     }
 
     /**
-     * sign up a new user
-     * @param registerChefDto the user to sign up
+     * sign up a new account.
+     * @param registerChefDto the data to create an account from.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public registerAsync(registerChefDto: RegisterChefDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public registerAsync(registerChefDto: RegisterChefDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public registerAsync(registerChefDto: RegisterChefDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public registerAsync(registerChefDto: RegisterChefDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<ChefDto>;
+    public registerAsync(registerChefDto: RegisterChefDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<ChefDto>>;
+    public registerAsync(registerChefDto: RegisterChefDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<ChefDto>>;
     public registerAsync(registerChefDto: RegisterChefDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (registerChefDto === null || registerChefDto === undefined) {
             throw new Error('Required parameter registerChefDto was null or undefined when calling registerAsync.');
@@ -287,7 +291,7 @@ export class AuthService {
         }
 
         let localVarPath = `/Auth/RegisterAsync`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<ChefDto>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: registerChefDto,
