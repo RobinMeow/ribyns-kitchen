@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
-import { APP_NAME } from '@core';
+import { APP_NAME } from 'src/app/core';
 
 @Injectable({
   providedIn: 'root',

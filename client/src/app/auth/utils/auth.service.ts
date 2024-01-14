@@ -19,7 +19,7 @@ import { TokenStorage } from './token.storage';
 import { Chef } from './Chef';
 import { JwtDecoderService } from './jwt-decoder.service';
 import { DecodedToken } from './DecodedToken';
-import { notEmpty_checked, true_checked } from '@shared/assertions';
+import { notEmpty_checked, true_checked } from 'src/app/shared/assertions';
 import { RegisterChef } from '../feature-register/RegisterChef';
 
 @Injectable({

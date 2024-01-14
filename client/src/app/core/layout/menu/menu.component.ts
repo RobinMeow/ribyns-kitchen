@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthCornerComponent } from '@auth';
+import { AuthCornerComponent } from 'src/app/auth';
 
 @Component({
   selector: 'core-menu',

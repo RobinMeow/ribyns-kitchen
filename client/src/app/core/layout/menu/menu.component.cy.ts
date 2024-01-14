@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { MenuComponent } from './menu.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthService } from 'src/domains/auth/utils/auth.service';
+import { AuthService } from 'src/app/auth/utils/auth.service';
 
 describe('menu should', () => {
   beforeEach('mount', () => {
