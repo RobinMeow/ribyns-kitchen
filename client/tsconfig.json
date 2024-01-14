@@ -32,6 +32,7 @@
       "@core": [ "src/app/core/index.ts" ],
       "@auth": [ "src/app/auth/index.ts" ],
       "@api": [ "src/app/api/index.ts" ],
+      "@recipe": [ "src/app/recipe/index.ts" ],
     }
   },
   "angularCompilerOptions": {

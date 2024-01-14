@@ -12,6 +12,7 @@ import {
   provideAppName,
   provideAppTitleStrategy,
 } from 'src/app/core';
+import { recipeRoutes } from '@recipe';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     importProvidersFrom(BrowserModule),
     provideAnimations(),
-    provideRouter(withRoutes(authRoutes, coreRoutes)),
+    provideRouter(withRoutes(authRoutes, coreRoutes, recipeRoutes)),
     provideAppTitleStrategy(),
   ],
 };
