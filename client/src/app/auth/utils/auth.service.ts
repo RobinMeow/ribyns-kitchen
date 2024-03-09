@@ -8,26 +8,17 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
-import {
-  ChefDto,
-  AuthService as GeneratedAuthService,
-  RegisterChefDto,
-} from '@infrastructure/open-api';
 import { Credentials } from './Credentials';
-import { TokenStorage } from './token.storage';
 import { Chef } from './Chef';
 import { JwtDecoder } from './jwt-decoder';
 import { DecodedToken } from './DecodedToken';
 import { notEmpty_checked, true_checked } from 'src/app/shared/assertions';
-import { RegisterChef } from '../feature-register/RegisterChef';
+import { AuthApi } from './auth.api';
+import { RegisterChef } from './RegisterChef';
+import { JwtToken } from '../JwtToken';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthService {
-  private readonly authService = inject(GeneratedAuthService);
-  private readonly tokenStorage = inject(TokenStorage);
+@Injectable({ providedIn: 'root' })
+export class AuthService extends AuthApi {
   private readonly tokenDecoder = inject(JwtDecoder);
   private readonly tokenSignal: WritableSignal<string | null | undefined> =
     signal(undefined);
@@ -60,32 +51,44 @@ export class AuthService {
     signal(null);
 
   constructor() {
+    super();
     const token: string | null = this.tokenStorage.retrieve();
     this.tokenSignal.set(token);
   }
 
-  registerAsync(chef: RegisterChef): Promise<ChefDto> {
-    const dto: RegisterChefDto = {
-      name: chef.name.trim(),
-      password: chef.password,
+  /** sign up also sign you in right away */
+  async signUpAsync(registerChef: RegisterChef): Promise<Chef> {
+    const name = registerChef.name.trim();
+    if (name.length === 0) throw new Error('Name is requried for sign up.');
+
+    const password = registerChef.password?.trim();
+    if (password.length === 0)
+      throw new Error('Password is requried for sign up.');
+
+    let email: string | undefined = registerChef.email?.trim();
+    if (email !== undefined && email.length === 0) {
+      email = undefined;
+    }
+    const registerChefTrimmed: RegisterChef = {
+      name: name,
+      password: password,
+      email: email,
     };
 
-    if (chef.email) {
-      dto.email = chef.email.trim();
-    }
-
-    return firstValueFrom(this.authService.registerAsync(dto));
+    await super.registerAsync(registerChefTrimmed);
+    const chef = await this.signInAsync(registerChef);
+    return chef;
   }
 
-  async loginAsync(credentials: Credentials): Promise<void> {
+  async signInAsync(credentials: Credentials): Promise<Chef> {
     notEmpty_checked(credentials.name, 'Login name may not be empty.');
     notEmpty_checked(credentials.password, 'Login password may not be empty.');
 
-    const token = await firstValueFrom(
-      this.authService.loginAsync(credentials),
-    );
-
+    const token: JwtToken = await super.loginAsync(credentials);
+    const decodedToken: DecodedToken = this.tokenDecoder.decode(token);
     this.tokenSignal.set(token);
+
+    return new Chef(decodedToken);
   }
 
   logout(): void {
@@ -108,10 +111,7 @@ export class AuthService {
     notEmpty_checked(credentials.name, 'Chefname may not be empty.');
     notEmpty_checked(credentials.password, 'Chef password may not be empty.');
 
-    return await firstValueFrom(this.authService.deleteAsync(credentials)).then(
-      () => {
-        this.logout();
-      },
-    );
+    await super.deleteAsync(credentials);
+    this.logout();
   }
 }

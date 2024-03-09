@@ -3,34 +3,17 @@ import { AuthService } from '../utils/auth.service';
 import { provideHttpClient } from '@angular/common/http';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
-function stubHttp() {
-  // stub 201 Created StatusCode
-  cy.intercept(
-    {
-      path: '/Auth/RegisterAsync',
-      times: 2,
-    },
-    {
-      statusCode: 201,
-    },
-  ).as('registerAsync');
-
-  // stub 200 Ok
-  cy.intercept(
-    {
-      path: '/Auth/LoginAsync',
-      times: 2,
-    },
-    {
-      statusCode: 200,
-    },
-  ).as('loginAsync');
-}
-
 describe('stubbed auth should', () => {
   beforeEach('mount', () => {
     cy.mount(Register, {
-      providers: [provideNoopAnimations(), provideHttpClient(), AuthService],
+      providers: [
+        provideNoopAnimations(),
+        provideHttpClient(),
+        {
+          provide: AuthService,
+          useValue: {},
+        },
+      ],
     });
   });
 
@@ -38,19 +21,44 @@ describe('stubbed auth should', () => {
     cy.getByAttr('title').should('be.visible');
   });
 
-  it('send form submit when enter is pressed in password input with valid credentials', () => {
-    stubHttp();
-    cy.getByAttr('register-name-input').type('1234');
-    cy.getByAttr('password-input').type('5678');
-    cy.getByAttr('password-input').type('{enter}');
+  it('have disabled submit button', () => {
+    cy.getByAttr('register-submit-button').should('be.disabled');
+  });
 
-    cy.wait('@registerAsync');
-    cy.wait('@loginAsync'); // would redirect to home page (if not component test)
+  it('have enabled submit button after required fields are filled out', () => {
+    cy.getByAttr('register-name-input').type('Weinberg des Herrn');
+    cy.getByAttr('password-input').type('iLoveJesus<3');
+    cy.getByAttr('register-submit-button').should('be.enabled');
+  });
 
-    cy.getByAttr('email-input').type('{enter}');
+  it('have disabled submit button with any invalid field', () => {
+    cy.getByAttr('register-submit-button')
+      .as('submitBtn')
+      .should('be.disabled');
 
-    cy.wait('@registerAsync');
-    cy.wait('@loginAsync');
-    // since we are not returning a valid JWT token in the loginAsync, this will not actualy log anyone in :)
+    // valid data - enabled
+    cy.getByAttr('register-name-input')
+      .as('nameInput')
+      .type('Weinberg des Herrn');
+    cy.getByAttr('password-input').as('pwInput').type('iLoveJesus<3');
+    cy.get('@submitBtn').should('be.enabled');
+
+    // invalid email, disbled
+    cy.getByAttr('email-input').as('emailInput').type('invalid');
+    cy.get('@submitBtn').should('be.disabled');
+
+    // valid email, enabled
+    cy.get('@emailInput').type('be.blessed@nd.loved');
+    cy.get('@submitBtn').should('be.enabled');
+
+    // invalid name, disabled
+    cy.get('@nameInput').clear();
+    cy.get('@submitBtn').should('be.disabled');
+    cy.get('@nameInput').type('Weinberg des Herrn');
+    cy.get('@submitBtn').should('be.enabled');
+
+    // invalid pw, disabled
+    cy.get('@pwInput').clear();
+    cy.get('@submitBtn').should('be.disabled');
   });
 });

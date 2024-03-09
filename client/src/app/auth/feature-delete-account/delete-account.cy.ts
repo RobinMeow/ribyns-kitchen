@@ -3,10 +3,18 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { AuthService } from '../utils/auth.service';
 
+const authServiceMock = {
+  currentUser() {},
+} as AuthService;
+
 describe('login should', () => {
   beforeEach('mount', () => {
     cy.mount(DeleteAccount, {
-      providers: [provideNoopAnimations(), provideHttpClient(), AuthService],
+      providers: [
+        provideNoopAnimations(),
+        provideHttpClient(),
+        { provide: AuthService, useValue: authServiceMock },
+      ],
     });
   });
 

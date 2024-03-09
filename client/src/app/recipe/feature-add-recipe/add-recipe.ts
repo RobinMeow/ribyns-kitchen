@@ -9,13 +9,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { RecipeConstraints } from './RecipeConstraints';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  NewRecipeDto,
-  RecipeDto,
-  RecipeService,
-} from '@infrastructure/open-api';
-import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { RecipeApi } from '../util/recipe.api';
+import { NewRecipe } from '../util/NewRecipe';
+import { RecipeModel } from '../util/RecipeModel';
 
 @Component({
   selector: 'recipe-add-recipe',
@@ -33,24 +30,23 @@ import { Router } from '@angular/router';
 })
 export class AddRecipe {
   private readonly nnfb = inject(NonNullableFormBuilder);
-  private readonly recipeService = inject(RecipeService);
+  private readonly recipeApi = inject(RecipeApi);
   private readonly router = inject(Router);
 
   protected readonly form = this.nnfb.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
   });
+
   protected readonly constraints = RecipeConstraints;
 
   protected async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
 
-    const newRecipe: NewRecipeDto = {
+    const newRecipe: NewRecipe = {
       title: this.form.controls.title.value,
     };
 
-    const req$ = this.recipeService.addAsync(newRecipe);
-
-    const recipe: RecipeDto = await firstValueFrom(req$);
+    const recipe: RecipeModel = await this.recipeApi.newAsync(newRecipe);
     void this.router.navigate(['/recipe', recipe.id]);
   }
 }

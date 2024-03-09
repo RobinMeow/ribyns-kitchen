@@ -2,16 +2,12 @@ import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
-import {
-  AuthService as GeneratedAuthService,
-  RegisterChefDto,
-} from '@infrastructure/open-api';
-import { RegisterChef } from '../feature-register/RegisterChef';
 import { of } from 'rxjs';
+import { RegisterChef } from './RegisterChef';
 
 describe('AuthService', () => {
   let authService: AuthService;
-  const generatedAuthServiceStub = {
+  const authServiceStub = {
     registerAsync() {
       return of(undefined);
     },
@@ -25,7 +21,7 @@ describe('AuthService', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        { provide: GeneratedAuthService, useValue: generatedAuthServiceStub },
+        { provide: AuthService, useValue: authServiceStub },
       ],
     });
 
@@ -54,7 +50,7 @@ describe('AuthService', () => {
   ];
   it.each(whiteSpaceValues)(
     'should make an API call with the values trimmed (exept password)',
-    async (name, password, email) => {
+    async (name: string, password: string, email: string) => {
       // Arrange
       const registerChef: RegisterChef = {
         name,
@@ -62,16 +58,16 @@ describe('AuthService', () => {
         email,
       };
 
-      const trimmedValues: RegisterChefDto = {
+      const trimmedValues: RegisterChef = {
         name: 'TestChef',
         password: password,
         email: 'test@example.com',
       };
 
-      const spy = jest.spyOn(generatedAuthServiceStub, 'registerAsync');
+      const spy = jest.spyOn(authServiceStub, 'registerAsync');
 
       // Act
-      await authService.registerAsync(registerChef);
+      await authService.signUpAsync(registerChef);
 
       // Assert
       expect(spy).toHaveBeenCalledTimes(1);
@@ -82,25 +78,28 @@ describe('AuthService', () => {
   it.each([
     ['', 'iLoveJesus<3!'],
     ['Weinberg des Herrn', ''],
-  ])('throws with empty credentials', async (name, password) => {
-    await expect(
-      authService.loginAsync({
-        name,
-        password,
-      }),
-    ).rejects.toThrow(Error);
-  });
+  ])(
+    'throws with empty credentials',
+    async (name: string, password: string) => {
+      await expect(
+        authService.signInAsync({
+          name,
+          password,
+        }),
+      ).rejects.toThrow(Error);
+    },
+  );
 
   it.each([
     ['name', 'password'],
     ['name', ' untrimmed password '],
   ])(
     'calls authService.loginAsync with unmodifed credentials',
-    async (name, password) => {
-      const spy = jest.spyOn(generatedAuthServiceStub, 'loginAsync');
+    async (name: string, password: string) => {
+      const spy = jest.spyOn(authServiceStub, 'loginAsync');
 
       // Act
-      await authService.loginAsync({
+      await authService.signInAsync({
         name,
         password,
       });

@@ -6,7 +6,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAppName } from 'src/app/core';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
-describe('AppComponent', () => {
+describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, App],

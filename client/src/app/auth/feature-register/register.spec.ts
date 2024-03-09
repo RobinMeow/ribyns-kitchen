@@ -5,7 +5,7 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { Register } from './register';
 
-describe('RegisterComponent', () => {
+describe('Register should', () => {
   let component: Register;
   let fixture: ComponentFixture<Register>;
 
@@ -24,7 +24,9 @@ describe('RegisterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('create', () => {});
 });

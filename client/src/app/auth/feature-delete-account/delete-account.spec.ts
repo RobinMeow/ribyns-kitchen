@@ -4,7 +4,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { DeleteAccount } from './delete-account';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
-describe('DeleteAccountComponent', () => {
+describe('DeleteAccount', () => {
   let component: DeleteAccount;
   let fixture: ComponentFixture<DeleteAccount>;
 

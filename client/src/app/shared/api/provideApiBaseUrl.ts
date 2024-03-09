@@ -1,11 +1,11 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
-import { BASE_PATH } from '@infrastructure/open-api';
 import { environment } from 'src/environments/environment';
+import { API_BASE_URL } from './API-BASE-URL';
 
-export const provideApi = function (): EnvironmentProviders {
+export const provideApiBaseUrl = function (): EnvironmentProviders {
   return makeEnvironmentProviders([
     {
-      provide: BASE_PATH,
+      provide: API_BASE_URL,
       useValue: environment.API_BASE_URL,
     },
   ]);

@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthCorner } from './auth-corner';
 
-describe('AuthCornerComponent', () => {
+describe('AuthCorner', () => {
   let component: AuthCorner;
   let fixture: ComponentFixture<AuthCorner>;
 
