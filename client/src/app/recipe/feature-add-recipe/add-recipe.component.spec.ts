@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { AddRecipeComponent } from './add-recipe.component';
 
@@ -9,6 +10,7 @@ describe('AddRecipeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AddRecipeComponent],
+      providers: [provideNoopAnimations()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AddRecipeComponent);

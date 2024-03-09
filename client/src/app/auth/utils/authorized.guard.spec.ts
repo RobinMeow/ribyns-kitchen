@@ -7,6 +7,7 @@ import {
 import { authorizedGuard } from './authorized.guard';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 describe('authorized guard should', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
@@ -14,7 +15,11 @@ describe('authorized guard should', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideNoopAnimations(),
+      ],
     });
   });
 
