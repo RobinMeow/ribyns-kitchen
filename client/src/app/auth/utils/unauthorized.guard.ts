@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 export const unauthorizedGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
-  const isAuthorized = inject(AuthService).isAuthorizedSignal()();
+  const isAuthorized = inject(AuthService).isAuthorized()();
 
   if (isAuthorized) {
     router.navigateByUrl('/');

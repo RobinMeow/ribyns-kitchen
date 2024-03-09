@@ -18,12 +18,12 @@ import { AuthService } from '../../utils/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthCornerComponent {
-  private readonly _authService = inject(AuthService);
+  private readonly authService = inject(AuthService);
 
-  protected isAuthorizedSignal: Signal<boolean> =
-    this._authService.isAuthorizedSignal();
+  protected readonly isAuthorizedSignal: Signal<boolean> =
+    this.authService.isAuthorized();
 
   protected logout(): void {
-    this._authService.logout();
+    this.authService.logout();
   }
 }

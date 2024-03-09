@@ -26,29 +26,29 @@ import { RegisterChef } from '../feature-register/RegisterChef';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly _authService = inject(GeneratedAuthService);
-  private readonly _tokenStorage = inject(TokenStorage);
-  private readonly _tokenDecoder = inject(JwtDecoderService);
-  private readonly _tokenSignal: WritableSignal<string | null | undefined> =
+  private readonly authService = inject(GeneratedAuthService);
+  private readonly tokenStorage = inject(TokenStorage);
+  private readonly tokenDecoder = inject(JwtDecoderService);
+  private readonly tokenSignal: WritableSignal<string | null | undefined> =
     signal(undefined);
-  private readonly _isAuthorizedSignal: Signal<boolean> = computed(() => {
-    const token = this._tokenSignal();
+  private readonly isAuthorizedComputed: Signal<boolean> = computed(() => {
+    const token = this.tokenSignal();
     return token !== null && token !== undefined;
   });
 
-  private readonly _onTokenChanged: EffectRef = effect(
+  private readonly onTokenChanged: EffectRef = effect(
     () => {
-      const token = this._tokenSignal();
+      const token = this.tokenSignal();
 
       if (token === undefined) return;
 
       if (token !== null) {
-        const decodedToken: DecodedToken = this._tokenDecoder.decode(token);
-        this._currentUserSignal.set(new Chef(decodedToken));
-        this._tokenStorage.store(token);
+        const decodedToken: DecodedToken = this.tokenDecoder.decode(token);
+        this.currentUserSignal.set(new Chef(decodedToken));
+        this.tokenStorage.store(token);
       } else {
-        this._tokenStorage.clear();
-        this._currentUserSignal.set(null);
+        this.tokenStorage.clear();
+        this.currentUserSignal.set(null);
       }
     },
     {
@@ -56,12 +56,12 @@ export class AuthService {
     },
   );
 
-  private readonly _currentUserSignal: WritableSignal<Chef | null> =
+  private readonly currentUserSignal: WritableSignal<Chef | null> =
     signal(null);
 
   constructor() {
-    const token: string | null = this._tokenStorage.retrieve();
-    this._tokenSignal.set(token);
+    const token: string | null = this.tokenStorage.retrieve();
+    this.tokenSignal.set(token);
   }
 
   registerAsync(chef: RegisterChef): Promise<ChefDto> {
@@ -74,7 +74,7 @@ export class AuthService {
       dto.email = chef.email.trim();
     }
 
-    return firstValueFrom(this._authService.registerAsync(dto));
+    return firstValueFrom(this.authService.registerAsync(dto));
   }
 
   async loginAsync(credentials: Credentials): Promise<void> {
@@ -82,36 +82,36 @@ export class AuthService {
     notEmpty_checked(credentials.password, 'Login password may not be empty.');
 
     const token = await firstValueFrom(
-      this._authService.loginAsync(credentials),
+      this.authService.loginAsync(credentials),
     );
 
-    this._tokenSignal.set(token);
+    this.tokenSignal.set(token);
   }
 
   logout(): void {
     true_checked(
-      this._isAuthorizedSignal(),
+      this.isAuthorizedComputed(),
       'Need to be authorized, to log out.',
     );
-    this._tokenSignal.set(null);
+    this.tokenSignal.set(null);
   }
 
-  isAuthorizedSignal(): Signal<boolean> {
-    return this._isAuthorizedSignal;
+  isAuthorized(): Signal<boolean> {
+    return this.isAuthorizedComputed;
   }
 
-  public currentUserSignal(): Signal<Chef | null> {
-    return this._currentUserSignal.asReadonly();
+  public currentUser(): Signal<Chef | null> {
+    return this.currentUserSignal.asReadonly();
   }
 
   async removeAsync(credentials: Credentials): Promise<void> {
     notEmpty_checked(credentials.name, 'Chefname may not be empty.');
     notEmpty_checked(credentials.password, 'Chef password may not be empty.');
 
-    return await firstValueFrom(
-      this._authService.deleteAsync(credentials),
-    ).then(() => {
-      this.logout();
-    });
+    return await firstValueFrom(this.authService.deleteAsync(credentials)).then(
+      () => {
+        this.logout();
+      },
+    );
   }
 }

@@ -32,19 +32,19 @@ import { PasswordComponent } from '../ui/password/password.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  private readonly _authService = inject(AuthService);
-  private readonly _router = inject(Router);
-  private readonly _nnfb = inject(NonNullableFormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly nnfb = inject(NonNullableFormBuilder);
 
   protected readonly chefConstraints = ChefConstraints;
 
-  private readonly _chefFormControlFactory = new ChefFromControlFactory(
-    this._nnfb,
+  private readonly chefFormControlFactory = new ChefFromControlFactory(
+    this.nnfb,
   );
 
-  protected readonly loginForm = this._nnfb.group({
-    chefname: this._chefFormControlFactory.Name(),
-    password: this._chefFormControlFactory.Password(),
+  protected readonly loginForm = this.nnfb.group({
+    chefname: this.chefFormControlFactory.Name(),
+    password: this.chefFormControlFactory.Password(),
   });
 
   protected readonly chefnameControl: FormControl<string> =
@@ -56,10 +56,10 @@ export class LoginComponent {
   protected async onSubmit(): Promise<void> {
     if (this.loginForm.invalid) return;
 
-    await this._authService.loginAsync({
+    await this.authService.loginAsync({
       name: this.chefnameControl.value,
       password: this.passwordControl.value,
     });
-    await this._router.navigateByUrl('/');
+    await this.router.navigateByUrl('/');
   }
 }

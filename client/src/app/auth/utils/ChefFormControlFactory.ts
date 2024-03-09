@@ -9,14 +9,14 @@ import { ChefConstraints } from './ChefConstraints';
  * Factory for instantiating FormControls.
  */
 export class ChefFromControlFactory {
-  private readonly _nnfb: NonNullableFormBuilder;
+  private readonly nnfb: NonNullableFormBuilder;
 
   constructor(nnfb: NonNullableFormBuilder) {
-    this._nnfb = nnfb;
+    this.nnfb = nnfb;
   }
 
   Name(): FormControl<string> {
-    return this._nnfb.control('', [
+    return this.nnfb.control('', [
       Validators.required,
       Validators.minLength(ChefConstraints.Name.minLength),
       Validators.maxLength(ChefConstraints.Name.maxLength),
@@ -24,7 +24,7 @@ export class ChefFromControlFactory {
   }
 
   Password(): FormControl<string> {
-    return this._nnfb.control('', [
+    return this.nnfb.control('', [
       Validators.required,
       Validators.minLength(ChefConstraints.Password.minLength),
       Validators.maxLength(ChefConstraints.Password.maxLength),
@@ -32,7 +32,7 @@ export class ChefFromControlFactory {
   }
 
   Email(): FormControl<string | null> {
-    return this._nnfb.control<string | null>('', [
+    return this.nnfb.control<string | null>('', [
       Validators.minLength(ChefConstraints.Email.minLength),
       Validators.maxLength(ChefConstraints.Email.maxLength),
     ]);
