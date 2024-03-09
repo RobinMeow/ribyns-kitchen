@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'recipe-view',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'recipe',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './recipe-view.component.html',
-  styleUrl: './recipe-view.component.scss',
+  templateUrl: './recipe.html',
+  styleUrl: './recipe.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecipeViewComponent {}
+export class Recipe {}
