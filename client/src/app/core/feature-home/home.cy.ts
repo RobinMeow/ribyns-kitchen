@@ -1,9 +1,9 @@
 import { provideAppName } from 'src/app/core';
-import { HomeComponent } from './home.component';
+import { Home } from './home';
 
 describe('home should', () => {
   beforeEach('mount', () => {
-    cy.mount(HomeComponent, {
+    cy.mount(Home, {
       providers: [provideAppName()],
     });
   });

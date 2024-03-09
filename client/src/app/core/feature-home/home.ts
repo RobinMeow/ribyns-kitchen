@@ -4,10 +4,10 @@ import { APP_NAME } from 'src/app/core';
 @Component({
   selector: 'core-home',
   standalone: true,
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  templateUrl: './home.html',
+  styleUrls: ['./home.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
+export class Home {
   protected readonly appName = inject(APP_NAME);
 }
