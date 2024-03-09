@@ -3210,11 +3210,6 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@softarc/eslint-plugin-sheriff@^0.14.2":
-  version "0.14.2"
-  resolved "https://registry.yarnpkg.com/@softarc/eslint-plugin-sheriff/-/eslint-plugin-sheriff-0.14.2.tgz#8a441b9befc649d4e17b13c4e97acab8db56ee0a"
-  integrity sha512-gmVyCf1BfhWH7gnh2Mfi+njmM24bhsswn9074EZ8CeRC69uHX+XpC9WX4NMLpwLXWpGi6CgRTCaoK5anHj8EIQ==
-
 "@tootallnate/once@2":
   version "2.0.0"
   resolved "https://registry.npmjs.org/@tootallnate/once/-/once-2.0.0.tgz"
