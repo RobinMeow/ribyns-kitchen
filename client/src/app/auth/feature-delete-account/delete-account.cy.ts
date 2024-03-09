@@ -1,11 +1,11 @@
-import { DeleteAccountComponent } from './delete-account.component';
+import { DeleteAccount } from './delete-account';
 import { provideHttpClient } from '@angular/common/http';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { AuthService } from '../utils/auth.service';
 
 describe('login should', () => {
   beforeEach('mount', () => {
-    cy.mount(DeleteAccountComponent, {
+    cy.mount(DeleteAccount, {
       providers: [provideNoopAnimations(), provideHttpClient(), AuthService],
     });
   });

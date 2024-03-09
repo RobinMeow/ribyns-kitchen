@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { DeleteAccountComponent } from './delete-account.component';
+import { DeleteAccount } from './delete-account';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 describe('DeleteAccountComponent', () => {
-  let component: DeleteAccountComponent;
-  let fixture: ComponentFixture<DeleteAccountComponent>;
+  let component: DeleteAccount;
+  let fixture: ComponentFixture<DeleteAccount>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DeleteAccountComponent],
+      imports: [DeleteAccount],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -18,7 +18,7 @@ describe('DeleteAccountComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DeleteAccountComponent);
+    fixture = TestBed.createComponent(DeleteAccount);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

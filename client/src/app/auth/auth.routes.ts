@@ -21,8 +21,7 @@ export const authRoutes: Route[] = [
     path: 'delete-account',
     canActivate: [authorizedGuard],
     loadComponent: async () =>
-      (await import('./feature-delete-account/delete-account.component'))
-        .DeleteAccountComponent,
+      (await import('./feature-delete-account/delete-account')).DeleteAccount,
     title: 'Account löschen',
   },
 ];

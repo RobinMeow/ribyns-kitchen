@@ -29,11 +29,11 @@ import { PasswordComponent } from '../ui/password/password.component';
     MatInputModule,
     PasswordComponent,
   ],
-  templateUrl: './delete-account.component.html',
-  styleUrls: ['./delete-account.component.scss', '../utils/auth.scss'],
+  templateUrl: './delete-account.html',
+  styleUrls: ['./delete-account.scss', '../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeleteAccountComponent {
+export class DeleteAccount {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly nnfb = inject(NonNullableFormBuilder);
