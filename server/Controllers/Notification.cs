@@ -3,7 +3,9 @@ namespace api.Controllers;
 /// <summary>contains a list of notification which can be filled up, and send back to the front end all at once.</summary>
 public abstract class Notification
 {
-    public System.Collections.Generic.ICollection<string> _notifications = new System.Collections.Generic.List<string>();
+    public IEnumerable<string> Notifications  { get => _notifications.ToList(); }
+
+    public ICollection<string> _notifications = new List<string>();
 
     public void AddErrorMessage(string notifications)
     {

@@ -9,8 +9,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { RecipeConstraints } from './RecipeConstraints';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { NewRecipeDto, RecipeService } from '@infrastructure/open-api';
+import {
+  NewRecipeDto,
+  RecipeDto,
+  RecipeService,
+} from '@infrastructure/open-api';
 import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'recipe-add-recipe',
@@ -29,6 +34,7 @@ import { firstValueFrom } from 'rxjs';
 export class AddRecipeComponent {
   private readonly _nnfb = inject(NonNullableFormBuilder);
   private readonly recipeService = inject(RecipeService);
+  private readonly router = inject(Router);
 
   protected readonly form = this._nnfb.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
@@ -44,6 +50,12 @@ export class AddRecipeComponent {
 
     const req$ = this.recipeService.addAsync(newRecipe);
 
-    await firstValueFrom(req$);
+    const recipe: RecipeDto = await firstValueFrom(req$);
+
+    void this.router.navigate(['/recipe'], {
+      queryParams: {
+        id: recipe.id,
+      },
+    });
   }
 }

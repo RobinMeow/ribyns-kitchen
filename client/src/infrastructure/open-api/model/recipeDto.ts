@@ -15,6 +15,6 @@ export interface RecipeDto {
     id: string;
     createdAt: string;
     modelVersion: number;
-    name: string;
+    title: string;
 }
 

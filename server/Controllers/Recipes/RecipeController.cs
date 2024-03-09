@@ -29,7 +29,7 @@ public sealed class RecipeController(
     {
         var newRecipeSpecification = new NewRecipeSpecification(newRecipe);
         if (!newRecipeSpecification.IsSatisfied())
-            return BadRequest();
+            return BadRequest(newRecipe);
 
         Recipe recipe = Create(newRecipe);
         cancellationToken.ThrowIfCancellationRequested();

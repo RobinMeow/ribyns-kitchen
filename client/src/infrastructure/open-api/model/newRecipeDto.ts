@@ -12,6 +12,7 @@
 
 
 export interface NewRecipeDto { 
+    readonly notifications?: Array<string>;
     title: string;
 }
 
