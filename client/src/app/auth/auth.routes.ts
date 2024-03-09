@@ -6,23 +6,21 @@ export const authRoutes: Route[] = [
   {
     path: 'login',
     canActivate: [unauthorizedGuard],
-    loadComponent: async () =>
-      (await import('./feature-login/login.component')).LoginComponent,
+    loadComponent: async () => (await import('./feature-login/login')).Login,
     title: 'Einloggen',
   },
   {
     path: 'register',
     canActivate: [unauthorizedGuard],
     loadComponent: async () =>
-      (await import('./feature-register/register.component')).RegisterComponent,
+      (await import('./feature-register/register')).Register,
     title: 'Registrieren',
   },
   {
     path: 'delete-account',
     canActivate: [authorizedGuard],
     loadComponent: async () =>
-      (await import('./feature-delete-account/delete-account.component'))
-        .DeleteAccountComponent,
+      (await import('./feature-delete-account/delete-account')).DeleteAccount,
     title: 'Account löschen',
   },
 ];

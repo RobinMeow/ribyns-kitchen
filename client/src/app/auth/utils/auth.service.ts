@@ -17,7 +17,7 @@ import {
 import { Credentials } from './Credentials';
 import { TokenStorage } from './token.storage';
 import { Chef } from './Chef';
-import { JwtDecoderService } from './jwt-decoder.service';
+import { JwtDecoder } from './jwt-decoder';
 import { DecodedToken } from './DecodedToken';
 import { notEmpty_checked, true_checked } from 'src/app/shared/assertions';
 import { RegisterChef } from '../feature-register/RegisterChef';
@@ -28,7 +28,7 @@ import { RegisterChef } from '../feature-register/RegisterChef';
 export class AuthService {
   private readonly authService = inject(GeneratedAuthService);
   private readonly tokenStorage = inject(TokenStorage);
-  private readonly tokenDecoder = inject(JwtDecoderService);
+  private readonly tokenDecoder = inject(JwtDecoder);
   private readonly tokenSignal: WritableSignal<string | null | undefined> =
     signal(undefined);
   private readonly isAuthorizedComputed: Signal<boolean> = computed(() => {

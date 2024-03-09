@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FeedbackSnackBarComponent } from './feedback-snackbar/feedback-snack-bar.component';
+import { FeedbackSnackBar } from './feedback-snackbar/feedback-snack-bar';
 import { FeedbackData } from './FeedbackData';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class FeedbackService {
       message,
     };
     const threeSeconds = 3000;
-    this.snackBar.openFromComponent(FeedbackSnackBarComponent, {
+    this.snackBar.openFromComponent(FeedbackSnackBar, {
       duration: threeSeconds,
       verticalPosition: 'bottom',
       horizontalPosition: 'right',
