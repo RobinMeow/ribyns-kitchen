@@ -1,12 +1,12 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
-import { AddRecipeComponent } from './add-recipe.component';
+import { AddRecipe } from './add-recipe';
 import { NewRecipeDto } from '@infrastructure/open-api';
 
 describe('add-recipe should', () => {
   beforeEach('mount', () => {
-    cy.mount(AddRecipeComponent, {
+    cy.mount(AddRecipe, {
       providers: [
         provideNoopAnimations(),
         provideHttpClient(),

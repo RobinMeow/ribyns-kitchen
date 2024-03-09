@@ -27,11 +27,11 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatButtonModule,
   ],
-  templateUrl: './add-recipe.component.html',
-  styleUrl: './add-recipe.component.scss',
+  templateUrl: './add-recipe.html',
+  styleUrl: './add-recipe.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddRecipeComponent {
+export class AddRecipe {
   private readonly nnfb = inject(NonNullableFormBuilder);
   private readonly recipeService = inject(RecipeService);
   private readonly router = inject(Router);
