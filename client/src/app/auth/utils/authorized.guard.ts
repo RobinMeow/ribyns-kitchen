@@ -5,7 +5,7 @@ import { FeedbackService } from '@shared/common';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const authorizedGuard: CanActivateFn = (route, state) => {
-  const isAuthorized = inject(AuthService).isAuthorizedSignal()();
+  const isAuthorized = inject(AuthService).isAuthorized()();
 
   if (!isAuthorized)
     inject(FeedbackService).show('Nicht autorisiert. Bitte einloggen.');

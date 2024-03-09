@@ -7,16 +7,16 @@ import { APP_NAME } from 'src/app/core';
   providedIn: 'root',
 })
 export class AppTitleStrategy extends TitleStrategy {
-  private readonly _title = inject(Title);
-  private readonly _appName = inject(APP_NAME);
+  private readonly title = inject(Title);
+  private readonly appName = inject(APP_NAME);
 
   override updateTitle(snapshot: RouterStateSnapshot): void {
     const title = this.buildTitle(snapshot);
 
     if (title !== undefined) {
-      this._title.setTitle(`${title} - ${this._appName}`);
+      this.title.setTitle(`${title} - ${this.appName}`);
     } else {
-      this._title.setTitle(this._appName);
+      this.title.setTitle(this.appName);
     }
   }
 }

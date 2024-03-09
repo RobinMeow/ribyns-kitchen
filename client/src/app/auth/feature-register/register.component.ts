@@ -35,19 +35,19 @@ import { PasswordComponent } from '../ui/password/password.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent {
-  private readonly _authService = inject(AuthService);
-  private readonly _router = inject(Router);
-  private readonly _nnfb = inject(NonNullableFormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly nnfb = inject(NonNullableFormBuilder);
 
-  private readonly _chefFormControlFactory = new ChefFromControlFactory(
-    this._nnfb,
+  private readonly chefFormControlFactory = new ChefFromControlFactory(
+    this.nnfb,
   );
 
   protected readonly chefConstraints = ChefConstraints;
 
-  protected readonly registerForm = this._nnfb.group({
-    chefname: this._chefFormControlFactory.Name(),
-    password: this._chefFormControlFactory.Password(),
+  protected readonly registerForm = this.nnfb.group({
+    chefname: this.chefFormControlFactory.Name(),
+    password: this.chefFormControlFactory.Password(),
     email: ['', [Validators.email]],
   });
 
@@ -69,8 +69,8 @@ export class RegisterComponent {
       password: this.registerForm.controls.password.value,
       email: this.registerForm.controls.email.value,
     };
-    await this._authService.registerAsync(chef);
-    await this._authService.loginAsync(chef);
-    await this._router.navigateByUrl('/');
+    await this.authService.registerAsync(chef);
+    await this.authService.loginAsync(chef);
+    await this.router.navigateByUrl('/');
   }
 }

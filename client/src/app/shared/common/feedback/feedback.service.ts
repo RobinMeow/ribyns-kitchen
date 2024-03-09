@@ -7,14 +7,14 @@ import { FeedbackData } from './FeedbackData';
   providedIn: 'root',
 })
 export class FeedbackService {
-  private readonly _snackBar = inject(MatSnackBar);
+  private readonly snackBar = inject(MatSnackBar);
 
   show(message: string) {
     const feedbackData: FeedbackData = {
       message,
     };
     const threeSeconds = 3000;
-    this._snackBar.openFromComponent(FeedbackSnackBarComponent, {
+    this.snackBar.openFromComponent(FeedbackSnackBarComponent, {
       duration: threeSeconds,
       verticalPosition: 'bottom',
       horizontalPosition: 'right',

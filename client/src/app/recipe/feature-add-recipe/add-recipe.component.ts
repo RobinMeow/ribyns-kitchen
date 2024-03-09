@@ -32,11 +32,11 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddRecipeComponent {
-  private readonly _nnfb = inject(NonNullableFormBuilder);
+  private readonly nnfb = inject(NonNullableFormBuilder);
   private readonly recipeService = inject(RecipeService);
   private readonly router = inject(Router);
 
-  protected readonly form = this._nnfb.group({
+  protected readonly form = this.nnfb.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
   });
   protected readonly constraints = RecipeConstraints;

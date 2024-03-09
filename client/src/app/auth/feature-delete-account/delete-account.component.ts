@@ -34,26 +34,26 @@ import { PasswordComponent } from '../ui/password/password.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteAccountComponent {
-  private readonly _authService = inject(AuthService);
-  private readonly _router = inject(Router);
-  private readonly _nnfb = inject(NonNullableFormBuilder);
-  private readonly _chefFormControlFactory = new ChefFromControlFactory(
-    this._nnfb,
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly nnfb = inject(NonNullableFormBuilder);
+  private readonly chefFormControlFactory = new ChefFromControlFactory(
+    this.nnfb,
   );
 
-  protected readonly deleteAccountForm = this._nnfb.group({
-    password: this._chefFormControlFactory.Password(),
+  protected readonly deleteAccountForm = this.nnfb.group({
+    password: this.chefFormControlFactory.Password(),
   });
 
-  private readonly _chefSignal: Signal<Chef | null> =
-    this._authService.currentUserSignal();
+  private readonly chefSignal: Signal<Chef | null> =
+    this.authService.currentUser();
 
   protected async onSubmit(): Promise<void> {
     if (this.deleteAccountForm.invalid) return;
 
-    const chef: Chef | null = this._chefSignal();
+    const chef: Chef | null = this.chefSignal();
     if (chef === null) {
-      await this._router.navigateByUrl('/');
+      await this.router.navigateByUrl('/');
       return;
     }
 
@@ -62,8 +62,8 @@ export class DeleteAccountComponent {
       password: this.deleteAccountForm.controls.password.value,
     };
 
-    await this._authService.removeAsync(credentials);
+    await this.authService.removeAsync(credentials);
 
-    await this._router.navigateByUrl('/');
+    await this.router.navigateByUrl('/');
   }
 }

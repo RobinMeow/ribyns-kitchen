@@ -119,10 +119,10 @@ describe('AuthService', () => {
   });
 
   it('should be unauthorized', () => {
-    expect(authService.isAuthorizedSignal()()).toBe(false);
+    expect(authService.isAuthorized()()).toBe(false);
   });
 
   it('should return no chef', () => {
-    expect(authService.currentUserSignal()()).toBe(null);
+    expect(authService.currentUser()()).toBe(null);
   });
 });
