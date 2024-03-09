@@ -1,11 +1,11 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login.component';
+import { Login } from './login';
 import { AuthService } from '../utils/auth.service';
 
 describe('login should', () => {
   beforeEach('mount', () => {
-    cy.mount(LoginComponent, {
+    cy.mount(Login, {
       providers: [provideNoopAnimations(), provideHttpClient(), AuthService],
     });
   });

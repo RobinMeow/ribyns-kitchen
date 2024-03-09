@@ -27,11 +27,11 @@ import { PasswordComponent } from '../ui/password/password.component';
     MatButtonModule,
     PasswordComponent,
   ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss', '../utils/auth.scss'],
+  templateUrl: './login.html',
+  styleUrls: ['./login.scss', '../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
+export class Login {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly nnfb = inject(NonNullableFormBuilder);
