@@ -1,5 +1,6 @@
 using api.Controllers.Recipes;
 using api.Domain;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -42,8 +43,10 @@ public sealed class RecipeControllerTests
             Title = title!,
         };
 
-        ActionResult<RecipeDto> result = await _recipeController.AddAsync(requestDto);
-        IsType<BadRequestObjectResult>(result.Result);
+        BadRequest<NewRecipeDto> result = await _recipeController.AddAsync(requestDto) as dynamic;
+        IsType<BadRequestObjectResult>(result);
+        NotNull(result.Value);
+        True(result.Value.HasErrors());
     }
 
     [Fact]
