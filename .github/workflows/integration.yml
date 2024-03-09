@@ -67,7 +67,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.16.0'
+          node-version: '20.11.1'
           cache: 'yarn'
           cache-dependency-path: 'client/yarn.lock'
   
@@ -93,7 +93,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.16.0'
+          node-version: '20.11.1'
           cache: 'yarn'
           cache-dependency-path: 'client/yarn.lock'
 
