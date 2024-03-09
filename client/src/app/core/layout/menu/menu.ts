@@ -9,10 +9,10 @@ import { AuthCorner } from 'src/app/auth';
   selector: 'core-menu',
   standalone: true,
   imports: [CommonModule, MatIconModule, MatButtonModule, AuthCorner],
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
+  templateUrl: './menu.html',
+  styleUrls: ['./menu.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuComponent {
+export class Menu {
   @Input({ required: true }) drawer!: MatDrawer;
 }

@@ -1,11 +1,11 @@
 import { provideHttpClient } from '@angular/common/http';
-import { MenuComponent } from './menu.component';
+import { Menu } from './menu';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from 'src/app/auth/utils/auth.service';
 
 describe('menu should', () => {
   beforeEach('mount', () => {
-    cy.mount(MenuComponent, {
+    cy.mount(Menu, {
       imports: [RouterTestingModule],
       providers: [provideHttpClient(), AuthService],
     });
