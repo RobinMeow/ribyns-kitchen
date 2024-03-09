@@ -5,7 +5,7 @@ import { DecodedToken } from './DecodedToken';
 @Injectable({
   providedIn: 'root',
 })
-export class JwtDecoderService {
+export class JwtDecoder {
   private readonly jwtHelperService = new JwtHelperService(); // thrid party library.
 
   decode(token: string): DecodedToken {
