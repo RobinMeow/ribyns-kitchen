@@ -43,9 +43,10 @@
     "strictTemplates": true
   },
   "exclude": [
-    // if you write jest tests ".spec.ts", activate those two lines, to make use of jest types.
     // https://github.com/microsoft/TypeScript/issues/37053 (╯‵□′)╯︵┻━┻
-    // "./cypress.config.ts", 
-    // "./cypress"
+    // if you write jest tests ".spec.ts", activate those two lines, to make use of jest types.
+    // might need to restart vscode
+    //"./cypress.config.ts", 
+    //"./cypress"
   ]
 }

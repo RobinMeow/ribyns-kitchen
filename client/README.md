@@ -30,3 +30,15 @@ As well as `ui`'s (usually dumb components, reuseable) and utils which usually c
 ## Adding domain prefixes
 
 in `.eslintrc` add the prefixes to the `@angular-eslint` properties.
+
+## Testing Jest and Cypress
+
+Jest:
+
+- run `ng test` to run all spec.ts files
+- for intellisense, go to `tsconfig.json`, scroll to the bottom and follow the comments to enable jest types (this will disable cypress types, because the conflict each other)
+- TODO: figure out why running `ng test --include filepath` returns errors when `ng test` doesnt => more intrested in how to run single file tests without errors, as why the error is thrown as it seems to be not connected to this project.
+
+Cypress:
+
+- run `yarn run cypress open` and follow the browser to test e2e or component
