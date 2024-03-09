@@ -8,15 +8,15 @@ public sealed class NewRecipeDtoTests : DataAnnotationTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public void fails_all_member_validations(string? name)
+    public void fails_all_member_validations(string? title)
     {
         var dto = new NewRecipeDto()
         {
-            Name = name!,
+            Title = title!,
         };
 
         IList<ValidationResult> validationResults = ValidationResults(dto);
-        True(HasInvalidMember(validationResults, nameof(NewRecipeDto.Name)));
+        True(HasInvalidMember(validationResults, nameof(NewRecipeDto.Title)));
     }
 
     [Theory]
@@ -26,7 +26,7 @@ public sealed class NewRecipeDtoTests : DataAnnotationTests
     {
         var dto = new NewRecipeDto()
         {
-            Name = name,
+            Title = name,
         };
 
         Empty(ValidationResults(dto));

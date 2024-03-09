@@ -12,6 +12,6 @@
 
 
 export interface NewRecipeDto { 
-    name: string;
+    title: string;
 }
 

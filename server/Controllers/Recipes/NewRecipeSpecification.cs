@@ -17,7 +17,7 @@ public sealed class NewRecipeSpecification
     /// <summary>Validates the fields and returns true if the data is valid.</summary>
     public bool IsSatisfied()
     {
-        ValidateName(_newRecipe.Name);
+        ValidateName(_newRecipe.Title);
 
         return !_newRecipe.HasErrors();
     }
@@ -26,9 +26,9 @@ public sealed class NewRecipeSpecification
     {
         if (name == null)
             _newRecipe.AddErrorMessage($"Name is required.");
-        else if (name.Length < RecipeValidators.NAME_MIN_LENGTH)
-            _newRecipe.AddErrorMessage($"Name has to be greater than {RecipeValidators.NAME_MIN_LENGTH - 1}.");
-        else if (name.Length > RecipeValidators.NAME_MAX_LENGTH)
-            _newRecipe.AddErrorMessage($"Name has to be less than {RecipeValidators.NAME_MAX_LENGTH + 1}.");
+        else if (name.Length < RecipeValidators.TITLE_MIN_LENGTH)
+            _newRecipe.AddErrorMessage($"Name has to be greater than {RecipeValidators.TITLE_MIN_LENGTH - 1}.");
+        else if (name.Length > RecipeValidators.TITLE_MAX_LENGTH)
+            _newRecipe.AddErrorMessage($"Name has to be less than {RecipeValidators.TITLE_MAX_LENGTH + 1}.");
     }
 }

@@ -25,7 +25,7 @@ public sealed class RecipeControllerTests
     {
         var requestDto = new NewRecipeDto()
         {
-            Name = "My Recipe",
+            Title = "My Recipe",
         };
 
         ActionResult<RecipeDto> createdResult = await _recipeController.AddAsync(requestDto);
@@ -35,11 +35,11 @@ public sealed class RecipeControllerTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public async Task AddAsync_returns_BadReuqest_with_invalid_request_dto(string? name)
+    public async Task AddAsync_returns_BadReuqest_with_invalid_request_dto(string? title)
     {
         var requestDto = new NewRecipeDto()
         {
-            Name = name!,
+            Title = title!,
         };
 
         ActionResult<RecipeDto> result = await _recipeController.AddAsync(requestDto);

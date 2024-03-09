@@ -27,7 +27,6 @@ public sealed class RecipeController(
     [ProducesDefaultResponseType]
     public async Task<ActionResult<RecipeDto>> AddAsync([Required] NewRecipeDto newRecipe, CancellationToken cancellationToken = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
         var newRecipeSpecification = new NewRecipeSpecification(newRecipe);
         if (!newRecipeSpecification.IsSatisfied())
             return BadRequest();
@@ -41,11 +40,11 @@ public sealed class RecipeController(
 
     static Recipe Create(NewRecipeDto newRecipe)
     {
-        System.Diagnostics.Debug.Assert(newRecipe.Name != null);
+        System.Diagnostics.Debug.Assert(newRecipe.Title != null);
         return new Recipe()
         {
             CreatedAt = IsoDateTime.Now,
-            Name = newRecipe.Name!
+            Name = newRecipe.Title!
         };
     }
 

@@ -6,6 +6,6 @@ namespace api.Controllers.Recipes;
 public sealed class NewRecipeDto : Notification
 {
     [Required]
-    [StringRange(RecipeValidators.NAME_MIN_LENGTH, RecipeValidators.NAME_MAX_LENGTH)]
-    public string Name { get; set; } = null!;
+    [StringRange(RecipeValidators.TITLE_MIN_LENGTH, RecipeValidators.TITLE_MAX_LENGTH)]
+    public string Title { get; set; } = null!;
 }

@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { RecipeConstraints } from './RecipeConstraints';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { NewRecipeDto, RecipeService } from '@infrastructure/open-api';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'recipe-add-recipe',
@@ -26,11 +28,22 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AddRecipeComponent {
   private readonly _nnfb = inject(NonNullableFormBuilder);
+  private readonly recipeService = inject(RecipeService);
 
   protected readonly form = this._nnfb.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
   });
   protected readonly constraints = RecipeConstraints;
 
-  protected onSubmit(): void {}
+  protected async onSubmit(): Promise<void> {
+    if (this.form.invalid) return;
+
+    const newRecipe: NewRecipeDto = {
+      title: this.form.controls.title.value,
+    };
+
+    const req$ = this.recipeService.addAsync(newRecipe);
+
+    await firstValueFrom(req$);
+  }
 }

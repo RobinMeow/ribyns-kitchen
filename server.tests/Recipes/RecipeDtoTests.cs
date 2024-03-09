@@ -18,7 +18,7 @@ public sealed class RecipeDtoTests : DataAnnotationTests
         };
 
         IList<ValidationResult> validationResults = ValidationResults(dto);
-        True(HasInvalidMember(validationResults, nameof(NewRecipeDto.Name)));
+        True(HasInvalidMember(validationResults, nameof(NewRecipeDto.Title)));
     }
 
     [Theory]
