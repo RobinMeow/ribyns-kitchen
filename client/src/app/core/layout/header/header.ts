@@ -17,11 +17,11 @@ import { APP_NAME } from 'src/app/core';
   selector: 'core-header',
   standalone: true,
   imports: [MatIconModule, MatToolbarModule, MatButtonModule, RouterLink],
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  templateUrl: './header.html',
+  styleUrls: ['./header.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
+export class Header {
   @Input({ required: true }) hideMenuButton!: boolean;
   @Output() openMenu = new EventEmitter<void>();
 

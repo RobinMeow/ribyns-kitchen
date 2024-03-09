@@ -1,10 +1,10 @@
 import { provideAppName } from 'src/app/core';
-import { HeaderComponent } from './header.component';
+import { Header } from './header';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('header should', () => {
   beforeEach('mount', () => {
-    cy.mount(HeaderComponent, {
+    cy.mount(Header, {
       imports: [RouterTestingModule],
       providers: [provideAppName()],
     });

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HeaderComponent } from './header.component';
+import { Header } from './header';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideAppName } from 'src/app/core';
 
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+  let component: Header;
+  let fixture: ComponentFixture<Header>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HeaderComponent, RouterTestingModule],
+      imports: [Header, RouterTestingModule],
       providers: [provideAppName()],
     });
-    fixture = TestBed.createComponent(HeaderComponent);
+    fixture = TestBed.createComponent(Header);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
