@@ -10,4 +10,12 @@ export const recipeRoutes: Route[] = [
         .AddRecipeComponent,
     title: 'Rezept hinzufügen',
   },
+  {
+    path: 'recipe/:id',
+    canActivate: [authorizedGuard],
+    loadComponent: async () =>
+      (await import('./feature-recipe-view/recipe-view.component'))
+        .RecipeViewComponent,
+    title: 'Rezept',
+  },
 ];

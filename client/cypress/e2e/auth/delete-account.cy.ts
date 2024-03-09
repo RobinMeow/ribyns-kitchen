@@ -4,7 +4,7 @@ describe('delete-account should', () => {
     cy.url().should('not.include', 'delete-account');
   });
 
-  it('validates incorrect chefname', () => {
+  it('validates incorrect password', () => {
     cy.createTestUser();
 
     cy.visit('/delete-account');

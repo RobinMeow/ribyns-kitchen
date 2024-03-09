@@ -38,7 +38,7 @@ describe('stubbed auth should', () => {
     cy.getByAttr('title').should('be.visible');
   });
 
-  it('send form submit when enter is pressed in password input with valid data', () => {
+  it('send form submit when enter is pressed in password input with valid credentials', () => {
     stubHttp();
     cy.getByAttr('register-name-input').type('1234');
     cy.getByAttr('password-input').type('5678');

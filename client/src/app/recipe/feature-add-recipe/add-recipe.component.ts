@@ -51,11 +51,6 @@ export class AddRecipeComponent {
     const req$ = this.recipeService.addAsync(newRecipe);
 
     const recipe: RecipeDto = await firstValueFrom(req$);
-    // TODO write e2e
-    void this.router.navigate(['/recipe'], {
-      queryParams: {
-        id: recipe.id,
-      },
-    });
+    void this.router.navigate(['/recipe', recipe.id]);
   }
 }
