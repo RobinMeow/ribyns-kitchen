@@ -43,7 +43,7 @@ public sealed class RecipeControllerTests
         };
 
         ActionResult<RecipeDto> result = await _recipeController.AddAsync(requestDto);
-        IsType<BadRequestResult>(result.Result);
+        IsType<BadRequestObjectResult>(result.Result);
     }
 
     [Fact]
