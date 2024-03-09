@@ -43,10 +43,17 @@ public sealed class RecipeControllerTests
             Title = title!,
         };
 
-        BadRequest<NewRecipeDto> result = await _recipeController.AddAsync(requestDto) as dynamic;
-        IsType<BadRequestObjectResult>(result);
-        NotNull(result.Value);
-        True(result.Value.HasErrors());
+        ActionResult<RecipeDto> result = await _recipeController.AddAsync(requestDto);
+        
+        IsType<BadRequestObjectResult>(result.Result);
+        BadRequestObjectResult objectResult = (BadRequestObjectResult)result.Result;
+
+        IsType<NewRecipeDto>(objectResult.Value);
+        NotNull(objectResult.Value);
+
+        NewRecipeDto dto = (NewRecipeDto)objectResult.Value;
+
+        True(dto.HasErrors());
     }
 
     [Fact]
