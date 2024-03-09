@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FeedbackSnackBarComponent } from './feedback-snack-bar.component';
+import { FeedbackSnackBar } from './feedback-snack-bar';
 import {
   MatSnackBarRef,
   MAT_SNACK_BAR_DATA,
@@ -8,12 +8,12 @@ import {
 import { FeedbackData } from '../FeedbackData';
 
 describe('FeedbackSnackbarComponent', () => {
-  let component: FeedbackSnackBarComponent;
-  let fixture: ComponentFixture<FeedbackSnackBarComponent>;
+  let component: FeedbackSnackBar;
+  let fixture: ComponentFixture<FeedbackSnackBar>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FeedbackSnackBarComponent],
+      imports: [FeedbackSnackBar],
       providers: [
         { provide: MatSnackBarRef, useValue: null! },
         {
@@ -23,7 +23,7 @@ describe('FeedbackSnackbarComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FeedbackSnackBarComponent);
+    fixture = TestBed.createComponent(FeedbackSnackBar);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,12 +2,12 @@ import {
   MAT_SNACK_BAR_DATA,
   MatSnackBarRef,
 } from '@angular/material/snack-bar';
-import { FeedbackSnackBarComponent } from './feedback-snack-bar.component';
+import { FeedbackSnackBar } from './feedback-snack-bar';
 import { FeedbackData } from '../FeedbackData';
 
 describe('feedback snackbar component should', () => {
   beforeEach('mount', () => {
-    cy.mount(FeedbackSnackBarComponent, {
+    cy.mount(FeedbackSnackBar, {
       providers: [
         { provide: MatSnackBarRef, useValue: null! },
         {

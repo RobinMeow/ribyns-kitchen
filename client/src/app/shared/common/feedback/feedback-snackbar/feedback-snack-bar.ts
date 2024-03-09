@@ -10,11 +10,11 @@ import { FeedbackData } from '../FeedbackData';
   selector: 'common-feedback-snackbar',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './feedback-snack-bar.component.html',
-  styleUrl: './feedback-snack-bar.component.scss',
+  templateUrl: './feedback-snack-bar.html',
+  styleUrl: './feedback-snack-bar.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedbackSnackBarComponent {
+export class FeedbackSnackBar {
   protected readonly snackBarRef = inject(MatSnackBarRef);
   protected readonly data: FeedbackData = inject(
     MAT_SNACK_BAR_DATA,
