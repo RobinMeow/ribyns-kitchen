@@ -1,5 +1,6 @@
 using api.Controllers.Recipes;
 using api.Domain;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -25,7 +26,7 @@ public sealed class RecipeControllerTests
     {
         var requestDto = new NewRecipeDto()
         {
-            Name = "My Recipe",
+            Title = "My Recipe",
         };
 
         ActionResult<RecipeDto> createdResult = await _recipeController.AddAsync(requestDto);
@@ -35,15 +36,24 @@ public sealed class RecipeControllerTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public async Task AddAsync_returns_BadReuqest_with_invalid_request_dto(string? name)
+    public async Task AddAsync_returns_BadReuqest_with_invalid_request_dto(string? title)
     {
         var requestDto = new NewRecipeDto()
         {
-            Name = name!,
+            Title = title!,
         };
 
         ActionResult<RecipeDto> result = await _recipeController.AddAsync(requestDto);
-        IsType<BadRequestResult>(result.Result);
+        
+        IsType<BadRequestObjectResult>(result.Result);
+        BadRequestObjectResult objectResult = (BadRequestObjectResult)result.Result;
+
+        IsType<NewRecipeDto>(objectResult.Value);
+        NotNull(objectResult.Value);
+
+        NewRecipeDto dto = (NewRecipeDto)objectResult.Value;
+
+        True(dto.HasErrors());
     }
 
     [Fact]

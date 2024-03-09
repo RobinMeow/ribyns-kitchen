@@ -19,7 +19,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": ["app", "core", "auth"],
+            "prefix": ["app", "core", "auth", "common", "recipe"],
             "style": "camelCase"
           }
         ],
@@ -27,12 +27,12 @@
           "error",
           {
             "type": "element",
-            "prefix": ["app", "core", "auth"],
+            "prefix": ["app", "core", "auth", "common", "recipe"],
             "style": "kebab-case"
           }
         ],
         "prettier/prettier": [
-          "error",
+          "warn",
           {
             "endOfLine": "auto"
           }
@@ -61,7 +61,7 @@
       ],
       "rules": {
         "prettier/prettier": [
-          "error",
+          "warn",
           {
             "parser": "angular",
             "endOfLine": "auto"

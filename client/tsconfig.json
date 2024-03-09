@@ -32,6 +32,8 @@
       "@core": [ "src/app/core/index.ts" ],
       "@auth": [ "src/app/auth/index.ts" ],
       "@api": [ "src/app/api/index.ts" ],
+      "@recipe": [ "src/app/recipe/index.ts" ],
+      "@common": [ "src/app/shared/common/index.ts" ],
     }
   },
   "angularCompilerOptions": {
@@ -41,9 +43,10 @@
     "strictTemplates": true
   },
   "exclude": [
-    // if you write jest tests ".spec.ts", activate those two lines, to make use of jest types.
     // https://github.com/microsoft/TypeScript/issues/37053 (╯‵□′)╯︵┻━┻
-    // "./cypress.config.ts", 
-    // "./cypress"
+    // if you write jest tests ".spec.ts", activate those two lines, to make use of jest types.
+    // might need to restart vscode
+    //"./cypress.config.ts", 
+    //"./cypress"
   ]
 }
