@@ -12,7 +12,7 @@ public static class DtoMappingExtensions
         {
             Id = recipe.Id,
             ModelVersion = recipe.ModelVersion,
-            Name = recipe.Name,
+            Title = recipe.Name,
             CreatedAt = recipe.CreatedAt
         };
     }
