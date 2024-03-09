@@ -1,4 +1,4 @@
-import { RegisterComponent } from './register.component';
+import { Register } from './register';
 import { AuthService } from '../utils/auth.service';
 import { provideHttpClient } from '@angular/common/http';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
@@ -29,7 +29,7 @@ function stubHttp() {
 
 describe('stubbed auth should', () => {
   beforeEach('mount', () => {
-    cy.mount(RegisterComponent, {
+    cy.mount(Register, {
       providers: [provideNoopAnimations(), provideHttpClient(), AuthService],
     });
   });

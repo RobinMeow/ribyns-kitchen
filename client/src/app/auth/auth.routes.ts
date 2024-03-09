@@ -13,7 +13,7 @@ export const authRoutes: Route[] = [
     path: 'register',
     canActivate: [unauthorizedGuard],
     loadComponent: async () =>
-      (await import('./feature-register/register.component')).RegisterComponent,
+      (await import('./feature-register/register')).Register,
     title: 'Registrieren',
   },
   {

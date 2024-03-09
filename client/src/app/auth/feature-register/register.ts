@@ -30,11 +30,11 @@ import { PasswordComponent } from '../ui/password/password.component';
     MatTooltipModule,
     PasswordComponent,
   ],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss', '../utils/auth.scss'],
+  templateUrl: './register.html',
+  styleUrls: ['./register.scss', '../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterComponent {
+export class Register {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly nnfb = inject(NonNullableFormBuilder);
