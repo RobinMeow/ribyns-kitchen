@@ -22,11 +22,11 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     NgIf,
   ],
-  templateUrl: './password.component.html',
-  styleUrl: './password.component.scss',
+  templateUrl: './password-input.html',
+  styleUrl: './password-input.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PasswordComponent {
+export class PasswordInput {
   @Input({ required: true }) passwordControl!: FormControl<string>;
   @Input({ transform: booleanAttribute }) showHint = false;
 

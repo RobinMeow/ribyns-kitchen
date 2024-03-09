@@ -3,19 +3,19 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { AuthCornerComponent } from './auth-corner.component';
+import { AuthCorner } from './auth-corner';
 
 describe('AuthCornerComponent', () => {
-  let component: AuthCornerComponent;
-  let fixture: ComponentFixture<AuthCornerComponent>;
+  let component: AuthCorner;
+  let fixture: ComponentFixture<AuthCorner>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthCornerComponent, RouterTestingModule],
+      imports: [AuthCorner, RouterTestingModule],
       providers: [provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AuthCornerComponent);
+    fixture = TestBed.createComponent(AuthCorner);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

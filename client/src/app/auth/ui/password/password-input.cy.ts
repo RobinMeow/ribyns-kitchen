@@ -1,5 +1,5 @@
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
-import { PasswordComponent } from './password.component';
+import { PasswordInput } from './password-input';
 import { FormControl } from '@angular/forms';
 
 function getPasswordInput() {
@@ -12,7 +12,7 @@ function getEyeToggleButton() {
 
 describe('password should', () => {
   beforeEach('mount', () => {
-    cy.mount(PasswordComponent, {
+    cy.mount(PasswordInput, {
       providers: [provideNoopAnimations()],
       componentProperties: {
         passwordControl: new FormControl<string>('', {

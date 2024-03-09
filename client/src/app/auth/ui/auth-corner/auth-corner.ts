@@ -13,11 +13,11 @@ import { AuthService } from '../../utils/auth.service';
   selector: 'auth-corner',
   standalone: true,
   imports: [CommonModule, MatButtonModule, RouterLink],
-  templateUrl: './auth-corner.component.html',
-  styleUrl: './auth-corner.component.scss',
+  templateUrl: './auth-corner.html',
+  styleUrl: './auth-corner.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthCornerComponent {
+export class AuthCorner {
   private readonly authService = inject(AuthService);
 
   protected readonly isAuthorizedSignal: Signal<boolean> =

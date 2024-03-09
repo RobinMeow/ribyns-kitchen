@@ -1,12 +1,12 @@
 import { provideHttpClient } from '@angular/common/http';
-import { AuthCornerComponent } from './auth-corner.component';
+import { AuthCorner } from './auth-corner';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '../../utils/auth.service';
 
 describe('auth-corner should', () => {
   beforeEach('mount', () => {
-    cy.mount(AuthCornerComponent, {
+    cy.mount(AuthCorner, {
       imports: [RouterTestingModule],
       providers: [provideNoopAnimations(), provideHttpClient(), AuthService],
     });

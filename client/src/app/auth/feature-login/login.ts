@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ChefFromControlFactory } from '../utils/ChefFormControlFactory';
 import { ChefConstraints } from '../utils/ChefConstraints';
-import { PasswordComponent } from '../ui/password/password.component';
+import { PasswordInput } from '../ui/password/password-input';
 
 @Component({
   selector: 'auth-login',
@@ -25,7 +25,7 @@ import { PasswordComponent } from '../ui/password/password.component';
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    PasswordComponent,
+    PasswordInput,
   ],
   templateUrl: './login.html',
   styleUrls: ['./login.scss', '../utils/auth.scss'],
