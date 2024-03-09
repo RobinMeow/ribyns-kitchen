@@ -9,16 +9,16 @@ namespace api.Controllers.Auth;
 [ApiController]
 [Route("[controller]")]
 public sealed class AuthController(
-    DbContext _context,
-    ILogger<AuthController> _logger,
-    IPasswordHasher _passwordHasher,
-    IJwtFactory _jwtFactory
+    DbContext context,
+    ILogger<AuthController> logger,
+    IPasswordHasher passwordHasher,
+    IJwtFactory jwtFactory
     ) : ControllerBase
 {
-    readonly IChefRepository _chefRepository = _context.ChefRepository;
-    readonly ILogger<AuthController> _logger = _logger;
-    readonly IPasswordHasher _passwordHasher = _passwordHasher;
-    readonly IJwtFactory _jwtFactory = _jwtFactory;
+    readonly IChefRepository _chefRepository = context.ChefRepository;
+    readonly ILogger<AuthController> _logger = logger;
+    readonly IPasswordHasher _passwordHasher = passwordHasher;
+    readonly IJwtFactory _jwtFactory = jwtFactory;
 
     /// <summary>sign up a new account.</summary>
     /// <param name="newChef">the data to create an account from.</param>

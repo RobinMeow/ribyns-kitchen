@@ -9,12 +9,12 @@ namespace api.Controllers.Recipes;
 [ApiController]
 [Route("[controller]")]
 public sealed class RecipeController(
-    DbContext _context,
+    DbContext context,
     ILogger<RecipeController> logger
     ) : ControllerBase
 {
     readonly ILogger<RecipeController> _logger = logger;
-    readonly IRecipeRepository _recipeRepository = _context.RecipeRepository;
+    readonly IRecipeRepository _recipeRepository = context.RecipeRepository;
 
     /// <summary>add a new recipe.</summary>
     /// <param name="newRecipe">the recipe to add.</param>
