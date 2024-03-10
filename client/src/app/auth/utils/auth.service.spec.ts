@@ -4,7 +4,6 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideApiBaseUrlTesting } from '@api';
 import { DomainAssertionError } from 'src/app/shared/assertions/DomainAssertionError';
-import { TokenStorage } from './token.storage';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -15,14 +14,6 @@ describe('AuthService', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideApiBaseUrlTesting(),
-        {
-          provide: TokenStorage,
-          useValue: {
-            retrieve() {
-              return null;
-            },
-          },
-        },
         AuthService,
       ],
     });
