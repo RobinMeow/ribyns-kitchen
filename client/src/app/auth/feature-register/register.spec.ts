@@ -4,6 +4,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { Register } from './register';
+import { provideApiBaseUrlTesting } from '@api';
 
 describe('Register should', () => {
   let component: Register;
@@ -16,6 +17,7 @@ describe('Register should', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideNoopAnimations(),
+        provideApiBaseUrlTesting(),
       ],
     }).compileComponents();
 
@@ -27,6 +29,4 @@ describe('Register should', () => {
   it('create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('create', () => {});
 });

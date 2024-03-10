@@ -10,3 +10,12 @@ export const provideApiBaseUrl = function (): EnvironmentProviders {
     },
   ]);
 };
+
+export const provideApiBaseUrlTesting = function (): EnvironmentProviders {
+  return makeEnvironmentProviders([
+    {
+      provide: API_BASE_URL,
+      useValue: 'fake-url',
+    },
+  ]);
+};

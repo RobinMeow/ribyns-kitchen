@@ -7,6 +7,8 @@ import {
 import { unauthorizedGuard } from './unauthorized.guard';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
+import { signal } from '@angular/core';
+import { AuthService } from './auth.service';
 
 describe('unauthorized guard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
@@ -14,7 +16,18 @@ describe('unauthorized guard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        {
+          provide: AuthService,
+          useValue: {
+            isAuthorized() {
+              return signal(false);
+            },
+          },
+        },
+      ],
     });
   });
 

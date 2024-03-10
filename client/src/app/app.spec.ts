@@ -5,6 +5,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAppName } from 'src/app/core';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
+import { provideApiBaseUrlTesting } from './shared/api/provideApiBaseUrl';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -15,6 +16,7 @@ describe('App', () => {
         provideHttpClientTesting(),
         provideAppName(),
         provideNoopAnimations(),
+        provideApiBaseUrlTesting(),
       ],
     }).compileComponents();
   });

@@ -5,6 +5,7 @@ import { AddRecipe } from './add-recipe';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { RecipeApi } from '../util/recipe.api';
+import { provideApiBaseUrlTesting } from '@api';
 
 describe('AddRecipe should', () => {
   let component: AddRecipe;
@@ -18,6 +19,7 @@ describe('AddRecipe should', () => {
         provideNoopAnimations(),
         provideHttpClient(),
         provideHttpClientTesting(),
+        provideApiBaseUrlTesting(),
         RecipeApi,
       ],
     }).compileComponents();
@@ -34,7 +36,7 @@ describe('AddRecipe should', () => {
 
   it('not send http reuqest form is submitted invalid', async () => {
     // form is invalid by default
-    const addAsyncSpy = jest.spyOn(recipeApi, 'newAsync');
+    const addAsyncSpy = spyOn(recipeApi, 'newAsync');
 
     const submitButton = fixture.nativeElement.querySelector(
       '[data-cy-add-recipe-submit-button]',

@@ -3,6 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { DeleteAccount } from './delete-account';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
+import { provideApiBaseUrlTesting } from '@api';
 
 describe('DeleteAccount', () => {
   let component: DeleteAccount;
@@ -15,6 +16,7 @@ describe('DeleteAccount', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideNoopAnimations(),
+        provideApiBaseUrlTesting(),
       ],
     }).compileComponents();
 

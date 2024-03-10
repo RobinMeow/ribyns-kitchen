@@ -4,6 +4,8 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthCorner } from './auth-corner';
+import { AuthService } from '../../utils/auth.service';
+import { signal } from '@angular/core';
 
 describe('AuthCorner', () => {
   let component: AuthCorner;
@@ -12,7 +14,18 @@ describe('AuthCorner', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AuthCorner, RouterTestingModule],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        {
+          provide: AuthService,
+          useValue: {
+            isAuthorized() {
+              return signal(false);
+            },
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AuthCorner);

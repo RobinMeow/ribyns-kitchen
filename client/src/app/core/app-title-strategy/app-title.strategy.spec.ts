@@ -22,12 +22,12 @@ describe('AppTitleStrategyService should', () => {
   it('update title with application name', () => {
     const title = TestBed.inject(Title);
     const appName = TestBed.inject(APP_NAME);
-    const setTitleSpy = jest.spyOn(title, 'setTitle');
+    const setTitleSpy = spyOn(title, 'setTitle');
 
     const routerStateSnapshot = {} as RouterStateSnapshot;
 
     strategy.updateTitle(routerStateSnapshot);
 
-    expect(setTitleSpy).toHaveBeenCalledWith(expect.stringContaining(appName));
+    expect(setTitleSpy).toHaveBeenCalledWith(jasmine.stringContaining(appName));
   });
 });
