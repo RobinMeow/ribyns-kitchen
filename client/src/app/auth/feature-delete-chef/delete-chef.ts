@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { PasswordInput } from '../ui/password/password-input';
 
 @Component({
-  selector: 'auth-delete-account',
+  selector: 'auth-delete-chef',
   standalone: true,
   imports: [
     CommonModule,
@@ -29,11 +29,11 @@ import { PasswordInput } from '../ui/password/password-input';
     MatInputModule,
     PasswordInput,
   ],
-  templateUrl: './delete-account.html',
-  styleUrls: ['./delete-account.scss', '../utils/auth.scss'],
+  templateUrl: './delete-chef.html',
+  styleUrls: ['./delete-chef.scss', '../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeleteAccount {
+export class DeleteChef {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly nnfb = inject(NonNullableFormBuilder);
@@ -41,7 +41,7 @@ export class DeleteAccount {
     this.nnfb,
   );
 
-  protected readonly deleteAccountForm = this.nnfb.group({
+  protected readonly form = this.nnfb.group({
     password: this.chefFormControlFactory.Password(),
   });
 
@@ -49,7 +49,7 @@ export class DeleteAccount {
     this.authService.currentUser();
 
   protected async onSubmit(): Promise<void> {
-    if (this.deleteAccountForm.invalid) return;
+    if (this.form.invalid) return;
 
     const chef: Chef | null = this.chefSignal();
     if (chef === null) {
@@ -59,7 +59,7 @@ export class DeleteAccount {
 
     const credentials: Credentials = {
       name: chef.name,
-      password: this.deleteAccountForm.controls.password.value,
+      password: this.form.controls.password.value,
     };
 
     await this.authService.removeAsync(credentials);

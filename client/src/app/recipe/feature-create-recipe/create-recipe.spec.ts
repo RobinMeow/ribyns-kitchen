@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
-import { AddRecipe } from './add-recipe';
+import { CreateRecipe } from './create-recipe';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { RecipeApi } from '../util/recipe.api';
 import { provideApiBaseUrlTesting } from '@api';
 
-describe('AddRecipe should', () => {
-  let component: AddRecipe;
+describe('CreateRecipe should', () => {
+  let component: CreateRecipe;
   let recipeApi: RecipeApi;
-  let fixture: ComponentFixture<AddRecipe>;
+  let fixture: ComponentFixture<CreateRecipe>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddRecipe],
+      imports: [CreateRecipe],
       providers: [
         provideNoopAnimations(),
         provideHttpClient(),
@@ -24,7 +24,7 @@ describe('AddRecipe should', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AddRecipe);
+    fixture = TestBed.createComponent(CreateRecipe);
     component = fixture.componentInstance;
     fixture.detectChanges();
     recipeApi = TestBed.inject(RecipeApi);

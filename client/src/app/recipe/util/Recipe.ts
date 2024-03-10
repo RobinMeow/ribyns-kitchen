@@ -1,6 +1,6 @@
 import { RecipeDto } from './RecipeDto';
 
-export class RecipeModel {
+export class Recipe {
   constructor(dto: RecipeDto) {
     this.id = dto.id;
     this.title = dto.title;

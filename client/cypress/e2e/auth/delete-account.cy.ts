@@ -1,17 +1,17 @@
-describe('delete-account should', () => {
+describe('delete-chef should', () => {
   it('redirect to home', () => {
-    cy.visit('/delete-account');
-    cy.url().should('not.include', 'delete-account');
+    cy.visit('/delete-chef');
+    cy.url().should('not.include', 'delete-chef');
   });
 
   it('validates incorrect password', () => {
     cy.createTestUser();
 
-    cy.visit('/delete-account');
+    cy.visit('/delete-chef');
 
     cy.getByAttr('password-input').type('wrong-password{enter}');
 
-    cy.url().should('include', 'delete-account');
+    cy.url().should('include', 'delete-chef');
 
     cy.deleteTestUser();
   });

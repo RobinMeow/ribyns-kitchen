@@ -12,10 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { RecipeApi } from '../util/recipe.api';
 import { NewRecipe } from '../util/NewRecipe';
-import { RecipeModel } from '../util/RecipeModel';
+import { Recipe } from '../util/Recipe';
 
 @Component({
-  selector: 'recipe-add-recipe',
+  selector: 'recipe-create-recipe',
   standalone: true,
   imports: [
     CommonModule,
@@ -24,11 +24,11 @@ import { RecipeModel } from '../util/RecipeModel';
     MatInputModule,
     MatButtonModule,
   ],
-  templateUrl: './add-recipe.html',
-  styleUrl: './add-recipe.scss',
+  templateUrl: './create-recipe.html',
+  styleUrl: './create-recipe.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddRecipe {
+export class CreateRecipe {
   private readonly nnfb = inject(NonNullableFormBuilder);
   private readonly recipeApi = inject(RecipeApi);
   private readonly router = inject(Router);
@@ -46,7 +46,7 @@ export class AddRecipe {
       title: this.form.controls.title.value,
     };
 
-    const recipe: RecipeModel = await this.recipeApi.newAsync(newRecipe);
+    const recipe: Recipe = await this.recipeApi.newAsync(newRecipe);
     void this.router.navigate(['/recipe', recipe.id]);
   }
 }

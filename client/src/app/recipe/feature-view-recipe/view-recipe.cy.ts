@@ -1,8 +1,8 @@
-import { Recipe } from './recipe';
+import { ViewRecipe } from './view-recipe';
 
 describe('recipe should', () => {
   beforeEach('mount', () => {
-    cy.mount(Recipe, {
+    cy.mount(ViewRecipe, {
       providers: [],
     });
   });

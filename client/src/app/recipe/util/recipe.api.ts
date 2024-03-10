@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseApi } from '@api';
 import { firstValueFrom, map } from 'rxjs';
 import { NewRecipe } from './NewRecipe';
-import { RecipeModel } from './RecipeModel';
+import { Recipe } from './Recipe';
 import { RecipeDto } from './RecipeDto';
 
 @Injectable({ providedIn: 'root' })
@@ -17,7 +17,7 @@ export class RecipeApi extends BaseApi {
       .post<RecipeDto>(url, recipe, {
         headers: headers,
       })
-      .pipe(map((dto) => new RecipeModel(dto)));
+      .pipe(map((dto) => new Recipe(dto)));
 
     return firstValueFrom(request$);
   }
