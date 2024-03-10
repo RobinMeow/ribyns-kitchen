@@ -3,15 +3,20 @@ import { Menu } from './menu';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
+import { provideApiBaseUrlTesting } from '@api';
 
-describe('MenuComponent', () => {
+describe('Menu', () => {
   let component: Menu;
   let fixture: ComponentFixture<Menu>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [Menu, RouterTestingModule],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideApiBaseUrlTesting(),
+      ],
     });
     fixture = TestBed.createComponent(Menu);
     component = fixture.componentInstance;

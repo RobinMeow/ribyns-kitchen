@@ -81,7 +81,7 @@ jobs:
         run: yarn run build
 
       - name: run jest tests
-        run: yarn run test
+        run: yarn run test --browsers ChromeHeadless --watch false
 
   cypress-e2e-and-component-tests-on-google-chrome:
     runs-on: ubuntu-22.04

@@ -33,11 +33,11 @@ in `.eslintrc` add the prefixes to the `@angular-eslint` properties.
 
 ## Testing Jest and Cypress
 
-Jest:
+Jasmine:
 
 - run `ng test` to run all spec.ts files
-- for intellisense, go to `tsconfig.json`, scroll to the bottom and follow the comments to enable jest types (this will disable cypress types, because the conflict each other)
-- TODO: figure out why running `ng test --include filepath` returns errors when `ng test` doesnt => more intrested in how to run single file tests without errors, as why the error is thrown as it seems to be not connected to this project.
+- for intellisense, go to `tsconfig.json`, scroll to the bottom and follow the comments to enable jasmine types (this will disable cypress types, because the conflict each other)
+- use --include filepath to run specified files
 
 Cypress:
 

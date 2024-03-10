@@ -4,8 +4,9 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 import { Register } from './register';
+import { provideApiBaseUrlTesting } from '@api';
 
-describe('RegisterComponent', () => {
+describe('Register should', () => {
   let component: Register;
   let fixture: ComponentFixture<Register>;
 
@@ -16,6 +17,7 @@ describe('RegisterComponent', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideNoopAnimations(),
+        provideApiBaseUrlTesting(),
       ],
     }).compileComponents();
 
@@ -24,7 +26,7 @@ describe('RegisterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('create', () => {
     expect(component).toBeTruthy();
   });
 });

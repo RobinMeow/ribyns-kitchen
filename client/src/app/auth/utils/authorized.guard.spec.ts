@@ -8,6 +8,8 @@ import { authorizedGuard } from './authorized.guard';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
+import { AuthService } from './auth.service';
+import { signal } from '@angular/core';
 
 describe('authorized guard should', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
@@ -19,6 +21,14 @@ describe('authorized guard should', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideNoopAnimations(),
+        {
+          provide: AuthService,
+          useValue: {
+            isAuthorized() {
+              return signal(false);
+            },
+          },
+        },
       ],
     });
   });

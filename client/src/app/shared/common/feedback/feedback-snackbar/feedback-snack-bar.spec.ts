@@ -7,7 +7,7 @@ import {
 } from '@angular/material/snack-bar';
 import { FeedbackData } from '../FeedbackData';
 
-describe('FeedbackSnackbarComponent', () => {
+describe('FeedbackSnackbar', () => {
   let component: FeedbackSnackBar;
   let fixture: ComponentFixture<FeedbackSnackBar>;
 

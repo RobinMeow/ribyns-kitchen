@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Home } from './home';
 import { provideAppName } from 'src/app/core';
 
-describe('HomeComponent', () => {
+describe('Home', () => {
   let component: Home;
   let fixture: ComponentFixture<Home>;
 

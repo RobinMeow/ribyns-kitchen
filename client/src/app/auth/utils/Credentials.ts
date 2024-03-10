@@ -1,4 +1,4 @@
-export type Credentials = {
-  name: string;
-  password: string;
-};
+export interface Credentials {
+  readonly name: string;
+  readonly password: string;
+}

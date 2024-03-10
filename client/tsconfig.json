@@ -23,17 +23,12 @@
       "dom"
     ],
     "paths": {
-      // shared
-      "@shared/assertions": [ "src/app/shared/assertions/index.ts" ],
-      "@shared/common": [ "src/app/shared/common/index.ts" ],
-      // infrastructure
-      "@infrastructure/open-api": [ "src/infrastructure/open-api/index.ts" ],
       // domains
       "@core": [ "src/app/core/index.ts" ],
       "@auth": [ "src/app/auth/index.ts" ],
-      "@api": [ "src/app/api/index.ts" ],
       "@recipe": [ "src/app/recipe/index.ts" ],
       "@common": [ "src/app/shared/common/index.ts" ],
+      "@api": [ "src/app/shared/api/index.ts" ],
     }
   },
   "angularCompilerOptions": {
@@ -44,7 +39,7 @@
   },
   "exclude": [
     // https://github.com/microsoft/TypeScript/issues/37053 (╯‵□′)╯︵┻━┻
-    // if you write jest tests ".spec.ts", activate those two lines, to make use of jest types.
+    // if you write jasmine tests ".spec.ts", activate those two lines, to make use of jasmine types.
     // might need to restart vscode
     //"./cypress.config.ts", 
     //"./cypress"

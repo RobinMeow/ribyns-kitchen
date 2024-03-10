@@ -56,7 +56,7 @@ export class Login {
   protected async onSubmit(): Promise<void> {
     if (this.loginForm.invalid) return;
 
-    await this.authService.loginAsync({
+    await this.authService.signInAsync({
       name: this.chefnameControl.value,
       password: this.passwordControl.value,
     });

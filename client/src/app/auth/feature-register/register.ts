@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../utils/auth.service';
-import { RegisterChef } from './RegisterChef';
 import { Router } from '@angular/router';
 import {
   NonNullableFormBuilder,
@@ -16,6 +15,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChefFromControlFactory } from '../utils/ChefFormControlFactory';
 import { ChefConstraints } from '../utils/ChefConstraints';
 import { PasswordInput } from '../ui/password/password-input';
+import { RegisterChef } from '../utils/RegisterChef';
 
 @Component({
   selector: 'auth-register',
@@ -69,8 +69,7 @@ export class Register {
       password: this.registerForm.controls.password.value,
       email: this.registerForm.controls.email.value,
     };
-    await this.authService.registerAsync(chef);
-    await this.authService.loginAsync(chef);
+    await this.authService.signUpAsync(chef);
     await this.router.navigateByUrl('/');
   }
 }

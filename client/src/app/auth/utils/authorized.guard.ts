@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
 import { AuthService } from './auth.service';
-import { FeedbackService } from '@shared/common';
+import { FeedbackService } from '@common';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const authorizedGuard: CanActivateFn = (route, state) => {

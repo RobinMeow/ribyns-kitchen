@@ -2,7 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { AddRecipe } from './add-recipe';
-import { NewRecipeDto } from '@infrastructure/open-api';
+import { RecipeApi } from '../util/recipe.api';
 
 describe('add-recipe should', () => {
   beforeEach('mount', () => {
@@ -11,40 +11,28 @@ describe('add-recipe should', () => {
         provideNoopAnimations(),
         provideHttpClient(),
         provideHttpClientTesting(),
+        {
+          provide: RecipeApi,
+          useValue: {},
+        },
       ],
     });
   });
 
   it('display the title input field', () => {
-    cy.get('[data-cy-title]').should('exist');
-    cy.get('[data-cy-recipe-title-input]').should('exist');
+    cy.getByAttr('title').should('exist');
+    cy.getByAttr('recipe-title-input').should('exist');
   });
 
   it('display the submit button', () => {
-    cy.get('[data-cy-add-recipe-submit-button]').should('exist');
+    cy.getByAttr('add-recipe-submit-button').should('exist');
   });
 
-  it('add a recipe when form is submitted with valid input', () => {
+  it('have enabled submit button with valid form', () => {
     const title = 'New Recipe Title';
 
-    cy.get('[data-cy-recipe-title-input]').type(title);
-    cy.get('[data-cy-add-recipe-submit-button]').click();
-
-    cy.intercept(
-      {
-        path: 'Recipe/AddAsync',
-        times: 1,
-      },
-      (req) => {
-        const newRecipeDto = req.body as NewRecipeDto;
-        expect(newRecipeDto.title).to.equal(title);
-        req.reply({});
-      },
-    );
-  });
-
-  it('have disabled submit button, when input is invalid', () => {
-    // leave input empty
-    cy.get('[data-cy-add-recipe-submit-button]').should('be.disabled');
+    cy.getByAttr('add-recipe-submit-button').as('btn').should('be.disabled');
+    cy.getByAttr('recipe-title-input').type(title);
+    cy.get('@btn').should('be.enabled');
   });
 });

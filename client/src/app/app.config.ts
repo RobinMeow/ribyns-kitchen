@@ -4,20 +4,17 @@ import { ApplicationConfig } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { authInterceptor, authRoutes } from 'src/app/auth';
-import { provideApi } from 'src/app/api';
-import { errorFeedbackInterceptor, withRoutes } from '@shared/common';
-import {
-  coreRoutes,
-  provideAppName,
-  provideAppTitleStrategy,
-} from 'src/app/core';
+
+import { authInterceptor, authRoutes } from '@auth';
+import { provideApiBaseUrl } from '@api';
+import { errorFeedbackInterceptor, withRoutes } from '@common';
+import { coreRoutes, provideAppName, provideAppTitleStrategy } from '@core';
 import { recipeRoutes } from '@recipe';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAppName(),
-    provideApi(),
+    provideApiBaseUrl(),
     provideHttpClient(
       withInterceptors([authInterceptor, errorFeedbackInterceptor]),
     ),

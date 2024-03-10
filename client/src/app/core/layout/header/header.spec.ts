@@ -3,7 +3,7 @@ import { Header } from './header';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideAppName } from 'src/app/core';
 
-describe('HeaderComponent', () => {
+describe('Header', () => {
   let component: Header;
   let fixture: ComponentFixture<Header>;
 
