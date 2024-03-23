@@ -32,7 +32,7 @@ As well as `ui`'s (usually dumb components, reuseable) and utils which usually c
 The app mostly runs on locally stored data, and every now and then syncs with the remote database to share its own data (Recipe Modifications, new Recipes, etc..).  
 *Name suffices are open to change.*
 
-- Classes named `exmaple.local-persistor.ts` are responsible for CRUD operations, which are all offline compatible.  
+- Classes named `exmaple.local-persistor.ts` are responsible for CRUD operations, which are all offline compatible. (The app used [idb](https://github.com/jakearchibald/idb) library for this mostly)  
 The name implies, that the underlaying storage plays no role. (Whether it be, indexedDB, localStorage, etc..).  
 - Classes named `exmaple.api.ts` are responsible for CRUD operations on the remote database.
 - Classes named `example.syncer.ts`  are Mediators. They make use of the `example.api.ts` and the `exmaple.local-persistor.ts` files, to keep the local database in sync with the remote (and vice versa).  
