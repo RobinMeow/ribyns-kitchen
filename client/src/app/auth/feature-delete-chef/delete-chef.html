@@ -1,15 +1,11 @@
 <h2 data-cy-title>Account löschen</h2>
 
-<form
-  [formGroup]="deleteAccountForm"
-  (submit)="onSubmit()"
-  data-cy-delete-account-form
->
+<form [formGroup]="form" (submit)="onSubmit()" data-cy-delete-chef-form>
   <div class="forms-column">
-    <auth-password [passwordControl]="deleteAccountForm.controls.password" />
+    <auth-password [passwordControl]="form.controls.password" />
   </div>
   <button
-    [disabled]="deleteAccountForm.invalid"
+    [disabled]="form.invalid"
     mat-raised-button
     color="primary"
     type="submit"

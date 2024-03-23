@@ -6,13 +6,14 @@ export const recipeRoutes: Route[] = [
     path: 'add-recipe',
     canActivate: [authorizedGuard],
     loadComponent: async () =>
-      (await import('./feature-add-recipe/add-recipe')).AddRecipe,
+      (await import('./feature-create-recipe/create-recipe')).CreateRecipe,
     title: 'Rezept hinzufügen',
   },
   {
     path: 'recipe/:id',
     canActivate: [authorizedGuard],
-    loadComponent: async () => (await import('./feature-recipe/recipe')).Recipe,
+    loadComponent: async () =>
+      (await import('./feature-view-recipe/view-recipe')).ViewRecipe,
     title: 'Rezept',
   },
 ];

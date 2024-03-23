@@ -118,13 +118,13 @@ function deleteTestUser() {
 
   cy.get('@user').then((user) => {
     const { password }: any = user;
-    cy.visit('/delete-account');
+    cy.visit('/delete-chef');
     cy.getByAttr('password-input').type(password);
     cy.intercept({
       path: '/Auth/DeleteAsync',
       times: 1,
     }).as('deleteAsync');
-    cy.getByAttr('delete-account-form').submit();
+    cy.getByAttr('delete-chef-form').submit();
     cy.wait('@deleteAsync');
   });
 }

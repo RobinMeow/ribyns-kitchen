@@ -17,10 +17,10 @@ export const authRoutes: Route[] = [
     title: 'Registrieren',
   },
   {
-    path: 'delete-account',
+    path: 'delete-chef',
     canActivate: [authorizedGuard],
     loadComponent: async () =>
-      (await import('./feature-delete-account/delete-account')).DeleteAccount,
+      (await import('./feature-delete-chef/delete-chef')).DeleteChef,
     title: 'Account löschen',
   },
 ];

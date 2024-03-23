@@ -6,8 +6,8 @@ import { CommonModule } from '@angular/common';
   selector: 'recipe',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './recipe.html',
-  styleUrl: './recipe.scss',
+  templateUrl: './view-recipe.html',
+  styleUrl: './view-recipe.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Recipe {}
+export class ViewRecipe {}

@@ -40,15 +40,15 @@ describe('auth should', () => {
       .contains('Ausloggen');
 
     // Delete the just registered account
-    cy.visit('/delete-account');
+    cy.visit('/delete-chef');
     cy.getByAttr('password-input').type(credentials.password);
     cy.intercept({
       path: '/Auth/DeleteAsync',
       times: 1,
     }).as('delete-http-request');
-    cy.getByAttr('delete-account-form').submit(); // redirect on success
+    cy.getByAttr('delete-chef-form').submit(); // redirect on success
     cy.wait('@delete-http-request');
-    cy.url().should('not.include', 'delete-account');
+    cy.url().should('not.include', 'delete-chef');
     cy.getByAttr('auth-corner').getByAttr('login-button');
   });
 });

@@ -1,4 +1,4 @@
-import { DeleteAccount } from './delete-account';
+import { DeleteChef } from './delete-chef';
 import { provideHttpClient } from '@angular/common/http';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { AuthService } from '../utils/auth.service';
@@ -9,7 +9,7 @@ const authServiceMock = {
 
 describe('login should', () => {
   beforeEach('mount', () => {
-    cy.mount(DeleteAccount, {
+    cy.mount(DeleteChef, {
       providers: [
         provideNoopAnimations(),
         provideHttpClient(),
