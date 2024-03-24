@@ -11,10 +11,17 @@ export type CommunityCookbookDb = Omit<
   | 'createObjectStore' // store creation should only be in onversion change, which is to be extended via the super() constructor
   | 'clear'
   | 'onversionchange'
-  | 'openDB'
   | 'onabort'
   | 'onclose'
   | 'onerror'
+  | 'addEventListener'
+  | 'removeEventListener'
+  | 'close'
+  | 'deleteObjectStore'
+  | 'dispatchEvent'
+  | 'objectStoreNames' // StoreNames are exposed in the base class.
+  | 'name' // i dont see as of now, why the calling code would use this. (and if, it might be better of exposing it like StoreNames)
+  | 'version' // same reason as 'name'
 >;
 
 @Injectable({ providedIn: 'root' })
