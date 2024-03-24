@@ -1,7 +1,7 @@
-import { RecipeDto } from './RecipeDto';
+import { RecipeBase } from './RecipeBase';
 
 export class Recipe {
-  constructor(dto: RecipeDto) {
+  constructor(dto: RecipeBase) {
     this.id = dto.id;
     this.title = dto.title;
   }

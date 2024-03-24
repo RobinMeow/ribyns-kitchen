@@ -3,7 +3,7 @@ import { authorizedGuard } from '@auth';
 
 export const recipeRoutes: Route[] = [
   {
-    path: 'add-recipe',
+    path: 'create-recipe',
     canActivate: [authorizedGuard],
     loadComponent: async () =>
       (await import('./feature-create-recipe/create-recipe')).CreateRecipe,
