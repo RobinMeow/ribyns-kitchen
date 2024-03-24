@@ -7,6 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideApiBaseUrlTesting } from '@api';
 import { RecipeLocalPersistor } from '../local-persistor/recipe.local-persistor';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MockProvider } from 'ng-mocks';
 
 describe('CreateRecipe should', () => {
   let component: CreateRecipe;
@@ -21,7 +22,7 @@ describe('CreateRecipe should', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideApiBaseUrlTesting(),
-        { provide: RecipeLocalPersistor, useValue: { async createAsync() {} } },
+        MockProvider(RecipeLocalPersistor),
       ],
     }).compileComponents();
 
