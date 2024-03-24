@@ -29,6 +29,7 @@
       "@recipe": [ "src/app/recipe/index.ts" ],
       "@common": [ "src/app/shared/common/index.ts" ],
       "@api": [ "src/app/shared/api/index.ts" ],
+      "@local-persistor": [ "src/app/shared/local-persistor/index.ts" ],
     }
   },
   "angularCompilerOptions": {

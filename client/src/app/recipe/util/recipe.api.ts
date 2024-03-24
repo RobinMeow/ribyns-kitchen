@@ -9,7 +9,7 @@ import { RecipeDto } from './RecipeDto';
 export class RecipeApi extends BaseApi {
   private readonly URL = this.BASE_URL + '/Recipe/';
 
-  newAsync(recipe: NewRecipe): Promise<RecipeDto> {
+  newAsync(recipe: NewRecipe): Promise<Recipe> {
     const headers = this.defaultHeadersWithAuth();
     const url = this.URL + 'AddAsync';
 

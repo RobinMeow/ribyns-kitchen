@@ -11,8 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { RecipeApi } from '../util/recipe.api';
-import { NewRecipe } from '../util/NewRecipe';
-import { Recipe } from '../util/Recipe';
+import { CreateRecipeCommand } from './create-recipe.command';
+import { RecipeLocalPersistor } from '../recipe.local-persistor';
 
 @Component({
   selector: 'recipe-create-recipe',
@@ -30,7 +30,8 @@ import { Recipe } from '../util/Recipe';
 })
 export class CreateRecipe {
   private readonly nnfb = inject(NonNullableFormBuilder);
-  private readonly recipeApi = inject(RecipeApi);
+  private readonly localPersistor = inject(RecipeLocalPersistor);
+  private readonly api = inject(RecipeApi);
   private readonly router = inject(Router);
 
   protected readonly form = this.nnfb.group({
@@ -42,11 +43,13 @@ export class CreateRecipe {
   protected async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
 
-    const newRecipe: NewRecipe = {
-      title: this.form.controls.title.value,
-    };
+    // const newRecipe: NewRecipe = {
+    //   title: this.form.controls.title.value,
+    // };
+    const cmd = new CreateRecipeCommand(this.form.controls.title.value);
+    await this.localPersistor.createAsync(cmd);
 
-    const recipe: Recipe = await this.recipeApi.newAsync(newRecipe);
-    void this.router.navigate(['/recipe', recipe.id]);
+    // const recipe: Recipe = await this.api.newAsync(newRecipe);
+    void this.router.navigate(['/recipe', cmd.Id]);
   }
 }
