@@ -6,6 +6,9 @@ interface CommunityCookbook extends IDBPDatabase {
   recipes: IDBPObjectStore<RecipeLocalDto, 'id'>;
 }
 
+// TODO I plan on moving the responsibility of creating/deleting objectstores to the using code.
+// e.g. recipe.local-persistor should handle creation of object store and onversionchange handler for new model version updates.
+
 export type CommunityCookbookDb = Omit<
   IDBPDatabase<CommunityCookbook>,
   | 'createObjectStore' // store creation should only be in onversion change, which is to be extended via the super() constructor
@@ -90,7 +93,7 @@ export class LocalPersistorBase {
   }
 
   private static init(database: IDBPDatabase<CommunityCookbook>) {
-    for (const storeName of Object.values(LocalPersistorBase._storeNames)) {
+    for (const storeName of Object.values(this._storeNames)) {
       database.createObjectStore(storeName, { keyPath: 'id' });
       console.log('LocalPersistor created: ', storeName);
     }
