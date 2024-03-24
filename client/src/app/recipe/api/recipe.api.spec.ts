@@ -7,7 +7,6 @@ import { MockProvider } from 'ng-mocks';
 import { TokenStorage } from 'src/app/auth/utils/token.storage';
 import { makeEnvironmentProviders } from '@angular/core';
 
-// TODO, reuse this for all api.spec tests (tho the token storage might needs a proper way)
 const provideApiTesting = () => {
   return makeEnvironmentProviders([
     provideHttpClient(),
