@@ -106,7 +106,6 @@ export abstract class LocalPersistorBase {
   private static init(database: IDBPDatabase<CommunityCookbook>) {
     for (const storeName of Object.values(this._storeNames)) {
       database.createObjectStore(storeName, { keyPath: 'id' });
-      console.log('LocalPersistor created: ', storeName);
     }
   }
 }
