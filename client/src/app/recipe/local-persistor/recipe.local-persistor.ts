@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { LocalPersistorBase } from '@local-persistor';
-import { RecipeLocalDto } from './util/Recipe.local-dto';
-import { NewRecipe } from './util/NewRecipe';
+import { RecipeLocalDto } from './Recipe.local-dto';
+import { NewRecipe } from '../util/NewRecipe';
+import { RecipeId } from './RecipeId';
 
-export type RecipeId = string;
+// TODO spec tests
 
 @Injectable({ providedIn: 'root' })
 export class RecipeLocalPersistor extends LocalPersistorBase {
   protected override readonly storeName: string = this.StoreNames.Recipes;
 
   async createAsync(newRecipe: NewRecipe): Promise<RecipeId> {
-    const recipeId: RecipeId = crypto.randomUUID();
+    const recipeId: RecipeId = this.newId();
 
     const dto: RecipeLocalDto = {
       id: recipeId,
       title: newRecipe.title,
-      createdAt: new Date().toISOString(),
+      createdAt: this.dateNow(),
       synced: false,
     };
 

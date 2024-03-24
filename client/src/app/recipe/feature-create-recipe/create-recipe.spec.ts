@@ -4,7 +4,7 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { CreateRecipe } from './create-recipe';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { RecipeApi } from '../util/recipe.api';
+import { RecipeApi } from '../api/recipe.api';
 import { provideApiBaseUrlTesting } from '@api';
 
 describe('CreateRecipe should', () => {

@@ -10,8 +10,9 @@ import { RecipeConstraints } from './RecipeConstraints';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { RecipeApi } from '../util/recipe.api';
-import { RecipeId, RecipeLocalPersistor } from '../recipe.local-persistor';
+import { RecipeApi } from '../api/recipe.api';
+import { RecipeLocalPersistor } from '../local-persistor/recipe.local-persistor';
+import { RecipeId } from '../local-persistor/RecipeId';
 import { NewRecipe } from '../util/NewRecipe';
 
 @Component({

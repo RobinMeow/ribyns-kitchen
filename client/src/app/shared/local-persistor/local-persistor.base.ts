@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { openDB, IDBPDatabase, IDBPObjectStore } from 'idb';
-import { RecipeLocalDto } from 'src/app/recipe/util/Recipe.local-dto';
+import { RecipeLocalDto } from 'src/app/recipe/local-persistor/Recipe.local-dto';
+import { EntityId } from './EntityId';
 
 interface CommunityCookbook extends IDBPDatabase {
   recipes: IDBPObjectStore<RecipeLocalDto, 'id'>;
@@ -50,6 +51,14 @@ export abstract class LocalPersistorBase {
     }
 
     return LocalPersistorBase._database;
+  }
+
+  protected newId(): EntityId {
+    return crypto.randomUUID();
+  }
+
+  protected dateNow(): string {
+    return new Date().toISOString();
   }
 
   private static initDbAsync(): Promise<IDBPDatabase<CommunityCookbook>> {
