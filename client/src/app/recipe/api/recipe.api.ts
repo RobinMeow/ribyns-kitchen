@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BaseApi } from '@api';
 import { firstValueFrom, map } from 'rxjs';
-import { NewRecipe } from '../util/NewRecipe';
-import { Recipe } from '../util/Recipe';
+import { NewRecipe } from '../shared/NewRecipe';
+import { Recipe } from '../shared/Recipe';
 import { RecipeApiDto } from './Recipe.api-dto';
 
 // TODO spec tests

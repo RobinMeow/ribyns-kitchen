@@ -1,4 +1,4 @@
-import { RecipeBase } from '../util/RecipeBase';
+import { RecipeBase } from '../shared/RecipeBase';
 
 export interface RecipeApiDto extends RecipeBase {
   readonly id: string;

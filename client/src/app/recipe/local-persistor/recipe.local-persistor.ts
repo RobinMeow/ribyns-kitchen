@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LocalPersistorBase } from '@local-persistor';
 import { RecipeLocalDto } from './Recipe.local-dto';
-import { NewRecipe } from '../util/NewRecipe';
-import { RecipeId } from './RecipeId';
-
-// TODO spec tests
+import { NewRecipe } from '../shared/NewRecipe';
+import { RecipeId } from './Recipe.id';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeLocalPersistor extends LocalPersistorBase {

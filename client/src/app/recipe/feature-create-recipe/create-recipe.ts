@@ -12,8 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { RecipeApi } from '../api/recipe.api';
 import { RecipeLocalPersistor } from '../local-persistor/recipe.local-persistor';
-import { RecipeId } from '../local-persistor/RecipeId';
-import { NewRecipe } from '../util/NewRecipe';
+import { RecipeId } from '../local-persistor/Recipe.id';
+import { NewRecipe } from '../shared/NewRecipe';
 
 @Component({
   selector: 'recipe-create-recipe',
