@@ -8,6 +8,7 @@ interface CommunityCookbook extends IDBPDatabase {
 
 // TODO I plan on moving the responsibility of creating/deleting objectstores to the using code.
 // e.g. recipe.local-persistor should handle creation of object store and onversionchange handler for new model version updates.
+// but I dont know, how to update the interface for CommunityCookbook in this case... Maybe I have to use unkown, and cast it in the calling code.
 
 export type CommunityCookbookDb = Omit<
   IDBPDatabase<CommunityCookbook>,
