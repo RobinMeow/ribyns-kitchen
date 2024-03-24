@@ -1,6 +1,6 @@
 <h2 data-cy-title>Rezept hinzufügen</h2>
 
-<form [formGroup]="form" data-cy-add-recipe-form>
+<form [formGroup]="form" data-cy-create-recipe-form>
   <div class="forms-column">
     <mat-form-field>
       <mat-label>Titel</mat-label>
@@ -17,8 +17,8 @@
         data-cy-recipe-title-input
       />
       <mat-hint
-        >Zwischen {{ constraints.Title.minLength }} und
-        {{ constraints.Title.maxLength }} Zeichen</mat-hint
+        >Zwischen {{ constraints.Title.minLength }} und {{
+        constraints.Title.maxLength }} Zeichen</mat-hint
       >
     </mat-form-field>
   </div>
@@ -28,7 +28,7 @@
     color="primary"
     type="submit"
     (click)="onSubmit()"
-    data-cy-add-recipe-submit-button
+    data-cy-create-recipe-submit-button
   >
     Hinzufügen
   </button>
