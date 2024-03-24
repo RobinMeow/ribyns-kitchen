@@ -5,13 +5,11 @@ import { NewRecipe } from '../shared/NewRecipe';
 import { Recipe } from '../shared/Recipe';
 import { RecipeApiDto } from './Recipe.api-dto';
 
-// TODO spec tests
-
 @Injectable({ providedIn: 'root' })
 export class RecipeApi extends BaseApi {
   private readonly URL = this.BASE_URL + '/Recipe/';
 
-  newAsync(recipe: NewRecipe): Promise<Recipe> {
+  private newAsync(recipe: NewRecipe): Promise<Recipe> {
     const headers = this.defaultHeadersWithAuth();
     const url = this.URL + 'AddAsync';
 
