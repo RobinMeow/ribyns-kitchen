@@ -36,6 +36,11 @@ describe('CreateRecipe should', () => {
     expect(component).toBeTruthy();
   });
 
+  it('render html title', () => {
+    const title = fixture.nativeElement.querySelector('[data-cy-title]');
+    expect(title).toBeTruthy();
+  });
+
   it('not call createAsync on invalid form', () => {
     spyOn(recipeLP, 'createAsync');
     const submitButton = fixture.nativeElement.querySelector(
