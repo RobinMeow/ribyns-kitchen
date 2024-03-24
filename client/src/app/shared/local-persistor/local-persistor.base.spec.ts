@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { LocalPersistorBase } from './local-persistor.base';
 
-describe('LocalPersistorBaseService', () => {
+describe('LocalPersistorBase', () => {
   let service: LocalPersistorBase;
 
   beforeEach(() => {
