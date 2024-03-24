@@ -29,7 +29,8 @@ export type CommunityCookbookDb = Omit<
 >;
 
 @Injectable({ providedIn: 'root' })
-export class LocalPersistorBase {
+export abstract class LocalPersistorBase {
+  protected abstract readonly storeName: string;
   private static readonly _storeNames = {
     Recipes: 'recipes',
   };

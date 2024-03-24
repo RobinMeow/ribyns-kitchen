@@ -5,7 +5,7 @@ import { RecipeLocalDto } from './util/Recipe.local-dto';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeLocalPersistor extends LocalPersistorBase {
-  private readonly storeName: string = this.StoreNames.Recipes;
+  protected override readonly storeName: string = this.StoreNames.Recipes;
 
   async createAsync(cmd: CreateRecipeCommand): Promise<void> {
     // TODO: SYNC we are using the Recipe DTO here but I assume, we need a difference localDto
