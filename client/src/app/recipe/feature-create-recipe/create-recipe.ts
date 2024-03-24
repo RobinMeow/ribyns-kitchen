@@ -10,7 +10,6 @@ import { RecipeConstraints } from './RecipeConstraints';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { RecipeApi } from '../api/recipe.api';
 import { RecipeLocalPersistor } from '../local-persistor/recipe.local-persistor';
 import { RecipeId } from '../local-persistor/Recipe.id';
 import { NewRecipe } from '../shared/NewRecipe';
@@ -32,7 +31,6 @@ import { NewRecipe } from '../shared/NewRecipe';
 export class CreateRecipe {
   private readonly nnfb = inject(NonNullableFormBuilder);
   private readonly recipeLP = inject(RecipeLocalPersistor);
-  private readonly api = inject(RecipeApi);
   private readonly router = inject(Router);
 
   protected readonly form = this.nnfb.group({
