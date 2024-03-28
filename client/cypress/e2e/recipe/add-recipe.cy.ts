@@ -1,8 +1,8 @@
-describe('add-recipe should', () => {
+describe('create-recipe should', () => {
   it(`redirect to recipe/{id} recipe is created sucessfully`, () => {
     cy.createTestUser();
 
-    cy.visit('/add-recipe');
+    cy.visit('/create-recipe');
 
     const recipeTitle = 'valid recipe title';
 
@@ -11,11 +11,11 @@ describe('add-recipe should', () => {
     cy.intercept({
       path: '/Recipe/AddAsync',
       times: 1,
-    }).as('add-recipe');
+    }).as('create-recipe');
 
-    cy.getByAttr('add-recipe-submit-button').click();
+    cy.getByAttr('create-recipe-submit-button').click();
 
-    cy.wait('@add-recipe').then((stuff) => {
+    cy.wait('@create-recipe').then((stuff) => {
       const newRecipe: { id: string } = stuff.response?.body;
       cy.url().should('include', 'recipe/' + newRecipe.id);
     });
