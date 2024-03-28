@@ -1,18 +1,18 @@
 describe('delete-chef should', () => {
   it('redirect to home', () => {
-    cy.visit('/delete-chef');
-    cy.url().should('not.include', 'delete-chef');
-  });
+    cy.visit('/delete-chef')
+    cy.url().should('not.include', 'delete-chef')
+  })
 
   it('validates incorrect password', () => {
-    cy.createTestUser();
+    cy.createTestUser()
 
-    cy.visit('/delete-chef');
+    cy.visit('/delete-chef')
 
-    cy.getByAttr('password-input').type('wrong-password{enter}');
+    cy.getByAttr('password-input').type('wrong-password{enter}')
 
-    cy.url().should('include', 'delete-chef');
+    cy.url().should('include', 'delete-chef')
 
-    cy.deleteTestUser();
-  });
-});
+    cy.deleteTestUser()
+  })
+})

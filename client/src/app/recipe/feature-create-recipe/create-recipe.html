@@ -1,6 +1,6 @@
-<h2 data-cy-title>Rezept hinzufügen</h2>
+<h2 data-test-title>Rezept hinzufügen</h2>
 
-<form [formGroup]="form" data-cy-create-recipe-form>
+<form [formGroup]="form" data-test-create-recipe-form>
   <div class="forms-column">
     <mat-form-field>
       <mat-label>Titel</mat-label>
@@ -14,7 +14,7 @@
         [formControl]="form.controls.title"
         placeholder="Weinberg des Herrn"
         type="text"
-        data-cy-recipe-title-input
+        data-test-recipe-title-input
       />
       <mat-hint
         >Zwischen {{ constraints.Title.minLength }} und
@@ -29,7 +29,7 @@
     color="primary"
     type="submit"
     (click)="onSubmit()"
-    data-cy-create-recipe-submit-button
+    data-test-create-recipe-submit-button
   >
     Hinzufügen
   </button>

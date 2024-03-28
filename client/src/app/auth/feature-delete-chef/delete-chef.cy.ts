@@ -2,18 +2,15 @@ import { DeleteChef } from './delete-chef'
 import { provideHttpClient } from '@angular/common/http'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { AuthService } from '../utils/auth.service'
+import { MockProvider } from 'ng-mocks'
 
-const authServiceMock = {
-  currentUser() {}
-} as AuthService
-
-describe('login should', () => {
+describe('DeleteChef should', () => {
   beforeEach('mount', () => {
     cy.mount(DeleteChef, {
       providers: [
         provideNoopAnimations(),
         provideHttpClient(),
-        { provide: AuthService, useValue: authServiceMock }
+        MockProvider(AuthService)
       ]
     })
   })
