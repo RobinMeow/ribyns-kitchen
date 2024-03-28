@@ -1,4 +1,4 @@
 export interface Credentials {
-  readonly name: string;
-  readonly password: string;
+  readonly name: string
+  readonly password: string
 }

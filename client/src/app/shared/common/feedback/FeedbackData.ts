@@ -1,3 +1,3 @@
 export type FeedbackData = {
-  message: string;
-};
+  message: string
+}

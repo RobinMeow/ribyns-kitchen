@@ -1,11 +1,11 @@
-import { RecipeDto } from './RecipeDto';
+import { RecipeDto } from './RecipeDto'
 
 export class Recipe {
   constructor(dto: RecipeDto) {
-    this.id = dto.id;
-    this.title = dto.title;
+    this.id = dto.id
+    this.title = dto.title
   }
 
-  readonly id: string;
-  readonly title: string; /** read-only for now, but prolly will be editable, once the ui is there for it. */
+  readonly id: string
+  readonly title: string /** read-only for now, but prolly will be editable, once the ui is there for it. */
 }

@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Login } from './login';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideNoopAnimations } from '@angular/platform-browser/animations';
-import { provideApiBaseUrlTesting } from '@api';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { Login } from './login'
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
+import { provideNoopAnimations } from '@angular/platform-browser/animations'
+import { provideApiBaseUrlTesting } from '@api'
 
 describe('Login', () => {
-  let component: Login;
-  let fixture: ComponentFixture<Login>;
+  let component: Login
+  let fixture: ComponentFixture<Login>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -16,16 +16,16 @@ describe('Login', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideNoopAnimations(),
-        provideApiBaseUrlTesting(),
-      ],
-    }).compileComponents();
+        provideApiBaseUrlTesting()
+      ]
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(Login);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(Login)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
