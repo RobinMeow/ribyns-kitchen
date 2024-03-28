@@ -1,6 +1,6 @@
-<h2 data-cy-title>Account löschen</h2>
+<h2 data-test-title>Account löschen</h2>
 
-<form [formGroup]="form" (submit)="onSubmit()" data-cy-delete-chef-form>
+<form [formGroup]="form" (submit)="onSubmit()" data-test-delete-chef-form>
   <div class="forms-column">
     <auth-password [passwordControl]="form.controls.password" />
   </div>
@@ -9,7 +9,7 @@
     mat-raised-button
     color="primary"
     type="submit"
-    data-cy-submit-btn
+    data-test-submit-btn
   >
     Unwiderruflich löschen
   </button>

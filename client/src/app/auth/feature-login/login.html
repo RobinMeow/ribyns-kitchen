@@ -1,6 +1,6 @@
-<h2 data-cy-title>Einloggen</h2>
+<h2 data-test-title>Einloggen</h2>
 
-<form [formGroup]="loginForm" (submit)="onSubmit()" data-cy-login-form>
+<form [formGroup]="loginForm" (submit)="onSubmit()" data-test-login-form>
   <div class="forms-column">
     <mat-form-field>
       <mat-label>Name</mat-label>
@@ -14,7 +14,7 @@
         [formControl]="chefnameControl"
         placeholder="Weinberg des Herrn"
         type="text"
-        data-cy-login-name-input
+        data-test-login-name-input
       />
       <mat-hint
         >Zwischen {{ chefConstraints.Name.minLength }} und
@@ -29,7 +29,7 @@
     mat-raised-button
     color="primary"
     type="submit"
-    data-cy-login-submit-button
+    data-test-login-submit-button
   >
     Einloggen
   </button>

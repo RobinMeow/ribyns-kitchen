@@ -39,7 +39,7 @@ describe('CreateRecipe should', () => {
     const addAsyncSpy = spyOn(recipeApi, 'newAsync')
 
     const submitButton = fixture.nativeElement.querySelector(
-      '[data-cy-create-recipe-submit-button]'
+      '[data-test-create-recipe-submit-button]'
     )
 
     expect(submitButton.disabled).toBe(true)

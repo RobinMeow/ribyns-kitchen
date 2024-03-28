@@ -1,6 +1,6 @@
-<h2 data-cy-title>Account erstellen</h2>
+<h2 data-test-title>Account erstellen</h2>
 
-<form [formGroup]="registerForm" (submit)="onSubmit()" data-cy-register-form>
+<form [formGroup]="registerForm" (submit)="onSubmit()" data-test-register-form>
   <div class="forms-column">
     <mat-form-field>
       <mat-label>Name</mat-label>
@@ -14,7 +14,7 @@
         [formControl]="registerForm.controls.chefname"
         placeholder="Weinberg des Herrn"
         type="text"
-        data-cy-register-name-input
+        data-test-register-name-input
       />
       <mat-hint>Zwischen 3 und 20 Zeichen</mat-hint>
     </mat-form-field>
@@ -30,7 +30,7 @@
         matInput
         [formControl]="registerForm.controls.email"
         placeholder="be.blessed@nd.loved"
-        data-cy-email-input
+        data-test-email-input
       />
       <mat-hint
         matTooltip="Wird eventuell zukünftig verwendet um Benachritigungen zu schicken. (Welche Benachrichtungen werden dann frei wählbar sein)"
@@ -47,7 +47,7 @@
     mat-raised-button
     color="primary"
     type="submit"
-    data-cy-register-submit-button
+    data-test-register-submit-button
   >
     Registrieren
   </button>

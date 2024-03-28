@@ -53,17 +53,17 @@ declare namespace Cypress {
               Cypress.Withinable &
               Cypress.Shadow
           >
-        | undefined,
-    ): Cypress.Chainable<JQuery<HTMLElement>>;
+        | undefined
+    ): Cypress.Chainable<JQuery<HTMLElement>>
 
-    createTestUser(): void;
-    deleteTestUser(): void;
+    createTestUser(): void
+    deleteTestUser(): void
   }
 }
 
 /**
  * @example
- * <button data-cy-my-button></button>
+ * <button data-test-my-button></button>
  * Cy.getByDataCy('my-button').should.be('be.visivle');
  */
 function getByAttr(
@@ -75,58 +75,58 @@ function getByAttr(
           Cypress.Withinable &
           Cypress.Shadow
       >
-    | undefined,
+    | undefined
 ): Cypress.Chainable<JQuery<HTMLElement>> {
-  return cy.get(`[data-cy-${selector}]`);
+  return cy.get(`[data-test-${selector}]`)
 }
 
-Cypress.Commands.add('getByAttr', getByAttr);
+Cypress.Commands.add('getByAttr', getByAttr)
 
 function createTestUser() {
-  cy.fixture('test-user.json').as('user');
+  cy.fixture('test-user.json').as('user')
   cy.get('@user').then((user) => {
-    const { chefname, password }: any = user;
+    const { chefname, password }: any = user
 
-    const registerUrl = '/register';
+    const registerUrl = '/register'
 
     cy.location('pathname').then((currentPath) => {
       if (currentPath !== registerUrl) {
-        cy.visit(registerUrl);
+        cy.visit(registerUrl)
       }
-    });
+    })
 
-    cy.getByAttr('register-name-input').type(chefname);
-    cy.getByAttr('password-input').type(password);
+    cy.getByAttr('register-name-input').type(chefname)
+    cy.getByAttr('password-input').type(password)
 
     cy.intercept({
       path: '/Auth/RegisterAsync',
-      times: 1,
-    }).as('registerAsync');
+      times: 1
+    }).as('registerAsync')
 
-    cy.getByAttr('register-form').submit();
+    cy.getByAttr('register-form').submit()
 
-    cy.wait('@registerAsync');
+    cy.wait('@registerAsync')
     // I dont know why, but this is required, else the "login redirects when logged in already" - test fails
-    cy.url().should('not.include', 'register');
-  });
+    cy.url().should('not.include', 'register')
+  })
 }
 
-Cypress.Commands.add('createTestUser', createTestUser);
+Cypress.Commands.add('createTestUser', createTestUser)
 
 function deleteTestUser() {
-  cy.fixture('test-user.json').as('user');
+  cy.fixture('test-user.json').as('user')
 
   cy.get('@user').then((user) => {
-    const { password }: any = user;
-    cy.visit('/delete-chef');
-    cy.getByAttr('password-input').type(password);
+    const { password }: any = user
+    cy.visit('/delete-chef')
+    cy.getByAttr('password-input').type(password)
     cy.intercept({
       path: '/Auth/DeleteAsync',
-      times: 1,
-    }).as('deleteAsync');
-    cy.getByAttr('delete-chef-form').submit();
-    cy.wait('@deleteAsync');
-  });
+      times: 1
+    }).as('deleteAsync')
+    cy.getByAttr('delete-chef-form').submit()
+    cy.wait('@deleteAsync')
+  })
 }
 
-Cypress.Commands.add('deleteTestUser', deleteTestUser);
+Cypress.Commands.add('deleteTestUser', deleteTestUser)

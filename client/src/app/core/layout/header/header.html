@@ -1,13 +1,13 @@
-<mat-toolbar data-cy-header>
+<mat-toolbar data-test-header>
   <button
     mat-icon-button
     (click)="onMenuClick()"
     [hidden]="hideMenuButton"
-    data-cy-open-menu-button
+    data-test-open-menu-button
   >
     <mat-icon>menu</mat-icon>
   </button>
-  <span routerLink="" class="cursor-pointer" data-cy-app-title>{{
+  <span routerLink="" class="cursor-pointer" data-test-app-title>{{
     appName
   }}</span>
 </mat-toolbar>
