@@ -52,3 +52,38 @@ Jasmine:
 Cypress:
 
 - run `yarn run cypress open` and follow the browser to test e2e or component
+
+## Syncing
+
+Syncing, is the process of syncing a client database with the remote database.
+
+### Updating local-db based on remote-db
+
+The client can request the server:
+
+- to query by `creator` != requestingClient-`chefId` AND `createdAt` > `lastSyncDate`-local.  
+*The resulting entities have been creatd by other chefs, since the last time the requesting client syned.*
+- to query by `creator` != requestingClient-`chefId` AND `modifiedAt` > `lastSyncDate`-local.  
+*The resulting entities have been modified by other chefs, since the last time the requesting client syned.*
+- to retrieve a list of deleted `entityId`s filtered by `creator` != requestingClient-`chefId` AND `deletionDate` > `lastSyncDate`-local.  
+*on remote deletions, the `entityId` and the present date is stored to remeber which entities have been deleted.*
+
+### Updating remote-db based on local-db
+
+- store a queue of created and modified and deleted `entityId`s. These can be send to the server.
+*a server action is stored alongside, so the server can tell easily apar which action to take.*
+
+```typescript
+/** the action the server has to execute. */
+enum ServerAction { Create, Modify, Delete }
+
+interface SyncAction
+{
+  entityId: EntityId;
+  action: ServerAction;
+}
+```
+
+> **Note:**  
+> *For some operations the order of execution is important.  
+> Generally, make sure, to sync "child" before "parent" entities.*
