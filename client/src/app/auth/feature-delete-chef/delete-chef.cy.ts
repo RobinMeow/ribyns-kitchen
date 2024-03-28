@@ -4,7 +4,7 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { AuthService } from '../utils/auth.service'
 import { MockProvider } from 'ng-mocks'
 
-describe('login should', () => {
+describe('DeleteChef should', () => {
   beforeEach('mount', () => {
     cy.mount(DeleteChef, {
       providers: [
