@@ -10,9 +10,9 @@ import { RecipeConstraints } from './RecipeConstraints';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { RecipeLocalPersistor } from '../local-persistor/recipe.local-persistor';
-import { RecipeId } from '../local-persistor/Recipe.id';
-import { NewRecipe } from '../shared/NewRecipe';
+import { RecipeApi } from '../util/recipe.api';
+import { NewRecipe } from '../util/NewRecipe';
+import { Recipe } from '../util/Recipe';
 
 @Component({
   selector: 'recipe-create-recipe',
@@ -30,7 +30,7 @@ import { NewRecipe } from '../shared/NewRecipe';
 })
 export class CreateRecipe {
   private readonly nnfb = inject(NonNullableFormBuilder);
-  private readonly recipeLP = inject(RecipeLocalPersistor);
+  private readonly recipeApi = inject(RecipeApi);
   private readonly router = inject(Router);
 
   protected readonly form = this.nnfb.group({
@@ -46,8 +46,7 @@ export class CreateRecipe {
       title: this.form.controls.title.value,
     };
 
-    const id: RecipeId = await this.recipeLP.createAsync(newRecipe);
-
-    void this.router.navigate(['/recipe', id]);
+    const recipe: Recipe = await this.recipeApi.newAsync(newRecipe);
+    void this.router.navigate(['/recipe', recipe.id]);
   }
 }

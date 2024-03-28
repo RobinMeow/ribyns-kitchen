@@ -1,3 +1,3 @@
 export interface NewRecipe {
-  readonly title: string;
+  title: string;
 }

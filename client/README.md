@@ -27,16 +27,6 @@ The incrastructure contains 3rd-party libraries, like i18n or open-api generated
 The domain contains `feature-`'s (usually smart components which are routable, and hard to reuse).
 As well as `ui`'s (usually dumb components, reuseable) and utils which usually contains pipes (relating to the domain) and such.
 
-## LocalPersitor
-
-The app mostly runs on locally stored data, and every now and then syncs with the remote database to share its own data (Recipe Modifications, new Recipes, etc..).  
-*Name suffices are open to change.*
-
-- Classes named `exmaple.local-persistor.ts` are responsible for CRUD operations, which are all offline compatible. (The app used [idb](https://github.com/jakearchibald/idb) library for this mostly)  
-The name implies, that the underlaying storage plays no role. (Whether it be, indexedDB, localStorage, etc..).  
-- Classes named `exmaple.api.ts` are responsible for CRUD operations on the remote database.
-- Classes named `example.syncer.ts`  are Mediators. They make use of the `example.api.ts` and the `exmaple.local-persistor.ts` files, to keep the local database in sync with the remote (and vice versa).  
-
 ## Adding domain prefixes
 
 in `.eslintrc` add the prefixes to the `@angular-eslint` properties.
