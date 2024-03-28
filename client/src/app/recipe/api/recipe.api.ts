@@ -4,6 +4,7 @@ import { firstValueFrom, map } from 'rxjs';
 import { NewRecipe } from '../shared/NewRecipe';
 import { Recipe } from '../shared/Recipe';
 import { RecipeApiDto } from './Recipe.api-dto';
+import { ActionLog } from '@sync';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeApi extends BaseApi {
@@ -20,5 +21,9 @@ export class RecipeApi extends BaseApi {
       .pipe(map((dto) => new Recipe(dto)));
 
     return firstValueFrom(request$);
+  }
+
+  getActionLogsAsync(): Promise<ActionLog[]> {
+    return Promise.resolve([]);
   }
 }

@@ -30,6 +30,7 @@
       "@common": [ "src/app/shared/common/index.ts" ],
       "@api": [ "src/app/shared/api/index.ts" ],
       "@local-persistor": [ "src/app/shared/local-persistor/index.ts" ],
+      "@sync": [ "src/app/sync/index.ts" ],
     }
   },
   "angularCompilerOptions": {
