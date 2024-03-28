@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { MatDrawer } from '@angular/material/sidenav'
 import { MatIconModule } from '@angular/material/icon'
@@ -14,5 +14,9 @@ import { AuthCorner } from 'src/app/auth'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Menu {
-  @Input({ required: true }) drawer!: MatDrawer
+  readonly drawer = input.required<MatDrawer>()
+
+  protected onArrowBackClick() {
+    this.drawer().toggle()
+  }
 }

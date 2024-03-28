@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { Header } from './header'
-import { RouterTestingModule } from '@angular/router/testing'
 import { provideAppName } from 'src/app/core'
+import { provideRouter } from '@angular/router'
 
 describe('Header', () => {
   let component: Header
@@ -9,7 +9,7 @@ describe('Header', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [Header, RouterTestingModule],
+      imports: [Header, provideRouter([])],
       providers: [provideAppName()]
     })
     fixture = TestBed.createComponent(Header)

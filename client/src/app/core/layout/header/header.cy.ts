@@ -1,11 +1,11 @@
 import { provideAppName } from 'src/app/core'
 import { Header } from './header'
-import { RouterTestingModule } from '@angular/router/testing'
+import { provideRouter } from '@angular/router'
 
 describe('header should', () => {
   beforeEach('mount', () => {
     cy.mount(Header, {
-      imports: [RouterTestingModule],
+      imports: [provideRouter([])],
       providers: [provideAppName()]
     })
   })

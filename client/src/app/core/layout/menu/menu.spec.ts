@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { Menu } from './menu'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
-import { RouterTestingModule } from '@angular/router/testing'
 import { provideApiBaseUrlTesting } from '@api'
+import { provideRouter } from '@angular/router'
 
 describe('Menu', () => {
   let component: Menu
@@ -11,7 +11,7 @@ describe('Menu', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [Menu, RouterTestingModule],
+      imports: [Menu, provideRouter([])],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),

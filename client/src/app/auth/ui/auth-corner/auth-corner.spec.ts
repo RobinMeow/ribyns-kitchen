@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
-import { RouterTestingModule } from '@angular/router/testing'
 
 import { AuthCorner } from './auth-corner'
 import { AuthService } from '../../utils/auth.service'
 import { signal } from '@angular/core'
+import { provideRouter } from '@angular/router'
 
 describe('AuthCorner', () => {
   let component: AuthCorner
@@ -13,7 +13,7 @@ describe('AuthCorner', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthCorner, RouterTestingModule],
+      imports: [AuthCorner, provideRouter([])],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),

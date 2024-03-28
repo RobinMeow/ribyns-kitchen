@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { PasswordInput } from './password-input'
-import { FormControl } from '@angular/forms'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 
 describe('PasswordInput', () => {
@@ -16,9 +15,6 @@ describe('PasswordInput', () => {
 
     fixture = TestBed.createComponent(PasswordInput)
     component = fixture.componentInstance
-    component.passwordControl = new FormControl<string>('', {
-      nonNullable: true
-    })
     fixture.detectChanges()
   })
 
