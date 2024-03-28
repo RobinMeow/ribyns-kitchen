@@ -2,7 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { CreateRecipe } from './create-recipe';
-import { RecipeApi } from '../api/recipe.api';
+import { RecipeApi } from '../util/recipe.api';
 
 describe('create-recipe should', () => {
   beforeEach('mount', () => {
