@@ -2,10 +2,7 @@ import { DeleteChef } from './delete-chef'
 import { provideHttpClient } from '@angular/common/http'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { AuthService } from '../utils/auth.service'
-
-const authServiceMock = {
-  currentUser() {}
-} as AuthService
+import { MockProvider } from 'ng-mocks'
 
 describe('login should', () => {
   beforeEach('mount', () => {
@@ -13,7 +10,7 @@ describe('login should', () => {
       providers: [
         provideNoopAnimations(),
         provideHttpClient(),
-        { provide: AuthService, useValue: authServiceMock }
+        MockProvider(AuthService)
       ]
     })
   })
