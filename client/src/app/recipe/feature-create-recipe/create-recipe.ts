@@ -46,7 +46,7 @@ export class CreateRecipe {
       title: this.form.controls.title.value,
     };
 
-    const recipe: Recipe = await this.recipeApi.createAsync(newRecipe);
+    const recipe: Recipe = await this.recipeApi.newAsync(newRecipe);
     void this.router.navigate(['/recipe', recipe.id]);
   }
 }
