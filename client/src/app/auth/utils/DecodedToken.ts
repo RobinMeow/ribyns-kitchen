@@ -1,5 +1,5 @@
-import { TokenKey } from './TokenKey';
+import { TokenKey } from './TokenKey'
 
 export type DecodedToken = {
-  [key in TokenKey]: string;
-};
+  [key in TokenKey]: string
+}

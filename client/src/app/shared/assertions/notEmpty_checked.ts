@@ -1,7 +1,7 @@
-import { DomainAssertionError } from './DomainAssertionError';
-import { logAssertion } from './logAssertion';
-import { logIfRecommendedMessageFormatIsNotMet } from './logIfRecommendedMessageFormatIsNotMet';
-import { removeLastStackTraceEntry } from './removeLastStackTraceEntry';
+import { DomainAssertionError } from './DomainAssertionError'
+import { logAssertion } from './logAssertion'
+import { logIfRecommendedMessageFormatIsNotMet } from './logIfRecommendedMessageFormatIsNotMet'
+import { removeLastStackTraceEntry } from './removeLastStackTraceEntry'
 
 /**
  * prints out a message in red, to the console, if the condition is not met, and throw an error to break code flow.
@@ -11,13 +11,13 @@ import { removeLastStackTraceEntry } from './removeLastStackTraceEntry';
  */
 export function notEmpty_checked(
   str: string | undefined | null,
-  message: string,
+  message: string
 ) {
-  logIfRecommendedMessageFormatIsNotMet(message);
+  logIfRecommendedMessageFormatIsNotMet(message)
   if (str === null || str === undefined || str.length === 0) {
-    logAssertion(message);
-    const err = new DomainAssertionError(message);
-    removeLastStackTraceEntry(err);
-    throw err;
+    logAssertion(message)
+    const err = new DomainAssertionError(message)
+    removeLastStackTraceEntry(err)
+    throw err
   }
 }

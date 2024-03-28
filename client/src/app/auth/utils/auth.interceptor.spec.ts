@@ -1,22 +1,22 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 import {
   HttpEvent,
   HttpHandlerFn,
   HttpHeaders,
   HttpInterceptorFn,
   HttpRequest,
-  provideHttpClient,
-} from '@angular/common/http';
+  provideHttpClient
+} from '@angular/common/http'
 
-import { authInterceptor } from './auth.interceptor';
-import { firstValueFrom, of } from 'rxjs';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { API_BASE_URL } from '@api';
-import { TokenStorage } from './token.storage';
+import { authInterceptor } from './auth.interceptor'
+import { firstValueFrom, of } from 'rxjs'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
+import { API_BASE_URL } from '@api'
+import { TokenStorage } from './token.storage'
 
 describe('authInterceptor should', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>
-    TestBed.runInInjectionContext(() => authInterceptor(req, next));
+    TestBed.runInInjectionContext(() => authInterceptor(req, next))
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -27,48 +27,47 @@ describe('authInterceptor should', () => {
           provide: TokenStorage,
           useValue: {
             retrieve() {
-              return 'token';
-            },
-          },
-        },
-      ],
-    });
-  });
+              return 'token'
+            }
+          }
+        }
+      ]
+    })
+  })
 
   it('be created', () => {
-    expect(interceptor).toBeTruthy();
-  });
+    expect(interceptor).toBeTruthy()
+  })
 
   it('append Authroize Header to API calls', async () => {
-    const req = new HttpRequest('GET', 'api-base-url');
-    expect(req.headers.has('Authorization')).toBeFalsy();
+    const req = new HttpRequest('GET', 'api-base-url')
+    expect(req.headers.has('Authorization')).toBeFalsy()
 
     const nextHandler = (req: HttpRequest<unknown>) =>
-      of(req.headers as unknown as HttpEvent<unknown>);
+      of(req.headers as unknown as HttpEvent<unknown>)
 
-    const evt = await firstValueFrom(interceptor(req, nextHandler));
-    const headers = evt as unknown as HttpHeaders;
-    expect(headers.get('Authorization')).toEqual('Bearer token');
-  });
-
-  [
+    const evt = await firstValueFrom(interceptor(req, nextHandler))
+    const headers = evt as unknown as HttpHeaders
+    expect(headers.get('Authorization')).toEqual('Bearer token')
+  })
+  ;[
     'http://other-domain.com',
-    'http://other-domain.com?returnUrl=' + 'api-base-url',
+    'http://other-domain.com?returnUrl=' + 'api-base-url'
   ].forEach((url: string) => {
     it('not append Authroize Header to non API calls', () => {
-      const req = new HttpRequest('GET', url);
-      expect(req.headers.has('Authorize')).toBeFalsy();
+      const req = new HttpRequest('GET', url)
+      expect(req.headers.has('Authorize')).toBeFalsy()
 
       const nextHandler: HttpHandlerFn = (req: HttpRequest<unknown>) =>
-        of(req.headers as unknown as HttpEvent<unknown>);
+        of(req.headers as unknown as HttpEvent<unknown>)
 
       interceptor(req, nextHandler).subscribe({
         next: (evt: HttpEvent<unknown>) => {
-          const headers = evt as unknown as HttpHeaders;
-          expect(headers.has('Authorize')).toBeFalsy();
+          const headers = evt as unknown as HttpHeaders
+          expect(headers.has('Authorize')).toBeFalsy()
         },
-        error: () => fail('expected next to be called.'),
-      });
-    });
-  });
-});
+        error: () => fail('expected next to be called.')
+      })
+    })
+  })
+})

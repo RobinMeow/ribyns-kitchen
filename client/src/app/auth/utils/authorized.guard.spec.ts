@@ -1,19 +1,19 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 import {
   ActivatedRouteSnapshot,
   CanActivateFn,
-  RouterStateSnapshot,
-} from '@angular/router';
-import { authorizedGuard } from './authorized.guard';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideNoopAnimations } from '@angular/platform-browser/animations';
-import { AuthService } from './auth.service';
-import { signal } from '@angular/core';
+  RouterStateSnapshot
+} from '@angular/router'
+import { authorizedGuard } from './authorized.guard'
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
+import { provideNoopAnimations } from '@angular/platform-browser/animations'
+import { AuthService } from './auth.service'
+import { signal } from '@angular/core'
 
 describe('authorized guard should', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
-    TestBed.runInInjectionContext(() => authorizedGuard(...guardParameters));
+    TestBed.runInInjectionContext(() => authorizedGuard(...guardParameters))
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -25,21 +25,21 @@ describe('authorized guard should', () => {
           provide: AuthService,
           useValue: {
             isAuthorized() {
-              return signal(false);
-            },
-          },
-        },
-      ],
-    });
-  });
+              return signal(false)
+            }
+          }
+        }
+      ]
+    })
+  })
 
   it('be created', () => {
-    expect(executeGuard).toBeTruthy();
-  });
+    expect(executeGuard).toBeTruthy()
+  })
 
   it('return false', () => {
     expect(
-      executeGuard({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot),
-    ).toBe(false);
-  });
-});
+      executeGuard({} as ActivatedRouteSnapshot, {} as RouterStateSnapshot)
+    ).toBe(false)
+  })
+})

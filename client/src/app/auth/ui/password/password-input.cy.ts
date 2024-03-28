@@ -1,13 +1,13 @@
-import { provideNoopAnimations } from '@angular/platform-browser/animations';
-import { PasswordInput } from './password-input';
-import { FormControl } from '@angular/forms';
+import { provideNoopAnimations } from '@angular/platform-browser/animations'
+import { PasswordInput } from './password-input'
+import { FormControl } from '@angular/forms'
 
 function getPasswordInput() {
-  return cy.getByAttr('password-input');
+  return cy.getByAttr('password-input')
 }
 
 function getEyeToggleButton() {
-  return cy.getByAttr('password-eye-toggle');
+  return cy.getByAttr('password-eye-toggle')
 }
 
 describe('password should', () => {
@@ -16,30 +16,30 @@ describe('password should', () => {
       providers: [provideNoopAnimations()],
       componentProperties: {
         passwordControl: new FormControl<string>('', {
-          nonNullable: true,
-        }),
-      },
-    });
-  });
+          nonNullable: true
+        })
+      }
+    })
+  })
 
   it('render', () => {
-    getPasswordInput().should('be.visible');
-    getEyeToggleButton().should('be.visible');
-  });
+    getPasswordInput().should('be.visible')
+    getEyeToggleButton().should('be.visible')
+  })
 
   it('toggle text visibility on eye-toggle', () => {
     getPasswordInput()
       .as('password-input')
       .should('have.attr', 'type')
-      .should('equal', 'password');
+      .should('equal', 'password')
 
     // this is only for the screenshot, and not required for this test.
-    cy.get('@password-input').type('iLoveJesus<3!');
+    cy.get('@password-input').type('iLoveJesus<3!')
 
-    getEyeToggleButton().click();
+    getEyeToggleButton().click()
 
     cy.get('@password-input')
       .should('have.attr', 'type')
-      .should('equal', 'text');
-  });
-});
+      .should('equal', 'text')
+  })
+})

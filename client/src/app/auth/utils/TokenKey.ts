@@ -4,5 +4,5 @@ export enum TokenKey {
   Issuer = 'iss',
   Audience = 'aud',
   ExpirationDateInMsSinceEpoche = 'exp',
-  Name = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name', // Uniform Resource Identifier
+  Name = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name' // Uniform Resource Identifier
 }

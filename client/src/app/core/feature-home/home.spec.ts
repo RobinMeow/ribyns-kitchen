@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { Home } from './home';
-import { provideAppName } from 'src/app/core';
+import { Home } from './home'
+import { provideAppName } from 'src/app/core'
 
 describe('Home', () => {
-  let component: Home;
-  let fixture: ComponentFixture<Home>;
+  let component: Home
+  let fixture: ComponentFixture<Home>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [Home],
-      providers: [provideAppName()],
-    });
-    fixture = TestBed.createComponent(Home);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+      providers: [provideAppName()]
+    })
+    fixture = TestBed.createComponent(Home)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
