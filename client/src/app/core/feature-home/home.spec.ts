@@ -4,7 +4,7 @@ import { Home } from './home'
 import { provideAppName } from 'src/app/core'
 import { queryByTestAttr } from '@testing'
 
-describe('Home shoudl', () => {
+describe('Home should', () => {
   let component: Home
   let fixture: ComponentFixture<Home>
 
@@ -24,5 +24,11 @@ describe('Home shoudl', () => {
 
   it('render home', () => {
     expect(queryByTestAttr(fixture, 'home')).toBeTruthy()
+  })
+
+  it('contain text', () => {
+    expect(
+      queryByTestAttr<HTMLElement>(fixture, 'home').innerText.length
+    ).toBeGreaterThan(0)
   })
 })
