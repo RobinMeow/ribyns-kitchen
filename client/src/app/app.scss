@@ -1,4 +1,6 @@
 @use '../app/shared/varibales';
+@use '../app/shared/media';
+
 
 .wrapper {
 	height: 100%;
@@ -12,7 +14,7 @@
 	margin: #{varibales.$spacing};
 }
 
-@media(max-width: 600px){
+@include media.mobile {
 	.menu {
 		width: 100%;
 	}
