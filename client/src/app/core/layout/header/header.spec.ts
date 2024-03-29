@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { Header } from './header'
 import { provideAppName } from 'src/app/core'
 import { Router, provideRouter } from '@angular/router'
-import { queryByTestAttr } from '@testing'
+import { byTestAttr } from '@testing'
 
 describe('Header should', () => {
   let component: Header
@@ -24,23 +24,23 @@ describe('Header should', () => {
   })
 
   it('display menu button', () => {
-    expect(queryByTestAttr(fixture, 'open-menu-button')).toBeTruthy()
+    expect(byTestAttr(fixture, 'open-menu-button')).toBeTruthy()
   })
 
   it('hide menu button', () => {
     fixture.componentRef.setInput('hideMenuButton', false)
     fixture.detectChanges()
-    const btn = queryByTestAttr<HTMLButtonElement>(fixture, 'open-menu-button')
+    const btn = byTestAttr<HTMLButtonElement>(fixture, 'open-menu-button')
     expect(btn.querySelector('[hidden]')).toBeDefined()
   })
 
   it('render title', () => {
-    const appTile = queryByTestAttr<HTMLHeadElement>(fixture, 'app-title')
+    const appTile = byTestAttr<HTMLHeadElement>(fixture, 'app-title')
     expect(appTile).toBeTruthy()
   })
 
   it('navigate to home on title click', () => {
-    const appTile = queryByTestAttr<HTMLButtonElement>(fixture, 'app-title')
+    const appTile = byTestAttr<HTMLButtonElement>(fixture, 'app-title')
     expect(appTile).toBeTruthy()
     const router = TestBed.inject(Router)
     const spy = spyOn(router, 'navigate')

@@ -1,2 +1,2 @@
-export * from './queryByTestAttr'
+export * from './byTestAttr'
 export * from './setValue'

@@ -6,7 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { RecipeApi } from '../util/recipe.api'
 import { provideApiBaseUrlTesting } from '@api'
-import { queryByTestAttr, setValue } from '@testing'
+import { byTestAttr, setValue } from '@testing'
 
 describe('CreateRecipe should', () => {
   let component: CreateRecipe
@@ -36,23 +36,23 @@ describe('CreateRecipe should', () => {
   })
 
   it('render title', () => {
-    expect(queryByTestAttr(fixture, 'title')).toBeTruthy()
+    expect(byTestAttr(fixture, 'title')).toBeTruthy()
   })
 
   it('render form', () => {
-    expect(queryByTestAttr(fixture, 'create-recipe-form')).toBeTruthy()
+    expect(byTestAttr(fixture, 'create-recipe-form')).toBeTruthy()
   })
 
   it('render recipe-title-input', () => {
-    expect(queryByTestAttr(fixture, 'recipe-title-input')).toBeTruthy()
+    expect(byTestAttr(fixture, 'recipe-title-input')).toBeTruthy()
   })
 
   it('render submit button', () => {
-    expect(queryByTestAttr(fixture, 'create-recipe-submit-button')).toBeTruthy()
+    expect(byTestAttr(fixture, 'create-recipe-submit-button')).toBeTruthy()
   })
 
   it('have disabled submit button by default', () => {
-    const btn = queryByTestAttr<HTMLButtonElement>(
+    const btn = byTestAttr<HTMLButtonElement>(
       fixture,
       'create-recipe-submit-button'
     )
@@ -60,14 +60,14 @@ describe('CreateRecipe should', () => {
   })
 
   it('enable submit button after valid inputs', () => {
-    const btn = queryByTestAttr<HTMLButtonElement>(
+    const btn = byTestAttr<HTMLButtonElement>(
       fixture,
       'create-recipe-submit-button'
     )
     expect(btn).toBeTruthy()
     expect(btn.disabled).toBeTrue()
 
-    const input = queryByTestAttr<HTMLInputElement>(
+    const input = byTestAttr<HTMLInputElement>(
       fixture,
       'recipe-title-input'
     )
@@ -78,12 +78,12 @@ describe('CreateRecipe should', () => {
   })
 
   it('not send http reuqest when form is submitted invalid', async () => {
-    const form = queryByTestAttr<HTMLFormElement>(fixture, 'create-recipe-form')
+    const form = byTestAttr<HTMLFormElement>(fixture, 'create-recipe-form')
     expect(form.querySelector('[invalid]')).toBeDefined()
 
     const addAsyncSpy = spyOn(recipeApi, 'newAsync')
 
-    const submitButton = queryByTestAttr<HTMLButtonElement>(
+    const submitButton = byTestAttr<HTMLButtonElement>(
       fixture,
       'create-recipe-submit-button'
     )
