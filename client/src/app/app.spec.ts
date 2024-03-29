@@ -1,19 +1,20 @@
 import { TestBed } from '@angular/core/testing'
-import { RouterTestingModule } from '@angular/router/testing'
 import { App } from './app'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideAppName } from 'src/app/core'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { provideApiBaseUrlTesting } from './shared/api/provideApiBaseUrl'
+import { provideRouter } from '@angular/router'
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, App],
+      imports: [App],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
+        provideRouter([]),
         provideAppName(),
         provideNoopAnimations(),
         provideApiBaseUrlTesting()

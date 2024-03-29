@@ -1,6 +1,7 @@
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
-import { PasswordInput } from './password-input'
+import { PasswordInput } from './password.input'
 import { FormControl } from '@angular/forms'
+import { signal } from '@angular/core'
 
 function getPasswordInput() {
   return cy.getByAttr('password-input')
@@ -15,9 +16,8 @@ describe('password should', () => {
     cy.mount(PasswordInput, {
       providers: [provideNoopAnimations()],
       componentProperties: {
-        passwordControl: new FormControl<string>('', {
-          nonNullable: true
-        })
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        passwordControl: signal(new FormControl('')) as any
       }
     })
   })

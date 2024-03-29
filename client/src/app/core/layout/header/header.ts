@@ -1,10 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
-  inject
+  inject,
+  input,
+  output
 } from '@angular/core'
 import { MatIconModule } from '@angular/material/icon'
 import { MatToolbarModule } from '@angular/material/toolbar'
@@ -18,12 +17,11 @@ import { APP_NAME } from 'src/app/core'
   standalone: true,
   imports: [MatIconModule, MatToolbarModule, MatButtonModule, RouterLink],
   templateUrl: './header.html',
-  styleUrls: ['./header.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Header {
-  @Input({ required: true }) hideMenuButton!: boolean
-  @Output() openMenu = new EventEmitter<void>()
+  readonly hideMenuButton = input.required<boolean>()
+  openMenu = output()
 
   protected readonly appName = inject(APP_NAME)
 

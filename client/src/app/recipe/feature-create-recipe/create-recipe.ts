@@ -15,7 +15,6 @@ import { NewRecipe } from '../util/NewRecipe'
 import { Recipe } from '../util/Recipe'
 
 @Component({
-  selector: 'recipe-create-recipe',
   standalone: true,
   imports: [
     CommonModule,
