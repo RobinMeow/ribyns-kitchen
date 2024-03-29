@@ -24,7 +24,7 @@ export class Header {
   private readonly router = inject(Router)
 
   readonly hideMenuButton = input.required<boolean>()
-  openMenu = output()
+  readonly openMenu = output()
 
   protected readonly appName = inject(APP_NAME)
 

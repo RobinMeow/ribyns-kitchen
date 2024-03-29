@@ -6,7 +6,7 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { provideApiBaseUrlTesting } from '@api'
 import { byTestAttr, setValue } from '@testing'
 
-describe('Login', () => {
+describe('Login should', () => {
   let component: Login
   let fixture: ComponentFixture<Login>
 
@@ -26,7 +26,7 @@ describe('Login', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  it('create', () => {
     expect(component).toBeTruthy()
   })
 

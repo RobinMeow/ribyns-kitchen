@@ -1,11 +1,11 @@
 @use './shared/variables' as *;
 @use './shared/media' as *;
 
-.wrapper {
+mat-drawer-container {
 	height: 100%;
 }
 
-.menu {
+mat-drawer {
 	padding: 0;
 }
 
