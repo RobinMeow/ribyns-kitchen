@@ -23,7 +23,6 @@
       "dom"
     ],
     "paths": {
-      // domains
       "@core": [ "src/app/core/index.ts" ],
       "@auth": [ "src/app/auth/index.ts" ],
       "@recipe": [ "src/app/recipe/index.ts" ],
