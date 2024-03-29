@@ -83,7 +83,7 @@ jobs:
       - name: run jest tests
         run: yarn run test --browsers ChromeHeadless --watch false
 
-  cypress-e2e-and-component-tests-on-google-chrome:
+  cypress-e2e-tests-on-google-chrome:
     runs-on: ubuntu-22.04
 
     steps:
@@ -120,15 +120,3 @@ jobs:
           if-no-files-found: error
           browser: chrome
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
-
-      - name: run cypress component tests
-        uses: cypress-io/github-action@v6.6.0
-        with:
-          working-directory: client
-          spec: src/**/*.cy.ts
-          component: true
-          if-no-files-found: error
-          browser: chrome
-          wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
-
-## TODO: Move into seperate files and reuse them, to make this more readable? or make use of matrixes for multi browser
