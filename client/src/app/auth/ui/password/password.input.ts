@@ -20,8 +20,8 @@ import { MatInputModule } from '@angular/material/input'
     MatInputModule,
     MatButtonModule
   ],
-  templateUrl: './password-input.html',
-  styleUrl: './password-input.scss',
+  templateUrl: './password.input.html',
+  styleUrl: './password.input.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PasswordInput {

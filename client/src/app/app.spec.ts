@@ -10,10 +10,11 @@ import { provideRouter } from '@angular/router'
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [provideRouter([]), App],
+      imports: [App],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
+        provideRouter([]),
         provideAppName(),
         provideNoopAnimations(),
         provideApiBaseUrlTesting()

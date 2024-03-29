@@ -1,5 +1,5 @@
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
-import { PasswordInput } from './password-input'
+import { PasswordInput } from './password.input'
 import { FormControl } from '@angular/forms'
 
 function getPasswordInput() {

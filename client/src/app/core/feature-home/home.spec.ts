@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { Home } from './home'
 import { provideAppName } from 'src/app/core'
+import { queryByTestAttr } from '@testing'
 
-describe('Home', () => {
+describe('Home shoudl', () => {
   let component: Home
   let fixture: ComponentFixture<Home>
 
@@ -17,7 +18,11 @@ describe('Home', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  it('create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('render home', () => {
+    expect(queryByTestAttr(fixture, 'home')).toBeTruthy()
   })
 })

@@ -4,26 +4,50 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideApiBaseUrlTesting } from '@api'
 import { provideRouter } from '@angular/router'
+import { queryByTestAttr } from '@testing'
+import { MatDrawer } from '@angular/material/sidenav'
 
-describe('Menu', () => {
+describe('Menu should', () => {
   let component: Menu
   let fixture: ComponentFixture<Menu>
+  let drawerSpy: jasmine.SpyObj<MatDrawer>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [Menu, provideRouter([])],
+      imports: [Menu],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
+        provideRouter([]),
         provideApiBaseUrlTesting()
       ]
     })
     fixture = TestBed.createComponent(Menu)
+    drawerSpy = jasmine.createSpyObj('MatDrawer', ['toggle'])
+    fixture.componentRef.setInput('drawer', drawerSpy)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  it('create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('render menu', () => {
+    expect(queryByTestAttr(fixture, 'menu')).toBeTruthy()
+  })
+
+  it('render close-menu-button', () => {
+    expect(queryByTestAttr(fixture, 'close-menu-button')).toBeTruthy()
+  })
+
+  it('render auth-corner', () => {
+    expect(queryByTestAttr(fixture, 'auth-corner')).toBeTruthy()
+  })
+
+  it('toggle drawer on close-menu-button click', () => {
+    queryByTestAttr<HTMLButtonElement>(fixture, 'close-menu-button').click()
+    fixture.detectChanges()
+    expect(drawerSpy.toggle).toHaveBeenCalledOnceWith()
   })
 })

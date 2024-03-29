@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { ChefFromControlFactory } from '../utils/ChefFormControlFactory'
 import { ChefConstraints } from '../utils/ChefConstraints'
-import { PasswordInput } from '../ui/password/password-input'
+import { PasswordInput } from '../ui/password/password.input'
 import { RegisterChef } from '../utils/RegisterChef'
 
 @Component({

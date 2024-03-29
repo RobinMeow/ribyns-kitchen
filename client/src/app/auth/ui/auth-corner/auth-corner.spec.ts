@@ -4,8 +4,10 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 
 import { AuthCorner } from './auth-corner'
 import { AuthService } from '../../utils/auth.service'
-import { signal } from '@angular/core'
 import { provideRouter } from '@angular/router'
+import { MockProvider } from 'ng-mocks'
+import { Signal, signal } from '@angular/core'
+import { queryByTestAttr } from '@testing'
 
 describe('AuthCorner', () => {
   let component: AuthCorner
@@ -13,18 +15,16 @@ describe('AuthCorner', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AuthCorner, provideRouter([])],
+      imports: [AuthCorner],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
-        {
-          provide: AuthService,
-          useValue: {
-            isAuthorized() {
-              return signal(false)
-            }
+        provideRouter([]),
+        MockProvider(AuthService, {
+          isAuthorized(): Signal<boolean> {
+            return signal(false)
           }
-        }
+        })
       ]
     }).compileComponents()
 
@@ -34,6 +34,11 @@ describe('AuthCorner', () => {
   })
 
   it('should create', () => {
+    expect(component).toBeTruthy()
+  })
+
+  it('should display login button when not authorized', () => {
+    expect(queryByTestAttr(fixture, 'login-button')).toBeTruthy()
     expect(component).toBeTruthy()
   })
 })

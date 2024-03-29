@@ -15,7 +15,7 @@ import { Credentials } from '../utils/Credentials'
 import { Router } from '@angular/router'
 import { Chef } from '../utils/Chef'
 import { MatInputModule } from '@angular/material/input'
-import { PasswordInput } from '../ui/password/password-input'
+import { PasswordInput } from '../ui/password/password.input'
 
 @Component({
   selector: 'auth-delete-chef',

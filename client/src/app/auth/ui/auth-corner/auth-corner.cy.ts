@@ -8,10 +8,10 @@ import { provideRouter } from '@angular/router'
 describe('auth-corner should', () => {
   beforeEach('mount', () => {
     cy.mount(AuthCorner, {
-      imports: [provideRouter([])],
       providers: [
         provideNoopAnimations(),
         provideHttpClient(),
+        provideRouter([]),
         {
           provide: AuthService,
           useValue: {

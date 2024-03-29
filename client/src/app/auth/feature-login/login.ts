@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { ChefFromControlFactory } from '../utils/ChefFormControlFactory'
 import { ChefConstraints } from '../utils/ChefConstraints'
-import { PasswordInput } from '../ui/password/password-input'
+import { PasswordInput } from '../ui/password/password.input'
 
 @Component({
   selector: 'auth-login',

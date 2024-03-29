@@ -7,9 +7,9 @@ import { provideRouter } from '@angular/router'
 describe('menu should', () => {
   beforeEach('mount', () => {
     cy.mount(Menu, {
-      imports: [provideRouter([])],
       providers: [
         provideHttpClient(),
+        provideRouter([]),
         {
           provide: AuthService,
           useValue: {

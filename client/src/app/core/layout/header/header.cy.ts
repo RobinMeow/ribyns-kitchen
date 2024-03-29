@@ -5,8 +5,7 @@ import { provideRouter } from '@angular/router'
 describe('header should', () => {
   beforeEach('mount', () => {
     cy.mount(Header, {
-      imports: [provideRouter([])],
-      providers: [provideAppName()]
+      providers: [provideAppName(), provideRouter([])]
     })
   })
 
