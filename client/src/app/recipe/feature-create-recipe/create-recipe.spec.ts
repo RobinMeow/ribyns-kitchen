@@ -56,7 +56,7 @@ describe('CreateRecipe should', () => {
       fixture,
       'create-recipe-submit-button'
     )
-    expect(btn.querySelector('[disabled]')).toBeDefined()
+    expect(btn.disabled).toBeTrue()
   })
 
   it('enable submit button after valid inputs', () => {
@@ -65,13 +65,17 @@ describe('CreateRecipe should', () => {
       'create-recipe-submit-button'
     )
     expect(btn).toBeTruthy()
-    expect(btn.querySelector('[disabled]')).toBeDefined()
+    expect(btn.disabled).toBeTrue()
 
-    queryByTestAttr<HTMLInputElement>(fixture, 'recipe-title-input').value =
-      'valid title'
+    const input = queryByTestAttr<HTMLInputElement>(
+      fixture,
+      'recipe-title-input'
+    )
+    input.value = 'valid title'
+    input.dispatchEvent(new Event('input'))
     fixture.detectChanges()
 
-    expect(btn.querySelector('[disabled]')).toBeNull()
+    expect(btn.disabled).toBeFalse()
   })
 
   it('not send http reuqest when form is submitted invalid', async () => {

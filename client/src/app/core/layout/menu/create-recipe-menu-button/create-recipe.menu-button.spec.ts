@@ -23,12 +23,12 @@ describe('CreateRecipeMenuButton should', () => {
   })
 
   it('be enabled', () => {
-    const element = queryByTestAttr<HTMLElement>(
+    const btn = queryByTestAttr<HTMLButtonElement>(
       fixture,
       'create-recipe-menu-button'
     )
-    expect(element).toBeTruthy()
-    expect(element.querySelector('[disabled]')).toBeNull()
+    expect(btn).toBeTruthy()
+    expect(btn.disabled).toBeFalse()
   })
 
   it('navigate route on click', () => {
