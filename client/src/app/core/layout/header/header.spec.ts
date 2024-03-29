@@ -30,21 +30,26 @@ describe('Header should', () => {
   it('hide menu button', () => {
     fixture.componentRef.setInput('hideMenuButton', false)
     fixture.detectChanges()
-    const btn = byTestAttr<HTMLButtonElement>(fixture, 'open-menu-button')
+    const btn = byTestAttr<HTMLAnchorElement>(fixture, 'open-menu-button')
     expect(btn.querySelector('[hidden]')).toBeDefined()
   })
 
   it('render title', () => {
-    const appTile = byTestAttr<HTMLHeadElement>(fixture, 'app-title')
+    const appTile = byTestAttr<HTMLAnchorElement>(fixture, 'app-title')
     expect(appTile).toBeTruthy()
   })
 
   it('navigate to home on title click', () => {
-    const appTile = byTestAttr<HTMLButtonElement>(fixture, 'app-title')
+    const appTile = byTestAttr<HTMLAnchorElement>(fixture, 'app-title')
     expect(appTile).toBeTruthy()
     const router = TestBed.inject(Router)
-    const spy = spyOn(router, 'navigate')
+    const spy = spyOn(router, 'navigateByUrl')
     appTile.click()
-    expect(spy).toHaveBeenCalledOnceWith([''])
+    expect(spy).toHaveBeenCalledOnceWith(jasmine.anything(), jasmine.anything())
+  })
+
+  it('have title with cursor pointer', () => {
+    const appTile = byTestAttr<HTMLAnchorElement>(fixture, 'app-title')
+    expect(getComputedStyle(appTile).cursor).toBe('pointer')
   })
 })
