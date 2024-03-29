@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { CreateRecipeNavButton } from './create-recipe.nav-button'
+import { CreateRecipeMenuButton } from './create-recipe.menu-button'
 import { Router } from '@angular/router'
 import { queryByTestAttr } from '@testing'
 
-describe('CreateRecipeButton should', () => {
-  let component: CreateRecipeNavButton
-  let fixture: ComponentFixture<CreateRecipeNavButton>
+describe('CreateRecipeMenuButton should', () => {
+  let component: CreateRecipeMenuButton
+  let fixture: ComponentFixture<CreateRecipeMenuButton>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateRecipeNavButton]
+      imports: [CreateRecipeMenuButton]
     }).compileComponents()
 
-    fixture = TestBed.createComponent(CreateRecipeNavButton)
+    fixture = TestBed.createComponent(CreateRecipeMenuButton)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
@@ -27,7 +27,7 @@ describe('CreateRecipeButton should', () => {
     const navigateSpy = spyOn(router, 'navigate')
     const button = queryByTestAttr<HTMLButtonElement>(
       fixture,
-      'create-recipe-nav-button'
+      'create-recipe-menu-button'
     )
     button.click()
     expect(navigateSpy).toHaveBeenCalledOnceWith(['/create-recipe'])
