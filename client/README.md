@@ -31,7 +31,7 @@ As well as `ui`'s (usually dumb components, reuseable) and utils which usually c
 
 in `.eslintrc` add the prefixes to the `@angular-eslint` properties.
 
-## Testing Jest and Cypress
+## Testing jasmine and Cypress
 
 Jasmine:
 
@@ -42,3 +42,9 @@ Jasmine:
 Cypress:
 
 - run `yarn run cypress open` and follow the browser to test e2e or component
+
+## scss angular problems
+
+I would like to to tsconfig paths for sccs files, but they arent working for ng test. They do work for ng build.
+This has been a problem since 2016 (or earlier) in angular, has is slowly fixing. Just dont wait fo rit.
+=> This means you have to use releative paths for scss files, even tho using `@use '@myName' as *;` will work for ng build ..
