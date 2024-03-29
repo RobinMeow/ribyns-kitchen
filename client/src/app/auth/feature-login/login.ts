@@ -28,7 +28,7 @@ import { PasswordInput } from '../ui/password/password.input'
     PasswordInput
   ],
   templateUrl: './login.html',
-  styleUrls: ['./login.scss', '../utils/auth.scss'],
+  styleUrls: ['../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Login {

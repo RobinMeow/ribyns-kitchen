@@ -30,7 +30,7 @@ import { PasswordInput } from '../ui/password/password.input'
     PasswordInput
   ],
   templateUrl: './delete-chef.html',
-  styleUrls: ['./delete-chef.scss', '../utils/auth.scss'],
+  styleUrls: ['../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeleteChef {

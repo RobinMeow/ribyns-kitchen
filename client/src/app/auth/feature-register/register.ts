@@ -31,7 +31,7 @@ import { RegisterChef } from '../utils/RegisterChef'
     PasswordInput
   ],
   templateUrl: './register.html',
-  styleUrls: ['./register.scss', '../utils/auth.scss'],
+  styleUrls: ['../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Register {
