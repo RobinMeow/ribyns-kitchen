@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatToolbarModule } from '@angular/material/toolbar'
 
 import { MatButtonModule } from '@angular/material/button'
-import { RouterLink } from '@angular/router'
+import { Router, RouterLink } from '@angular/router'
 import { APP_NAME } from 'src/app/core'
 
 @Component({
@@ -17,9 +17,12 @@ import { APP_NAME } from 'src/app/core'
   standalone: true,
   imports: [MatIconModule, MatToolbarModule, MatButtonModule, RouterLink],
   templateUrl: './header.html',
+  styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Header {
+  private readonly router = inject(Router)
+
   readonly hideMenuButton = input.required<boolean>()
   openMenu = output()
 
@@ -27,5 +30,9 @@ export class Header {
 
   protected onMenuClick(): void {
     this.openMenu.emit()
+  }
+
+  protected onTitleClick() {
+    this.router.navigate([''])
   }
 }
