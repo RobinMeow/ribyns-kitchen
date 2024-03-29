@@ -24,7 +24,6 @@ import { Recipe } from '../util/Recipe'
     MatButtonModule
   ],
   templateUrl: './create-recipe.html',
-  styleUrl: './create-recipe.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateRecipe {

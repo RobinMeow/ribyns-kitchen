@@ -7,6 +7,7 @@ import { provideHttpClient } from '@angular/common/http'
 import { RecipeApi } from '../util/recipe.api'
 import { provideApiBaseUrlTesting } from '@api'
 import { byTestAttr, setValue } from '@testing'
+import { MockProvider } from 'ng-mocks'
 
 describe('CreateRecipe should', () => {
   let component: CreateRecipe
@@ -21,7 +22,7 @@ describe('CreateRecipe should', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideApiBaseUrlTesting(),
-        RecipeApi
+        MockProvider(RecipeApi)
       ]
     }).compileComponents()
 
@@ -67,10 +68,7 @@ describe('CreateRecipe should', () => {
     expect(btn).toBeTruthy()
     expect(btn.disabled).toBeTrue()
 
-    const input = byTestAttr<HTMLInputElement>(
-      fixture,
-      'recipe-title-input'
-    )
+    const input = byTestAttr<HTMLInputElement>(fixture, 'recipe-title-input')
     setValue(input, 'Meow Miau Miaow')
     fixture.detectChanges()
 
