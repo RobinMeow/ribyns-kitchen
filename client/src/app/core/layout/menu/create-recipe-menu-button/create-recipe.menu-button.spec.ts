@@ -22,6 +22,15 @@ describe('CreateRecipeMenuButton should', () => {
     expect(component).toBeTruthy()
   })
 
+  it('be enabled', () => {
+    const element = queryByTestAttr<HTMLElement>(
+      fixture,
+      'create-recipe-menu-button'
+    )
+    expect(element).toBeTruthy()
+    expect(element.querySelector('[disabled]')).toBeNull()
+  })
+
   it('navigate route on click', () => {
     const router = TestBed.inject(Router)
     const navigateSpy = spyOn(router, 'navigate')
