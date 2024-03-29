@@ -1,4 +1,5 @@
 @use '../../../../../node_modules/@angular/material/toolbar/toolbar-variables';
+@use '../../../shared/media';
 
 .menu-wrapper {
 	height: 100%;
@@ -10,7 +11,7 @@
 	min-width: 250px;
 	width: 350px;
 
-	@media(min-width: 600px) {
+	@include media.desktop {
 		max-width: 600px;
 	}
 }
@@ -26,7 +27,7 @@
 
 	height: toolbar-variables.$height-mobile;
 
-	@media(min-width: 600px){
+	@include media.desktop {
 		height: toolbar-variables.$height-desktop;
 	}
 }
