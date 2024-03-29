@@ -6,7 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { RecipeApi } from '../util/recipe.api'
 import { provideApiBaseUrlTesting } from '@api'
-import { queryByTestAttr } from '@testing'
+import { queryByTestAttr, setValue } from '@testing'
 
 describe('CreateRecipe should', () => {
   let component: CreateRecipe
@@ -71,8 +71,7 @@ describe('CreateRecipe should', () => {
       fixture,
       'recipe-title-input'
     )
-    input.value = 'valid title'
-    input.dispatchEvent(new Event('input'))
+    setValue(input, 'Meow Miau Miaow')
     fixture.detectChanges()
 
     expect(btn.disabled).toBeFalse()

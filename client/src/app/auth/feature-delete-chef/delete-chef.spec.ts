@@ -4,7 +4,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { DeleteChef } from './delete-chef'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { provideApiBaseUrlTesting } from '@api'
-import { queryByTestAttr } from '@testing'
+import { queryByTestAttr, setValue } from '@testing'
 
 describe('DeleteChef should', () => {
   let component: DeleteChef
@@ -46,10 +46,12 @@ describe('DeleteChef should', () => {
   it('have enabled submit-btn after valid input', () => {
     const btn = queryByTestAttr<HTMLButtonElement>(fixture, 'submit-btn')
     expect(btn.disabled).toBeTrue()
+
     const input = queryByTestAttr<HTMLInputElement>(fixture, 'password-input')
-    input.value = 'meow'
-    input.dispatchEvent(new Event('input'))
+    setValue(input, 'meow')
+
     fixture.detectChanges()
+
     expect(btn.disabled).toBeFalse()
   })
 })
