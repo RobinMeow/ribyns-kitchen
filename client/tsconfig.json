@@ -39,10 +39,8 @@
     "strictTemplates": true
   },
   "exclude": [
-    // https://github.com/microsoft/TypeScript/issues/37053 (╯‵□′)╯︵┻━┻
-    // if you write jasmine tests ".spec.ts", activate those two lines, to make use of jasmine types.
-    // might need to restart vscode
-    //"./cypress.config.ts", 
-    //"./cypress"
+    // https://github.com/microsoft/TypeScript/issues/37053
+    "./cypress.config.ts", 
+    "./cypress"
   ]
 }

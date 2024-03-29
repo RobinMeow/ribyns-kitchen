@@ -7,7 +7,7 @@
   >
     <mat-icon>menu</mat-icon>
   </button>
-  <span routerLink="" class="cursor-pointer" data-test-app-title>{{
-    appName
-  }}</span>
+  <button (click)="onTitleClick()" data-test-app-title>
+    {{ appName }}
+  </button>
 </mat-toolbar>

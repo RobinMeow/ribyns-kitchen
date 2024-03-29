@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { FeedbackSnackBar } from './feedback-snack-bar'
-import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar'
-import { FeedbackData } from '../FeedbackData'
+import { FeedbackSnackBar } from './feedback.snack-bar'
+import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar'
+import { byTestAttr } from '../../testing/byTestAttr'
+import { MockProvider } from 'ng-mocks'
 
 describe('FeedbackSnackbar', () => {
   let component: FeedbackSnackBar
@@ -12,11 +13,9 @@ describe('FeedbackSnackbar', () => {
     await TestBed.configureTestingModule({
       imports: [FeedbackSnackBar],
       providers: [
-        { provide: MatSnackBarRef, useValue: null! },
-        {
-          provide: MAT_SNACK_BAR_DATA,
-          useValue: { message: 'test message' } as FeedbackData
-        }
+        MockProvider(MAT_SNACK_BAR_DATA, {
+          message: 'very unique test message'
+        })
       ]
     }).compileComponents()
 
@@ -27,5 +26,11 @@ describe('FeedbackSnackbar', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy()
+  })
+
+  it('display the message', () => {
+    const span = byTestAttr<HTMLSpanElement>(fixture, 'feedback-message')
+    expect(span).toBeTruthy()
+    expect(span.textContent).toBe('very unique test message')
   })
 })

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { CreateRecipeMenuButton } from './create-recipe.menu-button'
 import { Router } from '@angular/router'
-import { queryByTestAttr } from '@testing'
+import { byTestAttr } from '@testing'
 
 describe('CreateRecipeMenuButton should', () => {
   let component: CreateRecipeMenuButton
@@ -22,10 +22,19 @@ describe('CreateRecipeMenuButton should', () => {
     expect(component).toBeTruthy()
   })
 
+  it('be enabled', () => {
+    const btn = byTestAttr<HTMLButtonElement>(
+      fixture,
+      'create-recipe-menu-button'
+    )
+    expect(btn).toBeTruthy()
+    expect(btn.disabled).toBeFalse()
+  })
+
   it('navigate route on click', () => {
     const router = TestBed.inject(Router)
     const navigateSpy = spyOn(router, 'navigate')
-    const button = queryByTestAttr<HTMLButtonElement>(
+    const button = byTestAttr<HTMLButtonElement>(
       fixture,
       'create-recipe-menu-button'
     )

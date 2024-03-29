@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common'
   standalone: true,
   imports: [CommonModule],
   templateUrl: './view-recipe.html',
-  styleUrl: './view-recipe.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewRecipe {}

@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { Home } from './home'
 import { provideAppName } from 'src/app/core'
-import { queryByTestAttr } from '@testing'
+import { byTestAttr } from '@testing'
 
-describe('Home shoudl', () => {
+describe('Home should', () => {
   let component: Home
   let fixture: ComponentFixture<Home>
 
@@ -23,6 +23,12 @@ describe('Home shoudl', () => {
   })
 
   it('render home', () => {
-    expect(queryByTestAttr(fixture, 'home')).toBeTruthy()
+    expect(byTestAttr(fixture, 'home')).toBeTruthy()
+  })
+
+  it('contain text', () => {
+    expect(
+      byTestAttr<HTMLElement>(fixture, 'home').innerText.length
+    ).toBeGreaterThan(0)
   })
 })

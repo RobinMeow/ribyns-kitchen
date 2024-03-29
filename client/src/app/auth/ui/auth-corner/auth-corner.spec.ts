@@ -7,7 +7,7 @@ import { AuthService } from '../../utils/auth.service'
 import { provideRouter } from '@angular/router'
 import { MockProvider } from 'ng-mocks'
 import { Signal, signal } from '@angular/core'
-import { queryByTestAttr } from '@testing'
+import { byTestAttr } from '@testing'
 
 describe('AuthCorner', () => {
   let component: AuthCorner
@@ -38,7 +38,7 @@ describe('AuthCorner', () => {
   })
 
   it('should display login button when not authorized', () => {
-    expect(queryByTestAttr(fixture, 'login-button')).toBeTruthy()
+    expect(byTestAttr(fixture, 'login-button')).toBeTruthy()
     expect(component).toBeTruthy()
   })
 })

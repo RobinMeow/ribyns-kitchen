@@ -4,7 +4,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideApiBaseUrlTesting } from '@api'
 import { provideRouter } from '@angular/router'
-import { queryByTestAttr } from '@testing'
+import { byTestAttr } from '@testing'
 import { MatDrawer } from '@angular/material/sidenav'
 
 describe('Menu should', () => {
@@ -34,19 +34,19 @@ describe('Menu should', () => {
   })
 
   it('render menu', () => {
-    expect(queryByTestAttr(fixture, 'menu')).toBeTruthy()
+    expect(byTestAttr(fixture, 'menu')).toBeTruthy()
   })
 
   it('render close-menu-button', () => {
-    expect(queryByTestAttr(fixture, 'close-menu-button')).toBeTruthy()
+    expect(byTestAttr(fixture, 'close-menu-button')).toBeTruthy()
   })
 
   it('render auth-corner', () => {
-    expect(queryByTestAttr(fixture, 'auth-corner')).toBeTruthy()
+    expect(byTestAttr(fixture, 'auth-corner')).toBeTruthy()
   })
 
   it('toggle drawer on close-menu-button click', () => {
-    queryByTestAttr<HTMLButtonElement>(fixture, 'close-menu-button').click()
+    byTestAttr<HTMLButtonElement>(fixture, 'close-menu-button').click()
     fixture.detectChanges()
     expect(drawerSpy.toggle).toHaveBeenCalledOnceWith()
   })
