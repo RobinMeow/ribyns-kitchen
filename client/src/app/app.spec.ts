@@ -7,7 +7,7 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { provideApiBaseUrlTesting } from './shared/api/provideApiBaseUrl'
 import { provideRouter } from '@angular/router'
 
-describe('App', () => {
+describe('App should', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
@@ -22,7 +22,7 @@ describe('App', () => {
     }).compileComponents()
   })
 
-  it('should create the app', () => {
+  it('create the app', () => {
     const fixture = TestBed.createComponent(App)
     const app = fixture.componentInstance
     expect(app).toBeTruthy()

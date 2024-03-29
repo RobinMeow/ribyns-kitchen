@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing'
 
 import { FeedbackService } from './feedback.service'
 
-describe('FeedbackService', () => {
+describe('FeedbackService should', () => {
   let service: FeedbackService
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('FeedbackService', () => {
     service = TestBed.inject(FeedbackService)
   })
 
-  it('should be created', () => {
+  it('be created', () => {
     expect(service).toBeTruthy()
   })
 })

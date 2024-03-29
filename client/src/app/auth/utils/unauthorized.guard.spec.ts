@@ -10,7 +10,7 @@ import { provideHttpClient } from '@angular/common/http'
 import { signal } from '@angular/core'
 import { AuthService } from './auth.service'
 
-describe('unauthorized guard', () => {
+describe('unauthorized guard should', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
     TestBed.runInInjectionContext(() => unauthorizedGuard(...guardParameters))
 
@@ -31,7 +31,7 @@ describe('unauthorized guard', () => {
     })
   })
 
-  it('should be created', () => {
+  it('be created', () => {
     expect(executeGuard).toBeTruthy()
   })
 

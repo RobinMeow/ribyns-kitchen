@@ -5,7 +5,7 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar'
 import { byTestAttr } from '../../testing/byTestAttr'
 import { MockProvider } from 'ng-mocks'
 
-describe('FeedbackSnackbar', () => {
+describe('FeedbackSnackbar should', () => {
   let component: FeedbackSnackBar
   let fixture: ComponentFixture<FeedbackSnackBar>
 
@@ -24,7 +24,7 @@ describe('FeedbackSnackbar', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  it('create', () => {
     expect(component).toBeTruthy()
   })
 

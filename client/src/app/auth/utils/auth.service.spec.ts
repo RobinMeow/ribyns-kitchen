@@ -5,7 +5,7 @@ import { provideHttpClient } from '@angular/common/http'
 import { provideApiBaseUrlTesting } from '@api'
 import { DomainAssertionError } from 'src/app/shared/assertions/DomainAssertionError'
 
-describe('AuthService', () => {
+describe('AuthService should', () => {
   let authService: AuthService
 
   beforeEach(() => {
@@ -21,14 +21,14 @@ describe('AuthService', () => {
     authService = TestBed.inject(AuthService)
   })
 
-  it('should be created', () => {
+  it('be created', () => {
     expect(authService).toBeTruthy()
   })
   ;[
     ['', 'iLoveJesus<3!'],
     ['Weinberg des Herrn', '']
   ].forEach(([name, password]) => {
-    it('throws with empty credentials', async () => {
+    it('throw with empty credentials', async () => {
       try {
         await authService.signInAsync({
           name,
@@ -50,11 +50,11 @@ describe('AuthService', () => {
     }
   })
 
-  it('should be unauthorized', () => {
+  it('be unauthorized', () => {
     expect(authService.isAuthorized()()).toBe(false)
   })
 
-  it('should return no chef', () => {
+  it('return no chef', () => {
     expect(authService.currentUser()()).toBe(null)
   })
 })
