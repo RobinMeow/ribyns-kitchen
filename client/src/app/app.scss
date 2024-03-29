@@ -1,4 +1,4 @@
-@use '../app/shared/varibales';
+@use '../app/shared/variables';
 @use '@media' as *;
 
 .wrapper {
@@ -10,7 +10,7 @@
 }
 
 .router-outlet-defaults {
-	margin: #{varibales.$spacing};
+	margin: #{variables.$spacing};
 }
 
 @include mobile {

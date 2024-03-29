@@ -1,9 +1,9 @@
-@use '../../shared/varibales';
+@use '../../shared/variables';
 
 .forms-column {
   display: flex;
   flex-flow: column;
   width: 300px;
-  gap: #{varibales.$spacing};
-  margin-bottom: #{varibales.$spacing};
+  gap: #{variables.$spacing};
+  margin-bottom: #{variables.$spacing};
 }
