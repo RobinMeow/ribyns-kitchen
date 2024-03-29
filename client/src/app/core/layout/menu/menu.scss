@@ -1,7 +1,7 @@
 @use '../../../../../node_modules/@angular/material/toolbar/toolbar-variables';
 @use '../../../shared/media' as *;
 
-.menu-wrapper {
+:host {
 	height: 100%;
 	display: flex;
 	justify-content: space-between;
@@ -9,7 +9,6 @@
 	flex-direction: column;
 
 	min-width: 250px;
-	width: 350px;
 
 	@include desktop {
 		max-width: 600px;

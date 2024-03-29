@@ -4,12 +4,12 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 
 import { AuthCorner } from './auth-corner'
 import { AuthService } from '../../utils/auth.service'
-import { provideRouter } from '@angular/router'
+import { Router, provideRouter } from '@angular/router'
 import { MockProvider } from 'ng-mocks'
-import { Signal, signal } from '@angular/core'
 import { byTestAttr } from '@testing'
+import { Signal, signal } from '@angular/core'
 
-describe('AuthCorner', () => {
+describe('AuthCorner when unauthorized should', () => {
   let component: AuthCorner
   let fixture: ComponentFixture<AuthCorner>
 
@@ -33,12 +33,32 @@ describe('AuthCorner', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  it('create', () => {
     expect(component).toBeTruthy()
   })
 
-  it('should display login button when not authorized', () => {
+  it('display login button when not authorized', () => {
     expect(byTestAttr(fixture, 'login-button')).toBeTruthy()
     expect(component).toBeTruthy()
+  })
+
+  it('have register button with navigation', () => {
+    const btn = byTestAttr<HTMLButtonElement>(fixture, 'register-button')
+    expect(btn).toBeTruthy()
+
+    const spy = spyOn(TestBed.inject(Router), 'navigateByUrl')
+
+    btn.click()
+    expect(spy).toHaveBeenCalledOnceWith(jasmine.anything(), jasmine.anything())
+  })
+
+  it('have login button with navigation', () => {
+    const btn = byTestAttr<HTMLButtonElement>(fixture, 'login-button')
+    expect(btn).toBeTruthy()
+
+    const spy = spyOn(TestBed.inject(Router), 'navigateByUrl')
+
+    btn.click()
+    expect(spy).toHaveBeenCalledOnceWith(jasmine.anything(), jasmine.anything())
   })
 })

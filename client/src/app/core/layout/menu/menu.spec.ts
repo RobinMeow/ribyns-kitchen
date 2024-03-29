@@ -33,16 +33,12 @@ describe('Menu should', () => {
     expect(component).toBeTruthy()
   })
 
-  it('render menu', () => {
-    expect(byTestAttr(fixture, 'menu')).toBeTruthy()
-  })
-
   it('render close-menu-button', () => {
     expect(byTestAttr(fixture, 'close-menu-button')).toBeTruthy()
   })
 
   it('render auth-corner', () => {
-    expect(byTestAttr(fixture, 'auth-corner')).toBeTruthy()
+    expect(fixture.nativeElement.querySelector('auth-corner')).toBeTruthy()
   })
 
   it('toggle drawer on close-menu-button click', () => {

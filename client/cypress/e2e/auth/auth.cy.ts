@@ -22,10 +22,13 @@ describe('auth should', () => {
     cy.wait('@register-http-request')
 
     cy.url().should('not.include', 'register')
-    cy.getByAttr('auth-corner').getByAttr('logout-button').contains('Ausloggen')
+    cy.get('auth-corner')
+      .as('authc')
+      .getByAttr('logout-button')
+      .contains('Ausloggen')
 
     // Logout
-    cy.getByAttr('auth-corner').getByAttr('logout-button').click()
+    cy.get('@authc').getByAttr('logout-button').click()
 
     // Login
     cy.visit('/login')
@@ -33,7 +36,7 @@ describe('auth should', () => {
     cy.getByAttr('password-input').type(credentials.password)
     cy.getByAttr('login-submit-button').click() // should redirect somewhere in success
     cy.url().should('not.include', 'login')
-    cy.getByAttr('auth-corner').getByAttr('logout-button').contains('Ausloggen')
+    cy.get('@authc').getByAttr('logout-button').contains('Ausloggen')
 
     // Delete the just registered account
     cy.visit('/delete-chef')
@@ -45,6 +48,6 @@ describe('auth should', () => {
     cy.getByAttr('delete-chef-form').submit() // redirect on success
     cy.wait('@delete-http-request')
     cy.url().should('not.include', 'delete-chef')
-    cy.getByAttr('auth-corner').getByAttr('login-button')
+    cy.get('@authc').getByAttr('login-button')
   })
 })

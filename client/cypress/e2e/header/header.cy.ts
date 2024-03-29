@@ -11,13 +11,13 @@ describe('header should', () => {
   it('open the menu after it has been closed', () => {
     // Arrange
     cy.visit('/')
-    cy.getByAttr('menu').should('be.visible')
+    cy.get('core-menu').as('menu').should('be.visible')
     cy.getByAttr('close-menu-button').click()
 
     // Assert
-    cy.getByAttr('menu').should('not.be.visible')
+    cy.get('@menu').should('not.be.visible')
     getOpenMenuButton().click()
-    cy.getByAttr('menu').should('be.visible')
+    cy.get('@menu').should('be.visible')
   })
 
   // redirect
