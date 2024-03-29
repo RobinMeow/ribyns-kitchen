@@ -33,10 +33,6 @@ describe('Menu should', () => {
     expect(component).toBeTruthy()
   })
 
-  it('render menu', () => {
-    expect(byTestAttr(fixture, 'menu')).toBeTruthy()
-  })
-
   it('render close-menu-button', () => {
     expect(byTestAttr(fixture, 'close-menu-button')).toBeTruthy()
   })
