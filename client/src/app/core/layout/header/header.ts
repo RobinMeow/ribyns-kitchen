@@ -1,9 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
   inject,
   input,
   output
