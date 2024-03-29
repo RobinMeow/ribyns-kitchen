@@ -23,13 +23,12 @@
       "dom"
     ],
     "paths": {
-      // domains
       "@core": [ "src/app/core/index.ts" ],
       "@auth": [ "src/app/auth/index.ts" ],
       "@recipe": [ "src/app/recipe/index.ts" ],
       "@common": [ "src/app/shared/common/index.ts" ],
       "@api": [ "src/app/shared/api/index.ts" ],
-      "@testing": [ "src/app/shared/common/testing/index.ts" ],
+      "@testing": [ "src/app/shared/common/testing/index.ts" ]
     }
   },
   "angularCompilerOptions": {

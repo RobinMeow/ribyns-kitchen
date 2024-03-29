@@ -1,4 +1,5 @@
-@use '../app/shared/varibales';
+@use './shared/variables' as *;
+@use './shared/media' as *;
 
 .wrapper {
 	height: 100%;
@@ -9,10 +10,10 @@
 }
 
 .router-outlet-defaults {
-	margin: #{varibales.$spacing};
+	margin: #{$spacing};
 }
 
-@media(max-width: 600px){
+@include mobile {
 	.menu {
 		width: 100%;
 	}
