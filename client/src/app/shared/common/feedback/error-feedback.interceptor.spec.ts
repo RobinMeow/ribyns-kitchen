@@ -1,9 +1,8 @@
 import { TestBed } from '@angular/core/testing'
 import { HttpInterceptorFn } from '@angular/common/http'
-
 import { errorFeedbackInterceptor } from './error-feedback.interceptor'
 
-describe('errorFeedbackInterceptor', () => {
+describe('errorFeedbackInterceptor should', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>
     TestBed.runInInjectionContext(() => errorFeedbackInterceptor(req, next))
 
@@ -11,7 +10,7 @@ describe('errorFeedbackInterceptor', () => {
     TestBed.configureTestingModule({})
   })
 
-  it('should be created', () => {
+  it('be created', () => {
     expect(interceptor).toBeTruthy()
   })
 })
