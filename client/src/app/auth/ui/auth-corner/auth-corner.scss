@@ -1,6 +1,6 @@
 @use '../../../shared/variables' as *;
 
-.auth-wrapper {
+:host {
   display: flex;
   flex-direction: column;
   gap: #{$spacing};
