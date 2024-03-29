@@ -30,6 +30,7 @@
       "@common": [ "src/app/shared/common/index.ts" ],
       "@api": [ "src/app/shared/api/index.ts" ],
       "@testing": [ "src/app/shared/common/testing/index.ts" ],
+      "@media": [ "src/app/shared/_media.scss" ]
     }
   },
   "angularCompilerOptions": {
