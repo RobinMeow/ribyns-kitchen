@@ -17,4 +17,16 @@ describe('assert should', () => {
   it('not throw for true condition', () => {
     expect(() => assert(true, '')).not.toThrowError()
   })
+
+  it('throw for undefined', () => {
+    expect(() => assert(undefined, '')).toThrowError()
+  })
+
+  it('throw for null', () => {
+    expect(() => assert(null, '')).toThrowError()
+  })
+
+  it('throw for empty string', () => {
+    expect(() => assert('', '')).toThrowError()
+  })
 })

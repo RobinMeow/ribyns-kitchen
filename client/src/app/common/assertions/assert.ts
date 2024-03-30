@@ -30,11 +30,11 @@
  *   // ...
  * }
  *
- * // Usage for strictNullCheck
+ * // Usage for type narrowing
  * const value: { name: string; } | null = null
  * assert(value !== null, 'Value may not be null.') // will throw an error
  * console.log(value.name); // Non-null assertion operator not required onwards
  */
 export function assert(condition: unknown, msg: string): asserts condition {
-  if (condition === false) throw new Error(msg)
+  if (!condition) throw new Error(msg)
 }
