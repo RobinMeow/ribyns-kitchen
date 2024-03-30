@@ -12,10 +12,10 @@ import { Credentials } from './Credentials'
 import { Chef } from './Chef'
 import { JwtDecoder } from './jwt-decoder'
 import { DecodedToken } from './DecodedToken'
-import { notEmpty_checked, true_checked } from 'src/app/shared/assertions'
 import { AuthApi } from './auth.api'
 import { RegisterChef } from './RegisterChef'
 import { JwtToken } from '../JwtToken'
+import { assert } from '@common/assertions'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends AuthApi {
@@ -80,8 +80,8 @@ export class AuthService extends AuthApi {
   }
 
   async signInAsync(credentials: Credentials): Promise<Chef> {
-    notEmpty_checked(credentials.name, 'Login name may not be empty.')
-    notEmpty_checked(credentials.password, 'Login password may not be empty.')
+    assert(credentials.name, 'Login name may not be empty.')
+    assert(credentials.password, 'Login password may not be empty.')
 
     const token: JwtToken = await super.loginAsync(credentials)
     const decodedToken: DecodedToken = this.tokenDecoder.decode(token)
@@ -91,9 +91,9 @@ export class AuthService extends AuthApi {
   }
 
   logout(): void {
-    true_checked(
+    assert(
       this.isAuthorizedComputed(),
-      'Need to be authorized, to log out.'
+      'Chef has to be authorized to be able to log out.'
     )
     this.tokenSignal.set(null)
   }
@@ -107,8 +107,8 @@ export class AuthService extends AuthApi {
   }
 
   async removeAsync(credentials: Credentials): Promise<void> {
-    notEmpty_checked(credentials.name, 'Chefname may not be empty.')
-    notEmpty_checked(credentials.password, 'Chef password may not be empty.')
+    assert(credentials.name, 'Chefname may not be empty.')
+    assert(credentials.password, 'Chef password may not be empty.')
 
     await super.deleteAsync(credentials)
     this.logout()

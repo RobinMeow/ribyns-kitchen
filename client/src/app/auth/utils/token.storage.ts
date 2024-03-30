@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { notEmpty_checked } from 'src/app/shared/assertions'
+import { assert } from '@common/assertions'
 
 const key: string = 'token'
 
@@ -8,7 +8,7 @@ const key: string = 'token'
 })
 export class TokenStorage {
   store(token: string): void {
-    notEmpty_checked(token, 'token may not be an empty string.')
+    assert(token, 'Token is required.')
     localStorage.setItem(key, token)
   }
 

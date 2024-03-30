@@ -3,7 +3,6 @@ import { AuthService } from './auth.service'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideApiBaseUrlTesting } from '@api'
-import { DomainAssertionError } from 'src/app/shared/assertions/DomainAssertionError'
 
 describe('AuthService should', () => {
   let authService: AuthService
@@ -36,7 +35,7 @@ describe('AuthService should', () => {
         })
         fail()
       } catch (error) {
-        expect(error instanceof DomainAssertionError).toBeTrue()
+        expect(error).toBeTruthy()
       }
     })
   })
@@ -46,7 +45,7 @@ describe('AuthService should', () => {
       authService.logout()
       fail('expected to throw')
     } catch (error) {
-      expect(error instanceof DomainAssertionError).toBeTrue()
+      expect(error).toBeTruthy()
     }
   })
 
