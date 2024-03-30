@@ -90,57 +90,52 @@ describe('AuthService', () => {
   })
 
   describe('signUpAsync should', () => {
-    it('trim the name', async () => {
-      const promise = authService.signUpAsync({
-        name: ' TrimMe ',
-        password: 'valid'
+    describe('trim', () => {
+      let promise: Promise<unknown>
+
+      it('the email', async () => {
+        promise = authService.signUpAsync({
+          name: 'Chefname',
+          email: ' TrimMe ',
+          password: 'valid'
+        })
+        const registerRequest = httpCtrl.expectOne(
+          url + 'RegisterAsync',
+          `expected '${url + 'RegisterAsync'}'`
+        )
+        registerRequest.flush(null)
+
+        expect((<RegisterChef>registerRequest.request.body).email).toBe(
+          'TrimMe'
+        )
       })
-      const registerRequest = httpCtrl.expectOne(
-        url + 'RegisterAsync',
-        `expected '${url + 'RegisterAsync'}'`
-      )
-      registerRequest.flush(null)
 
-      expect((<RegisterChef>registerRequest.request.body).name).toBe('TrimMe')
+      it('the name', async () => {
+        promise = authService.signUpAsync({
+          name: ' TrimMe ',
+          password: 'valid'
+        })
+        const registerRequest = httpCtrl.expectOne(
+          url + 'RegisterAsync',
+          `expected '${url + 'RegisterAsync'}'`
+        )
+        registerRequest.flush(null)
 
-      // rest is not relevant for the test. (expecially dont check againt the chef.name returned from the JWT lol)
-      await Promise.resolve()
-      const loginRequest = httpCtrl.expectOne(
-        url + 'LoginAsync',
-        `expected '${url + 'LoginAsync'}'`
-      )
-      loginRequest.flush(validJwtToken)
-
-      await expectAsync(promise).toBeResolved()
-
-      httpCtrl.verify()
-    })
-
-    it('trim the email', async () => {
-      const promise = authService.signUpAsync({
-        name: 'Chefname',
-        email: ' TrimMe ',
-        password: 'valid'
+        expect((<RegisterChef>registerRequest.request.body).name).toBe('TrimMe')
       })
-      const registerRequest = httpCtrl.expectOne(
-        url + 'RegisterAsync',
-        `expected '${url + 'RegisterAsync'}'`
-      )
-      registerRequest.flush(null)
 
-      expect((<RegisterChef>registerRequest.request.body).email).toBe('TrimMe')
+      afterEach(async () => {
+        await Promise.resolve()
+        const loginRequest = httpCtrl.expectOne(
+          url + 'LoginAsync',
+          `expected '${url + 'LoginAsync'}'`
+        )
+        loginRequest.flush(validJwtToken)
 
-      // rest is not relevant for the test. (expecially dont check againt the chef.name returned from the JWT lol)
-      await Promise.resolve()
-      const loginRequest = httpCtrl.expectOne(
-        url + 'LoginAsync',
-        `expected '${url + 'LoginAsync'}'`
-      )
-      loginRequest.flush(validJwtToken)
+        await expectAsync(promise!).toBeResolved()
 
-      await expectAsync(promise).toBeResolved()
-
-      httpCtrl.verify()
+        httpCtrl.verify()
+      })
     })
 
     it('throw if password contains leading or trailing spaces', async () => {
