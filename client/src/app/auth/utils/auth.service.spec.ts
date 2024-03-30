@@ -20,25 +20,33 @@ describe('AuthService should', () => {
     authService = TestBed.inject(AuthService)
   })
 
-  it('be created', () => {
+  it('create', () => {
     expect(authService).toBeTruthy()
   })
-  ;[
-    ['', 'iLoveJesus<3!'],
-    ['Weinberg des Herrn', '']
-  ].forEach(([name, password]) => {
-    it('throw with empty credentials', async () => {
-      try {
-        await authService.signInAsync({
-          name,
-          password
+
+  const emptyStrings = ['', null!, undefined!]
+
+  emptyStrings.forEach((name: string) =>
+    it('throw for empty name', async () => {
+      await expectAsync(
+        authService.signInAsync({
+          name: name,
+          password: 'iLoveJesus<3!'
         })
-        fail()
-      } catch (error) {
-        expect(error).toBeTruthy()
-      }
+      ).toBeRejected()
     })
-  })
+  )
+
+  emptyStrings.forEach((password: string) =>
+    it(`throw for empty password '${password}'`, async () => {
+      await expectAsync(
+        authService.signInAsync({
+          name: 'Weinberg des Herrn',
+          password: password
+        })
+      ).toBeRejected()
+    })
+  )
 
   it('throw on logout when unauthorized', () => {
     try {
