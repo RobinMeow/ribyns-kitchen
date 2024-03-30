@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core'
 import { firstValueFrom } from 'rxjs'
 
 import { Credentials } from '@auth'
@@ -7,8 +6,7 @@ import { RegisterChef } from './RegisterChef'
 import { ChefDto } from './ChefDto'
 import { JwtToken } from '../JwtToken'
 
-@Injectable({ providedIn: 'root' })
-export class AuthApi extends BaseApi {
+export abstract class AuthApi extends BaseApi {
   private readonly URL = this.BASE_URL + '/Auth/'
 
   protected registerAsync(newChef: RegisterChef): Promise<ChefDto> {
