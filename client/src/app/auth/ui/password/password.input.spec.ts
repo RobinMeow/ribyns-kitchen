@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { PasswordInput } from './password.input'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { FormControl } from '@angular/forms'
-import { byTestAttr } from '@testing'
+import { byTestAttr } from '@common/testing'
 
 describe('PasswordInput should', () => {
   let component: PasswordInput

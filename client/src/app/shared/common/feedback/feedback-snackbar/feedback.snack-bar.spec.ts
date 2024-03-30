@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { FeedbackSnackBar } from './feedback.snack-bar'
 import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar'
-import { byTestAttr } from '../../testing/byTestAttr'
 import { MockProvider } from 'ng-mocks'
+import { byTestAttr } from '@common/testing'
 
 describe('FeedbackSnackbar should', () => {
   let component: FeedbackSnackBar

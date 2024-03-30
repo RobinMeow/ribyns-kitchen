@@ -4,7 +4,7 @@ import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { provideApiBaseUrlTesting } from '@api'
-import { byTestAttr, setValue } from '@testing'
+import { byTestAttr, setValue } from '@common/testing'
 
 describe('Login should', () => {
   let component: Login

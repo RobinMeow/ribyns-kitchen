@@ -8,7 +8,7 @@ import { provideApiBaseUrlTesting } from './shared/api/provideApiBaseUrl'
 import { provideRouter } from '@angular/router'
 import { MockComponent } from 'ng-mocks'
 import { MatDrawer } from '@angular/material/sidenav'
-import { findComponent } from '@testing'
+import { findComponent } from '@common/testing'
 
 describe('App should', () => {
   let fixture: ComponentFixture<App>

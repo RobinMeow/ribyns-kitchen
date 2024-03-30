@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { Header } from './header'
 import { provideAppName } from 'src/app/core'
 import { Router, provideRouter } from '@angular/router'
-import { byTestAttr } from '@testing'
+import { byTestAttr } from '@common/testing'
 
 describe('Header should', () => {
   let component: Header
