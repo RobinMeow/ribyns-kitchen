@@ -58,10 +58,16 @@ export class AuthService extends AuthApi {
   /** sign up also sign you in right away */
   async signUpAsync(registerChef: RegisterChef): Promise<Chef> {
     const name = registerChef.name.trim()
-    if (name.length === 0) throw new Error('Name is requried for sign up.')
+    assert(name, 'Name is requried for sign up.')
 
-    const password = registerChef.password?.trim()
-    if (password.length === 0)
+    const trimmedPassword = registerChef.password.trim()
+    assert(trimmedPassword, 'Password is required for sign up.')
+    assert(
+      trimmedPassword.length === registerChef.password.length,
+      'Password may not contain leading or trailing spaces.'
+    )
+
+    if (trimmedPassword.length === 0)
       throw new Error('Password is requried for sign up.')
 
     let email: string | undefined = registerChef.email?.trim()
@@ -70,7 +76,7 @@ export class AuthService extends AuthApi {
     }
     const registerChefTrimmed: RegisterChef = {
       name: name,
-      password: password,
+      password: trimmedPassword,
       email: email
     }
 

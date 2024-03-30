@@ -3,7 +3,7 @@ import { inject } from '@angular/core'
 import { TokenStorage } from '../../auth/utils/token.storage'
 import { API_BASE_URL } from './API-BASE-URL'
 
-export class BaseApi {
+export abstract class BaseApi {
   protected readonly httpClient = inject(HttpClient)
   protected readonly tokenStorage = inject(TokenStorage)
   protected readonly BASE_URL = inject(API_BASE_URL)

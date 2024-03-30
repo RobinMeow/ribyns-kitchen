@@ -1,4 +1,4 @@
 export interface ChefDto {
   readonly name: string
-  readonly email: string
+  readonly email?: string
 }
