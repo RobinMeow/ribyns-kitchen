@@ -26,6 +26,8 @@
       "@core": [ "src/app/core/index.ts" ],
       "@auth": [ "src/app/auth/index.ts" ],
       "@recipe": [ "src/app/recipe/index.ts" ],
+      "@shared/feedback": [ "src/app/shared/feedback/index.ts" ],
+      "@common": [ "src/app/common/index.ts" ],
       "@common/testing": [ "src/app/common/testing/index.ts" ],
       "@common/assertions": [ "src/app/common/assertions/index.ts" ],
       "@api": [ "src/app/shared/api/index.ts" ]

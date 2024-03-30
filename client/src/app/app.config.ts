@@ -7,9 +7,10 @@ import { BrowserModule } from '@angular/platform-browser'
 
 import { authInterceptor, authRoutes } from '@auth'
 import { provideApiBaseUrl } from '@api'
-import { errorFeedbackInterceptor, withRoutes } from '@common'
 import { coreRoutes, provideAppName, provideAppTitleStrategy } from '@core'
 import { recipeRoutes } from '@recipe'
+import { errorFeedbackInterceptor } from '@shared/feedback'
+import { withRoutes } from '@common'
 
 export const appConfig: ApplicationConfig = {
   providers: [
