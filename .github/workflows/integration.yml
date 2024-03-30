@@ -80,7 +80,7 @@ jobs:
       - name: build
         run: yarn run build
 
-      - name: run jest tests
+      - name: run jasmine tests
         run: yarn run test --browsers ChromeHeadless --watch false
 
   cypress-e2e-tests-on-google-chrome:
