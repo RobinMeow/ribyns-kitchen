@@ -4,7 +4,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { DeleteChef } from './delete-chef'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { provideApiBaseUrlTesting } from '@api'
-import { byTestAttr, setValue } from '@testing'
+import { byTestAttr, setValue } from '@common/testing'
 
 describe('DeleteChef should', () => {
   let component: DeleteChef

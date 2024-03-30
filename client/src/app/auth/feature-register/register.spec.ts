@@ -5,7 +5,7 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations'
 
 import { Register } from './register'
 import { provideApiBaseUrlTesting } from '@api'
-import { byTestAttr, setValue } from '@testing'
+import { byTestAttr, setValue } from '@common/testing'
 
 describe('Register should', () => {
   let component: Register

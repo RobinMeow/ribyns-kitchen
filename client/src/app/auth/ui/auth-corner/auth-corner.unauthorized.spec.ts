@@ -6,7 +6,7 @@ import { AuthCorner } from './auth-corner'
 import { AuthService } from '../../utils/auth.service'
 import { Router, provideRouter } from '@angular/router'
 import { MockProvider } from 'ng-mocks'
-import { byTestAttr } from '@testing'
+import { byTestAttr } from '@common/testing'
 import { Signal, signal } from '@angular/core'
 
 describe('AuthCorner when unauthorized should', () => {

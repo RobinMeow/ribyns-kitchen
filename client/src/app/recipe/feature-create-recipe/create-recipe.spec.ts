@@ -6,7 +6,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { RecipeApi } from '../util/recipe.api'
 import { provideApiBaseUrlTesting } from '@api'
-import { byTestAttr, setValue } from '@testing'
+import { byTestAttr, setValue } from '@common/testing'
 import { MockProvider } from 'ng-mocks'
 
 describe('CreateRecipe should', () => {

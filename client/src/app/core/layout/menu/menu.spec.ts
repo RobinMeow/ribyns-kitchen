@@ -4,7 +4,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideApiBaseUrlTesting } from '@api'
 import { provideRouter } from '@angular/router'
-import { byTestAttr } from '@testing'
+import { byTestAttr } from '@common/testing'
 import { MatDrawer } from '@angular/material/sidenav'
 
 describe('Menu should', () => {
