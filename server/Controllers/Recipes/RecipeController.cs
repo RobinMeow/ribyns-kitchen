@@ -46,7 +46,7 @@ public sealed class RecipeController(
         System.Diagnostics.Debug.Assert(newRecipe.Title != null);
         return new Recipe()
         {
-            CreatedAt = IsoDateTime.Now,
+            CreatedAt = DateTime.UtcNow,
             Name = newRecipe.Title!
         };
     }

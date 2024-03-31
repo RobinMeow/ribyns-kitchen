@@ -18,12 +18,10 @@ public sealed class MongoDbContext : DbContext
         ConventionPack camelCaseConvention = new ConventionPack {
             new CamelCaseElementNameConvention()
         };
-        ConventionRegistry.Register("CamelCase", camelCaseConvention, (System.Type type) => true);
+        ConventionRegistry.Register("CamelCase", camelCaseConvention, (Type type) => true);
 
         if (!BsonClassMap.IsClassMapRegistered(typeof(Recipe))) // ToDo: Check where this call belongs
         {
-            BsonSerializer.RegisterSerializer(typeof(IsoDateTime), new BsonIsoDateTimeSerializer()); // Serializers (in expectation to have the same lifetime scope as ClassMaps)
-
             BsonClassMap.RegisterClassMap<Entity>(x =>
             {
                 x.AutoMap();
