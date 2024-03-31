@@ -27,11 +27,14 @@ public sealed class RecipeController(
     [ProducesDefaultResponseType]
     public async Task<ActionResult<RecipeDto>> AddAsync([Required] NewRecipeDto newRecipe, CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var newRecipeSpecification = new NewRecipeSpecification(newRecipe);
         if (!newRecipeSpecification.IsSatisfied())
             return BadRequest(newRecipe);
 
         Recipe recipe = Create(newRecipe);
+
         cancellationToken.ThrowIfCancellationRequested();
         await _recipeRepository.AddAsync(recipe, cancellationToken);
 
