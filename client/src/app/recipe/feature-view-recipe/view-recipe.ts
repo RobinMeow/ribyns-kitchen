@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { ActivatedRoute } from '@angular/router'
+import { Recipe } from '../util/Recipe'
 
 @Component({
   standalone: true,
@@ -7,4 +9,8 @@ import { CommonModule } from '@angular/common'
   templateUrl: './view-recipe.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ViewRecipe {}
+export class ViewRecipe {
+  protected readonly recipe = inject(ActivatedRoute).snapshot.data[
+    'recipe'
+  ] as Recipe
+}
