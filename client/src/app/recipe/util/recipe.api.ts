@@ -17,8 +17,26 @@ export class RecipeApi extends BaseApi {
       .post<RecipeDto>(url, recipe, {
         headers: headers
       })
-      .pipe(map((dto) => new Recipe(dto)))
+      .pipe(map(this.toRecipe))
 
     return firstValueFrom(request$)
+  }
+
+  // TODO test
+  getAsync(id: string): Promise<Recipe> {
+    const headers = this.defaultHeadersWithAuth()
+    const url = this.URL + 'GetAsync?recipeId=' + id
+
+    const request$ = this.httpClient
+      .get<RecipeDto>(url, {
+        headers: headers
+      })
+      .pipe(map(this.toRecipe))
+
+    return firstValueFrom(request$)
+  }
+
+  private toRecipe(dto: RecipeDto): Recipe {
+    return new Recipe(dto)
   }
 }
