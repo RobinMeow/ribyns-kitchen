@@ -21,6 +21,16 @@ public sealed class RecipeMongoDbCollection : IRecipeRepository
     {
         return await _collection
             .Find<Recipe>(_ => true)
-            .ToListAsync(cancellationToken).ConfigureAwait(false);
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
 	}
+
+    public Task<Recipe?> GetAsync(EntityId id, CancellationToken ct = default)
+    {
+        return _collection
+            // did not work, due to serialization
+            // Builders<Recipe>.Filter.Eq(x => x.Id, id)
+            .Find(x => x.Id == id)
+            .FirstOrDefaultAsync(ct) as Task<Recipe?>;
+    }
 }

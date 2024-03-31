@@ -62,4 +62,22 @@ public sealed class RecipeController(
         IEnumerable<RecipeDto> recipeDtos = recipe.ToDto();
         return Ok(recipeDtos);
     }
+
+    [HttpGet(nameof(GetAsync))]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult<RecipeDto>> GetAsync([FromQuery] string recipeId, CancellationToken ct = default)
+        // TODO ValidEntityId
+    {
+        ct.ThrowIfCancellationRequested();
+        Recipe? recipe = await _recipeRepository.GetAsync(new EntityId(recipeId), ct);
+
+        if (recipe == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(recipe.ToDto());
+    }
 }
