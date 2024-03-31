@@ -22,7 +22,6 @@ export class RecipeApi extends BaseApi {
     return firstValueFrom(request$)
   }
 
-  // TODO test
   getAsync(id: string): Promise<Recipe> {
     const headers = this.defaultHeadersWithAuth()
     const url = this.URL + 'GetAsync?recipeId=' + id
