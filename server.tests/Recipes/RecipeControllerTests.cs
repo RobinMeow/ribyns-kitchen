@@ -1,3 +1,4 @@
+using api.Controllers;
 using api.Controllers.Recipes;
 using api.Domain;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -10,11 +11,10 @@ namespace Recipes;
 public sealed class RecipeControllerTests
 {
     readonly RecipeController _recipeController;
+    readonly DbContext dbContext = Substitute.For<DbContext>();
 
     public RecipeControllerTests()
     {
-        DbContext dbContext = Substitute.For<DbContext>();
-
         _recipeController = new RecipeController(
             dbContext,
             Substitute.For<ILogger<RecipeController>>()
@@ -61,5 +61,53 @@ public sealed class RecipeControllerTests
     {
         ActionResult<IEnumerable<RecipeDto>> result = await _recipeController.GetAllAsync();
         IsType<OkObjectResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task GetAsync_returns_NotFound()
+    {
+        ActionResult<RecipeDto> result = await _recipeController.GetAsync(EntityId.New());
+        IsType<NotFoundResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task GetAsync_returns_MockResult()
+    {
+        Recipe recipe = new Recipe() { Name = "" };
+        
+        dbContext.RecipeRepository
+            .GetAsync(Arg.Is(recipe.Id), default)
+            .Returns(Task.FromResult(recipe) as Task<Recipe?>);
+
+        ActionResult<RecipeDto> result = await _recipeController.GetAsync(recipe.Id);
+        IsType<OkObjectResult>(result.Result);
+        object? dto = ((OkObjectResult)result.Result).Value;
+        NotNull(dto);
+        IsType<RecipeDto>(dto);
+        Equal(recipe.Id, ((RecipeDto)dto).Id);
+    }
+
+    [Fact]
+    public async Task GetAsync_cancels_for_CancelationToken()
+    {
+        var source = new CancellationTokenSource();
+        source.Cancel();
+        await ThrowsAsync<OperationCanceledException>(() => _recipeController.GetAsync("", source.Token));
+    }
+
+    [Fact]
+    public async Task AddAsync_cancels_for_CancelationToken()
+    {
+        var source = new CancellationTokenSource();
+        source.Cancel();
+        await ThrowsAsync<OperationCanceledException>(() => _recipeController.AddAsync(null!, source.Token));
+    }
+
+    [Fact]
+    public async Task GetAllAsync_cancels_for_CancelationToken()
+    {
+        var source = new CancellationTokenSource();
+        source.Cancel();
+        await ThrowsAsync<OperationCanceledException>(() => _recipeController.GetAllAsync(source.Token));
     }
 }

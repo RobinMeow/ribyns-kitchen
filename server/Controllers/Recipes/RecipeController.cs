@@ -27,11 +27,14 @@ public sealed class RecipeController(
     [ProducesDefaultResponseType]
     public async Task<ActionResult<RecipeDto>> AddAsync([Required] NewRecipeDto newRecipe, CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         var newRecipeSpecification = new NewRecipeSpecification(newRecipe);
         if (!newRecipeSpecification.IsSatisfied())
             return BadRequest(newRecipe);
 
         Recipe recipe = Create(newRecipe);
+
         cancellationToken.ThrowIfCancellationRequested();
         await _recipeRepository.AddAsync(recipe, cancellationToken);
 
@@ -61,5 +64,23 @@ public sealed class RecipeController(
         IEnumerable<Recipe> recipe = await _recipeRepository.GetAllAsync(cancellationToken);
         IEnumerable<RecipeDto> recipeDtos = recipe.ToDto();
         return Ok(recipeDtos);
+    }
+
+    [HttpGet(nameof(GetAsync))]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult<RecipeDto>> GetAsync([FromQuery] string recipeId, CancellationToken ct = default)
+        // TODO ValidEntityId
+    {
+        ct.ThrowIfCancellationRequested();
+        Recipe? recipe = await _recipeRepository.GetAsync(new EntityId(recipeId), ct);
+
+        if (recipe == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(recipe.ToDto());
     }
 }

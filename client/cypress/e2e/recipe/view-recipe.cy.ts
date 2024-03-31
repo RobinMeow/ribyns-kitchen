@@ -1,6 +1,8 @@
 describe('create-recipe should', () => {
-  it(`redirect to recipe/{id} recipe is created sucessfully`, () => {
+  it(`redirect to recipe/{recipeId} recipe is created sucessfully`, () => {
+    cy.task('db:reset')
     cy.createTestUser()
+    // TODO this should use a seeded database
 
     cy.visit('/create-recipe')
 
@@ -19,6 +21,8 @@ describe('create-recipe should', () => {
       const newRecipe: { id: string } = stuff.response?.body
       cy.url().should('include', 'recipe/' + newRecipe.id)
     })
+
+    cy.getByAttr('title').contains(recipeTitle)
 
     cy.deleteTestUser()
   })
