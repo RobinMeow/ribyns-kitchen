@@ -4,10 +4,13 @@ import { MongoClient } from 'mongodb'
 import { assert } from './src/app/common/assertions/assert'
 
 export default defineConfig({
+  env: {
+    apiBaseUrl: 'http://localhost:5126',
+    baseUrl: 'http://localhost:4200'
+  },
   e2e: {
     baseUrl: 'http://localhost:4200',
     experimentalRunAllSpecs: true,
-    experimentalInteractiveRunEvents: true,
     specPattern: 'cypress/e2e/**/*_{cy,spec}.{js,jsx,ts,tsx}',
     async setupNodeEvents(
       on: Cypress.PluginEvents,

@@ -90,11 +90,14 @@ function byTestAttr(
 Cypress.Commands.add('byTestAttr', byTestAttr)
 
 Cypress.Commands.add('login', () => {
+  const apiBaseUrl = Cypress.env('apiBaseUrl')
+
   cy.fixture('test-user.json').as('user')
+
   cy.get('@user').then(async (user) => {
     const { chefname, password }: any = user
 
-    await fetch('http://localhost:5126/Auth/RegisterAsync', {
+    await fetch(apiBaseUrl + '/Auth/RegisterAsync', {
       method: 'POST',
       body: JSON.stringify({
         name: chefname,
@@ -111,7 +114,7 @@ Cypress.Commands.add('login', () => {
       cy.log('Testuser already created.')
     })
 
-    const loginResponse = await fetch('http://localhost:5126/Auth/LoginAsync', {
+    const loginResponse = await fetch(apiBaseUrl + '/Auth/LoginAsync', {
       method: 'POST',
       body: JSON.stringify({
         name: chefname,
@@ -125,6 +128,5 @@ Cypress.Commands.add('login', () => {
 
     const token = await loginResponse.json()
     window.localStorage.setItem('token', token)
-    Cypress.env({ baseUrl: 'http://localhost:4200' })
   })
 })
