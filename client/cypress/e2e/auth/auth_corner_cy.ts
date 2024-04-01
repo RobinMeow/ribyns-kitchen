@@ -6,9 +6,6 @@ describe('auth-corner', () => {
     })
 
     it('contain logout button', () => {
-      cy.login()
-      cy.visit('/')
-
       cy.byTestAttr('logout-button')
         .should('be.visible')
         .invoke('text')

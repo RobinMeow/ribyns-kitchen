@@ -19,3 +19,9 @@ import './commands'
 // beforeEach(function () {
 //   code that runs before every spec tests
 // })
+beforeEach('fetching SPA', async () => {
+  // make sure, the first http request goes onto the SPA
+  await fetch(Cypress.env('baseUrl'), {
+    method: 'GET'
+  })
+})

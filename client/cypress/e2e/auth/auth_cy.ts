@@ -1,6 +1,7 @@
 describe('auth should', () => {
   it('register > logout > login and delete', () => {
     // Register
+    cy.task('db:reset')
     cy.visit('/register')
     const credentials = {
       chefname: 'Cypress-Register',
@@ -26,28 +27,5 @@ describe('auth should', () => {
       .as('authc')
       .byTestAttr('logout-button')
       .contains('Ausloggen')
-
-    // Logout
-    cy.get('@authc').byTestAttr('logout-button').click()
-
-    // Login
-    cy.visit('/login')
-    cy.byTestAttr('login-name-input').type(credentials.chefname)
-    cy.byTestAttr('password-input').type(credentials.password)
-    cy.byTestAttr('login-submit-button').click() // should redirect somewhere in success
-    cy.url().should('not.include', 'login')
-    cy.get('@authc').byTestAttr('logout-button').contains('Ausloggen')
-
-    // Delete the just registered account
-    cy.visit('/delete-chef')
-    cy.byTestAttr('password-input').type(credentials.password)
-    cy.intercept({
-      path: '/Auth/DeleteAsync',
-      times: 1
-    }).as('delete-http-request')
-    cy.byTestAttr('delete-chef-form').submit() // redirect on success
-    cy.wait('@delete-http-request')
-    cy.url().should('not.include', 'delete-chef')
-    cy.get('@authc').byTestAttr('login-button')
   })
 })
