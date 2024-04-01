@@ -59,7 +59,10 @@ export default defineConfig({
               title: title
             })
           } catch (error) {
-            console.error('Error creating recipe database:', error)
+            console.error(
+              `Failed to see recipe with id '${id}' and title '${title}'.`,
+              error
+            )
           } finally {
             await client.close()
           }
