@@ -1,5 +1,5 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core'
-import { APP_NAME } from './app_name_temp'
+import { APP_NAME } from './app_name'
 
 export function provideAppName(): EnvironmentProviders {
   return makeEnvironmentProviders([
