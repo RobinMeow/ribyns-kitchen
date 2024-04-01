@@ -59,6 +59,11 @@ declare namespace Cypress {
         | undefined
     ): Cypress.Chainable<JQuery<HTMLElement>>
 
+    /**
+     * looks for en existing login token.
+     * If none found, tries to register (+login).
+     * If the Chefname already exists will do login with those creds.
+     */
     login(): void
   }
 }
@@ -99,10 +104,11 @@ Cypress.Commands.add('login', () => {
         },
         failOnStatusCode: false
       }).then((req) => {
-        if (!req.isOkStatusCode) {
-          if (req.body !== 'Chefname ist bereits vergeben.') {
-            throw new Error('Failed to login')
-          }
+        if (
+          !req.isOkStatusCode &&
+          req.body !== 'Chefname ist bereits vergeben.'
+        ) {
+          throw new Error('Failed to login')
         }
       })
 
