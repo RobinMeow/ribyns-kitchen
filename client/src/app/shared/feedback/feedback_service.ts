@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { FeedbackSnackBar } from './feedback-snackbar/feedback_snack_bar'
-import { FeedbackData } from './FeedbackData'
+import { FeedbackData } from './feedback_data'
 
 @Injectable({
   providedIn: 'root'
