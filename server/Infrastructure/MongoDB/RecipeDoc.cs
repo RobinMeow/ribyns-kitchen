@@ -14,7 +14,7 @@ public sealed record RecipeDoc : Document
     {
         return new RecipeDoc()
         {
-            Id = recipe.Id,
+            Id = recipe.Id.ToString(),
             Title = recipe.Title,
             CreatedAt = recipe.CreatedAt,
         };

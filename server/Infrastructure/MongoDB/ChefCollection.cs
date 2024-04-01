@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace api.Infrastructure.MongoDB;
 
-public sealed class ChefCollection : IChefRepository
+public sealed class ChefCollection : Collection, IChefRepository
 {
     readonly IMongoCollection<ChefDoc> _collection;
 
@@ -24,7 +24,7 @@ public sealed class ChefCollection : IChefRepository
         FilterDefinition<ChefDoc> byName = builder.Eq(doc => doc.Name, name);
 
         return _collection
-            .Find(byName)
+            .Find(byName, s_findOptions)
             .Project(ChefProjectionDefinition())
             .FirstOrDefaultAsync(ct) as Task<Chef?>;
     }
@@ -35,7 +35,7 @@ public sealed class ChefCollection : IChefRepository
         FilterDefinition<ChefDoc> byEmail = builder.Eq(doc => doc.Email, email);
 
         return _collection
-            .Find(byEmail)
+            .Find(byEmail, s_findOptions)
             .Project(ChefProjectionDefinition())
             .FirstOrDefaultAsync(cancellationToken) as Task<Chef?>;
     }
@@ -43,7 +43,7 @@ public sealed class ChefCollection : IChefRepository
     public async Task<IEnumerable<Chef>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _collection
-            .Find(_ => true)
+            .Find(_ => true, s_findOptions)
             .Project(ChefProjectionDefinition())
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);
@@ -52,7 +52,7 @@ public sealed class ChefCollection : IChefRepository
     public Task<Chef> GetAsync(string name, CancellationToken cancellationToken = default)
     {
         return _collection
-            .Find(chef => chef.Name == name)
+            .Find(chef => chef.Name == name, s_findOptions)
             .Project(ChefProjectionDefinition())
             .SingleOrDefaultAsync(cancellationToken);
     }

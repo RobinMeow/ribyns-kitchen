@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace api.Infrastructure.MongoDB;
 
-public sealed class RecipeCollection : IRecipeRepository
+public sealed class RecipeCollection : Collection, IRecipeRepository
 {
     readonly IMongoCollection<RecipeDoc> _collection;
 
@@ -22,16 +22,17 @@ public sealed class RecipeCollection : IRecipeRepository
     public async Task<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _collection
-            .Find(_ => true)
+            .Find(_ => true, s_findOptions)
             .Project(RecipeProjectionDefinition())
             .ToListAsync(cancellationToken) // TODO get rid of this and return the query
             .ConfigureAwait(false);
     }
 
-    public Task<Recipe?> GetAsync(EntityId id, CancellationToken ct = default)
+    public Task<Recipe?> GetAsync(EntityId entityId, CancellationToken ct = default)
     {
+        string id = entityId.ToString();
         return _collection
-            .Find(Builders<RecipeDoc>.Filter.Eq(x => x.Id, id))
+            .Find(Builders<RecipeDoc>.Filter.Eq(x => x.Id, id), s_findOptions)
             .Project(RecipeProjectionDefinition())
             .FirstOrDefaultAsync(ct) as Task<Recipe?>;
     }

@@ -18,7 +18,7 @@ public sealed record ChefDoc : Document
     {
         return new ChefDoc()
         {
-            Id = chef.Id,
+            Id = chef.Id.ToString(),
             Name = chef.Name,
             PasswordHash = chef.PasswordHash,
             Email = chef.Email,

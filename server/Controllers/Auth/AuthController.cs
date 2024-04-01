@@ -59,7 +59,7 @@ public sealed class AuthController(
         string? uri = null;
         return TypedResults.Created(uri, new ChefDto
         {
-            Id = chef.Id,
+            Id = chef.Id.ToString(),
             Email = chef.Email,
             CreatedAt = chef.CreatedAt,
         });

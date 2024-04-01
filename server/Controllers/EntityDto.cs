@@ -6,8 +6,8 @@ namespace api.Controllers;
 public abstract class EntityDto
 {
     [Required]
-    public string Id { get; set; } = EntityId.New();
+    public required string Id { get; set; }
 
     [Required]
-    public DateTime CreatedAt { get; set; } = DateTime.MinValue;
+    public DateTime CreatedAt { get; set; }
 }

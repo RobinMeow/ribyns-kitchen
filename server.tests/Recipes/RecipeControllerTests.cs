@@ -66,7 +66,7 @@ public sealed class RecipeControllerTests
     [Fact]
     public async Task GetAsync_returns_NotFound()
     {
-        ActionResult<RecipeDto> result = await _recipeController.GetAsync(EntityId.New());
+        ActionResult<RecipeDto> result = await _recipeController.GetAsync(EntityId.New().ToString());
         IsType<NotFoundResult>(result.Result);
     }
 
@@ -83,12 +83,12 @@ public sealed class RecipeControllerTests
             .GetAsync(Arg.Is(recipe.Id), default)
             .Returns(Task.FromResult(recipe) as Task<Recipe?>);
 
-        ActionResult<RecipeDto> result = await _recipeController.GetAsync(recipe.Id);
+        ActionResult<RecipeDto> result = await _recipeController.GetAsync(recipe.Id.ToString());
         IsType<OkObjectResult>(result.Result);
         object? dto = ((OkObjectResult)result.Result).Value;
         NotNull(dto);
         IsType<RecipeDto>(dto);
-        Equal(recipe.Id, ((RecipeDto)dto).Id);
+        Equal(recipe.Id.ToString(), ((RecipeDto)dto).Id);
     }
 
     [Fact]
