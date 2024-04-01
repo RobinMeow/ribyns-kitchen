@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { Router } from '@angular/router'
 import { RecipeApi } from '../util/recipe_api'
-import { NewRecipe } from '../util/NewRecipe'
+import { NewRecipe } from '../util/new_recipe'
 import { Recipe } from '../util/Recipe'
 
 @Component({
