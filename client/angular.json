@@ -99,6 +99,9 @@
             "tsConfig": "tsconfig.spec.json",
             "include": [
               "**/*spec.ts"
+            ],
+            "codeCoverageExclude": [
+              "**/*_routes.ts"
             ]
           }
         },

@@ -16,6 +16,7 @@ import { Router } from '@angular/router'
 import { Chef } from '../utils/Chef'
 import { MatInputModule } from '@angular/material/input'
 import { PasswordInput } from '../ui/password/password_input'
+import { assert } from '@common/assertions'
 
 @Component({
   selector: 'auth-delete-chef',
@@ -52,10 +53,7 @@ export class DeleteChef {
     if (this.form.invalid) return
 
     const chef: Chef | null = this.chefSignal()
-    if (chef === null) {
-      await this.router.navigateByUrl('/')
-      return
-    }
+    assert(chef, 'Chef may not be null.')
 
     const credentials: Credentials = {
       name: chef.name,
