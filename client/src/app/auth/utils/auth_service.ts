@@ -9,7 +9,7 @@ import {
   signal
 } from '@angular/core'
 import { Credentials } from './Credentials'
-import { Chef } from './Chef'
+import { Chef } from './chef_temp'
 import { JwtDecoder } from './jwt_decoder'
 import { DecodedToken } from './DecodedToken'
 import { AuthApi } from './auth_api'
