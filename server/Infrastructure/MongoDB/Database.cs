@@ -1,3 +1,4 @@
+using api.Domain;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
@@ -5,11 +6,11 @@ using MongoDB.Driver;
 
 namespace api.Infrastructure.MongoDB;
 
-public sealed class Database : Domain.DbContext
+public sealed class Database : DbContext
 {
-    public override Domain.IRecipeRepository RecipeRepository { get; init; }
+    public override IRecipeRepository RecipeRepository { get; init; }
 
-    public override Domain.IChefRepository ChefRepository { get; init; }
+    public override IChefRepository ChefRepository { get; init; }
 
     public Database(IOptions<PersistenceSettings> persistenceSettings)
     : base()
@@ -28,7 +29,7 @@ public sealed class Database : Domain.DbContext
                 x.MapMember(doc => doc.Id).SetElementName("_id");
             });
 
-            BsonClassMap.RegisterClassMap<Domain.Chef>(x =>
+            BsonClassMap.RegisterClassMap<ChefDoc>(x =>
             {
                 x.AutoMap();
                 x.SetDiscriminator(nameof(Document));
