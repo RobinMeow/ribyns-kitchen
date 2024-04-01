@@ -8,7 +8,7 @@ import {
   inject,
   signal
 } from '@angular/core'
-import { Credentials } from './Credentials'
+import { Credentials } from './credentials_temp'
 import { Chef } from './chef'
 import { JwtDecoder } from './jwt_decoder'
 import { DecodedToken } from './decoded_token'
