@@ -1,6 +1,4 @@
-using api;
 using api.Domain;
-using api.Infrastructure;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
@@ -8,13 +6,13 @@ using MongoDB.Driver;
 
 namespace api.Infrastructure.MongoDB;
 
-public sealed class MongoDbContext : DbContext
+public sealed class Database : DbContext
 {
     public override IRecipeRepository RecipeRepository { get; init; }
 
     public override IChefRepository ChefRepository { get; init; }
 
-    public MongoDbContext(IOptions<PersistenceSettings> persistenceSettings)
+    public Database(IOptions<PersistenceSettings> persistenceSettings)
     : base()
     {
         ConventionPack camelCaseConvention = new ConventionPack {
@@ -52,8 +50,8 @@ public sealed class MongoDbContext : DbContext
 
         IMongoDatabase db = client.GetDatabase(databaseName);
 
-        RecipeRepository = new RecipeMongoDbCollection(db);
-        ChefRepository = new ChefMongoDbCollection(db);
+        RecipeRepository = new RecipeCollection(db);
+        ChefRepository = new ChefCollection(db);
     }
 }
 

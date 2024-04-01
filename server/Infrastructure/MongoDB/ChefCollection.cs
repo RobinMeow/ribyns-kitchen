@@ -3,11 +3,11 @@ using MongoDB.Driver;
 
 namespace api.Infrastructure.MongoDB;
 
-public sealed class ChefMongoDbCollection : IChefRepository
+public sealed class ChefCollection : IChefRepository
 {
     readonly IMongoCollection<Chef> _collection;
 
-    public ChefMongoDbCollection(IMongoDatabase database)
+    public ChefCollection(IMongoDatabase database)
     {
         _collection = database.GetCollection<Chef>("chefs");
     }

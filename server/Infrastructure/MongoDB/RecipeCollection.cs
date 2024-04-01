@@ -3,11 +3,11 @@ using MongoDB.Driver;
 
 namespace api.Infrastructure.MongoDB;
 
-public sealed class RecipeMongoDbCollection : IRecipeRepository
+public sealed class RecipeCollection : IRecipeRepository
 {
     readonly IMongoCollection<Recipe> _collection;
 
-    public RecipeMongoDbCollection(IMongoDatabase database)
+    public RecipeCollection(IMongoDatabase database)
     {
         _collection = database.GetCollection<Recipe>("recipes");
     }
