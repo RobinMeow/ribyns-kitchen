@@ -1,4 +1,3 @@
-using api.Domain;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
@@ -6,11 +5,11 @@ using MongoDB.Driver;
 
 namespace api.Infrastructure.MongoDB;
 
-public sealed class Database : DbContext
+public sealed class Database : Domain.DbContext
 {
-    public override IRecipeRepository RecipeRepository { get; init; }
+    public override Domain.IRecipeRepository RecipeRepository { get; init; }
 
-    public override IChefRepository ChefRepository { get; init; }
+    public override Domain.IChefRepository ChefRepository { get; init; }
 
     public Database(IOptions<PersistenceSettings> persistenceSettings)
     : base()
@@ -20,7 +19,7 @@ public sealed class Database : DbContext
         };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, (type) => true);
 
-        if (!BsonClassMap.IsClassMapRegistered(typeof(Recipe))) // ToDo: Check where this call belongs
+        if (!BsonClassMap.IsClassMapRegistered(typeof(RecipeDoc))) // ToDo: Check where this call belongs
         {
             BsonClassMap.RegisterClassMap<Document>(x =>
             {
@@ -29,16 +28,16 @@ public sealed class Database : DbContext
                 x.MapMember(doc => doc.Id).SetElementName("_id");
             });
 
-            BsonClassMap.RegisterClassMap<Chef>(x =>
+            BsonClassMap.RegisterClassMap<Domain.Chef>(x =>
             {
                 x.AutoMap();
-                x.SetDiscriminator(nameof(Entity));
+                x.SetDiscriminator(nameof(Document));
             });
 
-            BsonClassMap.RegisterClassMap<Recipe>(x =>
+            BsonClassMap.RegisterClassMap<RecipeDoc>(x =>
             {
                 x.AutoMap();
-                x.SetDiscriminator(nameof(Entity));
+                x.SetDiscriminator(nameof(Document));
             });
         }
 
