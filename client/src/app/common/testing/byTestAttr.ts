@@ -14,6 +14,8 @@ import { ComponentFixture } from '@angular/core/testing'
  * // alternatively: <div data-test="example"></div>
  * const div = queryByTestAttr<HTMLButtonElement>(fixture, 'example');
  * expect(div)toBeTruthy();
+ *
+ * @__PURE__
  */
 export function byTestAttr<T>(
   fixture: ComponentFixture<unknown>,

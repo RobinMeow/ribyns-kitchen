@@ -7,14 +7,14 @@ describe('create-recipe should', () => {
 
     const recipeTitle = 'valid recipe title'
 
-    cy.getByAttr('recipe-title-input').type(recipeTitle)
+    cy.byTestAttr('recipe-title-input').type(recipeTitle)
 
     cy.intercept({
       path: '/Recipe/AddAsync',
       times: 1
     }).as('create-recipe')
 
-    cy.getByAttr('create-recipe-submit-button').click()
+    cy.byTestAttr('create-recipe-submit-button').click()
 
     cy.wait('@create-recipe').then((stuff) => {
       const newRecipe: { id: string } = stuff.response?.body
