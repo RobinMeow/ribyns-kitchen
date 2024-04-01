@@ -7,6 +7,7 @@ export default defineConfig({
     baseUrl: 'http://localhost:4200',
     experimentalRunAllSpecs: true,
     experimentalInteractiveRunEvents: true,
+    specPattern: 'cypress/e2e/**/*_{cy,spec}.{js,jsx,ts,tsx}',
     async setupNodeEvents(
       on: Cypress.PluginEvents,
       config: Cypress.PluginConfigOptions
