@@ -6,7 +6,7 @@ import {
   Validators
 } from '@angular/forms'
 import { MatFormFieldModule } from '@angular/material/form-field'
-import { RecipeConstraints } from './RecipeConstraints'
+import { RecipeConstraints } from './recipe_constraints'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { Router } from '@angular/router'
