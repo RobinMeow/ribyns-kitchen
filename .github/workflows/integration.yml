@@ -116,7 +116,7 @@ jobs:
         uses: cypress-io/github-action@v6.6.0
         with:
           working-directory: client
-          spec: cypress/e2e/**/*.cy.ts
+          spec: cypress/e2e/**/*cy.ts
           if-no-files-found: error
           browser: chrome
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
