@@ -5,7 +5,6 @@ import { inject } from '@angular/core'
 import { RecipeApi } from '../util/recipe.api'
 import { assert } from '@common/assertions'
 
-/** @__PURE__ */
 export const recipeResolver: ResolveFn<Promise<Recipe>> = (
   route: ActivatedRouteSnapshot,
   _: unknown

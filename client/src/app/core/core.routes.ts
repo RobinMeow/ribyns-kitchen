@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router'
 
-/** @__PURE__ */
 export const coreRoutes: Routes = [
   {
     path: '',

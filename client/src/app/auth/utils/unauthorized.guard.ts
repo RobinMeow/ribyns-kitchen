@@ -4,7 +4,6 @@ import { AuthService } from './auth.service'
 
 /**
  * redirects to home, if authorized to protect the route which is reserved for unauthorized users. Like login.
- * @__PURE__
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const unauthorizedGuard: CanActivateFn = (route, state) => {

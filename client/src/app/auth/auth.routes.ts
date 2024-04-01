@@ -2,7 +2,6 @@ import { Route } from '@angular/router'
 import { unauthorizedGuard } from './utils/unauthorized.guard'
 import { authorizedGuard } from './utils/authorized.guard'
 
-/** @__PURE__ */
 export const authRoutes: Route[] = [
   {
     path: 'login',

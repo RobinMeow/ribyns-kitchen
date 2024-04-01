@@ -2,7 +2,6 @@ import { Route } from '@angular/router'
 import { authorizedGuard } from '@auth'
 import { recipeResolver } from './feature-view-recipe/recipe.resolver'
 
-/** @__PURE__ */
 export const recipeRoutes: Route[] = [
   {
     path: 'create-recipe',

@@ -1,7 +1,5 @@
-import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
-import { API_BASE_URL } from './API-BASE-URL';
-
-/** @__PURE__ */
+import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core'
+import { API_BASE_URL } from './API-BASE-URL'
 
 export const provideApiBaseUrlTesting = function (): EnvironmentProviders {
   return makeEnvironmentProviders([
@@ -9,5 +7,5 @@ export const provideApiBaseUrlTesting = function (): EnvironmentProviders {
       provide: API_BASE_URL,
       useValue: 'fake-url'
     }
-  ]);
-};
+  ])
+}

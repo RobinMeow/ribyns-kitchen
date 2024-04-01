@@ -7,7 +7,6 @@ import { inject } from '@angular/core'
 import { Observable, tap } from 'rxjs'
 import { FeedbackService } from './feedback.service'
 
-/** @__PURE__ */
 export const errorFeedbackInterceptor: HttpInterceptorFn = (
   req,
   next
