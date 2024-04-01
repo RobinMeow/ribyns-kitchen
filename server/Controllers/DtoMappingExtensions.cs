@@ -10,9 +10,8 @@ public static class DtoMappingExtensions
     {
         return new RecipeDto
         {
-            Id = recipe.Id,
-            ModelVersion = recipe.ModelVersion,
-            Title = recipe.Name,
+            Id = recipe.Id.ToString(),
+            Title = recipe.Title,
             CreatedAt = recipe.CreatedAt
         };
     }

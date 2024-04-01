@@ -46,6 +46,7 @@ public sealed class AuthController(
 
         var chef = new Chef()
         {
+            Id = EntityId.New(),
             Name = chefname,
             Email = newChef.Email
         };
@@ -58,10 +59,9 @@ public sealed class AuthController(
         string? uri = null;
         return TypedResults.Created(uri, new ChefDto
         {
-            Id = chef.Id,
+            Id = chef.Id.ToString(),
             Email = chef.Email,
             CreatedAt = chef.CreatedAt,
-            ModelVersion = chef.ModelVersion
         });
     }
 

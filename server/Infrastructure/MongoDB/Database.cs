@@ -4,43 +4,41 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
-namespace api.Infrastructure;
+namespace api.Infrastructure.MongoDB;
 
-public sealed class MongoDbContext : DbContext
+public sealed class Database : DbContext
 {
     public override IRecipeRepository RecipeRepository { get; init; }
 
     public override IChefRepository ChefRepository { get; init; }
 
-    public MongoDbContext(IOptions<PersistenceSettings> persistenceSettings)
+    public Database(IOptions<PersistenceSettings> persistenceSettings)
     : base()
     {
         ConventionPack camelCaseConvention = new ConventionPack {
             new CamelCaseElementNameConvention()
         };
-        ConventionRegistry.Register("CamelCase", camelCaseConvention, (System.Type type) => true);
+        ConventionRegistry.Register("CamelCase", camelCaseConvention, (type) => true);
 
-        if (!BsonClassMap.IsClassMapRegistered(typeof(Recipe))) // ToDo: Check where this call belongs
+        if (!BsonClassMap.IsClassMapRegistered(typeof(RecipeDoc))) // ToDo: Check where this call belongs
         {
-            BsonSerializer.RegisterSerializer(typeof(IsoDateTime), new BsonIsoDateTimeSerializer()); // Serializers (in expectation to have the same lifetime scope as ClassMaps)
-
-            BsonClassMap.RegisterClassMap<Entity>(x =>
+            BsonClassMap.RegisterClassMap<Document>(x =>
             {
                 x.AutoMap();
-                x.MapMember(entity => entity.ModelVersion).SetElementName("__v");
-                x.MapMember(entity => entity.Id).SetElementName("_id").SetSerializer(new EntityIdSerializer());
+                x.MapMember(doc => doc.ModelVersion).SetElementName("__v");
+                x.MapMember(doc => doc.Id).SetElementName("_id");
             });
 
-            BsonClassMap.RegisterClassMap<Chef>(x =>
+            BsonClassMap.RegisterClassMap<ChefDoc>(x =>
             {
                 x.AutoMap();
-                x.SetDiscriminator(nameof(Entity));
+                x.SetDiscriminator(nameof(Document));
             });
 
-            BsonClassMap.RegisterClassMap<Recipe>(x =>
+            BsonClassMap.RegisterClassMap<RecipeDoc>(x =>
             {
                 x.AutoMap();
-                x.SetDiscriminator(nameof(Entity));
+                x.SetDiscriminator(nameof(Document));
             });
         }
 
@@ -52,8 +50,8 @@ public sealed class MongoDbContext : DbContext
 
         IMongoDatabase db = client.GetDatabase(databaseName);
 
-        RecipeRepository = new RecipeMongoDbCollection(db);
-        ChefRepository = new ChefMongoDbCollection(db);
+        RecipeRepository = new RecipeCollection(db);
+        ChefRepository = new ChefCollection(db);
     }
 }
 

@@ -1,7 +1,7 @@
 using System.Net.Mime;
-using api.Domain;
-using api.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using api.Domain;
+using api.Infrastructure.MongoDB;
 
 namespace api;
 
@@ -26,7 +26,7 @@ internal class Program
         builder.Services.AddExceptionHandler<ExceptionHandler>();
         builder.AddFrontEndOriginsCors();
 
-        builder.Services.AddSingleton<DbContext, MongoDbContext>(); // Transient: instance per code request. Scoped: instance per HTTP request
+        builder.Services.AddSingleton<DbContext, Database>(); // Transient: instance per code request. Scoped: instance per HTTP request
 
         WebApplication app = builder.Build();
 

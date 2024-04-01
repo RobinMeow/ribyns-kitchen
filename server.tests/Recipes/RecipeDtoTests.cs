@@ -1,7 +1,8 @@
 ﻿using api.Controllers.Recipes;
+using api.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace server.tests.Recipes;
+namespace api.tests.Recipes;
 
 public sealed class RecipeDtoTests : DataAnnotationTests
 {
@@ -14,6 +15,7 @@ public sealed class RecipeDtoTests : DataAnnotationTests
     {
         var dto = new RecipeDto()
         {
+            Id = EntityId.New().ToString(),
             Title = title!,
         };
 
@@ -29,6 +31,7 @@ public sealed class RecipeDtoTests : DataAnnotationTests
     {
         var dto = new RecipeDto()
         {
+            Id = EntityId.New().ToString(),
             Title = title,
         };
 

@@ -1,7 +1,8 @@
 ﻿using api.Controllers;
+using api.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace server.tests;
+namespace api.tests;
 
 public sealed class ChefDtoTests : DataAnnotationTests
 {
@@ -12,6 +13,7 @@ public sealed class ChefDtoTests : DataAnnotationTests
     {
         var dto = new ChefDto()
         {
+            Id = EntityId.New().ToString(),
             Name = name!,
             Email = email
         };
@@ -28,6 +30,7 @@ public sealed class ChefDtoTests : DataAnnotationTests
     {
         var dto = new ChefDto()
         {
+            Id = EntityId.New().ToString(),
             Name = name,
             Email = email
         };

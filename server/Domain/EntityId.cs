@@ -45,8 +45,6 @@ public sealed record EntityId
         return new EntityId(newId);
     }
 
-    public static implicit operator string(EntityId entityId) => entityId.Id;
-
     public override string ToString()
     {
         return Id;

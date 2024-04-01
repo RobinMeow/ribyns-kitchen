@@ -2,7 +2,7 @@
 using api.Infrastructure.Auth;
 using Microsoft.IdentityModel.Tokens;
 
-namespace server.tests.Infrastructure;
+namespace api.tests.Infrastructure;
 
 public sealed class IssuerSigningKeyFactoryTests
 {

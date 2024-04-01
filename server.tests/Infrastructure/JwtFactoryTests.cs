@@ -3,12 +3,13 @@ using api.Domain.Auth;
 using api.Infrastructure.Auth;
 using System.Security.Claims;
 
-namespace server.tests.Infrastructure;
+namespace api.tests.Infrastructure;
 
 public sealed class JwtFactoryTests
 {
     readonly static Chef _chef = new()
     {
+        Id = EntityId.New(),
         Name = "Chefname",
     };
 
@@ -60,7 +61,10 @@ public sealed class JwtFactoryTests
     public void throws_when_chefname_is_missing()
     {
         // Arrange
-        var namelessChef = new Chef();
+        var namelessChef = new Chef()
+        {
+            Id = EntityId.New(),
+        };
 
         // Act & Assert
         ThrowsAny<Exception>(() => new Claim(ClaimTypes.Name, namelessChef.Name));

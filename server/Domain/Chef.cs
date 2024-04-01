@@ -1,11 +1,8 @@
 namespace api.Domain;
 
-public sealed class Chef() : Entity()
+public sealed class Chef : Entity
 {
-
-    public const int MODEL_VERSION = 0;
-
-    public override int ModelVersion { get; init; } = MODEL_VERSION;
+    public Chef() : base() {}
 
     public string Name { get; set; } = null!;
 
