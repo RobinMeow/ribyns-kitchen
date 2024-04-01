@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing'
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
-import { Recipe } from '../util/Recipe'
+import { Recipe } from '../util/recipe_temp'
 import { recipeResolver } from './recipe_resolver'
 import { RecipeApi } from '../util/recipe_api'
 import { MockProvider } from 'ng-mocks'

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { ViewRecipe } from './view_recipe'
 import { byTestAttr } from '@common/testing'
 import { ActivatedRoute } from '@angular/router'
-import { Recipe } from '../util/Recipe'
+import { Recipe } from '../util/recipe_temp'
 
 describe('Recipe should', () => {
   let component: ViewRecipe

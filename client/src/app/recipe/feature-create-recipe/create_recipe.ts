@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { Router } from '@angular/router'
 import { RecipeApi } from '../util/recipe_api'
 import { NewRecipe } from '../util/new_recipe'
-import { Recipe } from '../util/Recipe'
+import { Recipe } from '../util/recipe_temp'
 
 @Component({
   standalone: true,

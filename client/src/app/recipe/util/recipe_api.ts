@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { BaseApi } from '@api'
 import { firstValueFrom, map } from 'rxjs'
 import { NewRecipe } from './new_recipe'
-import { Recipe } from './Recipe'
+import { Recipe } from './recipe_temp'
 import { RecipeDto } from './recipe_dto'
 
 @Injectable({ providedIn: 'root' })
