@@ -1,5 +1,3 @@
-import { config } from '../config'
-
 describe('auth-corner', () => {
   describe('wehn authorized should', () => {
     beforeEach(() => {
@@ -19,7 +17,8 @@ describe('auth-corner', () => {
 
     it('navigate to home on logout button click', () => {
       cy.byTestAttr('logout-button').click()
-      cy.url().should('equal', config.hostUrl + '/')
+      const hostUrl = Cypress.env()['baseUrl']
+      cy.url().should('equal', hostUrl + '/')
       cy.byTestAttr('login-button').should('be.visible')
       cy.byTestAttr('register-button').should('be.visible')
     })

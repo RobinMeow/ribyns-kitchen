@@ -93,37 +93,35 @@ Cypress.Commands.add('login', () => {
   cy.fixture('test-user.json').as('user')
   cy.get('@user').then((user) => {
     const { chefname, password }: any = user
-    const token = window.localStorage.getItem('token')
-    if (!token) {
-      cy.request({
-        method: 'POST',
-        url: 'http://localhost:5126/Auth/RegisterAsync',
-        body: {
-          name: chefname,
-          password: password
-        },
-        failOnStatusCode: false
-      }).then((req) => {
-        if (
-          !req.isOkStatusCode &&
-          req.body !== 'Chefname ist bereits vergeben.'
-        ) {
-          throw new Error('Failed to login')
-        }
-      })
+    cy.request({
+      method: 'POST',
+      url: 'http://localhost:5126/Auth/RegisterAsync',
+      body: {
+        name: chefname,
+        password: password
+      },
+      failOnStatusCode: false
+    }).then((req) => {
+      if (
+        !req.isOkStatusCode &&
+        req.body !== 'Chefname ist bereits vergeben.'
+      ) {
+        throw new Error('Failed to login')
+      }
+    })
 
-      cy.request({
-        method: 'POST',
-        url: 'http://localhost:5126/Auth/LoginAsync',
-        body: {
-          name: chefname,
-          password: password
-        }
-      }).then((response) => {
-        const token = response.body
-        window.localStorage.setItem('token', token)
-        return
-      })
-    }
+    cy.request({
+      method: 'POST',
+      url: 'http://localhost:5126/Auth/LoginAsync',
+      body: {
+        name: chefname,
+        password: password
+      }
+    }).then((response) => {
+      const token = response.body
+      window.localStorage.setItem('token', token)
+      return
+    })
+    return
   })
 })

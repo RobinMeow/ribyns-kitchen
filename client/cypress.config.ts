@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { defineConfig } from 'cypress'
 import { MongoClient } from 'mongodb'
+import { assert } from './src/app/common/assertions/assert'
 
 export default defineConfig({
   e2e: {
@@ -28,7 +29,13 @@ export default defineConfig({
           }
           return Promise.resolve(null)
         },
-        async 'db:seed:recipe'() {
+        async 'db:seed:recipe'({ id, title }) {
+          assert(id && typeof id === 'string', 'Id required to create recipe.')
+          assert(
+            title && typeof title === 'string',
+            'Title required to create recipe.'
+          )
+
           const client = new MongoClient('mongodb://127.0.0.1:27017')
 
           try {
@@ -43,10 +50,10 @@ export default defineConfig({
             const db = client.db('communitycookbook')
             const collection = db.collection<Recipe>('recipes')
             await collection.insertOne({
-              _id: '2302dbb0-5269-4839-8bfa-b39e8c0b4821',
+              _id: id,
               __v: 0,
               createdAt: new Date(new Date().toISOString()),
-              title: 'Cypress Recipe'
+              title: title
             })
           } catch (error) {
             console.error('Error creating recipe database:', error)
