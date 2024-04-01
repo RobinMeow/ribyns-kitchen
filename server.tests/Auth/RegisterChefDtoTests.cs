@@ -1,7 +1,7 @@
 ﻿using api.Controllers.Auth;
 using System.ComponentModel.DataAnnotations;
 
-namespace server.tests.Auth;
+namespace api.tests.Auth;
 
 public sealed class RegisterChefDtoTests : DataAnnotationTests
 {

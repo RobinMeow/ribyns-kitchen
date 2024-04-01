@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace server.tests;
+namespace api.tests;
 
 public abstract class DataAnnotationTests
 {

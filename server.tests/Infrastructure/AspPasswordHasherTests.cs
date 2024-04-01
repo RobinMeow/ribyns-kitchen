@@ -2,7 +2,7 @@
 using api.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 
-namespace server.tests.Infrastructure;
+namespace api.tests.Infrastructure;
 
 public sealed class AspPasswordHasherTests
 {

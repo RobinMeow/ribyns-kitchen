@@ -1,29 +1,29 @@
 using api.Domain;
 using MongoDB.Driver;
 
-namespace api.Infrastructure;
+namespace api.Infrastructure.MongoDB;
 
 public sealed class RecipeMongoDbCollection : IRecipeRepository
 {
-	readonly IMongoCollection<Recipe> _collection;
+    readonly IMongoCollection<Recipe> _collection;
 
-	public RecipeMongoDbCollection(IMongoDatabase database)
-	{
-		_collection = database.GetCollection<Recipe>("recipes");
-	}
+    public RecipeMongoDbCollection(IMongoDatabase database)
+    {
+        _collection = database.GetCollection<Recipe>("recipes");
+    }
 
-	public Task AddAsync(Recipe recipe, CancellationToken cancellationToken = default)
-	{
+    public Task AddAsync(Recipe recipe, CancellationToken cancellationToken = default)
+    {
         return _collection.InsertOneAsync(recipe, cancellationToken: cancellationToken);
-	}
+    }
 
-	public async Task<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _collection
-            .Find<Recipe>(_ => true)
+            .Find(_ => true)
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);
-	}
+    }
 
     public Task<Recipe?> GetAsync(EntityId id, CancellationToken ct = default)
     {

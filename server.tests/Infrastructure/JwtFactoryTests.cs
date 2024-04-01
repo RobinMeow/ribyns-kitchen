@@ -3,7 +3,7 @@ using api.Domain.Auth;
 using api.Infrastructure.Auth;
 using System.Security.Claims;
 
-namespace server.tests.Infrastructure;
+namespace api.tests.Infrastructure;
 
 public sealed class JwtFactoryTests
 {

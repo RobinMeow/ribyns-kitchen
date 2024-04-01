@@ -1,7 +1,7 @@
 ﻿using api.Controllers.Recipes;
 using System.ComponentModel.DataAnnotations;
 
-namespace server.tests.Recipes;
+namespace api.tests.Recipes;
 
 public sealed class RecipeDtoTests : DataAnnotationTests
 {

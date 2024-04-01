@@ -1,7 +1,7 @@
 ﻿using api.Controllers;
 using System.ComponentModel.DataAnnotations;
 
-namespace server.tests;
+namespace api.tests;
 
 public sealed class ChefDtoTests : DataAnnotationTests
 {

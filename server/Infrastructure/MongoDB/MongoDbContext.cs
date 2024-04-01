@@ -1,10 +1,12 @@
+using api;
 using api.Domain;
+using api.Infrastructure;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
-namespace api.Infrastructure;
+namespace api.Infrastructure.MongoDB;
 
 public sealed class MongoDbContext : DbContext
 {
@@ -18,7 +20,7 @@ public sealed class MongoDbContext : DbContext
         ConventionPack camelCaseConvention = new ConventionPack {
             new CamelCaseElementNameConvention()
         };
-        ConventionRegistry.Register("CamelCase", camelCaseConvention, (Type type) => true);
+        ConventionRegistry.Register("CamelCase", camelCaseConvention, (type) => true);
 
         if (!BsonClassMap.IsClassMapRegistered(typeof(Recipe))) // ToDo: Check where this call belongs
         {

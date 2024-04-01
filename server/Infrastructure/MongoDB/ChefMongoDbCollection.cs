@@ -1,7 +1,7 @@
 using api.Domain;
 using MongoDB.Driver;
 
-namespace api.Infrastructure;
+namespace api.Infrastructure.MongoDB;
 
 public sealed class ChefMongoDbCollection : IChefRepository
 {
@@ -20,7 +20,7 @@ public sealed class ChefMongoDbCollection : IChefRepository
     public async Task<Chef?> GetByNameAsync(string name, CancellationToken cancellationToken = default)
     {
         IAsyncCursor<Chef> asyncCursor = await _collection
-            .FindAsync((Chef chef) => chef.Name == name,
+            .FindAsync((chef) => chef.Name == name,
             cancellationToken: cancellationToken)
             .ConfigureAwait(false);
 
@@ -31,7 +31,7 @@ public sealed class ChefMongoDbCollection : IChefRepository
     public async Task<Chef?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
         IAsyncCursor<Chef> asyncCursor = await _collection
-            .FindAsync((Chef chef) => chef.Email == email,
+            .FindAsync((chef) => chef.Email == email,
             cancellationToken: cancellationToken)
             .ConfigureAwait(false);
 
@@ -42,7 +42,7 @@ public sealed class ChefMongoDbCollection : IChefRepository
     public async Task<IEnumerable<Chef>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _collection
-            .Find<Chef>(_ => true)
+            .Find(_ => true)
             .ToListAsync(cancellationToken)
             .ConfigureAwait(false);
     }
@@ -50,7 +50,7 @@ public sealed class ChefMongoDbCollection : IChefRepository
     public Task<Chef> GetAsync(string name, CancellationToken cancellationToken = default)
     {
         return _collection
-            .Find<Chef>(chef => chef.Name == name)
+            .Find(chef => chef.Name == name)
             .SingleOrDefaultAsync(cancellationToken);
     }
 

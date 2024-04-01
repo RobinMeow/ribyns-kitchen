@@ -1,6 +1,6 @@
 ﻿using api.Domain;
 
-namespace server.tests.EntityId_specs;
+namespace api.tests.EntityId_specs;
 
 public sealed class IsSatisfiedByTests : _testData
 {
