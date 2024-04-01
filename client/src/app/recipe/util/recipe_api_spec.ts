@@ -7,7 +7,7 @@ import { TestBed } from '@angular/core/testing'
 import { API_BASE_URL, provideApiBaseUrlTesting } from '@api'
 import { RecipeApi } from './recipe_api'
 import { RecipeDto } from './recipe_dto'
-import { Recipe } from './recipe_temp'
+import { Recipe } from './recipe'
 import { MockProvider } from 'ng-mocks'
 import { TokenStorage } from 'src/app/auth/utils/token_storage'
 

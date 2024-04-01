@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router'
-import { Recipe } from '../util/recipe_temp'
+import { Recipe } from '../util/recipe'
 import { inject } from '@angular/core'
 import { RecipeApi } from '../util/recipe_api'
 import { assert } from '@common/assertions'

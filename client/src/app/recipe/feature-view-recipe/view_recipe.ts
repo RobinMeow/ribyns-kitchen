@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { ActivatedRoute } from '@angular/router'
-import { Recipe } from '../util/recipe_temp'
+import { Recipe } from '../util/recipe'
 
 @Component({
   standalone: true,
