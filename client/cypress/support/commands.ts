@@ -59,8 +59,7 @@ declare namespace Cypress {
         | undefined
     ): Cypress.Chainable<JQuery<HTMLElement>>
 
-    createTestUser(): void
-    deleteTestUser(): void
+    login(): void
   }
 }
 
@@ -68,8 +67,6 @@ declare namespace Cypress {
  * @example
  * <button data-test-my-button></button>
  * Cy.getByDataCy('my-button').should.be('be.visivle');
- *
- * @__PURE__
  */
 function byTestAttr(
   selector: string,
@@ -87,51 +84,40 @@ function byTestAttr(
 
 Cypress.Commands.add('byTestAttr', byTestAttr)
 
-function createTestUser() {
+Cypress.Commands.add('login', () => {
   cy.fixture('test-user.json').as('user')
   cy.get('@user').then((user) => {
     const { chefname, password }: any = user
+    const token = window.localStorage.getItem('token')
+    if (!token) {
+      cy.request({
+        method: 'POST',
+        url: 'http://localhost:5126/Auth/RegisterAsync',
+        body: {
+          name: chefname,
+          password: password
+        },
+        failOnStatusCode: false
+      }).then((req) => {
+        if (!req.isOkStatusCode) {
+          if (req.body !== 'Chefname ist bereits vergeben.') {
+            throw new Error('Failed to login')
+          }
+        }
+      })
 
-    const registerUrl = '/register'
-
-    cy.location('pathname').then((currentPath) => {
-      if (currentPath !== registerUrl) {
-        cy.visit(registerUrl)
-      }
-    })
-
-    cy.byTestAttr('register-name-input').type(chefname)
-    cy.byTestAttr('password-input').type(password)
-
-    cy.intercept({
-      path: '/Auth/RegisterAsync',
-      times: 1
-    }).as('registerAsync')
-
-    cy.byTestAttr('register-form').submit()
-
-    cy.wait('@registerAsync')
-    // I dont know why, but this is required, else the "login redirects when logged in already" - test fails
-    cy.url().should('not.include', 'register')
+      cy.request({
+        method: 'POST',
+        url: 'http://localhost:5126/Auth/LoginAsync',
+        body: {
+          name: chefname,
+          password: password
+        }
+      }).then((response) => {
+        const token = response.body
+        window.localStorage.setItem('token', token)
+        return
+      })
+    }
   })
-}
-
-Cypress.Commands.add('createTestUser', createTestUser)
-
-function deleteTestUser() {
-  cy.fixture('test-user.json').as('user')
-
-  cy.get('@user').then((user) => {
-    const { password }: any = user
-    cy.visit('/delete-chef')
-    cy.byTestAttr('password-input').type(password)
-    cy.intercept({
-      path: '/Auth/DeleteAsync',
-      times: 1
-    }).as('deleteAsync')
-    cy.byTestAttr('delete-chef-form').submit()
-    cy.wait('@deleteAsync')
-  })
-}
-
-Cypress.Commands.add('deleteTestUser', deleteTestUser)
+})

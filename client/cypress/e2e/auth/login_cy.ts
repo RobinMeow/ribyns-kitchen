@@ -8,9 +8,8 @@ describe('login should', () => {
 
 describe('login redirects', () => {
   it('when logged in already', () => {
-    cy.createTestUser()
+    cy.login()
     cy.visit('/login')
     cy.url().should('not.include', 'login')
-    cy.deleteTestUser()
   })
 })

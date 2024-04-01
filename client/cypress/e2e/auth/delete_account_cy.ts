@@ -5,14 +5,12 @@ describe('delete-chef should', () => {
   })
 
   it('validates incorrect password', () => {
-    cy.createTestUser()
+    cy.login()
 
     cy.visit('/delete-chef')
 
     cy.byTestAttr('password-input').type('wrong-password{enter}')
 
     cy.url().should('include', 'delete-chef')
-
-    cy.deleteTestUser()
   })
 })

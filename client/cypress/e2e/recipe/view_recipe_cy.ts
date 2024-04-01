@@ -1,7 +1,7 @@
 describe('view-recipe should', () => {
   it(`redirect to recipe/{recipeId} recipe is created sucessfully`, () => {
     cy.task('db:reset')
-    cy.createTestUser()
+    cy.login()
     // TODO this should use a seeded database
 
     cy.visit('/create-recipe')
@@ -23,7 +23,5 @@ describe('view-recipe should', () => {
     })
 
     cy.byTestAttr('title').contains(recipeTitle)
-
-    cy.deleteTestUser()
   })
 })
