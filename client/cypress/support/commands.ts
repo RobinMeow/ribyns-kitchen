@@ -64,7 +64,7 @@ declare namespace Cypress {
      * If none found, tries to register (+login).
      * If the Chefname already exists will do login with those creds.
      */
-    login(): void
+    login(): Promise<void>
   }
 }
 
@@ -91,37 +91,39 @@ Cypress.Commands.add('byTestAttr', byTestAttr)
 
 Cypress.Commands.add('login', () => {
   cy.fixture('test-user.json').as('user')
-  cy.get('@user').then((user) => {
+  cy.get('@user').then(async (user) => {
     const { chefname, password }: any = user
-    cy.request({
+
+    await fetch('http://localhost:5126/Auth/RegisterAsync', {
       method: 'POST',
-      url: 'http://localhost:5126/Auth/RegisterAsync',
-      body: {
+      body: JSON.stringify({
         name: chefname,
         password: password
-      },
-      failOnStatusCode: false
-    }).then((req) => {
-      if (
-        !req.isOkStatusCode &&
-        req.body !== 'Chefname ist bereits vergeben.'
-      ) {
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    }).catch((response) => {
+      if (response.body !== 'Chefname ist bereits vergeben.') {
         throw new Error('Failed to login')
+      }
+      cy.log('Testuser already created.')
+    })
+
+    const loginResponse = await fetch('http://localhost:5126/Auth/LoginAsync', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: chefname,
+        password: password
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
       }
     })
 
-    cy.request({
-      method: 'POST',
-      url: 'http://localhost:5126/Auth/LoginAsync',
-      body: {
-        name: chefname,
-        password: password
-      }
-    }).then((response) => {
-      const token = response.body
-      window.localStorage.setItem('token', token)
-      return
-    })
-    return
+    const token = await loginResponse.json()
+    window.localStorage.setItem('token', token)
   })
 })
