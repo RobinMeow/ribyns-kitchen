@@ -11,8 +11,7 @@ public static class DtoMappingExtensions
         return new RecipeDto
         {
             Id = recipe.Id,
-            ModelVersion = recipe.ModelVersion,
-            Title = recipe.Name,
+            Title = recipe.Title,
             CreatedAt = recipe.CreatedAt
         };
     }

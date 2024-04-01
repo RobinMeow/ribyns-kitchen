@@ -73,7 +73,11 @@ public sealed class RecipeControllerTests
     [Fact]
     public async Task GetAsync_returns_MockResult()
     {
-        Recipe recipe = new Recipe() { Name = "" };
+        Recipe recipe = new Recipe()
+        {
+            Id = EntityId.New(),
+            Title = ""
+        };
         
         dbContext.RecipeRepository
             .GetAsync(Arg.Is(recipe.Id), default)

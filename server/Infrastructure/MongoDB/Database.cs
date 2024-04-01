@@ -22,11 +22,11 @@ public sealed class Database : DbContext
 
         if (!BsonClassMap.IsClassMapRegistered(typeof(Recipe))) // ToDo: Check where this call belongs
         {
-            BsonClassMap.RegisterClassMap<Entity>(x =>
+            BsonClassMap.RegisterClassMap<Document>(x =>
             {
                 x.AutoMap();
-                x.MapMember(entity => entity.ModelVersion).SetElementName("__v");
-                x.MapMember(entity => entity.Id).SetElementName("_id").SetSerializer(new EntityIdSerializer());
+                x.MapMember(doc => doc.ModelVersion).SetElementName("__v");
+                x.MapMember(doc => doc.Id).SetElementName("_id");
             });
 
             BsonClassMap.RegisterClassMap<Chef>(x =>
