@@ -1,5 +1,5 @@
 import { FormControl, NonNullableFormBuilder, Validators } from '@angular/forms'
-import { ChefConstraints } from './ChefConstraints'
+import { ChefConstraints } from './chef_constraints'
 
 /**
  * Factory for instantiating FormControls.

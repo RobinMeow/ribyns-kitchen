@@ -2,9 +2,9 @@ import { firstValueFrom } from 'rxjs'
 
 import { Credentials } from '@auth'
 import { BaseApi } from '@api'
-import { RegisterChef } from './RegisterChef'
-import { ChefDto } from './ChefDto'
-import { JwtToken } from './JwtToken'
+import { RegisterChef } from './register_chef'
+import { ChefDto } from './chef_dto'
+import { JwtToken } from './jwt_token'
 
 export abstract class AuthApi extends BaseApi {
   private readonly URL = this.BASE_URL + '/Auth/'

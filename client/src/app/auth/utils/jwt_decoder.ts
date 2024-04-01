@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { JwtHelperService } from '@auth0/angular-jwt'
-import { DecodedToken } from './DecodedToken'
+import { DecodedToken } from './decoded_token'
 
 @Injectable({
   providedIn: 'root'

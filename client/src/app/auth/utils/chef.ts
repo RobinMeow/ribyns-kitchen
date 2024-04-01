@@ -1,5 +1,5 @@
-import { DecodedToken } from './DecodedToken'
-import { TokenKey } from './TokenKey'
+import { DecodedToken } from './decoded_token'
+import { TokenKey } from './token_key'
 
 export class Chef {
   constructor(decodedToken: DecodedToken) {

@@ -11,10 +11,10 @@ import {
 import { Credentials } from './Credentials'
 import { Chef } from './chef'
 import { JwtDecoder } from './jwt_decoder'
-import { DecodedToken } from './DecodedToken'
+import { DecodedToken } from './decoded_token'
 import { AuthApi } from './auth_api'
-import { RegisterChef } from './RegisterChef'
-import { JwtToken } from './JwtToken'
+import { RegisterChef } from './register_chef'
+import { JwtToken } from './jwt_token'
 import { assert } from '@common/assertions'
 
 @Injectable({ providedIn: 'root' })

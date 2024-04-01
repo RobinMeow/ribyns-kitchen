@@ -10,7 +10,7 @@ import { WritableSignal, isSignal } from '@angular/core'
 import { MockProvider } from 'ng-mocks'
 import { TokenStorage } from './token_storage'
 import { Chef } from '@auth'
-import { RegisterChef } from './RegisterChef'
+import { RegisterChef } from './register_chef'
 
 describe('AuthService', () => {
   let authService: AuthService

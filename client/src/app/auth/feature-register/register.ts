@@ -12,10 +12,10 @@ import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { MatTooltipModule } from '@angular/material/tooltip'
-import { ChefFromControlFactory } from '../utils/ChefFormControlFactory'
-import { ChefConstraints } from '../utils/ChefConstraints'
+import { ChefFromControlFactory } from '../utils/chef_form_control_factory'
+import { ChefConstraints } from '../utils/chef_constraints'
 import { PasswordInput } from '../ui/password/password_input'
-import { RegisterChef } from '../utils/RegisterChef'
+import { RegisterChef } from '../utils/register_chef'
 
 @Component({
   selector: 'auth-register',
