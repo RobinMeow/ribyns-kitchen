@@ -12,6 +12,7 @@ import { recipeRoutes } from '@recipe'
 import { errorFeedbackInterceptor } from '@shared/feedback'
 import { withRoutes } from '@common'
 
+/** @__PURE__ */
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAppName(),

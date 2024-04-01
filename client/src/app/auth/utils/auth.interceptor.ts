@@ -3,6 +3,7 @@ import { inject } from '@angular/core'
 import { TokenStorage } from './token.storage'
 import { environment } from 'src/environments/environment'
 
+/** @__PURE__ */
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (!req.url.startsWith(environment.API_BASE_URL)) return next(req)
 
