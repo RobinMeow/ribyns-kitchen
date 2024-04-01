@@ -125,5 +125,6 @@ Cypress.Commands.add('login', () => {
 
     const token = await loginResponse.json()
     window.localStorage.setItem('token', token)
+    Cypress.env({ baseUrl: 'http://localhost:4200' })
   })
 })
