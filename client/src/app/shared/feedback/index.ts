@@ -1,2 +1,2 @@
-export * from './feedback.service'
-export * from './error-feedback.interceptor'
+export * from './feedback_service'
+export * from './error_feedback_interceptor'

@@ -8,12 +8,12 @@ import {
 } from '@angular/forms'
 import { MatIconModule } from '@angular/material/icon'
 import { Router } from '@angular/router'
-import { AuthService } from '../utils/auth.service'
+import { AuthService } from '../utils/auth_service'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { ChefFromControlFactory } from '../utils/ChefFormControlFactory'
 import { ChefConstraints } from '../utils/ChefConstraints'
-import { PasswordInput } from '../ui/password/password.input'
+import { PasswordInput } from '../ui/password/password_input'
 
 @Component({
   selector: 'auth-login',

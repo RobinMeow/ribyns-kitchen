@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { AuthService } from '../utils/auth.service'
+import { AuthService } from '../utils/auth_service'
 import { Router } from '@angular/router'
 import {
   NonNullableFormBuilder,
@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { ChefFromControlFactory } from '../utils/ChefFormControlFactory'
 import { ChefConstraints } from '../utils/ChefConstraints'
-import { PasswordInput } from '../ui/password/password.input'
+import { PasswordInput } from '../ui/password/password_input'
 import { RegisterChef } from '../utils/RegisterChef'
 
 @Component({
