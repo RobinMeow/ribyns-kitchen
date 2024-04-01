@@ -1,5 +1,5 @@
 function getOpenMenuButton() {
-  return cy.getByAttr('open-menu-button')
+  return cy.byTestAttr('open-menu-button')
 }
 
 describe('header should', () => {
@@ -12,7 +12,7 @@ describe('header should', () => {
     // Arrange
     cy.visit('/')
     cy.get('core-menu').as('menu').should('be.visible')
-    cy.getByAttr('close-menu-button').click()
+    cy.byTestAttr('close-menu-button').click()
 
     // Assert
     cy.get('@menu').should('not.be.visible')
@@ -23,7 +23,7 @@ describe('header should', () => {
   // redirect
   it('redirect to home when app title is clicked', () => {
     cy.visit('/login')
-    cy.getByAttr('app-title').click()
+    cy.byTestAttr('app-title').click()
     cy.url().should('not.include', 'login')
   })
 })

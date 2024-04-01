@@ -9,7 +9,7 @@ describe('delete-chef should', () => {
 
     cy.visit('/delete-chef')
 
-    cy.getByAttr('password-input').type('wrong-password{enter}')
+    cy.byTestAttr('password-input').type('wrong-password{enter}')
 
     cy.url().should('include', 'delete-chef')
 

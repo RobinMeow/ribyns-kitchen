@@ -1,7 +1,7 @@
 describe('login should', () => {
   it('not log in with empty inputs', () => {
     cy.visit('/login')
-    cy.getByAttr('login-submit-button').click({ force: true })
+    cy.byTestAttr('login-submit-button').click({ force: true })
     cy.url().should('include', 'login')
   })
 })

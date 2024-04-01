@@ -8,6 +8,8 @@
  * @example
  * const inputElement = document.querySelector('input[type="text"]');
  * setValue(inputElement, 'New Value');
+ *
+ * @__PURE__
  */
 export function setValue(input: HTMLInputElement, newValue: string) {
   input.value = newValue

@@ -47,7 +47,7 @@
 
 declare namespace Cypress {
   interface Chainable<Subject = any> {
-    getByAttr(
+    byTestAttr(
       selector: string,
       options?:
         | Partial<
@@ -68,8 +68,10 @@ declare namespace Cypress {
  * @example
  * <button data-test-my-button></button>
  * Cy.getByDataCy('my-button').should.be('be.visivle');
+ *
+ * @__PURE__
  */
-function getByAttr(
+function byTestAttr(
   selector: string,
   options?:
     | Partial<
@@ -83,7 +85,7 @@ function getByAttr(
   return cy.get(`[data-test-${selector}]`)
 }
 
-Cypress.Commands.add('getByAttr', getByAttr)
+Cypress.Commands.add('byTestAttr', byTestAttr)
 
 function createTestUser() {
   cy.fixture('test-user.json').as('user')
@@ -98,15 +100,15 @@ function createTestUser() {
       }
     })
 
-    cy.getByAttr('register-name-input').type(chefname)
-    cy.getByAttr('password-input').type(password)
+    cy.byTestAttr('register-name-input').type(chefname)
+    cy.byTestAttr('password-input').type(password)
 
     cy.intercept({
       path: '/Auth/RegisterAsync',
       times: 1
     }).as('registerAsync')
 
-    cy.getByAttr('register-form').submit()
+    cy.byTestAttr('register-form').submit()
 
     cy.wait('@registerAsync')
     // I dont know why, but this is required, else the "login redirects when logged in already" - test fails
@@ -122,12 +124,12 @@ function deleteTestUser() {
   cy.get('@user').then((user) => {
     const { password }: any = user
     cy.visit('/delete-chef')
-    cy.getByAttr('password-input').type(password)
+    cy.byTestAttr('password-input').type(password)
     cy.intercept({
       path: '/Auth/DeleteAsync',
       times: 1
     }).as('deleteAsync')
-    cy.getByAttr('delete-chef-form').submit()
+    cy.byTestAttr('delete-chef-form').submit()
     cy.wait('@deleteAsync')
   })
 }
