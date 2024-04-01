@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { inject } from '@angular/core'
 import { TokenStorage } from '../../auth/utils/token_storage'
-import { API_BASE_URL } from './API_BASE_URL'
+import { API_BASE_URL } from './api_base_url_temp'
 
 export abstract class BaseApi {
   protected readonly httpClient = inject(HttpClient)

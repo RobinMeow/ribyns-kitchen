@@ -1,5 +1,5 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core'
-import { API_BASE_URL } from './API_BASE_URL'
+import { API_BASE_URL } from './api_base_url_temp'
 
 export const provideApiBaseUrlTesting = function (): EnvironmentProviders {
   return makeEnvironmentProviders([
