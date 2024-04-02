@@ -25,7 +25,9 @@ public sealed class AuthController(
     /// <param name="cancellationToken"></param>
     [HttpPost(nameof(RegisterAsync))]
     [ProducesResponseType<ChefDto>(StatusCodes.Status201Created)]
-    public async Task<Results<Created<ChefDto>, BadRequest, BadRequest<string>, StatusCodeHttpResult>> RegisterAsync([Required] RegisterChefDto newChef, CancellationToken cancellationToken = default)
+    public async Task<Results<Created<ChefDto>, BadRequest, BadRequest<string>, StatusCodeHttpResult>> RegisterAsync(
+        [Required] RegisterChefDto newChef,
+        CancellationToken cancellationToken = default)
     {
         string chefname = newChef.Name;
 

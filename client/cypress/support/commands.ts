@@ -59,8 +59,12 @@ declare namespace Cypress {
         | undefined
     ): Cypress.Chainable<JQuery<HTMLElement>>
 
-    createTestUser(): void
-    deleteTestUser(): void
+    /**
+     * looks for en existing login token.
+     * If none found, tries to register (+login).
+     * If the Chefname already exists will do login with those creds.
+     */
+    login(): Promise<void>
   }
 }
 
@@ -68,8 +72,6 @@ declare namespace Cypress {
  * @example
  * <button data-test-my-button></button>
  * Cy.getByDataCy('my-button').should.be('be.visivle');
- *
- * @__PURE__
  */
 function byTestAttr(
   selector: string,
@@ -87,51 +89,53 @@ function byTestAttr(
 
 Cypress.Commands.add('byTestAttr', byTestAttr)
 
-function createTestUser() {
+Cypress.Commands.add('login', () => {
+  const apiBaseUrl = Cypress.env('apiBaseUrl')
+
   cy.fixture('test-user.json').as('user')
-  cy.get('@user').then((user) => {
+
+  cy.get('@user').then(async (user) => {
     const { chefname, password }: any = user
 
-    const registerUrl = '/register'
+    cy.request({
+      method: 'POST',
+      url: apiBaseUrl + '/Auth/RegisterAsync',
+      body: JSON.stringify({
+        name: chefname,
+        password: password
+      }),
+      failOnStatusCode: false,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    }).then((response) => {
+      if (!response.isOkStatusCode) {
+        if (
+          response.status !== 400 &&
+          response.body !== 'Chefname ist bereits vergeben.'
+        ) {
+          throw new Error('Failed to login')
+        }
 
-    cy.location('pathname').then((currentPath) => {
-      if (currentPath !== registerUrl) {
-        cy.visit(registerUrl)
+        cy.log('Testuser already created.')
       }
     })
 
-    cy.byTestAttr('register-name-input').type(chefname)
-    cy.byTestAttr('password-input').type(password)
-
-    cy.intercept({
-      path: '/Auth/RegisterAsync',
-      times: 1
-    }).as('registerAsync')
-
-    cy.byTestAttr('register-form').submit()
-
-    cy.wait('@registerAsync')
-    // I dont know why, but this is required, else the "login redirects when logged in already" - test fails
-    cy.url().should('not.include', 'register')
+    cy.request({
+      method: 'POST',
+      url: apiBaseUrl + '/Auth/LoginAsync',
+      body: JSON.stringify({
+        name: chefname,
+        password: password
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    }).then((response) => {
+      const token = response.body
+      window.localStorage.setItem('token', token)
+    })
   })
-}
-
-Cypress.Commands.add('createTestUser', createTestUser)
-
-function deleteTestUser() {
-  cy.fixture('test-user.json').as('user')
-
-  cy.get('@user').then((user) => {
-    const { password }: any = user
-    cy.visit('/delete-chef')
-    cy.byTestAttr('password-input').type(password)
-    cy.intercept({
-      path: '/Auth/DeleteAsync',
-      times: 1
-    }).as('deleteAsync')
-    cy.byTestAttr('delete-chef-form').submit()
-    cy.wait('@deleteAsync')
-  })
-}
-
-Cypress.Commands.add('deleteTestUser', deleteTestUser)
+})

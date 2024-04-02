@@ -1,16 +1,32 @@
-describe('login should', () => {
-  it('not log in with empty inputs', () => {
-    cy.visit('/login')
-    cy.byTestAttr('login-submit-button').click({ force: true })
-    cy.url().should('include', 'login')
-  })
-})
+describe('login', () => {
+  describe('when unauthorized should', () => {
+    beforeEach(() => {
+      cy.task('db:reset')
+      cy.visit('/login')
+    })
 
-describe('login redirects', () => {
-  it('when logged in already', () => {
-    cy.createTestUser()
-    cy.visit('/login')
-    cy.url().should('not.include', 'login')
-    cy.deleteTestUser()
+    it('not log in with empty inputs', () => {
+      cy.byTestAttr('login-submit-button').click({ force: true })
+      cy.url().should('include', 'login')
+    })
+
+    it('work with enter', () => {
+      cy.byTestAttr('login-name-input').type('Cypress Testuser')
+      cy.byTestAttr('password-input').type('iLoveJesus<3!{enter}')
+    })
+
+    it('work with submit button', () => {
+      cy.byTestAttr('login-name-input').type('Cypress Testuser')
+      cy.byTestAttr('password-input').type('iLoveJesus<3!{enter}')
+      cy.byTestAttr('login-submit-button').click()
+    })
+  })
+
+  describe('when authorized should', () => {
+    it('redirect', () => {
+      cy.login()
+      cy.visit('/login')
+      cy.url().should('not.include', 'login')
+    })
   })
 })
