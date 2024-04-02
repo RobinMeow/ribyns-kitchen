@@ -57,8 +57,7 @@ public sealed class AuthController(
         cancellationToken.ThrowIfCancellationRequested();
         await _chefRepository.AddAsync(chef, cancellationToken);
 
-        string? uri = null;
-        return TypedResults.Created(uri, new ChefDto
+        return TypedResults.Created(nameof(RegisterAsync), new ChefDto
         {
             Id = chef.Id.ToString(),
             Email = chef.Email,
