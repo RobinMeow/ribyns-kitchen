@@ -78,10 +78,10 @@ public sealed class RecipeControllerTests
             Id = EntityId.New(),
             Title = ""
         };
-        
+
         dbContext.RecipeRepository
             .GetAsync(Arg.Is(recipe.Id), default)
-            .Returns(Task.FromResult(recipe) as Task<Recipe?>);
+            .Returns(ValueTask.FromResult<Recipe?>(recipe));
 
         Results<Ok<RecipeDto>, NotFound> result = await _recipeController.GetAsync(recipe.Id.ToString());
 
