@@ -1,4 +1,4 @@
-describe('login should', () => {
+describe('login', () => {
   describe('when unauthorized should', () => {
     beforeEach(() => {
       cy.task('db:reset')
