@@ -1,5 +1,5 @@
 describe('auth-corner', () => {
-  describe('wehn authorized should', () => {
+  describe('when authorized should', () => {
     beforeEach(() => {
       cy.login()
       cy.visit('/')
@@ -21,7 +21,7 @@ describe('auth-corner', () => {
     })
   })
 
-  describe('wehn not authorized should', () => {
+  describe('when not authorized should', () => {
     beforeEach(() => {
       cy.visit('/')
     })
