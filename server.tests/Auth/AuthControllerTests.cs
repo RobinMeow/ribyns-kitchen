@@ -13,10 +13,10 @@ public sealed class AuthControllerTests
 
     public AuthControllerTests()
     {
-        DbContext dbContext = Substitute.For<DbContext>();
+        IChefRepository chefRepository = Substitute.For<IChefRepository>();
 
         _authController = new AuthController(
-            dbContext,
+            chefRepository,
             Substitute.For<ILogger<AuthController>>(),
             Substitute.For<IPasswordHasher>(),
             Substitute.For<IJwtFactory>()

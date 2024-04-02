@@ -4,13 +4,13 @@ using MongoDB.Driver;
 
 namespace api.Infrastructure.MongoDB;
 
-public sealed class RecipeCollection : Collection, IRecipeRepository
+public sealed class RecipeCollection : Collection, IRecipeRepository, IRecipeCollection
 {
     readonly IMongoCollection<RecipeDoc> _collection;
 
-    public RecipeCollection(IMongoDatabase database)
+    public RecipeCollection(MongoDatabase mongo) : base()
     {
-        _collection = database.GetCollection<RecipeDoc>("recipes");
+        _collection = mongo.Database.GetCollection<RecipeDoc>("recipes");
     }
 
     public ValueTask AddAsync(Recipe recipe, CancellationToken cancellationToken = default)

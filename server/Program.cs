@@ -26,7 +26,12 @@ internal class Program
         builder.Services.AddExceptionHandler<ExceptionHandler>();
         builder.AddFrontEndOriginsCors();
 
-        builder.Services.AddSingleton<DbContext, Database>(); // Transient: instance per code request. Scoped: instance per HTTP request
+        // Transient: instance per code request. Scoped: instance per HTTP request
+        builder.Services.AddSingleton<MongoDatabase>();
+        builder.Services.AddSingleton<RecipeCollection>();
+        builder.Services.AddSingleton<IRecipeCollection, RecipeCollection>();
+        builder.Services.AddSingleton<IRecipeRepository, RecipeCollection>();
+        builder.Services.AddSingleton<IChefRepository, ChefCollection>();
 
         WebApplication app = builder.Build();
 

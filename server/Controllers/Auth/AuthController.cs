@@ -9,13 +9,13 @@ namespace api.Controllers.Auth;
 [ApiController]
 [Route("[controller]")]
 public sealed class AuthController(
-    DbContext context,
+    IChefRepository chefRepository,
     ILogger<AuthController> logger,
     IPasswordHasher passwordHasher,
     IJwtFactory jwtFactory
     ) : ControllerBase
 {
-    readonly IChefRepository _chefRepository = context.ChefRepository;
+    readonly IChefRepository _chefRepository = chefRepository;
     readonly ILogger<AuthController> _logger = logger;
     readonly IPasswordHasher _passwordHasher = passwordHasher;
     readonly IJwtFactory _jwtFactory = jwtFactory;
@@ -60,6 +60,7 @@ public sealed class AuthController(
         return TypedResults.Created(nameof(RegisterAsync), new ChefDto
         {
             Id = chef.Id.ToString(),
+            Name = chef.Name,
             Email = chef.Email,
             CreatedAt = chef.CreatedAt,
         });

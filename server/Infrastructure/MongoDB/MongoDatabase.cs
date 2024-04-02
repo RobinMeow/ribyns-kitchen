@@ -6,13 +6,11 @@ using MongoDB.Driver;
 
 namespace api.Infrastructure.MongoDB;
 
-public sealed class Database : DbContext
+public sealed class MongoDatabase : DbContext
 {
-    public override IRecipeRepository RecipeRepository { get; init; }
+    public IMongoDatabase Database { get; }
 
-    public override IChefRepository ChefRepository { get; init; }
-
-    public Database(IOptions<PersistenceSettings> persistenceSettings)
+    public MongoDatabase(IOptions<PersistenceSettings> persistenceSettings)
     : base()
     {
         ConventionPack camelCaseConvention = new ConventionPack {
@@ -48,10 +46,7 @@ public sealed class Database : DbContext
 
         string databaseName = Globals.ApplicationNameAbbreviated.ToLower();
 
-        IMongoDatabase db = client.GetDatabase(databaseName);
-
-        RecipeRepository = new RecipeCollection(db);
-        ChefRepository = new ChefCollection(db);
+        Database = client.GetDatabase(databaseName);
     }
 }
 

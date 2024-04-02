@@ -1,5 +1,7 @@
+using api;
 using api.Controllers.Recipes;
 using api.Domain;
+using api.Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -9,12 +11,14 @@ namespace Recipes;
 public sealed class RecipeControllerTests
 {
     readonly RecipeController _recipeController;
-    readonly DbContext dbContext = Substitute.For<DbContext>();
+    readonly IRecipeCollection _recipeCollection = Substitute.For<IRecipeCollection>();
+    readonly IRecipeRepository _recipeRepository = Substitute.For<IRecipeRepository>(); 
 
     public RecipeControllerTests()
-    {
+    {   
         _recipeController = new RecipeController(
-            dbContext,
+            _recipeRepository,
+            _recipeCollection,
             Substitute.For<ILogger<RecipeController>>()
         );
     }
@@ -58,7 +62,7 @@ public sealed class RecipeControllerTests
     [Fact]
     public async Task GetAllAsync_returns_Ok()
     {
-        dbContext.RecipeRepository
+        _recipeRepository
             .GetAllAsync()
             .Returns(ValueTask.FromResult(Enumerable.Empty<Recipe>().AsQueryable()));
 
@@ -83,7 +87,7 @@ public sealed class RecipeControllerTests
             Title = ""
         };
 
-        dbContext.RecipeRepository
+        _recipeRepository
             .GetAsync(Arg.Is(recipe.Id), default)
             .Returns(ValueTask.FromResult<Recipe?>(recipe));
 

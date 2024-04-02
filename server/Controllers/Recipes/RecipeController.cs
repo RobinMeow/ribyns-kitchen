@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using api.Domain;
+using api.Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -10,12 +11,14 @@ namespace api.Controllers.Recipes;
 [ApiController]
 [Route("[controller]")]
 public sealed class RecipeController(
-    DbContext context,
+    IRecipeRepository recipeRepository,
+    IRecipeCollection recipeCollection,
     ILogger<RecipeController> logger
     ) : ControllerBase
 {
     readonly ILogger<RecipeController> _logger = logger;
-    readonly IRecipeRepository _recipeRepository = context.RecipeRepository;
+    readonly IRecipeRepository _recipeRepository = recipeRepository;
+    readonly IRecipeCollection _recipeCollection = recipeCollection;
 
     /// <summary>add a new recipe.</summary>
     /// <param name="newRecipe">the recipe to add.</param>

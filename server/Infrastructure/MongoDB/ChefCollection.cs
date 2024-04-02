@@ -9,9 +9,9 @@ public sealed class ChefCollection : Collection, IChefRepository
 {
     readonly IMongoCollection<ChefDoc> _collection;
 
-    public ChefCollection(IMongoDatabase database)
+    public ChefCollection(MongoDatabase mongo) : base()
     {
-        _collection = database.GetCollection<ChefDoc>("chefs");
+        _collection = mongo.Database.GetCollection<ChefDoc>("chefs");
     }
 
     public ValueTask AddAsync(Chef chef, CancellationToken cancellationToken = default)
