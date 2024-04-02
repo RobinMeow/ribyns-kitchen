@@ -19,9 +19,9 @@ public sealed class RecipeCollection : Collection, IRecipeRepository
         return new ValueTask(_collection.InsertOneAsync(doc, default, cancellationToken));
     }
 
-    public ValueTask<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
+    public ValueTask<IQueryable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return new ValueTask<IEnumerable<Recipe>>(_collection
+        return new ValueTask<IQueryable<Recipe>>(_collection
             .AsQueryable()
             .Select(s_asRecipe));
     }

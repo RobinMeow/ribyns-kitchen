@@ -6,5 +6,5 @@ public interface IRecipeRepository
 
     ValueTask<Recipe?> GetAsync(EntityId id, CancellationToken ct = default);
 
-    ValueTask<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default);
+    ValueTask<IQueryable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default);
 }

@@ -58,6 +58,10 @@ public sealed class RecipeControllerTests
     [Fact]
     public async Task GetAllAsync_returns_Ok()
     {
+        dbContext.RecipeRepository
+            .GetAllAsync()
+            .Returns(ValueTask.FromResult(Enumerable.Empty<Recipe>().AsQueryable()));
+
         Ok<IEnumerable<RecipeDto>> result = await _recipeController.GetAllAsync();
         NotNull(result);
         NotNull(result.Value);

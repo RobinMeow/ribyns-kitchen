@@ -56,9 +56,8 @@ public sealed class RecipeController(
     public async Task<Ok<IEnumerable<RecipeDto>>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        IEnumerable<Recipe> recipe = await _recipeRepository.GetAllAsync(cancellationToken);
-        IEnumerable<RecipeDto> recipeDtos = recipe.ToDto();
-        return TypedResults.Ok(recipeDtos);
+        IQueryable<Recipe> recipes = await _recipeRepository.GetAllAsync(cancellationToken);
+        return TypedResults.Ok(recipes.ToDto());
     }
 
     [HttpGet(nameof(GetAsync))]
