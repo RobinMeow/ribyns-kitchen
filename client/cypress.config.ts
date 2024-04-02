@@ -16,7 +16,6 @@ export default defineConfig({
       on: Cypress.PluginEvents,
       config: Cypress.PluginConfigOptions
     ) {
-      // Replace with your actual  MongoDB connection details
       on('task', {
         async 'db:reset'() {
           const client = new MongoClient('mongodb://127.0.0.1:27017')
