@@ -12,6 +12,11 @@ describe('auth-corner', () => {
         .should('have.length.above', 1)
     })
 
+    it('logout on logoutClick', () => {
+      cy.byTestAttr('logout-button').click()
+      cy.byTestAttr('login-button').should('be.visible')
+    })
+
     it('navigate to home on logout button click', () => {
       cy.byTestAttr('logout-button').click()
       const hostUrl = Cypress.env()['baseUrl']
