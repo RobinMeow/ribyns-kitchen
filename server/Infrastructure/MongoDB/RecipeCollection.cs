@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using api.Domain;
 using MongoDB.Driver;
 
@@ -12,29 +13,26 @@ public sealed class RecipeCollection : Collection, IRecipeRepository
         _collection = database.GetCollection<RecipeDoc>("recipes");
     }
 
-    // TODO use ValueTask, as the code runs in sync anyways.
-    public Task AddAsync(Recipe recipe, CancellationToken cancellationToken = default)
+    public ValueTask AddAsync(Recipe recipe, CancellationToken cancellationToken = default)
     {
         RecipeDoc doc = RecipeDoc.Create(recipe);
-        return _collection.InsertOneAsync(doc, cancellationToken: cancellationToken);
+        return new ValueTask(_collection.InsertOneAsync(doc, default, cancellationToken));
     }
 
-    public async Task<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
+    public ValueTask<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return await _collection
-            .Find(_ => true, s_findOptions)
-            .Project(RecipeProjectionDefinition())
-            .ToListAsync(cancellationToken) // TODO get rid of this and return the query
-            .ConfigureAwait(false);
+        return new ValueTask<IEnumerable<Recipe>>(_collection
+            .AsQueryable()
+            .Select(s_asRecipe));
     }
 
-    public Task<Recipe?> GetAsync(EntityId entityId, CancellationToken ct = default)
+    public ValueTask<Recipe?> GetAsync(EntityId entityId, CancellationToken ct = default)
     {
         string id = entityId.ToString();
-        return _collection
+        return new ValueTask<Recipe?>(_collection
             .Find(Builders<RecipeDoc>.Filter.Eq(x => x.Id, id), s_findOptions)
             .Project(RecipeProjectionDefinition())
-            .FirstOrDefaultAsync(ct) as Task<Recipe?>;
+            .FirstOrDefaultAsync(ct)!);
     }
 
     static ProjectionDefinition<RecipeDoc, Recipe> RecipeProjectionDefinition()
@@ -46,4 +44,11 @@ public sealed class RecipeCollection : Collection, IRecipeRepository
             CreatedAt = x.CreatedAt,
         });
     }
+
+    static readonly Expression<Func<RecipeDoc, Recipe>> s_asRecipe = doc => new Recipe()
+    {
+        Id = new EntityId(doc.Id),
+        Title = doc.Title,
+        CreatedAt = doc.CreatedAt,
+    };
 }
