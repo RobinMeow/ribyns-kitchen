@@ -24,9 +24,8 @@ public sealed class AuthController(
     /// <param name="newChef">the data to create an account from.</param>
     /// <param name="cancellationToken"></param>
     [HttpPost(nameof(RegisterAsync))]
-    [ProducesResponseType<ChefDto>(StatusCodes.Status201Created)]
-    public async Task<Results<Created<ChefDto>, BadRequest, BadRequest<string>, StatusCodeHttpResult>> RegisterAsync(
-        [Required] RegisterChefDto newChef,
+    public async Task<Results<Created<ChefDto>, BadRequest<string>, StatusCodeHttpResult>> RegisterAsync(
+        [Required, FromBody] RegisterChefDto newChef,
         CancellationToken cancellationToken = default)
     {
         string chefname = newChef.Name;
@@ -72,30 +71,28 @@ public sealed class AuthController(
     /// <param name="cancellationToken"></param>
     /// <returns>a JWT for client side usage to keep the user logged in over a longer period of time.</returns>
     [HttpPost(nameof(LoginAsync))]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<ActionResult<string>> LoginAsync([Required] CredentialsDto credentials, CancellationToken cancellationToken = default)
+    public async Task<Results<Ok<string>, BadRequest<string>>> LoginAsync(
+        [Required, FromBody] CredentialsDto credentials,
+        CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
         Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name, cancellationToken);
 
         if (chef == null)
         {
-            return BadRequest("Benutzer existiert nicht.");
+            return TypedResults.BadRequest("Benutzer existiert nicht.");
         }
 
         PasswordVerificationResult passwordVerificationResult = _passwordHasher.VerifyHashedPassword(chef.PasswordHash, credentials.Password);
 
         if (passwordVerificationResult == PasswordVerificationResult.Failed)
         {
-            return BadRequest("Falsches Passwort.");
+            return TypedResults.BadRequest("Falsches Passwort.");
         }
 
         string token = _jwtFactory.Create(chef);
 
-        return Ok(token);
+        return TypedResults.Ok(token);
     }
 
     /// <summary>delete an existing account.</summary>

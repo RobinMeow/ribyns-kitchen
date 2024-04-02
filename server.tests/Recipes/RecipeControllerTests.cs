@@ -1,6 +1,7 @@
 using api.Controllers;
 using api.Controllers.Recipes;
 using api.Domain;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -29,8 +30,12 @@ public sealed class RecipeControllerTests
             Title = "My Recipe",
         };
 
-        ActionResult<RecipeDto> createdResult = await _recipeController.AddAsync(requestDto);
-        IsType<CreatedResult>(createdResult.Result);
+        Results<BadRequest<NewRecipeDto>, Created<RecipeDto>> createdResult = await _recipeController.AddAsync(requestDto);
+        IsType<Created<RecipeDto>>(createdResult.Result);
+        var actual = createdResult.Result as Created<RecipeDto>;
+        NotNull(actual);
+        NotNull(actual.Value);
+        Equal("My Recipe", actual.Value.Title);
     }
 
     [Theory]
@@ -43,31 +48,29 @@ public sealed class RecipeControllerTests
             Title = title!,
         };
 
-        ActionResult<RecipeDto> result = await _recipeController.AddAsync(requestDto);
+        Results<BadRequest<NewRecipeDto>, Created<RecipeDto>> result = await _recipeController.AddAsync(requestDto);
         
-        IsType<BadRequestObjectResult>(result.Result);
-        BadRequestObjectResult objectResult = (BadRequestObjectResult)result.Result;
+        IsType<BadRequest<NewRecipeDto>>(result.Result);
+        var actual = result.Result as BadRequest<NewRecipeDto>;
 
-        IsType<NewRecipeDto>(objectResult.Value);
-        NotNull(objectResult.Value);
-
-        NewRecipeDto dto = (NewRecipeDto)objectResult.Value;
-
-        True(dto.HasErrors());
+        NotNull(actual);
+        NotNull(actual.Value);
+        True(actual.Value.HasErrors());
     }
 
     [Fact]
-    public async Task GetAllAsync_returns_OkObject()
+    public async Task GetAllAsync_returns_Ok()
     {
-        ActionResult<IEnumerable<RecipeDto>> result = await _recipeController.GetAllAsync();
-        IsType<OkObjectResult>(result.Result);
+        Ok<IEnumerable<RecipeDto>> result = await _recipeController.GetAllAsync();
+        NotNull(result);
+        NotNull(result.Value);
     }
 
     [Fact]
     public async Task GetAsync_returns_NotFound()
     {
-        ActionResult<RecipeDto> result = await _recipeController.GetAsync(EntityId.New().ToString());
-        IsType<NotFoundResult>(result.Result);
+        Results<Ok<RecipeDto>, NotFound> result = await _recipeController.GetAsync(EntityId.New().ToString());
+        IsType<NotFound>(result.Result);
     }
 
     [Fact]
@@ -83,12 +86,12 @@ public sealed class RecipeControllerTests
             .GetAsync(Arg.Is(recipe.Id), default)
             .Returns(Task.FromResult(recipe) as Task<Recipe?>);
 
-        ActionResult<RecipeDto> result = await _recipeController.GetAsync(recipe.Id.ToString());
-        IsType<OkObjectResult>(result.Result);
-        object? dto = ((OkObjectResult)result.Result).Value;
-        NotNull(dto);
-        IsType<RecipeDto>(dto);
-        Equal(recipe.Id.ToString(), ((RecipeDto)dto).Id);
+        Results<Ok<RecipeDto>, NotFound> result = await _recipeController.GetAsync(recipe.Id.ToString());
+
+        IsType<Ok<RecipeDto>>(result.Result);
+        Ok<RecipeDto>? actual = (result.Result as Ok<RecipeDto>);
+        NotNull(actual?.Value);
+        Equal(recipe.Id.ToString(), actual.Value.Id);
     }
 
     [Fact]

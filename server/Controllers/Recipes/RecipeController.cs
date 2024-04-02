@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using api.Domain;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers.Recipes;
@@ -21,24 +22,20 @@ public sealed class RecipeController(
     /// <param name="cancellationToken"></param>
     /// <returns>the newly created recipe.</returns>
     [HttpPost(nameof(AddAsync))]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<ActionResult<RecipeDto>> AddAsync([Required] NewRecipeDto newRecipe, CancellationToken cancellationToken = default)
+    public async Task<Results<BadRequest<NewRecipeDto>, Created<RecipeDto>>> AddAsync([Required] NewRecipeDto newRecipe, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
         var newRecipeSpecification = new NewRecipeSpecification(newRecipe);
         if (!newRecipeSpecification.IsSatisfied())
-            return BadRequest(newRecipe);
+            return TypedResults.BadRequest(newRecipe);
 
         Recipe recipe = Create(newRecipe);
 
         cancellationToken.ThrowIfCancellationRequested();
         await _recipeRepository.AddAsync(recipe, cancellationToken);
 
-        return Created(string.Empty, recipe.ToDto()); // ToDo: Use CreatedAt, to msomehow make use of id creation in back end. and eable front end navigation
+        return TypedResults.Created(nameof(AddAsync), recipe.ToDto());
     }
 
     static Recipe Create(NewRecipeDto newRecipe)
@@ -56,32 +53,26 @@ public sealed class RecipeController(
     /// <param name="cancellationToken"></param>
     /// <returns>all recipes.</returns>
     [HttpGet(nameof(GetAllAsync))]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<Ok<IEnumerable<RecipeDto>>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
         IEnumerable<Recipe> recipe = await _recipeRepository.GetAllAsync(cancellationToken);
         IEnumerable<RecipeDto> recipeDtos = recipe.ToDto();
-        return Ok(recipeDtos);
+        return TypedResults.Ok(recipeDtos);
     }
 
     [HttpGet(nameof(GetAsync))]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [ProducesDefaultResponseType]
-    public async Task<ActionResult<RecipeDto>> GetAsync([FromQuery] string recipeId, CancellationToken ct = default)
-        // TODO ValidEntityId
+    public async Task<Results<Ok<RecipeDto>, NotFound>> GetAsync([FromQuery] string recipeId, CancellationToken ct = default)
+    // TODO ValidEntityId
     {
         ct.ThrowIfCancellationRequested();
         Recipe? recipe = await _recipeRepository.GetAsync(new EntityId(recipeId), ct);
 
         if (recipe == null)
         {
-            return NotFound();
+            return TypedResults.NotFound();
         }
 
-        return Ok(recipe.ToDto());
+        return TypedResults.Ok(recipe.ToDto());
     }
 }

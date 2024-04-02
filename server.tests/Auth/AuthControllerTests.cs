@@ -32,7 +32,11 @@ public sealed class AuthControllerTests
             Password = "Password"
         };
 
-        Results<Created<ChefDto>, BadRequest, BadRequest<string>, StatusCodeHttpResult> createdResult = await _authController.RegisterAsync(requestDto);
+        Results<
+            Created<ChefDto>, 
+            BadRequest<string>, 
+            StatusCodeHttpResult> createdResult = await _authController.RegisterAsync(requestDto);
+
         IsType<Created<ChefDto>>(createdResult.Result);
     }
 
