@@ -1,27 +1,12 @@
-// ***********************************************************
-// This example support/e2e.ts is processed and
-// loaded automatically before your test files.
-//
-// This is a great place to put global configuration and
-// behavior that modifies Cypress.
-//
-// You can change the location of this file or turn off
-// automatically serving support files with the
-// 'supportFile' configuration option.
-//
-// You can read more here:
-// https://on.cypress.io/configuration
-// ***********************************************************
-
-// When a command from ./commands is ready to use, import with `import './commands'` syntax
 import './commands'
 
-// beforeEach(function () {
-//   code that runs before every spec tests
-// })
-beforeEach('fetching SPA', async () => {
-  // make sure, the first http request goes onto the SPA
-  await fetch(Cypress.env('baseUrl'), {
-    method: 'GET'
-  })
-})
+// this looks hacky and wierd af!
+// and it sure is!
+// to spare you the time of reading the known bug (https://github.com/cypress-io/cypress/issues/25397)
+// which wont get fixed.
+// here the short explanation:
+// after using cy.request() for login, cy.visit() does not function anymore as intended.
+// thise is a workaround to make, sure cy.visit() does function as intended.
+fetch(Cypress.env('baseUrl'), {
+  method: 'GET'
+}) // fire and forget

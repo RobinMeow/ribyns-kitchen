@@ -97,8 +97,34 @@ Cypress.Commands.add('login', () => {
   cy.get('@user').then(async (user) => {
     const { chefname, password }: any = user
 
-    await fetch(apiBaseUrl + '/Auth/RegisterAsync', {
+    cy.request({
       method: 'POST',
+      url: apiBaseUrl + '/Auth/RegisterAsync',
+      body: JSON.stringify({
+        name: chefname,
+        password: password
+      }),
+      failOnStatusCode: false,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    }).then((response) => {
+      if (!response.isOkStatusCode) {
+        if (
+          response.status !== 400 &&
+          response.body !== 'Chefname ist bereits vergeben.'
+        ) {
+          throw new Error('Failed to login')
+        }
+
+        cy.log('Testuser already created.')
+      }
+    })
+
+    cy.request({
+      method: 'POST',
+      url: apiBaseUrl + '/Auth/LoginAsync',
       body: JSON.stringify({
         name: chefname,
         password: password
@@ -107,26 +133,9 @@ Cypress.Commands.add('login', () => {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       }
-    }).catch((response) => {
-      if (response.body !== 'Chefname ist bereits vergeben.') {
-        throw new Error('Failed to login')
-      }
-      cy.log('Testuser already created.')
+    }).then((response) => {
+      const token = response.body
+      window.localStorage.setItem('token', token)
     })
-
-    const loginResponse = await fetch(apiBaseUrl + '/Auth/LoginAsync', {
-      method: 'POST',
-      body: JSON.stringify({
-        name: chefname,
-        password: password
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      }
-    })
-
-    const token = await loginResponse.json()
-    window.localStorage.setItem('token', token)
   })
 })
