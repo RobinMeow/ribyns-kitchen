@@ -104,6 +104,12 @@ Go To Production:
 
 ## Domain Packages 
 
-| Package | namespace | use case |
+| Package | namespace | usage |
 | Microsoft.Extensions.Identity.Core | Microsoft.AspNetCore.Identity | PasswordVerificationResult / IPasswordHaser |
 | Microsoft.IdentityModel.Tokens | Microsoft.IdentityModel.Tokens | SecurityKey / IIssuerSigningKeyFactory |
+
+## Infrastructure Packages
+
+| Package | namespace | usage |
+| Microsoft.Extensions.Configuration.Abstractions | Microsoft.Extensions.Configuration | IConfiguration (DI) |
+| MongoDB.Driver | MongoDB.Driver | Database, Collections, ... |

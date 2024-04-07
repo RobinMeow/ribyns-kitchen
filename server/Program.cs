@@ -1,7 +1,8 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using Domain;
-using api.Infrastructure.MongoDB;
+using Infrastructure.MongoDB;
+using Infrastructure;
 
 namespace api;
 

@@ -1,9 +1,9 @@
 ﻿using Domain;
 using Domain.Auth;
-using api.Infrastructure.Auth;
+using Infrastructure.Auth;
 using System.Security.Claims;
 
-namespace api.tests.Infrastructure;
+namespace Infrastructure_specs;
 
 public sealed class JwtFactoryTests
 {

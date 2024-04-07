@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace api.Infrastructure.MongoDB;
+namespace Infrastructure.MongoDB;
 
 public abstract class Collection
 {

@@ -1,4 +1,4 @@
-namespace api;
+namespace Common;
 
 public static class Globals
 {

@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 using Domain;
 using MongoDB.Driver;
 
-namespace api.Infrastructure.MongoDB;
+namespace Infrastructure.MongoDB;
 
 public sealed class RecipeCollection : Collection, IRecipeRepository, IRecipeCollection
 {

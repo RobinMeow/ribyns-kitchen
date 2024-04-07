@@ -1,4 +1,4 @@
-namespace api;
+namespace Infrastructure;
 
 public sealed class PersistenceSettings
 {

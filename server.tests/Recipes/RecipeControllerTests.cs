@@ -1,6 +1,6 @@
 using api.Controllers.Recipes;
 using Domain;
-using api.Infrastructure.MongoDB;
+using Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;
 using NSubstitute;

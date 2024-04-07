@@ -1,8 +1,9 @@
 using System.Text;
 using Domain.Auth;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace api.Infrastructure.Auth;
+namespace Infrastructure.Auth;
 
 public sealed class IssuerSigningKeyFactory(BearerConfig bearerConfig) : IIssuerSigningKeyFactory
 {
@@ -10,7 +11,7 @@ public sealed class IssuerSigningKeyFactory(BearerConfig bearerConfig) : IIssuer
 
     public IssuerSigningKeyFactory(IConfiguration configuration)
     : this(configuration.GetSection(nameof(BearerConfig)).Get<BearerConfig>()
-            ?? throw new ArgumentException($"Couldnt not find {nameof(BearerConfig)} in configuration."))
+            ?? throw new ArgumentException($"Could not find '{nameof(BearerConfig)}' in configuration."))
     {
     }
 

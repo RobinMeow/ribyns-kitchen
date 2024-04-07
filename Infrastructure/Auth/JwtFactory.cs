@@ -2,9 +2,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Domain;
 using Domain.Auth;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace api.Infrastructure.Auth;
+namespace Infrastructure.Auth;
 
 public sealed class JwtFactory : IJwtFactory
 {

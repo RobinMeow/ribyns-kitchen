@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
-namespace api.Infrastructure.MongoDB;
+namespace Infrastructure.MongoDB;
 
 public sealed class MongoDatabase : DbContext
 {
@@ -44,7 +44,7 @@ public sealed class MongoDatabase : DbContext
         settings.ServerApi = new ServerApi(ServerApiVersion.V1);
         MongoClient client = new MongoClient(settings);
 
-        string databaseName = Globals.ApplicationNameAbbreviated.ToLower();
+        string databaseName = Common.Globals.ApplicationNameAbbreviated.ToLower();
 
         Database = client.GetDatabase(databaseName);
     }

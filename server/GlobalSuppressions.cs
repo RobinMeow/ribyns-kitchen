@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0290:Use primary constructor", Justification = "Saving Memory (RAM) while staying consistent", Scope = "member", Target = "~M:api.Infrastructure.ChefMongoDbCollection.#ctor(MongoDB.Driver.IMongoDatabase)")]
+[assembly: SuppressMessage("Style", "IDE0290:Use primary constructor", Justification = "Saving Memory (RAM) while staying consistent", Scope = "member", Target = "~M:Infrastructure.ChefMongoDbCollection.#ctor(MongoDB.Driver.IMongoDatabase)")]

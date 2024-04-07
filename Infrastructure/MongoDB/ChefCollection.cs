@@ -3,7 +3,7 @@ using Domain;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
-namespace api.Infrastructure.MongoDB;
+namespace Infrastructure.MongoDB;
 
 public sealed class ChefCollection : Collection, IChefRepository
 {

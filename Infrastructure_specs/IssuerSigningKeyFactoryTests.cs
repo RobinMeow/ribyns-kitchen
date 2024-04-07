@@ -1,8 +1,8 @@
 ﻿using Domain.Auth;
-using api.Infrastructure.Auth;
+using Infrastructure.Auth;
 using Microsoft.IdentityModel.Tokens;
 
-namespace api.tests.Infrastructure;
+namespace Infrastructure_specs;
 
 public sealed class IssuerSigningKeyFactoryTests
 {

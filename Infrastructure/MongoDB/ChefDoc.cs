@@ -1,6 +1,6 @@
 ﻿using Domain;
 
-namespace api.Infrastructure.MongoDB;
+namespace Infrastructure.MongoDB;
 
 public sealed record ChefDoc : Document
 {

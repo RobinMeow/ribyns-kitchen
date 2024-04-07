@@ -1,8 +1,8 @@
 using System.Reflection;
 using Domain;
 using Domain.Auth;
-using api.Infrastructure;
-using api.Infrastructure.Auth;
+using Infrastructure;
+using Infrastructure.Auth;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;

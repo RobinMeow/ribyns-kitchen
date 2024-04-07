@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace api.Infrastructure.MongoDB;
+namespace Infrastructure.MongoDB;
 
 public interface IRecipeCollection
 {

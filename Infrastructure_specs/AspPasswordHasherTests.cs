@@ -1,8 +1,7 @@
-﻿using Domain;
-using api.Infrastructure;
+﻿using Infrastructure;
 using Microsoft.AspNetCore.Identity;
 
-namespace api.tests.Infrastructure;
+namespace Infrastructure_specs;
 
 public sealed class AspPasswordHasherTests
 {

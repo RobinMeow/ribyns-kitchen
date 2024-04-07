@@ -1,7 +1,7 @@
 using Domain;
 using Microsoft.AspNetCore.Identity;
 
-namespace api.Infrastructure;
+namespace Infrastructure;
 
 public sealed class AspPasswordHasher : IPasswordHasher
 {
