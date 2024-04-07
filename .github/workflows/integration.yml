@@ -32,7 +32,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: 'server.tests'
+        working-directory: './'
 
     steps:
       - name: Checkout
