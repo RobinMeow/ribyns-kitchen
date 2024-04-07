@@ -1,7 +1,5 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
-using Domain;
-using Infrastructure.MongoDB;
 using Infrastructure;
 
 namespace Application;
@@ -28,11 +26,7 @@ internal class Program
         builder.AddFrontEndOriginsCors();
 
         // Transient: instance per code request. Scoped: instance per HTTP request
-        builder.Services.AddSingleton<MongoDatabase>();
-        builder.Services.AddSingleton<RecipeCollection>();
-        builder.Services.AddSingleton<IRecipeCollection, RecipeCollection>();
-        builder.Services.AddSingleton<IRecipeRepository, RecipeCollection>();
-        builder.Services.AddSingleton<IChefRepository, ChefCollection>();
+        builder.Services.AddInfrastructure();
 
         WebApplication app = builder.Build();
 
