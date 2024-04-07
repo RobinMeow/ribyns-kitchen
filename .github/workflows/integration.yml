@@ -7,10 +7,6 @@ jobs:
 
   build-server:
     runs-on: ubuntu-22.04
-    
-    defaults:
-      run:
-        working-directory: server
 
     steps:
       - name: Checkout
@@ -32,7 +28,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: 'server.tests'
+        working-directory: './'
 
     steps:
       - name: Checkout
@@ -109,8 +105,7 @@ jobs:
           mongodb-version: '6.0'
 
       - name: Build and Run Back-End
-        working-directory: server
-        run: dotnet build && dotnet run &
+        run: dotnet build && dotnet run --project ./Application &
 
       - name: run cypress e2e
         uses: cypress-io/github-action@v6.6.0
@@ -119,3 +114,4 @@ jobs:
           spec: cypress/e2e/**/*cy.ts
           browser: chrome
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
+          wait-on-timeout: 150 # wait 150s (dotnet restore can take a while if not cached. Otherwise it usually takes a few seconds)
