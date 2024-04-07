@@ -1,7 +1,7 @@
 namespace Application;
 
 /// <summary>contains a list of notification which can be filled up, and send back to the front end all at once.</summary>
-public abstract class Notification
+public abstract record Notification
 {
     public IEnumerable<string> Notifications  { get => _notifications.ToList(); }
 
@@ -16,3 +16,5 @@ public abstract class Notification
 }
 
 // Since this is a highly unknown (and in my opinion underestimated pattern), I'll leave its origin and explanation here: https://martinfowler.com/articles/replaceThrowWithNotification.html
+
+// TODO use Notification for DomainErrors/Notifications, and use DataAnnotations for simple VlaueType validations

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Application;
 
-public sealed class ChefDto : EntityDto
+public sealed record ChefDto : EntityDto
 {
     [Required]
     public string Name { get; set; } = null!;

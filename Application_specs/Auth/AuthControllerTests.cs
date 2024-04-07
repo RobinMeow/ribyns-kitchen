@@ -26,7 +26,7 @@ public sealed class AuthControllerTests
     [Fact]
     public async Task Register_returns_created_with_valid_request_dto()
     {
-        var requestDto = new RegisterChefDto()
+        var requestDto = new RegisterChefRequest()
         {
             Name = "Robin",
             Password = "Password"

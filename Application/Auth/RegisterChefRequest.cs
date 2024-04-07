@@ -4,7 +4,7 @@ using Domain;
 
 namespace Application.Auth;
 
-public sealed record class RegisterChefDto
+public sealed record class RegisterChefRequest
 {
     [Required]
     [StringRange(ChefValidatiors.NameMinLength, ChefValidatiors.NameMaxLength)]
