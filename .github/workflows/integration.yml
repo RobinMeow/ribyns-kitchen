@@ -7,10 +7,6 @@ jobs:
 
   build-server:
     runs-on: ubuntu-22.04
-    
-    defaults:
-      run:
-        working-directory: server
 
     steps:
       - name: Checkout
@@ -109,7 +105,6 @@ jobs:
           mongodb-version: '6.0'
 
       - name: Build and Run Back-End
-        working-directory: server
         run: dotnet build && dotnet run &
 
       - name: run cypress e2e
