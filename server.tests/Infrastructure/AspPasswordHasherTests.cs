@@ -1,4 +1,4 @@
-﻿using api.Domain;
+﻿using Domain;
 using api.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 

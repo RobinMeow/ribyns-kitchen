@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using api.Domain;
+using Domain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

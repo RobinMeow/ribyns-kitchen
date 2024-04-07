@@ -100,3 +100,10 @@ Go To Production:
 - Add email service (Firebase is for free, I think).
 - Maybe use Domain Events for some things, like sending emails, but the Application Layer is sufficient for this.
 - For more, [see Requirements](../README.md#requirements)
+
+
+## Domain Packages 
+
+| Package | namespace | use case |
+| Microsoft.Extensions.Identity.Core | Microsoft.AspNetCore.Identity | PasswordVerificationResult / IPasswordHaser |
+| Microsoft.IdentityModel.Tokens | Microsoft.IdentityModel.Tokens | SecurityKey / IIssuerSigningKeyFactory |

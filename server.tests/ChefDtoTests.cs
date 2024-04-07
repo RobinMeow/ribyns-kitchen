@@ -1,5 +1,5 @@
 ﻿using api.Controllers;
-using api.Domain;
+using Domain;
 using System.ComponentModel.DataAnnotations;
 
 namespace api.tests;

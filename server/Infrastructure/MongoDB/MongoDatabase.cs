@@ -1,4 +1,4 @@
-using api.Domain;
+using Domain;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;

@@ -1,6 +1,6 @@
 using api.Controllers;
 using api.Controllers.Auth;
-using api.Domain;
+using Domain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;
 using NSubstitute;

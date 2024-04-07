@@ -1,6 +1,6 @@
 using Microsoft.IdentityModel.Tokens;
 
-namespace api.Domain.Auth;
+namespace Domain.Auth;
 
 public interface IIssuerSigningKeyFactory
 {

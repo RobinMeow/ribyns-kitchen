@@ -1,5 +1,5 @@
 using System.Text;
-using api.Domain.Auth;
+using Domain.Auth;
 using Microsoft.IdentityModel.Tokens;
 
 namespace api.Infrastructure.Auth;

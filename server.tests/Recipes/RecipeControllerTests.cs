@@ -1,5 +1,5 @@
 using api.Controllers.Recipes;
-using api.Domain;
+using Domain;
 using api.Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;

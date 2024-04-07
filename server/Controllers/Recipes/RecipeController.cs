@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using api.Domain;
+using Domain;
 using api.Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;

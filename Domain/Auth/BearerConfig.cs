@@ -1,4 +1,4 @@
-namespace api.Domain.Auth;
+namespace Domain.Auth;
 
 public sealed class BearerConfig
 {

@@ -1,4 +1,4 @@
-namespace api.Domain;
+namespace Domain;
 
 public interface IRecipeRepository
 {

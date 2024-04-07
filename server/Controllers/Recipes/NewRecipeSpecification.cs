@@ -1,4 +1,4 @@
-using api.Domain;
+using Domain;
 
 namespace api.Controllers.Recipes;
 

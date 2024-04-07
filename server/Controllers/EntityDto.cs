@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using api.Domain;
+using Domain;
 
 namespace api.Controllers;
 

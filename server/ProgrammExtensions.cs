@@ -1,6 +1,6 @@
 using System.Reflection;
-using api.Domain;
-using api.Domain.Auth;
+using Domain;
+using Domain.Auth;
 using api.Infrastructure;
 using api.Infrastructure.Auth;
 using Microsoft.AspNetCore.Authentication;

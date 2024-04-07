@@ -1,4 +1,4 @@
-﻿using api.Domain.Auth;
+﻿using Domain.Auth;
 using api.Infrastructure.Auth;
 using Microsoft.IdentityModel.Tokens;
 

@@ -1,5 +1,5 @@
-﻿using api.Domain;
-using api.Domain.Auth;
+﻿using Domain;
+using Domain.Auth;
 using api.Infrastructure.Auth;
 using System.Security.Claims;
 

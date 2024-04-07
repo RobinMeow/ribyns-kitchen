@@ -1,4 +1,4 @@
-﻿namespace api.Domain;
+﻿namespace Domain;
 
 public static class ChefValidatiors
 {

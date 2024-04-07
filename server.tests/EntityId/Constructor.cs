@@ -1,4 +1,4 @@
-using api.Domain;
+using Domain;
 
 namespace api.tests.EntityId_specs;
 
