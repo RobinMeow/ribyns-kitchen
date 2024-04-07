@@ -3,6 +3,7 @@ using Domain;
 using Domain.Auth;
 using Infrastructure;
 using Infrastructure.Auth;
+using Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -105,6 +106,17 @@ public static class ProgrammExtensions
                 Type = SecuritySchemeType.ApiKey
             });
         });
+
+        return services;
+    }
+
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+    {
+        services.AddSingleton<MongoDatabase>();
+        services.AddSingleton<RecipeCollection>();
+        services.AddSingleton<IRecipeCollection, RecipeCollection>();
+        services.AddSingleton<IRecipeRepository, RecipeCollection>();
+        services.AddSingleton<IChefRepository, ChefCollection>();
 
         return services;
     }
