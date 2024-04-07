@@ -105,7 +105,7 @@ jobs:
           mongodb-version: '6.0'
 
       - name: Build and Run Back-End
-        run: dotnet build && dotnet run &
+        run: dotnet build && dotnet run --project ./Application &
 
       - name: run cypress e2e
         uses: cypress-io/github-action@v6.6.0
