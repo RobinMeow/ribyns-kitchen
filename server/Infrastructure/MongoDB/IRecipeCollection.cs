@@ -1,11 +1,10 @@
-﻿using api.Domain;
+﻿using System.Linq.Expressions;
 
-namespace api.Infrastructure.MongoDB
+namespace api.Infrastructure.MongoDB;
+
+public interface IRecipeCollection
 {
-    public interface IRecipeCollection
-    {
-        ValueTask AddAsync(Recipe recipe, CancellationToken cancellationToken = default);
-        ValueTask<IQueryable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default);
-        ValueTask<Recipe?> GetAsync(EntityId entityId, CancellationToken ct = default);
-    }
+    ValueTask<T?> GetAsync<T>(string recipeId, Expression<Func<RecipeDoc, T>> projection, CancellationToken ct = default);
+
+    ValueTask<IQueryable<T>> GetAllAsync<T>(Expression<Func<RecipeDoc, T>> projection, CancellationToken ct = default);
 }

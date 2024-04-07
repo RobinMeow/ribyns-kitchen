@@ -1,10 +1,10 @@
-using api;
 using api.Controllers.Recipes;
 using api.Domain;
 using api.Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
+using System.Linq.Expressions;
 
 namespace Recipes;
 
@@ -62,11 +62,11 @@ public sealed class RecipeControllerTests
     [Fact]
     public async Task GetAllAsync_returns_Ok()
     {
-        _recipeRepository
-            .GetAllAsync()
-            .Returns(ValueTask.FromResult(Enumerable.Empty<Recipe>().AsQueryable()));
+        _ = _recipeCollection
+            .GetAllAsync(Arg.Any<Expression<Func<RecipeDoc, RecipeDto>>>())
+            .Returns(new ValueTask<IQueryable<RecipeDto>>(Enumerable.Empty<RecipeDto>().AsQueryable()));
 
-        Ok<IEnumerable<RecipeDto>> result = await _recipeController.GetAllAsync();
+        Ok<IQueryable<RecipeDto>> result = await _recipeController.GetAllAsync();
         NotNull(result);
         NotNull(result.Value);
     }
@@ -87,9 +87,15 @@ public sealed class RecipeControllerTests
             Title = ""
         };
 
-        _recipeRepository
-            .GetAsync(Arg.Is(recipe.Id), default)
-            .Returns(ValueTask.FromResult<Recipe?>(recipe));
+        RecipeDto dto = new RecipeDto()
+        {
+            Id = recipe.Id.ToString(),
+            Title = "",
+        };
+
+        _recipeCollection
+            .GetAsync(Arg.Is(recipe.Id.ToString()), Arg.Any<Expression<Func<RecipeDoc, RecipeDto>>>(), default)
+            .Returns(new ValueTask<RecipeDto?>(dto));
 
         Results<Ok<RecipeDto>, NotFound> result = await _recipeController.GetAsync(recipe.Id.ToString());
 
@@ -100,7 +106,7 @@ public sealed class RecipeControllerTests
     }
 
     [Fact]
-    public async Task GetAsync_cancels_for_CancelationToken()
+    public async Task GetAsync_cancels_for_CancellationToken()
     {
         var source = new CancellationTokenSource();
         source.Cancel();
@@ -108,7 +114,7 @@ public sealed class RecipeControllerTests
     }
 
     [Fact]
-    public async Task AddAsync_cancels_for_CancelationToken()
+    public async Task AddAsync_cancels_for_CancellationToken()
     {
         var source = new CancellationTokenSource();
         source.Cancel();
@@ -116,7 +122,7 @@ public sealed class RecipeControllerTests
     }
 
     [Fact]
-    public async Task GetAllAsync_cancels_for_CancelationToken()
+    public async Task GetAllAsync_cancels_for_CancellationToken()
     {
         var source = new CancellationTokenSource();
         source.Cancel();

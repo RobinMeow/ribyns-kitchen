@@ -19,36 +19,22 @@ public sealed class RecipeCollection : Collection, IRecipeRepository, IRecipeCol
         return new ValueTask(_collection.InsertOneAsync(doc, default, cancellationToken));
     }
 
-    public ValueTask<IQueryable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
+    public ValueTask<T?> GetAsync<T>(string recipeId, Expression<Func<RecipeDoc, T>> projection, CancellationToken ct = default)
     {
-        return new ValueTask<IQueryable<Recipe>>(_collection
-            .AsQueryable()
-            .Select(s_asRecipe));
+        Task<T> query = _collection
+            .Find(Builders<RecipeDoc>.Filter.Eq(x => x.Id, recipeId), s_findOptions)
+            .Project(projection)
+            .FirstOrDefaultAsync(ct);
+
+        return new ValueTask<T?>(query!);
     }
 
-    public ValueTask<Recipe?> GetAsync(EntityId entityId, CancellationToken ct = default)
+    public ValueTask<IQueryable<T>> GetAllAsync<T>(Expression<Func<RecipeDoc, T>> projection, CancellationToken ct = default)
     {
-        string id = entityId.ToString();
-        return new ValueTask<Recipe?>(_collection
-            .Find(Builders<RecipeDoc>.Filter.Eq(x => x.Id, id), s_findOptions)
-            .Project(RecipeProjectionDefinition())
-            .FirstOrDefaultAsync(ct)!);
-    }
+        IQueryable<T> query = _collection
+           .AsQueryable()
+           .Select(projection);
 
-    static ProjectionDefinition<RecipeDoc, Recipe> RecipeProjectionDefinition()
-    {
-        return new ProjectionDefinitionBuilder<RecipeDoc>().Expression(x => new Recipe()
-        {
-            Id = new EntityId(x.Id),
-            Title = x.Title,
-            CreatedAt = x.CreatedAt,
-        });
+        return new ValueTask<IQueryable<T>>(query);
     }
-
-    static readonly Expression<Func<RecipeDoc, Recipe>> s_asRecipe = doc => new Recipe()
-    {
-        Id = new EntityId(doc.Id),
-        Title = doc.Title,
-        CreatedAt = doc.CreatedAt,
-    };
 }

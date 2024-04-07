@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
 using api.Domain;
 using api.Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Authorization;
@@ -20,6 +21,20 @@ public sealed class RecipeController(
     readonly IRecipeRepository _recipeRepository = recipeRepository;
     readonly IRecipeCollection _recipeCollection = recipeCollection;
 
+    readonly Func<Recipe, RecipeDto> _toDto = recipe => new RecipeDto()
+    {
+        Id = recipe.Id.Id,
+        CreatedAt = recipe.CreatedAt,
+        Title = recipe.Title,
+    };
+
+    readonly Expression<Func<RecipeDoc, RecipeDto>> _dtoProjection = doc => new RecipeDto()
+    {
+        Id = doc.Id,
+        CreatedAt = doc.CreatedAt,
+        Title = doc.Title,
+    };
+
     /// <summary>add a new recipe.</summary>
     /// <param name="newRecipe">the recipe to add.</param>
     /// <param name="cancellationToken"></param>
@@ -38,7 +53,7 @@ public sealed class RecipeController(
         cancellationToken.ThrowIfCancellationRequested();
         await _recipeRepository.AddAsync(recipe, cancellationToken);
 
-        return TypedResults.Created(nameof(AddAsync), recipe.ToDto());
+        return TypedResults.Created(nameof(AddAsync), _toDto(recipe));
     }
 
     static Recipe Create(NewRecipeDto newRecipe)
@@ -53,28 +68,29 @@ public sealed class RecipeController(
     }
 
     /// <summary>retrieve all recipes.</summary>
-    /// <param name="cancellationToken"></param>
+    /// <param name="ct"></param>
     /// <returns>all recipes.</returns>
     [HttpGet(nameof(GetAllAsync))]
-    public async Task<Ok<IEnumerable<RecipeDto>>> GetAllAsync(CancellationToken cancellationToken = default)
-    {
-        cancellationToken.ThrowIfCancellationRequested();
-        IQueryable<Recipe> recipes = await _recipeRepository.GetAllAsync(cancellationToken);
-        return TypedResults.Ok(recipes.ToDto());
-    }
-
-    [HttpGet(nameof(GetAsync))]
-    public async Task<Results<Ok<RecipeDto>, NotFound>> GetAsync([FromQuery] string recipeId, CancellationToken ct = default)
-    // TODO ValidEntityId
+    public async Task<Ok<IQueryable<RecipeDto>>> GetAllAsync(CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
-        Recipe? recipe = await _recipeRepository.GetAsync(new EntityId(recipeId), ct);
+
+        return TypedResults.Ok(await _recipeCollection.GetAllAsync(_dtoProjection, ct));
+    }
+
+
+    [HttpGet(nameof(GetAsync))] // TODO EntityIdAttribute
+    public async Task<Results<Ok<RecipeDto>, NotFound>> GetAsync([FromQuery] string recipeId, CancellationToken ct = default)
+    {
+        ct.ThrowIfCancellationRequested();
+        // TODO consider using nullable return type, instead of NotFound
+        RecipeDto? recipe = await _recipeCollection.GetAsync(recipeId, _dtoProjection, ct);
 
         if (recipe == null)
         {
             return TypedResults.NotFound();
         }
 
-        return TypedResults.Ok(recipe.ToDto());
+        return TypedResults.Ok(recipe);
     }
 }
