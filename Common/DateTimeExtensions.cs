@@ -1,6 +1,4 @@
-using System;
-
-namespace api;
+namespace Common;
 
 public static class DateTimeExtensions
 {

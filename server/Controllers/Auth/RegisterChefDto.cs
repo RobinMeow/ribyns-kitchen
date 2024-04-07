@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Common;
 using Domain;
 
 namespace api.Controllers.Auth;

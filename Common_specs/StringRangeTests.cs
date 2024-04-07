@@ -1,4 +1,6 @@
-﻿namespace api.tests.common;
+﻿using Common;
+
+namespace Common_specs;
 
 public sealed class StringRangeTests
 {

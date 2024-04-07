@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace api;
+namespace Common;
 
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
 public sealed class StringRangeAttribute : StringLengthAttribute
