@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace api.Controllers.Recipes;
+namespace Application.Recipes;
 
 [Authorize]
 [ApiController]

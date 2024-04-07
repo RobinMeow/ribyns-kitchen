@@ -1,6 +1,6 @@
 using Domain;
 
-namespace api.Controllers.Recipes;
+namespace Application.Recipes;
 
 /// <summary>
 /// Uses the <see cref="RecipeValidators" /> to ensure the data is valid. Adds ErrorMessages to the DTO accordingly. Returns true when it contains invalid data.

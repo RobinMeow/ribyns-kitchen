@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Common;
 using Domain;
 
-namespace api.Controllers.Recipes;
+namespace Application.Recipes;
 
 public sealed class NewRecipeDto : Notification
 {

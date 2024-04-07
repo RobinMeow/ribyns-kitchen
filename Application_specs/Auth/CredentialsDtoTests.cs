@@ -1,4 +1,4 @@
-﻿using api.Controllers.Auth;
+﻿using Application.Auth;
 using Common_specs;
 using System.ComponentModel.DataAnnotations;
 

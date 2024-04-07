@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace api.Controllers;
+namespace Application;
 
 public sealed class ChefDto : EntityDto
 {

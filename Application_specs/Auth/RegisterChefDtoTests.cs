@@ -1,5 +1,5 @@
-﻿using api.Controllers.Auth;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Application.Auth;
 using Common_specs;
 
 namespace api.tests.Auth;

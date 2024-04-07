@@ -1,4 +1,4 @@
-using api.Controllers.Recipes;
+using Application.Recipes;
 using Domain;
 using Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Http.HttpResults;

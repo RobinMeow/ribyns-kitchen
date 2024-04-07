@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Common;
 using Domain;
 
-namespace api.Controllers.Auth;
+namespace Application.Auth;
 
 public sealed record class RegisterChefDto
 {

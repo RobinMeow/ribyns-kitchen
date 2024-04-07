@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace api.Controllers.Auth;
+namespace Application.Auth;
 
 public record class CredentialsDto
 {

@@ -4,7 +4,7 @@ using Domain;
 using Infrastructure.MongoDB;
 using Infrastructure;
 
-namespace api;
+namespace Application;
 
 internal class Program
 {

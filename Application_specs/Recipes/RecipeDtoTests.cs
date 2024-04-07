@@ -1,4 +1,4 @@
-﻿using api.Controllers.Recipes;
+﻿using Application.Recipes;
 using Common_specs;
 using Domain;
 using System.ComponentModel.DataAnnotations;

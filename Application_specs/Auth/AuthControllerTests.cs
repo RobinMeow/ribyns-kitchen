@@ -1,5 +1,5 @@
-using api.Controllers;
-using api.Controllers.Auth;
+using Application;
+using Application.Auth;
 using Domain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;

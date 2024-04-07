@@ -1,4 +1,4 @@
-﻿namespace api;
+﻿namespace Application;
 
 public sealed class ExceptionHandler : Microsoft.AspNetCore.Diagnostics.IExceptionHandler
 {

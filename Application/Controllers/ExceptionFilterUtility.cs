@@ -1,4 +1,4 @@
-﻿namespace api.Controllers;
+﻿namespace Application;
 
 public static class ExceptionFilterUtility
 {

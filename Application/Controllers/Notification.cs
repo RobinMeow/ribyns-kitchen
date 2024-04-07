@@ -1,4 +1,4 @@
-namespace api.Controllers;
+namespace Application;
 
 /// <summary>contains a list of notification which can be filled up, and send back to the front end all at once.</summary>
 public abstract class Notification
