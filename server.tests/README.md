@@ -111,3 +111,10 @@ Exmaple:
 > Means a total of 88 tests performed better in 10 classes (avrg. 42ms), compared to 3 classes (avrg. 47.833ms). (`IsoDateTime` was already split up in 2 classes)
 
 I was thinking, "how much better would this perform on my laptop?", which runs on 16 logical processors. My conclusion was, that it wasnt much faster, because there were only 10 classes, meaning they untilize at max 10 out of 16 possible logical processors xD
+
+## Reading Data via IDomainRepository vs IDocumentCollection
+
+- the collections are used for read only operations, which allow to use versatile projections for performance optimazions. 
+- the domain repository is for read and write operations, which have a Domain Interface
+
+For example, a DomainRepositoey interface expects a EntityId as argument, whereas a Collection expects a string, to avoid the unneccassy conversion.

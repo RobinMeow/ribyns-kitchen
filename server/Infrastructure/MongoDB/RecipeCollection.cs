@@ -1,49 +1,40 @@
+using System.Linq.Expressions;
 using api.Domain;
 using MongoDB.Driver;
 
 namespace api.Infrastructure.MongoDB;
 
-public sealed class RecipeCollection : Collection, IRecipeRepository
+public sealed class RecipeCollection : Collection, IRecipeRepository, IRecipeCollection
 {
     readonly IMongoCollection<RecipeDoc> _collection;
 
-    public RecipeCollection(IMongoDatabase database)
+    public RecipeCollection(MongoDatabase mongo) : base()
     {
-        _collection = database.GetCollection<RecipeDoc>("recipes");
+        _collection = mongo.Database.GetCollection<RecipeDoc>("recipes");
     }
 
-    // TODO use ValueTask, as the code runs in sync anyways.
-    public Task AddAsync(Recipe recipe, CancellationToken cancellationToken = default)
+    public ValueTask AddAsync(Recipe recipe, CancellationToken cancellationToken = default)
     {
         RecipeDoc doc = RecipeDoc.Create(recipe);
-        return _collection.InsertOneAsync(doc, cancellationToken: cancellationToken);
+        return new ValueTask(_collection.InsertOneAsync(doc, default, cancellationToken));
     }
 
-    public async Task<IEnumerable<Recipe>> GetAllAsync(CancellationToken cancellationToken = default)
+    public ValueTask<T?> GetAsync<T>(string recipeId, Expression<Func<RecipeDoc, T>> projection, CancellationToken ct = default)
     {
-        return await _collection
-            .Find(_ => true, s_findOptions)
-            .Project(RecipeProjectionDefinition())
-            .ToListAsync(cancellationToken) // TODO get rid of this and return the query
-            .ConfigureAwait(false);
+        Task<T> query = _collection
+            .Find(Builders<RecipeDoc>.Filter.Eq(x => x.Id, recipeId), s_findOptions)
+            .Project(projection)
+            .FirstOrDefaultAsync(ct);
+
+        return new ValueTask<T?>(query!);
     }
 
-    public Task<Recipe?> GetAsync(EntityId entityId, CancellationToken ct = default)
+    public ValueTask<IQueryable<T>> GetAllAsync<T>(Expression<Func<RecipeDoc, T>> projection, CancellationToken ct = default)
     {
-        string id = entityId.ToString();
-        return _collection
-            .Find(Builders<RecipeDoc>.Filter.Eq(x => x.Id, id), s_findOptions)
-            .Project(RecipeProjectionDefinition())
-            .FirstOrDefaultAsync(ct) as Task<Recipe?>;
-    }
+        IQueryable<T> query = _collection
+           .AsQueryable()
+           .Select(projection);
 
-    static ProjectionDefinition<RecipeDoc, Recipe> RecipeProjectionDefinition()
-    {
-        return new ProjectionDefinitionBuilder<RecipeDoc>().Expression(x => new Recipe()
-        {
-            Id = new EntityId(x.Id),
-            Title = x.Title,
-            CreatedAt = x.CreatedAt,
-        });
+        return new ValueTask<IQueryable<T>>(query);
     }
 }

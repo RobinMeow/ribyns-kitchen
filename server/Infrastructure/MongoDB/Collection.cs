@@ -8,4 +8,9 @@ public abstract class Collection
     {
         AllowDiskUse = false,
     };
+
+    protected static AggregateOptions s_aggregateOptions = new AggregateOptions()
+    {
+        AllowDiskUse = false,
+    };
 }
