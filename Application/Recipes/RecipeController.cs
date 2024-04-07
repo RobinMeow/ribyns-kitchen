@@ -40,7 +40,7 @@ public sealed class RecipeController(
     /// <param name="cancellationToken"></param>
     /// <returns>the newly created recipe.</returns>
     [HttpPost(nameof(AddAsync))]
-    public async Task<Results<BadRequest<NewRecipeDto>, Created<RecipeDto>>> AddAsync([Required] NewRecipeDto newRecipe, CancellationToken cancellationToken = default)
+    public async Task<Results<BadRequest<NewRecipeRequest>, Created<RecipeDto>>> AddAsync([Required] NewRecipeRequest newRecipe, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -56,7 +56,7 @@ public sealed class RecipeController(
         return TypedResults.Created(nameof(AddAsync), _toDto(recipe));
     }
 
-    static Recipe Create(NewRecipeDto newRecipe)
+    static Recipe Create(NewRecipeRequest newRecipe)
     {
         System.Diagnostics.Debug.Assert(newRecipe.Title != null);
         return new Recipe()

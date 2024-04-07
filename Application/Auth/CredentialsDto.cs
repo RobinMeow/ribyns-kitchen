@@ -2,9 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Application.Auth;
 
-public record class CredentialsDto
+public sealed record class CredentialsDto
 {
     [Required]
+    // TODO [NotNullOrWhiteSpace]
     public string Name { get; set; } = null!;
 
     [Required]

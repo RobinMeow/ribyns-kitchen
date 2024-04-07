@@ -4,7 +4,7 @@ using Domain;
 
 namespace Application.Recipes;
 
-public sealed class NewRecipeDto : Notification
+public sealed record NewRecipeRequest : Notification
 {
     [Required]
     [StringRange(RecipeValidators.TITLE_MIN_LENGTH, RecipeValidators.TITLE_MAX_LENGTH)]

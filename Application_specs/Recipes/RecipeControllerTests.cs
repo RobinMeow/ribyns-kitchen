@@ -26,12 +26,12 @@ public sealed class RecipeControllerTests
     [Fact]
     public async Task AddAsync_returns_created_with_valid_request_dto()
     {
-        var requestDto = new NewRecipeDto()
+        var requestDto = new NewRecipeRequest()
         {
             Title = "My Recipe",
         };
 
-        Results<BadRequest<NewRecipeDto>, Created<RecipeDto>> createdResult = await _recipeController.AddAsync(requestDto);
+        Results<BadRequest<NewRecipeRequest>, Created<RecipeDto>> createdResult = await _recipeController.AddAsync(requestDto);
         IsType<Created<RecipeDto>>(createdResult.Result);
         var actual = createdResult.Result as Created<RecipeDto>;
         NotNull(actual);
@@ -44,15 +44,15 @@ public sealed class RecipeControllerTests
     [InlineData("")]
     public async Task AddAsync_returns_BadReuqest_with_invalid_request_dto(string? title)
     {
-        var requestDto = new NewRecipeDto()
+        var requestDto = new NewRecipeRequest()
         {
             Title = title!,
         };
 
-        Results<BadRequest<NewRecipeDto>, Created<RecipeDto>> result = await _recipeController.AddAsync(requestDto);
+        Results<BadRequest<NewRecipeRequest>, Created<RecipeDto>> result = await _recipeController.AddAsync(requestDto);
         
-        IsType<BadRequest<NewRecipeDto>>(result.Result);
-        var actual = result.Result as BadRequest<NewRecipeDto>;
+        IsType<BadRequest<NewRecipeRequest>>(result.Result);
+        var actual = result.Result as BadRequest<NewRecipeRequest>;
 
         NotNull(actual);
         NotNull(actual.Value);

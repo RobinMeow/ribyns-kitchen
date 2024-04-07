@@ -7,9 +7,9 @@ namespace Application.Recipes;
 /// </summary>
 public sealed class NewRecipeSpecification
 {
-    readonly NewRecipeDto _newRecipe;
+    readonly NewRecipeRequest _newRecipe;
 
-    public NewRecipeSpecification(NewRecipeDto newRecipe)
+    public NewRecipeSpecification(NewRecipeRequest newRecipe)
     {
         _newRecipe = newRecipe;
     }
