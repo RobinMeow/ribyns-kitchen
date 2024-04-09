@@ -109,6 +109,7 @@ public sealed class RecipeController : ControllerBase
         var title = new ValidationField(nameof(NewRecipeRequest.Title), "string");
         title.Constraints.Add(new Constraint(Validation.Min, RecipeValidators.TITLE_MIN_LENGTH));
         title.Constraints.Add(new Constraint(Validation.Max, RecipeValidators.TITLE_MAX_LENGTH));
+        title.Constraints.Add(new Constraint(Validation.Required, true));
 
         var validationFields = new ValidationField[1];
         validationFields[0] = title;

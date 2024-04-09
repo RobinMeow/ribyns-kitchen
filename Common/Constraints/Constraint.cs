@@ -2,12 +2,12 @@
 
 public sealed record Constraint
 {
-    public Constraint(Validation validator, object value)
+    public Constraint(Validation validation, object value)
     {
-        Validator = validator;
+        Validation = validation;
         Value = value;
     }
 
-    public Validation Validator { get; set; }
+    public Validation Validation { get; set; }
     public object Value { get; set; }
 }
