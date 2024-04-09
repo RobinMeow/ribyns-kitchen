@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
+using Common.Constraints;
 using Domain;
 using Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Authorization;
@@ -11,15 +12,22 @@ namespace Application.Recipes;
 [Authorize]
 [ApiController]
 [Route("[controller]")]
-public sealed class RecipeController(
-    IRecipeRepository recipeRepository,
-    IRecipeCollection recipeCollection,
-    ILogger<RecipeController> logger
-    ) : ControllerBase
+public sealed class RecipeController : ControllerBase
 {
-    readonly ILogger<RecipeController> _logger = logger;
-    readonly IRecipeRepository _recipeRepository = recipeRepository;
-    readonly IRecipeCollection _recipeCollection = recipeCollection;
+    public RecipeController(
+        IRecipeRepository recipeRepository,
+        IRecipeCollection recipeCollection,
+        ILogger<RecipeController> logger
+        ) : base()
+    {
+        _recipeRepository = recipeRepository;
+        _recipeCollection = recipeCollection;
+        _logger = logger;
+    }
+
+    readonly ILogger<RecipeController> _logger;
+    readonly IRecipeRepository _recipeRepository;
+    readonly IRecipeCollection _recipeCollection;
 
     readonly Func<Recipe, RecipeDto> _toDto = recipe => new RecipeDto()
     {
@@ -92,5 +100,18 @@ public sealed class RecipeController(
         }
 
         return TypedResults.Ok(recipe);
+    }
+
+    [HttpGet(nameof(GetNewRecipeValidationFields))]
+    public Task<Ok<ValidationField[]>> GetNewRecipeValidationFields(CancellationToken ct = default)
+    {
+        ct.ThrowIfCancellationRequested();
+        var title = new ValidationField(nameof(NewRecipeRequest.Title), "string");
+        title.Constraints.Add(new Constraint(Validation.Min, RecipeValidators.TITLE_MIN_LENGTH));
+        title.Constraints.Add(new Constraint(Validation.Max, RecipeValidators.TITLE_MAX_LENGTH));
+
+        var validationFields = new ValidationField[1];
+        validationFields[0] = title;
+        return Task.FromResult(TypedResults.Ok(validationFields));
     }
 }

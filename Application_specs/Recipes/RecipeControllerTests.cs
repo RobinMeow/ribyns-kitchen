@@ -1,4 +1,5 @@
 using Application.Recipes;
+using Common.Constraints;
 using Domain;
 using Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -127,5 +128,21 @@ public sealed class RecipeControllerTests
         var source = new CancellationTokenSource();
         source.Cancel();
         await ThrowsAsync<OperationCanceledException>(() => _recipeController.GetAllAsync(source.Token));
+    }
+
+    [Fact]
+    public async Task GetNewRecipeValidationFields_cancels_for_CancellationToken()
+    {
+        var source = new CancellationTokenSource();
+        source.Cancel();
+        await ThrowsAsync<OperationCanceledException>(() => _recipeController.GetNewRecipeValidationFields(source.Token));
+    }
+
+    [Fact]
+    public async Task GetNewRecipeValidationFields_returns_oke()
+    {
+        Ok<ValidationField[]> ok = await _recipeController.GetNewRecipeValidationFields();
+        NotNull(ok.Value);
+        True(ok.Value.Length > 0);
     }
 }
