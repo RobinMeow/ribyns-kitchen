@@ -4,6 +4,7 @@ import { firstValueFrom, map } from 'rxjs'
 import { NewRecipe } from './new_recipe'
 import { Recipe } from './recipe'
 import { RecipeDto } from './recipe_dto'
+import { ValidationField } from '@common/constraints'
 
 @Injectable({ providedIn: 'root' })
 export class RecipeApi extends BaseApi {
@@ -31,6 +32,17 @@ export class RecipeApi extends BaseApi {
         headers: headers
       })
       .pipe(map(this.toRecipe))
+
+    return firstValueFrom(request$)
+  }
+
+  getNewRecipeConstraints(): Promise<Array<ValidationField>> {
+    const headers = this.defaultHeadersWithAuth()
+    const url = this.URL + 'GetNewRecipeValidationFields'
+
+    const request$ = this.httpClient.get<Array<ValidationField>>(url, {
+      headers: headers
+    })
 
     return firstValueFrom(request$)
   }
