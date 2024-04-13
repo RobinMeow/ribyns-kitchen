@@ -39,10 +39,10 @@ export class CreateRecipe {
     this.validationFields
   )
 
-  private readonly validationField = this.validationReader.get('title')
+  private readonly titleValidations = this.validationReader.get('title')
 
   private readonly titleConstraintReader = new ConstraintReader(
-    this.validationField
+    this.titleValidations
   )
 
   protected readonly titleMinLength = this.titleConstraintReader.read<number>(
@@ -53,7 +53,7 @@ export class CreateRecipe {
   )
 
   protected readonly form = this.nnfb.group({
-    title: ['', ValidatorsFactory.create(this.validationField)]
+    title: ['', ValidatorsFactory.create(this.titleValidations)]
   })
 
   protected async onSubmit(): Promise<void> {
