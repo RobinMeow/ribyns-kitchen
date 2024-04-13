@@ -2,7 +2,7 @@ import { assert } from '@common/assertions'
 import { Validation } from './validation'
 import { Constraint } from './constraint'
 
-export class ValidationField {
+export class FieldValidations {
   readonly name: string
   readonly dataType: string
   private readonly constraints: ReadonlyMap<Validation, Constraint>

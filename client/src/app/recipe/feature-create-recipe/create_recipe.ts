@@ -10,7 +10,7 @@ import { NewRecipe } from '../util/new_recipe'
 import { Recipe } from '../util/recipe'
 import {
   Validation,
-  ValidationField,
+  FieldValidations,
   ValidationReader,
   ValidatorsFactory
 } from '@common/constraints'
@@ -32,23 +32,23 @@ export class CreateRecipe {
   private readonly recipeApi = inject(RecipeApi)
   private readonly router = inject(Router)
   private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
-  private readonly validationFields: readonly ValidationField[] =
+  private readonly validationFields: readonly FieldValidations[] =
     this.activatedRouteSnapshot.data['validationFields']
   private readonly validationReader: ValidationReader = new ValidationReader(
     this.validationFields
   )
 
-  private readonly titleValidationField = this.validationReader.get('title')
+  private readonly titleValidations = this.validationReader.get('title')
 
-  protected readonly titleMinLength = this.titleValidationField.read<number>(
+  protected readonly titleMinLength = this.titleValidations.read<number>(
     Validation.Min
   )
-  protected readonly titleMaxLength = this.titleValidationField.read<number>(
+  protected readonly titleMaxLength = this.titleValidations.read<number>(
     Validation.Max
   )
 
   protected readonly form = this.nnfb.group({
-    title: ['', ValidatorsFactory.create(this.titleValidationField)]
+    title: ['', ValidatorsFactory.create(this.titleValidations)]
   })
 
   protected async onSubmit(): Promise<void> {

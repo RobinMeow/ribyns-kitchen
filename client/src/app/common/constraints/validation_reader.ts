@@ -1,16 +1,16 @@
 import { assert } from '@common/assertions'
-import { ValidationField } from './validation_field'
+import { FieldValidations } from './field_validations'
 
 export class ValidationReader {
-  private readonly validationFields: { [name: string]: ValidationField } = {}
+  private readonly validationFields: { [name: string]: FieldValidations } = {}
 
-  constructor(validationFields: readonly ValidationField[]) {
+  constructor(validationFields: readonly FieldValidations[]) {
     for (const validationField of validationFields) {
       this.validationFields[validationField.name] = validationField
     }
   }
 
-  get(name: string): ValidationField {
+  get(name: string): FieldValidations {
     const validationField = this.validationFields[name]
     assert(validationField, `ValidationField '${name}' not found.`)
     return validationField

@@ -1,9 +1,9 @@
 import { ValidatorFn, Validators } from '@angular/forms'
-import { ValidationField } from './validation_field'
+import { FieldValidations } from './field_validations'
 import { Validation } from './validation'
 
 export class ValidatorsFactory {
-  static create(validationField: ValidationField): ValidatorFn[] {
+  static create(validationField: FieldValidations): ValidatorFn[] {
     const validators: ValidatorFn[] = []
 
     for (const constraint of validationField.getAllConstraints()) {

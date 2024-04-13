@@ -4,7 +4,7 @@ import { firstValueFrom, map } from 'rxjs'
 import { NewRecipe } from './new_recipe'
 import { Recipe } from './recipe'
 import { RecipeDto } from './recipe_dto'
-import { Constraint, Validation, ValidationField } from '@common/constraints'
+import { Constraint, Validation, FieldValidations } from '@common/constraints'
 
 const toValidation = (dto: ValidationDto): Validation => {
   return <Validation>ValidationDto[dto]
@@ -13,8 +13,12 @@ const toValidation = (dto: ValidationDto): Validation => {
 const toConstraint = (dto: ConstraintDto) =>
   new Constraint(toValidation(dto.validation), dto.value)
 
-const toValidationField = (dto: ValidationFieldDto): ValidationField =>
-  new ValidationField(dto.name, dto.dataType, dto.constraints.map(toConstraint))
+const toValidationField = (dto: ValidationFieldDto): FieldValidations =>
+  new FieldValidations(
+    dto.name,
+    dto.dataType,
+    dto.constraints.map(toConstraint)
+  )
 
 @Injectable({ providedIn: 'root' })
 export class RecipeApi extends BaseApi {
@@ -46,7 +50,7 @@ export class RecipeApi extends BaseApi {
     return firstValueFrom(request$)
   }
 
-  getCreateRecipeConstraints(): Promise<ValidationField[]> {
+  getCreateRecipeConstraints(): Promise<FieldValidations[]> {
     const headers = this.defaultHeadersWithAuth()
     const url = this.URL + 'GetNewRecipeValidationFields'
 
