@@ -14,6 +14,7 @@ import {
   ValidationReader,
   ValidatorsFactory
 } from '@common/constraints'
+import { assert } from '@common/assertions'
 
 @Component({
   standalone: true,
@@ -34,6 +35,10 @@ export class CreateRecipe {
   private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
   private readonly validationFields: readonly FieldValidations[] =
     this.activatedRouteSnapshot.data['validationFields']
+  private readonly _ = assert(
+    this.validationFields.length === 1,
+    'Expeted 1 FieldValiadtions.'
+  )
   private readonly validationReader: ValidationReader = new ValidationReader(
     this.validationFields
   )
