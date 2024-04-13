@@ -16,6 +16,40 @@ import {
 } from '@common/constraints'
 import { assert } from '@common/assertions'
 
+class ConstraintReader {
+  private readonly validationField: ValidationField
+
+  constructor(validationField: ValidationField) {
+    this.validationField = validationField
+  }
+
+  readValue<T>(validation: Validation): T {
+    const constraint = this.validationField.constraints.find(
+      (x) => x.validation === validation
+    )
+    assert(constraint, `Validation '${validationName(validation)}' not found.`)
+    return <T>constraint.value
+  }
+}
+
+class ValidationFields {
+  private readonly validationFields: ValidationField[]
+
+  constructor(validationFields: ValidationField[]) {
+    this.validationFields = validationFields
+  }
+
+  get(name: string): ValidationField {
+    const validationField = this.validationFields.find((x) => x.name === name)
+    assert(validationField, `ValidationField '${name}' not found.`)
+    return validationField
+  }
+
+  toArray(): ValidationField[] {
+    return structuredClone(this.validationFields)
+  }
+}
+
 @Component({
   standalone: true,
   imports: [
@@ -33,16 +67,26 @@ export class CreateRecipe {
   private readonly recipeApi = inject(RecipeApi)
   private readonly router = inject(Router)
   private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
-  private readonly validationFields: ValidationField[] =
+  private readonly validationFields: ValidationFields = new ValidationFields(
     this.activatedRouteSnapshot.data['validationFields']
+  )
 
-  // TODO remove boilerplate code here..
-  private readonly titleValidationField = this.getValidationField('title')
-  protected readonly titleMaxLength = this.getConstraintValue(Validation.Max)
-  protected readonly titleMinLength = this.getConstraintValue(Validation.Min)
+  private readonly titleConstraintReader = new ConstraintReader(
+    this.validationFields.get('title')
+  )
+
+  protected readonly titleMinLength = this.titleConstraintReader.readValue(
+    Validation.Min
+  )
+  protected readonly titleMaxLength = this.titleConstraintReader.readValue(
+    Validation.Max
+  )
 
   protected readonly form = this.nnfb.group({
-    title: ['', ValidatorsFactory.create('title', this.validationFields)]
+    title: [
+      '',
+      ValidatorsFactory.create('title', this.validationFields.toArray())
+    ]
   })
 
   protected async onSubmit(): Promise<void> {
@@ -55,19 +99,5 @@ export class CreateRecipe {
 
     const recipe: Recipe = await this.recipeApi.newAsync(newRecipe)
     void this.router.navigate(['/recipe', recipe.id])
-  }
-
-  private getValidationField(name: string): ValidationField {
-    const validationField = this.validationFields.find((x) => x.name === name)
-    assert(validationField, `ValidationField '${name}' not found.`)
-    return validationField
-  }
-
-  private getConstraintValue(validation: Validation): unknown {
-    const constraint = this.titleValidationField.constraints.find(
-      (x) => x.validation === validation
-    )
-    assert(constraint, `Validation '${validationName(validation)}' not found.`)
-    return constraint.value
   }
 }
