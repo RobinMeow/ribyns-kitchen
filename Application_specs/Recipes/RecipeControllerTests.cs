@@ -139,9 +139,9 @@ public sealed class RecipeControllerTests
     }
 
     [Fact]
-    public async Task GetNewRecipeValidationFields_returns_oke()
+    public async Task GetNewRecipeValidationFields_returns_OK()
     {
-        Ok<ValidationField[]> ok = await _recipeController.GetNewRecipeValidationFields();
+        Ok<FieldValidations[]> ok = await _recipeController.GetNewRecipeValidationFields();
         NotNull(ok.Value);
         True(ok.Value.Length > 0);
     }

@@ -1,8 +1,8 @@
 ﻿namespace Common.Constraints;
 
-public sealed record ValidationField
+public sealed record FieldValidations
 {
-    public ValidationField(string name, string dataType)
+    public FieldValidations(string name, string dataType, Constraint[] constraints)
     {
         // convert first character to lower case
         ReadOnlySpan<char> span = name.AsSpan();
@@ -12,11 +12,12 @@ public sealed record ValidationField
 
         Name = char.ToLowerInvariant(span[0]) + span.Slice(1).ToString();
         DataType = dataType;
+        Constraints = constraints;
     }
 
     public string Name { get; }
 
     public string DataType { get; set; }
 
-    public List<Constraint> Constraints { get; set; } = new List<Constraint>();
+    public Constraint[] Constraints { get; set; }
 }

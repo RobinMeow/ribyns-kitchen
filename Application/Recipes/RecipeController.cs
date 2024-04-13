@@ -103,16 +103,14 @@ public sealed class RecipeController : ControllerBase
     }
 
     [HttpGet(nameof(GetNewRecipeValidationFields))]
-    public Task<Ok<ValidationField[]>> GetNewRecipeValidationFields(CancellationToken ct = default)
+    public Task<Ok<FieldValidations[]>> GetNewRecipeValidationFields(CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
-        var title = new ValidationField(nameof(NewRecipeRequest.Title), "string");
-        title.Constraints.Add(new Constraint(Validation.Min, RecipeValidators.TITLE_MIN_LENGTH));
-        title.Constraints.Add(new Constraint(Validation.Max, RecipeValidators.TITLE_MAX_LENGTH));
-        title.Constraints.Add(new Constraint(Validation.Required, true));
-
-        var validationFields = new ValidationField[1];
-        validationFields[0] = title;
-        return Task.FromResult(TypedResults.Ok(validationFields));
+        return Task.FromResult(TypedResults.Ok(new FieldValidationsBuilder()
+            .AddField(nameof(NewRecipeRequest.Title), "string")
+            .WithConstraint(Validation.Min, RecipeValidators.TITLE_MIN_LENGTH)
+            .WithConstraint(Validation.Max, RecipeValidators.TITLE_MAX_LENGTH)
+            .WithConstraint(Validation.Required)
+            .Build()));
     }
 }
