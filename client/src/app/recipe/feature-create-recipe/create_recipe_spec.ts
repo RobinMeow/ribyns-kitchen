@@ -8,6 +8,14 @@ import { RecipeApi } from '../util/recipe_api'
 import { provideApiBaseUrlTesting } from '@api'
 import { byTestAttr, setValue } from '@common/testing'
 import { MockProvider } from 'ng-mocks'
+import { ActivatedRoute } from '@angular/router'
+import { Validation, ValidationField } from '@common/constraints'
+import { fakeSnapshot } from 'src/app/common/testing/fake_snapshot'
+import { withResolvedData } from 'src/app/common/testing/with_resolved_data'
+import {
+  withConstraint,
+  fakeValidationField
+} from '@common/constraints/testing'
 
 describe('CreateRecipe should', () => {
   let component: CreateRecipe
@@ -22,7 +30,18 @@ describe('CreateRecipe should', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideApiBaseUrlTesting(),
-        MockProvider(RecipeApi)
+        MockProvider(RecipeApi),
+        MockProvider(ActivatedRoute, {
+          snapshot: fakeSnapshot(
+            withResolvedData<ValidationField[]>('validationFields', [
+              fakeValidationField('title', 'string', [
+                withConstraint(Validation.Min, 1),
+                withConstraint(Validation.Max, 2),
+                withConstraint(Validation.Required)
+              ])
+            ])
+          )
+        })
       ]
     }).compileComponents()
 
@@ -69,15 +88,16 @@ describe('CreateRecipe should', () => {
     expect(btn.disabled).toBeTrue()
 
     const input = byTestAttr<HTMLInputElement>(fixture, 'recipe-title-input')
-    setValue(input, 'Meow Miau Miaow')
+    setValue(input, 'A')
     fixture.detectChanges()
 
     expect(btn.disabled).toBeFalse()
   })
 
-  it('not send http reuqest when form is submitted invalid', async () => {
+  it('not send http request when form is submitted invalid', async () => {
     const form = byTestAttr<HTMLFormElement>(fixture, 'create-recipe-form')
     expect(form.querySelector('[invalid]')).toBeDefined()
+    expect(component['form'].invalid).toBeTrue()
 
     const addAsyncSpy = spyOn(recipeApi, 'newAsync')
 

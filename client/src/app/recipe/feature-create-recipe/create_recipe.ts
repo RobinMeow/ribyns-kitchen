@@ -11,7 +11,8 @@ import { Recipe } from '../util/recipe'
 import {
   Validation,
   ValidationField,
-  ValidatorsFactory
+  ValidatorsFactory,
+  validationName
 } from '@common/constraints'
 import { assert } from '@common/assertions'
 
@@ -37,14 +38,8 @@ export class CreateRecipe {
 
   // TODO remove boilerplate code here..
   private readonly titleValidationField = this.getValidationField('title')
-  protected readonly titleMaxLength =
-    this.titleValidationField.constraints.find(
-      (x) => x.validation === Validation.Max
-    )!.value
-  protected readonly titleMinLength =
-    this.titleValidationField.constraints.find(
-      (x) => x.validation === Validation.Min
-    )!.value
+  protected readonly titleMaxLength = this.getConstraintValue(Validation.Max)
+  protected readonly titleMinLength = this.getConstraintValue(Validation.Min)
 
   protected readonly form = this.nnfb.group({
     title: ['', ValidatorsFactory.create('title', this.validationFields)]
@@ -66,5 +61,13 @@ export class CreateRecipe {
     const validationField = this.validationFields.find((x) => x.name === name)
     assert(validationField, `ValidationField '${name}' not found.`)
     return validationField
+  }
+
+  private getConstraintValue(validation: Validation): unknown {
+    const constraint = this.titleValidationField.constraints.find(
+      (x) => x.validation === validation
+    )
+    assert(constraint, `Validation '${validationName(validation)}' not found.`)
+    return constraint.value
   }
 }

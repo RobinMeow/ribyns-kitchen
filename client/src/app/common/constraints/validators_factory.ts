@@ -15,16 +15,12 @@ export class ValidatorsFactory {
     )
 
     assert(validationField, `Name did not exist in vlidationFields.`)
-
     for (let i = 0; i < validationField.constraints.length; i++) {
       const constraint = validationField.constraints[i]
       switch (constraint.validation) {
         case Validation.Required: {
-          if (constraint.value) {
-            validators.push(Validators.required)
-          } else {
-            // not required, needs no validator.
-          }
+          // value is ignored by design for required.
+          validators.push(Validators.required)
           break
         }
         case Validation.Min: {

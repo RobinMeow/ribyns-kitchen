@@ -29,6 +29,7 @@
       "@shared/feedback": [ "src/app/shared/feedback/index.ts" ],
       "@common": [ "src/app/common/index.ts" ],
       "@common/testing": [ "src/app/common/testing/index.ts" ],
+      "@common/constraints/testing": [ "src/app/common/constraints/testing/index.ts" ],
       "@common/assertions": [ "src/app/common/assertions/index.ts" ],
       "@common/constraints": [ "src/app/common/constraints/index.ts" ],
       "@api": [ "src/app/shared/api/index.ts" ]
