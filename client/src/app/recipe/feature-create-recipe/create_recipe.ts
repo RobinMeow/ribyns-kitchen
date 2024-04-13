@@ -12,7 +12,7 @@ import {
   ConstraintReader,
   Validation,
   ValidationField,
-  ValidationFields as ValidationReader,
+  ValidationReader,
   ValidatorsFactory
 } from '@common/constraints'
 
