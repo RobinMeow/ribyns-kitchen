@@ -13,11 +13,7 @@ import {
 } from '@common/testing'
 import { MockProvider } from 'ng-mocks'
 import { ActivatedRoute } from '@angular/router'
-import { Validation, ValidationField } from '@common/constraints'
-import {
-  withConstraint,
-  fakeValidationField
-} from '@common/constraints/testing'
+import { Constraint, Validation, ValidationField } from '@common/constraints'
 
 describe('CreateRecipe should', () => {
   let component: CreateRecipe
@@ -36,10 +32,10 @@ describe('CreateRecipe should', () => {
         MockProvider(ActivatedRoute, {
           snapshot: fakeSnapshot(
             withResolvedData<ValidationField[]>('validationFields', [
-              fakeValidationField('title', 'string', [
-                withConstraint(Validation.Min, 1),
-                withConstraint(Validation.Max, 2),
-                withConstraint(Validation.Required)
+              new ValidationField('title', 'string', [
+                new Constraint(Validation.Min, 1),
+                new Constraint(Validation.Max, 2),
+                new Constraint(Validation.Required)
               ])
             ])
           )

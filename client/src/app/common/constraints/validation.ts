@@ -1,5 +1,5 @@
 export enum Validation {
-  Required,
-  Min,
-  Max
+  Required = 'Required',
+  Min = 'Min',
+  Max = 'Max'
 }

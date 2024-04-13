@@ -9,7 +9,6 @@ import { RecipeApi } from '../util/recipe_api'
 import { NewRecipe } from '../util/new_recipe'
 import { Recipe } from '../util/recipe'
 import {
-  ConstraintReader,
   Validation,
   ValidationField,
   ValidationReader,
@@ -39,21 +38,17 @@ export class CreateRecipe {
     this.validationFields
   )
 
-  private readonly titleValidations = this.validationReader.get('title')
+  private readonly titleValidationField = this.validationReader.get('title')
 
-  private readonly titleConstraintReader = new ConstraintReader(
-    this.titleValidations
-  )
-
-  protected readonly titleMinLength = this.titleConstraintReader.read<number>(
+  protected readonly titleMinLength = this.titleValidationField.read<number>(
     Validation.Min
   )
-  protected readonly titleMaxLength = this.titleConstraintReader.read<number>(
+  protected readonly titleMaxLength = this.titleValidationField.read<number>(
     Validation.Max
   )
 
   protected readonly form = this.nnfb.group({
-    title: ['', ValidatorsFactory.create(this.titleValidations)]
+    title: ['', ValidatorsFactory.create(this.titleValidationField)]
   })
 
   protected async onSubmit(): Promise<void> {

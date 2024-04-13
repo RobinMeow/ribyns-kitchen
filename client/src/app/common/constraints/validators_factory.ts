@@ -1,15 +1,12 @@
 import { ValidatorFn, Validators } from '@angular/forms'
 import { ValidationField } from './validation_field'
 import { Validation } from './validation'
-import { assert } from '@common/assertions'
 
 export class ValidatorsFactory {
   static create(validationField: ValidationField): ValidatorFn[] {
     const validators: ValidatorFn[] = []
 
-    assert(validationField, `Name did not exist in vlidationFields.`)
-    for (let i = 0; i < validationField.constraints.length; i++) {
-      const constraint = validationField.constraints[i]
+    for (const constraint of validationField.getAllConstraints()) {
       switch (constraint.validation) {
         case Validation.Required: {
           // value is ignored by design for required.
