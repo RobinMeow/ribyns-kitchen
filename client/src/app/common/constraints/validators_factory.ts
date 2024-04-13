@@ -22,7 +22,7 @@ export class ValidatorsFactory {
             validators.push(Validators.minLength(min))
           } else {
             throw new Error(
-              `Validatio.Min for DataType '${validationField.dataType}' is not supported.`
+              `Validation.Min for DataType '${validationField.dataType}' is not supported.`
             )
           }
           break
@@ -33,7 +33,7 @@ export class ValidatorsFactory {
             validators.push(Validators.maxLength(max))
           } else {
             throw new Error(
-              `Validatio.Max for DataType '${validationField.dataType}' is not supported.`
+              `Validation.Max for DataType '${validationField.dataType}' is not supported.`
             )
           }
           break
