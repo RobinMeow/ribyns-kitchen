@@ -36,7 +36,7 @@ export class RecipeApi extends BaseApi {
     return firstValueFrom(request$)
   }
 
-  getNewRecipeConstraints(): Promise<Array<ValidationField>> {
+  getCreateRecipeConstraints(): Promise<Array<ValidationField>> {
     const headers = this.defaultHeadersWithAuth()
     const url = this.URL + 'GetNewRecipeValidationFields'
 

@@ -11,5 +11,5 @@ import { RecipeApi } from '../util/recipe_api'
 export const createRecipeValidationFieldsResolver: ResolveFn<
   Promise<Array<ValidationField>>
 > = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  return inject(RecipeApi).getNewRecipeConstraints()
+  return inject(RecipeApi).getCreateRecipeConstraints()
 }
