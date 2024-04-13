@@ -19,12 +19,11 @@ export class FieldValidations {
   }
 
   get<T>(validation: Validation): T {
-    const value = this.constraints.get(validation)
     assert(
       this.constraints.has(validation),
       `Constraint with Validation '${validation}' not found.`
     )
-    return value as T
+    return this.constraints.get(validation) as T
   }
 
   getAllConstraints(): IterableIterator<Constraint> {
