@@ -1,6 +1,7 @@
 import { assert } from '@common/assertions'
 import { Validation } from './validation'
 import { Constraint } from './constraint'
+import { ValidatorFn } from '@angular/forms'
 
 export class FieldValidations {
   readonly name: string
@@ -26,7 +27,13 @@ export class FieldValidations {
     return this.constraints.get(validation) as T
   }
 
-  getAllConstraints(): IterableIterator<Constraint> {
-    return this.constraints.values()
+  getValiadtors(): ValidatorFn[] {
+    const validators: ValidatorFn[] = []
+
+    for (const constraint of this.constraints.values()) {
+      validators.push(constraint.getValidator(this.dataType))
+    }
+
+    return validators
   }
 }

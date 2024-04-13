@@ -11,8 +11,7 @@ import { Recipe } from '../util/recipe'
 import {
   Validation,
   FieldValidations,
-  ValidationReader,
-  ValidatorsFactory
+  ValidationReader
 } from '@common/constraints'
 import { assert } from '@common/assertions'
 
@@ -54,7 +53,7 @@ export class CreateRecipe {
   )
 
   protected readonly form = this.nnfb.group({
-    title: ['', ValidatorsFactory.create(this.titleValidations)]
+    title: ['', this.titleValidations.getValiadtors()]
   })
 
   protected async onSubmit(): Promise<void> {
