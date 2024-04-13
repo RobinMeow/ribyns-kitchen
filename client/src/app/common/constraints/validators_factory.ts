@@ -4,15 +4,8 @@ import { Validation } from './validation'
 import { assert } from '@common/assertions'
 
 export class ValidatorsFactory {
-  static create(
-    name: string,
-    validationFields: readonly ValidationField[]
-  ): ValidatorFn[] {
+  static create(validationField: ValidationField): ValidatorFn[] {
     const validators: ValidatorFn[] = []
-
-    const validationField = validationFields.find(
-      (vf: ValidationField) => vf.name === name
-    )
 
     assert(validationField, `Name did not exist in vlidationFields.`)
     for (let i = 0; i < validationField.constraints.length; i++) {
