@@ -43,12 +43,13 @@ export class CreateRecipe {
     this.validationFields
   )
 
-  private readonly titleValidations = this.validationReader.get('title')
+  private readonly titleValidations = this.validationReader.read('title')
 
-  protected readonly titleMinLength = this.titleValidations.read<number>(
+  protected readonly titleMinLength = this.titleValidations.get<number>(
     Validation.Min
   )
-  protected readonly titleMaxLength = this.titleValidations.read<number>(
+
+  protected readonly titleMaxLength = this.titleValidations.get<number>(
     Validation.Max
   )
 

@@ -10,7 +10,7 @@ export class ValidationReader {
     }
   }
 
-  get(name: string): FieldValidations {
+  read(name: string): FieldValidations {
     const validationField = this.validationFields[name]
     assert(validationField, `ValidationField '${name}' not found.`)
     return validationField

@@ -18,7 +18,7 @@ export class FieldValidations {
     this.constraints = map
   }
 
-  read<T>(validation: Validation): T {
+  get<T>(validation: Validation): T {
     const value = this.constraints.get(validation)
     assert(
       this.constraints.has(validation),
