@@ -1,17 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
-
 import { CreateRecipe } from './create_recipe'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { RecipeApi } from '../util/recipe_api'
 import { provideApiBaseUrlTesting } from '@api'
-import { byTestAttr, setValue } from '@common/testing'
+import {
+  byTestAttr,
+  fakeSnapshot,
+  setValue,
+  withResolvedData
+} from '@common/testing'
 import { MockProvider } from 'ng-mocks'
 import { ActivatedRoute } from '@angular/router'
 import { Validation, ValidationField } from '@common/constraints'
-import { fakeSnapshot } from 'src/app/common/testing/fake_snapshot'
-import { withResolvedData } from 'src/app/common/testing/with_resolved_data'
 import {
   withConstraint,
   fakeValidationField

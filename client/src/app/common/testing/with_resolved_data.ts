@@ -6,5 +6,5 @@ export interface ResolvedDataFake<T> {
 
 /** @__PURE__ */
 export function withResolvedData<T>(key: string, data: T): ResolvedDataFake<T> {
-  return { key, data }
+  return Object.freeze({ key, data })
 }

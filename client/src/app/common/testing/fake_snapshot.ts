@@ -9,5 +9,5 @@ export function fakeSnapshot(
   for (const fake of resolvedData) {
     data[fake.key] = fake.data
   }
-  return { data } as ActivatedRouteSnapshot
+  return Object.freeze({ data } as ActivatedRouteSnapshot)
 }

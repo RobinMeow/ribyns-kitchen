@@ -6,8 +6,8 @@ export function withConstraint(
   validation: Validation,
   value: unknown = undefined
 ): Constraint {
-  return {
+  return Object.freeze({
     validation,
     value
-  } satisfies Constraint
+  } satisfies Constraint)
 }

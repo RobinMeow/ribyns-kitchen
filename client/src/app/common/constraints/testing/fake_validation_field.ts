@@ -7,9 +7,9 @@ export function fakeValidationField(
   dataType: string,
   constraints: Constraint[]
 ): ValidationField {
-  return {
+  return Object.freeze({
     name: name,
     constraints: constraints,
     dataType: dataType
-  } satisfies ValidationField
+  } satisfies ValidationField)
 }
