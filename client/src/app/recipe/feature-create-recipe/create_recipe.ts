@@ -43,10 +43,10 @@ export class CreateRecipe {
     this.validationReader.get('title')
   )
 
-  protected readonly titleMinLength = this.titleConstraintReader.readValue(
+  protected readonly titleMinLength = this.titleConstraintReader.read<number>(
     Validation.Min
   )
-  protected readonly titleMaxLength = this.titleConstraintReader.readValue(
+  protected readonly titleMaxLength = this.titleConstraintReader.read<number>(
     Validation.Max
   )
 
