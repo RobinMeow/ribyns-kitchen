@@ -6,7 +6,7 @@ import { assert } from '@common/assertions'
 export class ValidatorsFactory {
   static create(
     name: string,
-    validationFields: ValidationField[]
+    validationFields: readonly ValidationField[]
   ): ValidatorFn[] {
     const validators: ValidatorFn[] = []
 

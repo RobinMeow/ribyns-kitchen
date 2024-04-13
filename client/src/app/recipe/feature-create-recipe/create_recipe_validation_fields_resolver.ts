@@ -9,7 +9,8 @@ import { ValidationField } from '@common/constraints'
 import { RecipeApi } from '../util/recipe_api'
 
 export const createRecipeValidationFieldsResolver: ResolveFn<
-  Promise<Array<ValidationField>>
-> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  return inject(RecipeApi).getCreateRecipeConstraints()
+  Promise<readonly ValidationField[]>
+> = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  const array = inject(RecipeApi).getCreateRecipeConstraints()
+  return Object.freeze(array)
 }

@@ -2,9 +2,9 @@ import { assert } from '@common/assertions'
 import { ValidationField } from './validation_field'
 
 export class ValidationFields {
-  private readonly validationFields: ValidationField[]
+  private readonly validationFields: readonly ValidationField[]
 
-  constructor(validationFields: ValidationField[]) {
+  constructor(validationFields: readonly ValidationField[]) {
     this.validationFields = validationFields
   }
 
@@ -12,9 +12,5 @@ export class ValidationFields {
     const validationField = this.validationFields.find((x) => x.name === name)
     assert(validationField, `ValidationField '${name}' not found.`)
     return validationField
-  }
-
-  toArray(): ValidationField[] {
-    return structuredClone(this.validationFields)
   }
 }
