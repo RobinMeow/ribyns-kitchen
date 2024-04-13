@@ -9,46 +9,11 @@ import { RecipeApi } from '../util/recipe_api'
 import { NewRecipe } from '../util/new_recipe'
 import { Recipe } from '../util/recipe'
 import {
+  ConstraintReader,
   Validation,
-  ValidationField,
-  ValidatorsFactory,
-  validationName
+  ValidationFields,
+  ValidatorsFactory
 } from '@common/constraints'
-import { assert } from '@common/assertions'
-
-class ConstraintReader {
-  private readonly validationField: ValidationField
-
-  constructor(validationField: ValidationField) {
-    this.validationField = validationField
-  }
-
-  readValue<T>(validation: Validation): T {
-    const constraint = this.validationField.constraints.find(
-      (x) => x.validation === validation
-    )
-    assert(constraint, `Validation '${validationName(validation)}' not found.`)
-    return <T>constraint.value
-  }
-}
-
-class ValidationFields {
-  private readonly validationFields: ValidationField[]
-
-  constructor(validationFields: ValidationField[]) {
-    this.validationFields = validationFields
-  }
-
-  get(name: string): ValidationField {
-    const validationField = this.validationFields.find((x) => x.name === name)
-    assert(validationField, `ValidationField '${name}' not found.`)
-    return validationField
-  }
-
-  toArray(): ValidationField[] {
-    return structuredClone(this.validationFields)
-  }
-}
 
 @Component({
   standalone: true,
