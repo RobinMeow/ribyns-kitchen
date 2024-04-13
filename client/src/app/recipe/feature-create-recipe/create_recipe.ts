@@ -57,7 +57,6 @@ export class CreateRecipe {
   })
 
   protected async onSubmit(): Promise<void> {
-    console.log(this.form)
     if (this.form.invalid) return
 
     const newRecipe: NewRecipe = {
