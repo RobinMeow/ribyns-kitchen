@@ -15,21 +15,44 @@ export class Constraint {
     switch (dataType) {
       case 'string':
         switch (this.validation) {
-          case Validation.Min:
+          case Validation.min:
+            assert(
+              typeof this.value === 'number',
+              `Value '${this.value}' is not a number.`
+            )
+            return Validators.minLength(this.value)
+
+          case Validation.max:
+            assert(
+              typeof this.value === 'number',
+              `Value '${this.value}' is not a number.`
+            )
+            return Validators.maxLength(this.value)
+
+          case Validation.required:
+            return Validators.required
+
+          default:
+            throw new Error(`Validation not supported '${this.validation}'.`)
+        }
+
+      case 'number':
+        switch (this.validation) {
+          case Validation.min:
             assert(
               typeof this.value === 'number',
               `Value '${this.value}' is not a number.`
             )
             return Validators.min(this.value)
 
-          case Validation.Max:
+          case Validation.max:
             assert(
               typeof this.value === 'number',
               `Value '${this.value}' is not a number.`
             )
             return Validators.max(this.value)
 
-          case Validation.Required:
+          case Validation.required:
             return Validators.required
 
           default:

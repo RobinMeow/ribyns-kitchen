@@ -45,11 +45,11 @@ export class CreateRecipe {
   private readonly titleValidations = this.validationReader.read('title')
 
   protected readonly titleMinLength = this.titleValidations.get<number>(
-    Validation.Min
+    Validation.min
   )
 
   protected readonly titleMaxLength = this.titleValidations.get<number>(
-    Validation.Max
+    Validation.max
   )
 
   protected readonly form = this.nnfb.group({

@@ -33,9 +33,9 @@ describe('CreateRecipe should', () => {
           snapshot: fakeSnapshot(
             withResolvedData<FieldValidations[]>('validationFields', [
               new FieldValidations('title', 'string', [
-                new Constraint(Validation.Min, 1),
-                new Constraint(Validation.Max, 2),
-                new Constraint(Validation.Required)
+                new Constraint(Validation.min, 1),
+                new Constraint(Validation.max, 2),
+                new Constraint(Validation.required)
               ])
             ])
           )
