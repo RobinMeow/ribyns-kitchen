@@ -35,6 +35,12 @@ export class ConstraintsFakeBuilder {
   }
 
   build(): FieldConstaintsFake {
+    const f = this.fake
+    if (f.required === false && f.max === undefined && f.min === undefined)
+      throw new Error(
+        'Constraints(Fake)Builder is not meant to be used to create zero constraints.'
+      )
+
     return this.fake
   }
 }
