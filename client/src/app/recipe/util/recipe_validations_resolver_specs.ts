@@ -5,37 +5,40 @@ import {
   RouterStateSnapshot
 } from '@angular/router'
 import { MockProvider } from 'ng-mocks'
-import { AuthService } from './auth_service'
-import { ChefValidations } from './chef_validations'
 import { fakeValidations, withField } from '@common/validations/testing'
-import { chefValidationsResolver } from './chef_validations_resolver'
+import { RecipeApi } from './recipe_api'
+import { RecipeValidations } from './recipe_validations'
+import { recipeValidationsResolver } from './recipe_validations_resolver'
 
 describe('chefValidationsResolver should', () => {
-  let authService: AuthService
+  let recipeApi: RecipeApi
   let route: ActivatedRouteSnapshot
   const state = undefined! as RouterStateSnapshot
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MockProvider(AuthService), MockProvider(ActivatedRoute)]
+      providers: [MockProvider(RecipeApi), MockProvider(ActivatedRoute)]
     })
 
-    authService = TestBed.inject(AuthService)
+    recipeApi = TestBed.inject(RecipeApi)
     route = TestBed.inject(ActivatedRoute).snapshot
   })
 
   it('resolve to ChefValidations', async () => {
-    const expectedValidations = new ChefValidations(
-      fakeValidations([withField('name').required().build()])
+    const expectedValidations = new RecipeValidations(
+      fakeValidations([withField('meow').required().build()])
     )
 
-    const spy = spyOn(authService, 'getValidationsAsync').and.returnValue(
+    const spy = spyOn(recipeApi, 'getValidationsAsync').and.returnValue(
       Promise.resolve(expectedValidations)
     )
 
-    let actual: ChefValidations
+    let actual: RecipeValidations
     await TestBed.runInInjectionContext(async () => {
-      actual = (await chefValidationsResolver(route, state)) as ChefValidations
+      actual = (await recipeValidationsResolver(
+        route,
+        state
+      )) as RecipeValidations
     })
 
     expect(actual!).toEqual(expectedValidations)
@@ -45,12 +48,12 @@ describe('chefValidationsResolver should', () => {
   // TODO e2e test which covers feedback on rejected resolver
 
   it('rejects when api rejects as well', async () => {
-    const apiSpy = spyOn(authService, 'getValidationsAsync').and.returnValue(
+    const apiSpy = spyOn(recipeApi, 'getValidationsAsync').and.returnValue(
       Promise.reject(null)
     )
 
     await TestBed.runInInjectionContext(async () => {
-      const promise = chefValidationsResolver(route, state)
+      const promise = recipeValidationsResolver(route, state)
       await expectAsync(<Promise<unknown>>promise).toBeRejectedWith(null)
     })
 

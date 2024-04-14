@@ -11,5 +11,5 @@ import { RecipeValidations } from './recipe_validations'
 export const recipeValidationsResolver: ResolveFn<
   Promise<Readonly<RecipeValidations>>
 > = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  return inject(RecipeApi).getValidations()
+  return inject(RecipeApi).getValidationsAsync()
 }

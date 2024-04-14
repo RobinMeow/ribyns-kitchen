@@ -37,7 +37,7 @@ export class RecipeApi extends BaseApi {
     return firstValueFrom(request$)
   }
 
-  getValidations(): Promise<Readonly<RecipeValidations>> {
+  getValidationsAsync(): Promise<Readonly<RecipeValidations>> {
     const headers = this.defaultHeadersWithAuth()
     const url = this.URL + 'GetValidations'
 
