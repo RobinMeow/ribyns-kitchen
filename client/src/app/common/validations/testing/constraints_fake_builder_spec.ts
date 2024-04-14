@@ -32,4 +32,8 @@ describe('ConstraintsFakeBuilder should', () => {
     expect(constraints.max).toBe(6)
     expect(constraints.required).toBe(true)
   })
+
+  it('throw when build() is called too early', () => {
+    expect(() => builder.build()).toThrowError()
+  })
 })
