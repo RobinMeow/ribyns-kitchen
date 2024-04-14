@@ -1,3 +1,4 @@
+/** @__PURE__ */
 export type FieldConstaintsFake = {
   fieldName: string
   min?: number
@@ -5,6 +6,7 @@ export type FieldConstaintsFake = {
   required: boolean
 }
 
+/** @__PURE__ */
 export class ConstraintsFakeBuilder {
   private readonly fake: FieldConstaintsFake = {
     fieldName: '',

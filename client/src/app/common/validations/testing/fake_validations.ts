@@ -2,6 +2,7 @@ import { FieldConstraints } from '../field_constraints'
 import { Validations } from '../validations'
 import { FieldConstaintsFake } from './constraints_fake_builder'
 
+/** @__PURE__ */
 export function fakeValidations(
   fieldConstaints: FieldConstaintsFake[]
 ): Readonly<Validations> {
