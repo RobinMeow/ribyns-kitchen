@@ -9,7 +9,6 @@ public sealed class NewRecipeSpecification
 {
     readonly NewRecipeRequest _newRecipe;
 
-    // TODO should be using the ConstraintBuilder instance created in the controller (and that therefore should maybe be put into the domain)
     public NewRecipeSpecification(NewRecipeRequest newRecipe)
     {
         _newRecipe = newRecipe;
