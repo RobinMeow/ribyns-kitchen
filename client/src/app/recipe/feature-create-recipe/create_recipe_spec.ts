@@ -14,7 +14,7 @@ import {
 import { MockProvider } from 'ng-mocks'
 import { ActivatedRoute } from '@angular/router'
 import { RecipeValidations } from '../util/recipe_validations'
-import { Validations } from '@common/validations'
+import { fakeValidations, withField } from '@common/validations/testing'
 
 describe('CreateRecipe should', () => {
   let component: CreateRecipe
@@ -35,14 +35,9 @@ describe('CreateRecipe should', () => {
             withResolvedData(
               'recipeValidations',
               new RecipeValidations(
-                // todo use fakes
-                Object.freeze(<Validations>{
-                  title: {
-                    min: 1,
-                    max: 2,
-                    required: true
-                  }
-                })
+                fakeValidations([
+                  withField('title').min(1).max(2).required().build()
+                ])
               )
             )
           )

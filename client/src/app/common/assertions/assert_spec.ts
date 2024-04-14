@@ -12,8 +12,6 @@ describe('assert should', () => {
     })
   })
 
-  // TODO im considerung, throwing errors in assert() for empty strings and if the string doesnt end with an dot.
-
   it('not throw for true condition', () => {
     expect(() => assert(true, '')).not.toThrowError()
   })
