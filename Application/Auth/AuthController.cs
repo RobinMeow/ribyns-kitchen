@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Common.Validations;
 using Domain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
@@ -122,6 +123,26 @@ public sealed class AuthController : ControllerBase
         await _chefRepository.RemoveAsync(credentials.Name, ct);
 
         return TypedResults.Ok();
+    }
+
+    [HttpGet(nameof(GetValidations))]
+    public Task<Ok<Dictionary<string, FieldConstraints>>> GetValidations()
+    {
+        return Task.FromResult(TypedResults.Ok(new ValidationsBuilder()
+            .AddField(nameof(RegisterChefRequest.Name))
+            .Required()
+            .Min(ChefValidations.NameMinLength)
+            .Max(ChefValidations.NameMaxLength)
+
+            .AddField(nameof(RegisterChefRequest.Password))
+            .Required()
+            .Min(ChefValidations.PasswordMinLength)
+            .Max(ChefValidations.PasswordMaxLength)
+
+            .AddField(nameof(RegisterChefRequest.Email))
+            .Min(ChefValidations.EmailMinLength)
+            .Max(ChefValidations.EmailMaxLength)
+            .Build()));
     }
 
     private BadRequest<string> UserNotFound()

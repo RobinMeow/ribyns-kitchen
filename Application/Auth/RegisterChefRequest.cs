@@ -7,14 +7,14 @@ namespace Application.Auth;
 public sealed record class RegisterChefRequest
 {
     [Required]
-    [StringRange(ChefValidatiors.NameMinLength, ChefValidatiors.NameMaxLength)]
+    [StringRange(ChefValidations.NameMinLength, ChefValidations.NameMaxLength)]
     public string Name { get; set; } = null!;
 
     [Required]
-    [StringRange(ChefValidatiors.PasswordMinLength, ChefValidatiors.PasswordMaxLength)]
+    [StringRange(ChefValidations.PasswordMinLength, ChefValidations.PasswordMaxLength)]
     public string Password { get; set; } = null!;
 
     [EmailAddress]
-    [StringRange(ChefValidatiors.EmailMinLength, ChefValidatiors.EmailMaxLength)]
+    [StringRange(ChefValidations.EmailMinLength, ChefValidations.EmailMaxLength)]
     public string? Email { get; set; } = null;
 }

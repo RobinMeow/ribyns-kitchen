@@ -1,5 +1,6 @@
 using Application;
 using Application.Auth;
+using Common.Validations;
 using Domain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Logging;
@@ -44,5 +45,14 @@ public sealed class AuthControllerTests
     public async Task Register_throws_without_request_dto()
     {
         await ThrowsAnyAsync<NullReferenceException>(async () => await _authController.RegisterAsync(null!));
+    }
+
+    [Fact]
+    public async Task GetValidations_returns_OK()
+    {
+        Ok<Dictionary<string, FieldConstraints>> validations = await _authController.GetValidations();
+        Equal(200, validations.StatusCode);
+        NotNull(validations.Value);
+        True(validations.Value.Count > 0);
     }
 }
