@@ -108,7 +108,7 @@ public sealed class RecipeController : ControllerBase
     {
         ct.ThrowIfCancellationRequested();
 
-        return Task.FromResult(TypedResults.Ok(new ValidationBuilder()
+        return Task.FromResult(TypedResults.Ok(new ValidationsBuilder()
             .AddField(nameof(NewRecipeRequest.Title))
             .Required()
             .Min(RecipeValidations.TITLE_MIN_LENGTH)

@@ -3,7 +3,7 @@
 /// <summary>
 /// The Builder is not only a shorthand for syntax, but it ensures correct fieldname captalization conventions.
 /// </summary>
-public sealed class ValidationBuilder
+public sealed class ValidationsBuilder
 {
     private string? _fieldName = null;
     private uint? _min = null;
@@ -16,6 +16,9 @@ public sealed class ValidationBuilder
     {
         if (_fieldName == null) return;
 
+        if (!(_min != null || _max != null | _required != false))
+            throw new InvalidOperationException("Field has been added, but no constraints.");
+
         _buildedDictionary.Add(
             new FieldName(_fieldName).ToString(),
             new FieldConstraints()
@@ -24,16 +27,20 @@ public sealed class ValidationBuilder
                 Max = _max,
                 Min = _min
             });
+        
+        _max = null;
+        _min = null;
+        _required = false;
     }
 
-    public ValidationBuilder AddField(string name)
+    public ValidationsBuilder AddField(string name)
     {
         AddCurrentToBuild();
         _fieldName = name;
         return this;
     }
 
-    public ValidationBuilder Required()
+    public ValidationsBuilder Required()
     {
         AssertFieldIsSet();
         if (_required)
@@ -43,7 +50,7 @@ public sealed class ValidationBuilder
         return this;
     }
 
-    public ValidationBuilder Min(uint min)
+    public ValidationsBuilder Min(uint min)
     {
         AssertFieldIsSet();
         if (_min != null)
@@ -53,7 +60,7 @@ public sealed class ValidationBuilder
         return this;
     }
 
-    public ValidationBuilder Max(uint max)
+    public ValidationsBuilder Max(uint max)
     {
         AssertFieldIsSet();
         if (_max != null)
