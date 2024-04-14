@@ -8,9 +8,9 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { RecipeApi } from '../util/recipe_api'
 import { NewRecipe } from '../util/new_recipe'
 import { Recipe } from '../util/recipe'
-import { assert } from '@common/assertions'
 import { RecipeValidations } from '../util/recipe_validations'
 import { FieldConstraints, ValidatorsFactory } from '@common/validations'
+import { NotUndefinedPipe } from '@common/assertions'
 
 @Component({
   standalone: true,
@@ -19,7 +19,8 @@ import { FieldConstraints, ValidatorsFactory } from '@common/validations'
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    NotUndefinedPipe
   ],
   templateUrl: './create_recipe.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -33,25 +34,8 @@ export class CreateRecipe {
     this.activatedRouteSnapshot.data['recipeValidations']
   private readonly validatorsFactory = new ValidatorsFactory()
 
-  private readonly titleValidations: Readonly<FieldConstraints> =
+  protected readonly titleValidations: Readonly<FieldConstraints> =
     this.recipeValidations.title()
-
-  protected readonly titleMinLength = ((): number => {
-    const val = this.titleValidations.min
-    assert(
-      typeof val == 'number',
-      `title min constraint has to be of type number, but got '${val}'.`
-    )
-    return val
-  })()
-  protected readonly titleMaxLength = ((): number => {
-    const val = this.titleValidations.max
-    assert(
-      typeof val == 'number',
-      `title max constraint has to be of type number, but got '${val}'.`
-    )
-    return val
-  })()
 
   protected readonly form = this.nnfb.group({
     title: ['', this.validatorsFactory.create('string', this.titleValidations)]
