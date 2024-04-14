@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { AuthService } from '../utils/auth_service'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
@@ -12,10 +12,10 @@ import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { MatTooltipModule } from '@angular/material/tooltip'
-import { ChefFromControlFactory } from '../utils/chef_form_control_factory'
-import { ChefConstraints } from '../utils/chef_constraints'
 import { PasswordInput } from '../ui/password/password_input'
 import { RegisterChef } from '../utils/register_chef'
+import { ValidatorsFactory } from '@common/validations'
+import { ChefValidations } from '../utils/chef_validations'
 
 @Component({
   selector: 'auth-register',
@@ -38,17 +38,36 @@ export class Register {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   private readonly nnfb = inject(NonNullableFormBuilder)
+  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot // TODO inject in testbed
 
-  private readonly chefFormControlFactory = new ChefFromControlFactory(
-    this.nnfb
-  )
+  private readonly chefValidations: Readonly<ChefValidations> =
+    this.activatedRouteSnapshot.data['chefValidations']
 
-  protected readonly chefConstraints = ChefConstraints
+  // TODO improve front end validation hints
+  protected readonly nameValidations = this.chefValidations.name()
+  // TODO improve front end validation hints
+  protected readonly passwordValidations = this.chefValidations.password()
+  // TODO improve front end validation hints
+  protected readonly emailValidations = this.chefValidations.email()
+
+  private readonly validatorsFactory = new ValidatorsFactory()
 
   protected readonly registerForm = this.nnfb.group({
-    chefname: this.chefFormControlFactory.Name(),
-    password: this.chefFormControlFactory.Password(),
-    email: ['', [Validators.email]]
+    chefname: [
+      '',
+      this.validatorsFactory.create('string', this.nameValidations)
+    ],
+    password: [
+      '',
+      this.validatorsFactory.create('string', this.passwordValidations)
+    ],
+    email: [
+      '',
+      [
+        ...this.validatorsFactory.create('string', this.emailValidations),
+        Validators.email
+      ]
+    ]
   })
 
   protected hidePassword = true

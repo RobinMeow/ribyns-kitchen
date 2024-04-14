@@ -103,7 +103,6 @@ public sealed class RecipeController : ControllerBase
     }
 
     [HttpGet(nameof(GetValidations))]
-    [AllowAnonymous]
     public Task<Ok<Dictionary<string, FieldConstraints>>> GetValidations(CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();

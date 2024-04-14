@@ -23,7 +23,7 @@ public sealed class ValidationsBuilder
             new FieldName(_fieldName).ToString(),
             new FieldConstraints()
             {
-                IsRequired = _required,
+                Required = _required,
                 Max = _max,
                 Min = _min
             });

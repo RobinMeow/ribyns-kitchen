@@ -69,7 +69,7 @@ public sealed class ValidationsBuiler_specs
                 .Min(1)
                 .Build();
 
-            False(actualRequired["next field"].IsRequired);
+            False(actualRequired["next field"].Required);
         }
 
         [Fact]
@@ -113,7 +113,7 @@ public sealed class ValidationsBuiler_specs
 
             Single(actual);
             FieldConstraints fieldConstraints = actual.First().Value;
-            True(fieldConstraints.IsRequired);
+            True(fieldConstraints.Required);
             Equal(1u, fieldConstraints.Min);
             Equal(2u, fieldConstraints.Max);
         }
@@ -134,11 +134,11 @@ public sealed class ValidationsBuiler_specs
 
             Equal(2, actual.Count);
             FieldConstraints fcA = actual.First().Value;
-            True(fcA.IsRequired);
+            True(fcA.Required);
             Equal(1u, fcA.Min);
             Equal(2u, fcA.Max);
             FieldConstraints fcB = actual.Last().Value;
-            True(fcB.IsRequired);
+            True(fcB.Required);
             Equal(3u, fcB.Min);
             Equal(4u, fcB.Max);
         }

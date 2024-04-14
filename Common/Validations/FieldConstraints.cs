@@ -2,7 +2,7 @@
 
 public sealed record FieldConstraints
 {
-    public bool IsRequired { get; set; } = false;
+    public bool Required { get; set; } = false;
 
     /// <summary>
     /// min and max properties are used for both, strings and numbers.

@@ -16,6 +16,7 @@ import { AuthApi } from './auth_api'
 import { RegisterChef } from './register_chef'
 import { JwtToken } from './jwt_token'
 import { assert } from '@common/assertions'
+import { ChefValidations } from './chef_validations'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends AuthApi {
@@ -118,5 +119,10 @@ export class AuthService extends AuthApi {
 
     await super.deleteAsync(credentials)
     this.logout()
+  }
+
+  // TODO write specs
+  override async getValidationsAsync(): Promise<Readonly<ChefValidations>> {
+    return await super.getValidationsAsync()
   }
 }

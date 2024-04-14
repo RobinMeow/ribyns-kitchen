@@ -125,8 +125,8 @@ public sealed class AuthController : ControllerBase
         return TypedResults.Ok();
     }
 
-    [HttpGet(nameof(GetValidations))]
-    public Task<Ok<Dictionary<string, FieldConstraints>>> GetValidations()
+    [HttpGet(nameof(GetValidationsAsync))]
+    public Task<Ok<Dictionary<string, FieldConstraints>>> GetValidationsAsync()
     {
         return Task.FromResult(TypedResults.Ok(new ValidationsBuilder()
             .AddField(nameof(RegisterChefRequest.Name))

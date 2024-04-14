@@ -13,6 +13,7 @@
         matInput
         [formControl]="registerForm.controls.chefname"
         placeholder="Weinberg des Herrn"
+        [required]="nameValidations.required"
         type="text"
         data-test-register-name-input
       />
@@ -29,6 +30,7 @@
       <input
         matInput
         [formControl]="registerForm.controls.email"
+        [required]="emailValidations.required"
         placeholder="be.blessed@nd.loved"
         data-test-email-input
       />

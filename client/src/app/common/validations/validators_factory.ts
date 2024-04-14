@@ -6,7 +6,9 @@ type CreateValidatorFn = (
   fieldConstraints: Readonly<FieldConstraints>
 ) => ValidatorFn[]
 
-function string_creator(fieldConstraints: Readonly<FieldConstraints>) {
+function string_creator(
+  fieldConstraints: Readonly<FieldConstraints>
+): ValidatorFn[] {
   const validators: ValidatorFn[] = []
 
   const required = fieldConstraints.required

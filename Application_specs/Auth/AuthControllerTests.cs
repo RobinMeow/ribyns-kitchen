@@ -50,7 +50,7 @@ public sealed class AuthControllerTests
     [Fact]
     public async Task GetValidations_returns_OK()
     {
-        Ok<Dictionary<string, FieldConstraints>> validations = await _authController.GetValidations();
+        Ok<Dictionary<string, FieldConstraints>> validations = await _authController.GetValidationsAsync();
         Equal(200, validations.StatusCode);
         NotNull(validations.Value);
         True(validations.Value.Count > 0);

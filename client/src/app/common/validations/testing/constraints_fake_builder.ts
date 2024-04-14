@@ -1,0 +1,38 @@
+export type FieldConstaintsFake = {
+  fieldName: string
+  min?: number
+  max?: number
+  required: boolean
+}
+
+export class ConstraintsFakeBuilder {
+  private readonly fake: FieldConstaintsFake = {
+    fieldName: '',
+    required: false,
+    max: undefined,
+    min: undefined
+  }
+
+  constructor(fieldName: string) {
+    this.fake.fieldName = fieldName
+  }
+
+  required(): ConstraintsFakeBuilder {
+    this.fake.required = true
+    return this
+  }
+
+  min(value: number): ConstraintsFakeBuilder {
+    this.fake.min = value
+    return this
+  }
+
+  max(value: number): ConstraintsFakeBuilder {
+    this.fake.max = value
+    return this
+  }
+
+  build(): FieldConstaintsFake {
+    return this.fake
+  }
+}
