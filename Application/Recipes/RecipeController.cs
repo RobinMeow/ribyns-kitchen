@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using Common.Constraints;
+using Common.Validations;
 using Domain;
 using Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Authorization;
@@ -102,15 +102,17 @@ public sealed class RecipeController : ControllerBase
         return TypedResults.Ok(recipe);
     }
 
-    [HttpGet(nameof(GetNewRecipeValidationFields))]
-    public Task<Ok<FieldValidations[]>> GetNewRecipeValidationFields(CancellationToken ct = default)
+    [HttpGet(nameof(GetValidations))]
+    [AllowAnonymous]
+    public Task<Ok<Dictionary<string, FieldConstraints>>> GetValidations(CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
-        return Task.FromResult(TypedResults.Ok(new FieldValidationsBuilder()
-            .AddField(nameof(NewRecipeRequest.Title), "string")
-            .WithConstraint(Validation.Min, RecipeValidators.TITLE_MIN_LENGTH)
-            .WithConstraint(Validation.Max, RecipeValidators.TITLE_MAX_LENGTH)
-            .WithConstraint(Validation.Required)
+
+        return Task.FromResult(TypedResults.Ok(new ValidationBuilder()
+            .AddField(nameof(NewRecipeRequest.Title))
+            .Required()
+            .Min(RecipeValidations.TITLE_MIN_LENGTH)
+            .Max(RecipeValidations.TITLE_MAX_LENGTH)
             .Build()));
     }
 }

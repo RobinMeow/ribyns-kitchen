@@ -1,7 +1,7 @@
 import { Route } from '@angular/router'
 import { authorizedGuard } from '@auth'
 import { recipeResolver } from './feature-view-recipe/recipe_resolver'
-import { createRecipeValidationFieldsResolver } from './feature-create-recipe/create_recipe_validation_fields_resolver'
+import { recipeValidationsResolver } from './util/recipe_validations_resolver'
 
 export const recipeRoutes: Route[] = [
   {
@@ -11,7 +11,7 @@ export const recipeRoutes: Route[] = [
       (await import('./feature-create-recipe/create_recipe')).CreateRecipe,
     title: 'Rezept hinzufügen',
     resolve: {
-      validationFields: createRecipeValidationFieldsResolver
+      recipeValidations: recipeValidationsResolver
     }
   },
   {

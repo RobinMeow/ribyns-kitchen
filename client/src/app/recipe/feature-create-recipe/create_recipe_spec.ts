@@ -13,7 +13,8 @@ import {
 } from '@common/testing'
 import { MockProvider } from 'ng-mocks'
 import { ActivatedRoute } from '@angular/router'
-import { Constraint, Validation, FieldValidations } from '@common/constraints'
+import { RecipeValidations } from '../util/recipe_validations'
+import { Validations } from '@common/validations'
 
 describe('CreateRecipe should', () => {
   let component: CreateRecipe
@@ -31,13 +32,19 @@ describe('CreateRecipe should', () => {
         MockProvider(RecipeApi),
         MockProvider(ActivatedRoute, {
           snapshot: fakeSnapshot(
-            withResolvedData<FieldValidations[]>('validationFields', [
-              new FieldValidations('title', 'string', [
-                new Constraint(Validation.min, 1),
-                new Constraint(Validation.max, 2),
-                new Constraint(Validation.required)
-              ])
-            ])
+            withResolvedData(
+              'recipeValidations',
+              new RecipeValidations(
+                // todo use fakes
+                Object.freeze(<Validations>{
+                  title: {
+                    min: 1,
+                    max: 2,
+                    required: true
+                  }
+                })
+              )
+            )
           )
         })
       ]

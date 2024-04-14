@@ -8,12 +8,9 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { RecipeApi } from '../util/recipe_api'
 import { NewRecipe } from '../util/new_recipe'
 import { Recipe } from '../util/recipe'
-import {
-  Validation,
-  FieldValidations,
-  ValidationReader
-} from '@common/constraints'
 import { assert } from '@common/assertions'
+import { RecipeValidations } from '../util/recipe_validations'
+import { FieldConstraints, ValidatorsFactory } from '@common/validations'
 
 @Component({
   standalone: true,
@@ -32,28 +29,32 @@ export class CreateRecipe {
   private readonly recipeApi = inject(RecipeApi)
   private readonly router = inject(Router)
   private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
-  private readonly validationFields: readonly FieldValidations[] =
-    this.activatedRouteSnapshot.data['validationFields']
-  private readonly _ = assert(
-    this.validationFields.length === 1,
-    'Expeted 1 FieldValiadtions.'
-  )
-  private readonly validationReader: ValidationReader = new ValidationReader(
-    this.validationFields
-  )
+  private readonly recipeValidations: Readonly<RecipeValidations> =
+    this.activatedRouteSnapshot.data['recipeValidations']
+  private readonly validatorsFactory = new ValidatorsFactory()
 
-  private readonly titleValidations = this.validationReader.read('title')
+  private readonly titleValidations: Readonly<FieldConstraints> =
+    this.recipeValidations.title()
 
-  protected readonly titleMinLength = this.titleValidations.get<number>(
-    Validation.min
-  )
-
-  protected readonly titleMaxLength = this.titleValidations.get<number>(
-    Validation.max
-  )
+  protected readonly titleMinLength = ((): number => {
+    const val = this.titleValidations.min
+    assert(
+      typeof val == 'number',
+      `title min constraint has to be of type number, but got '${val}'.`
+    )
+    return val
+  })()
+  protected readonly titleMaxLength = ((): number => {
+    const val = this.titleValidations.max
+    assert(
+      typeof val == 'number',
+      `title max constraint has to be of type number, but got '${val}'.`
+    )
+    return val
+  })()
 
   protected readonly form = this.nnfb.group({
-    title: ['', this.titleValidations.getValiadtors()]
+    title: ['', this.validatorsFactory.create('string', this.titleValidations)]
   })
 
   protected async onSubmit(): Promise<void> {

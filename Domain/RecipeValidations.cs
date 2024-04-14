@@ -1,6 +1,6 @@
 namespace Domain;
 
-public static class RecipeValidators
+public static class RecipeValidations
 {
     public const int TITLE_MIN_LENGTH = 3;
 

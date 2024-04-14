@@ -30,7 +30,7 @@
       "@common": [ "src/app/common/index.ts" ],
       "@common/testing": [ "src/app/common/testing/index.ts" ],
       "@common/assertions": [ "src/app/common/assertions/index.ts" ],
-      "@common/constraints": [ "src/app/common/constraints/index.ts" ],
+      "@common/validations": [ "src/app/common/validations/index.ts" ],
       "@api": [ "src/app/shared/api/index.ts" ]
     }
   },

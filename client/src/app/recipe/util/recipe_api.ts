@@ -1,24 +1,11 @@
 import { Injectable } from '@angular/core'
-import { BaseApi, ValidationFieldDto, ConstraintDto, ValidationDto } from '@api'
+import { BaseApi } from '@api'
 import { firstValueFrom, map } from 'rxjs'
 import { NewRecipe } from './new_recipe'
 import { Recipe } from './recipe'
 import { RecipeDto } from './recipe_dto'
-import { Constraint, Validation, FieldValidations } from '@common/constraints'
-
-const toValidation = (dto: ValidationDto): Validation => {
-  return <Validation>ValidationDto[dto]
-}
-
-const toConstraint = (dto: ConstraintDto) =>
-  new Constraint(toValidation(dto.validation), dto.value)
-
-const toValidationField = (dto: ValidationFieldDto): FieldValidations =>
-  new FieldValidations(
-    dto.name,
-    dto.dataType,
-    dto.constraints.map(toConstraint)
-  )
+import { RecipeValidations } from './recipe_validations'
+import { Validations } from '@common/validations'
 
 @Injectable({ providedIn: 'root' })
 export class RecipeApi extends BaseApi {
@@ -50,15 +37,17 @@ export class RecipeApi extends BaseApi {
     return firstValueFrom(request$)
   }
 
-  getCreateRecipeConstraints(): Promise<FieldValidations[]> {
+  getValidations(): Promise<Readonly<RecipeValidations>> {
     const headers = this.defaultHeadersWithAuth()
-    const url = this.URL + 'GetNewRecipeValidationFields'
+    const url = this.URL + 'GetValidations'
 
     const request$ = this.httpClient
-      .get<ValidationFieldDto[]>(url, {
+      .get<Validations>(url, {
         headers: headers
       })
-      .pipe(map((dtos) => dtos.map(toValidationField)))
+      .pipe(
+        map((validations) => Object.freeze(new RecipeValidations(validations)))
+      )
 
     return firstValueFrom(request$)
   }
