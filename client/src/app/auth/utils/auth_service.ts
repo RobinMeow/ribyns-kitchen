@@ -121,7 +121,6 @@ export class AuthService extends AuthApi {
     this.logout()
   }
 
-  // TODO write specs
   override async getValidationsAsync(): Promise<Readonly<ChefValidations>> {
     return await super.getValidationsAsync()
   }

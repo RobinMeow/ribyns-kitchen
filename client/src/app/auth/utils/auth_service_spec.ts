@@ -11,6 +11,7 @@ import { MockProvider } from 'ng-mocks'
 import { TokenStorage } from './token_storage'
 import { Chef } from '@auth'
 import { RegisterChef } from './register_chef'
+import { Validations } from '@common/validations'
 
 describe('AuthService', () => {
   let authService: AuthService
@@ -274,6 +275,32 @@ describe('AuthService', () => {
   describe('logout should', () => {
     it('throw for unauthorized', () => {
       expect(() => authService.logout()).toThrowError()
+    })
+  })
+
+  describe('getValidationsAsync should', () => {
+    it('reject invalid validations from http get', async () => {
+      const promise = authService.getValidationsAsync()
+      const validValidations: Validations = {}
+
+      const req = httpCtrl.expectOne(url + 'GetValidationsAsync')
+      req.flush(validValidations)
+      await expectAsync(promise).toBeRejectedWithError()
+    })
+
+    it('resolve validations from http get', async () => {
+      const promise = authService.getValidationsAsync()
+      const validValidations: Validations = {
+        // requires at least one field
+        meow: {
+          // satisfy constraints compiler
+          required: false
+        }
+      }
+
+      const req = httpCtrl.expectOne(url + 'GetValidationsAsync')
+      req.flush(validValidations)
+      await expectAsync(promise).toBeResolved()
     })
   })
 })

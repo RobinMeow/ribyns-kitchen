@@ -37,7 +37,7 @@ export class Login {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   private readonly nnfb = inject(NonNullableFormBuilder)
-  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot // TODO inject in testbed
+  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
 
   private readonly chefValidations: Readonly<ChefValidations> =
     this.activatedRouteSnapshot.data['chefValidations']

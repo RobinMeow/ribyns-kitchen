@@ -38,16 +38,13 @@ export class Register {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   private readonly nnfb = inject(NonNullableFormBuilder)
-  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot // TODO inject in testbed
+  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
 
   private readonly chefValidations: Readonly<ChefValidations> =
     this.activatedRouteSnapshot.data['chefValidations']
 
-  // TODO improve front end validation hints
   protected readonly nameValidations = this.chefValidations.name()
-  // TODO improve front end validation hints
   protected readonly passwordValidations = this.chefValidations.password()
-  // TODO improve front end validation hints
   protected readonly emailValidations = this.chefValidations.email()
 
   private readonly validatorsFactory = new ValidatorsFactory()
