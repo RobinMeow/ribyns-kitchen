@@ -20,7 +20,7 @@ public sealed class ValidationsBuiler_specs
             public void when_min_constraint_is_added_twice()
             {
                 Throws<InvalidOperationException>(() => new ValidationsBuilder()
-                    .AddField("")
+                    .AddField("A")
                     .Min(1)
                     .Min(2)
                     .Build());
@@ -30,7 +30,7 @@ public sealed class ValidationsBuiler_specs
             public void when_max_constraint_is_added_twice()
             {
                 Throws<InvalidOperationException>(() => new ValidationsBuilder()
-                    .AddField("")
+                    .AddField("A")
                     .Max(1)
                     .Max(2)
                     .Build());
@@ -40,7 +40,7 @@ public sealed class ValidationsBuiler_specs
             public void when_required_constraint_is_added_twice()
             {
                 Throws<InvalidOperationException>(() => new ValidationsBuilder()
-                    .AddField("")
+                    .AddField("A")
                     .Required()
                     .Required()
                     .Build());
@@ -146,7 +146,7 @@ public sealed class ValidationsBuiler_specs
         [Fact]
         public void throw_if_fieldname_already_set()
         {
-            Throws<InvalidOperationException>(() => new ValidationsBuilder().AddField("").AddField(""));
+            Throws<InvalidOperationException>(() => new ValidationsBuilder().AddField("A").AddField("A"));
         }
     }
 }
