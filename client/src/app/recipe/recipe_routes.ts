@@ -1,6 +1,7 @@
 import { Route } from '@angular/router'
 import { authorizedGuard } from '@auth'
 import { recipeResolver } from './feature-view-recipe/recipe_resolver'
+import { recipeValidationsResolver } from './util/recipe_validations_resolver'
 
 export const recipeRoutes: Route[] = [
   {
@@ -8,7 +9,10 @@ export const recipeRoutes: Route[] = [
     canActivate: [authorizedGuard],
     loadComponent: async () =>
       (await import('./feature-create-recipe/create_recipe')).CreateRecipe,
-    title: 'Rezept hinzufügen'
+    title: 'Rezept hinzufügen',
+    resolve: {
+      recipeValidations: recipeValidationsResolver
+    }
   },
   {
     path: 'recipe/:recipeId',

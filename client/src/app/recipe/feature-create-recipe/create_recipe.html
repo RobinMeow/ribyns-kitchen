@@ -17,9 +17,9 @@
         data-test-recipe-title-input
       />
       <mat-hint
-        >Zwischen {{ constraints.Title.minLength }} und
+        >Zwischen {{ titleValidations.min | notUndefined }} und
         <!-- eslint-disable-next-line prettier/prettier -->{{
-        constraints.Title.maxLength }} Zeichen</mat-hint
+        titleValidations.min | notUndefined }} Zeichen</mat-hint
       >
     </mat-form-field>
   </div>

@@ -1,18 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import {
-  NonNullableFormBuilder,
-  ReactiveFormsModule,
-  Validators
-} from '@angular/forms'
+import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms'
 import { MatFormFieldModule } from '@angular/material/form-field'
-import { RecipeConstraints } from './recipe_constraints'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { RecipeApi } from '../util/recipe_api'
 import { NewRecipe } from '../util/new_recipe'
 import { Recipe } from '../util/recipe'
+import { RecipeValidations } from '../util/recipe_validations'
+import { FieldConstraints, ValidatorsFactory } from '@common/validations'
+import { NotUndefinedPipe } from '@common/assertions'
 
 @Component({
   standalone: true,
@@ -21,7 +19,8 @@ import { Recipe } from '../util/recipe'
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    NotUndefinedPipe
   ],
   templateUrl: './create_recipe.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -30,12 +29,17 @@ export class CreateRecipe {
   private readonly nnfb = inject(NonNullableFormBuilder)
   private readonly recipeApi = inject(RecipeApi)
   private readonly router = inject(Router)
+  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
+  private readonly recipeValidations: Readonly<RecipeValidations> =
+    this.activatedRouteSnapshot.data['recipeValidations']
+  private readonly validatorsFactory = new ValidatorsFactory()
+
+  protected readonly titleValidations: Readonly<FieldConstraints> =
+    this.recipeValidations.title()
 
   protected readonly form = this.nnfb.group({
-    title: ['', [Validators.required, Validators.minLength(3)]]
+    title: ['', this.validatorsFactory.create('string', this.titleValidations)]
   })
-
-  protected readonly constraints = RecipeConstraints
 
   protected async onSubmit(): Promise<void> {
     if (this.form.invalid) return

@@ -7,13 +7,14 @@ import {
   ReactiveFormsModule
 } from '@angular/forms'
 import { MatIconModule } from '@angular/material/icon'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { AuthService } from '../utils/auth_service'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
-import { ChefFromControlFactory } from '../utils/chef_form_control_factory'
-import { ChefConstraints } from '../utils/chef_constraints'
 import { PasswordInput } from '../ui/password/password_input'
+import { ValidatorsFactory } from '@common/validations'
+import { ChefValidations } from '../utils/chef_validations'
+import { NotUndefinedPipe } from '@common/assertions'
 
 @Component({
   selector: 'auth-login',
@@ -25,7 +26,8 @@ import { PasswordInput } from '../ui/password/password_input'
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    PasswordInput
+    PasswordInput,
+    NotUndefinedPipe
   ],
   templateUrl: './login.html',
   styleUrls: ['../utils/auth.scss'],
@@ -35,16 +37,25 @@ export class Login {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   private readonly nnfb = inject(NonNullableFormBuilder)
+  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
 
-  protected readonly chefConstraints = ChefConstraints
+  private readonly chefValidations: Readonly<ChefValidations> =
+    this.activatedRouteSnapshot.data['chefValidations']
 
-  private readonly chefFormControlFactory = new ChefFromControlFactory(
-    this.nnfb
-  )
+  protected readonly nameValidations = this.chefValidations.name()
+  private readonly passwordValidations = this.chefValidations.password()
+
+  private readonly validatorsFactory = new ValidatorsFactory()
 
   protected readonly loginForm = this.nnfb.group({
-    chefname: this.chefFormControlFactory.Name(),
-    password: this.chefFormControlFactory.Password()
+    chefname: [
+      '',
+      this.validatorsFactory.create('string', this.nameValidations)
+    ],
+    password: [
+      '',
+      this.validatorsFactory.create('string', this.passwordValidations)
+    ]
   })
 
   protected readonly chefnameControl: FormControl<string> =

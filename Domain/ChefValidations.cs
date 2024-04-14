@@ -1,6 +1,6 @@
 ﻿namespace Domain;
 
-public static class ChefValidatiors
+public static class ChefValidations
 {
     public const int NameMinLength = 3;
     public const int NameMaxLength = 20;

@@ -1,13 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
-
 import { CreateRecipe } from './create_recipe'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { RecipeApi } from '../util/recipe_api'
 import { provideApiBaseUrlTesting } from '@api'
-import { byTestAttr, setValue } from '@common/testing'
+import {
+  byTestAttr,
+  fakeSnapshot,
+  setValue,
+  withResolvedData
+} from '@common/testing'
 import { MockProvider } from 'ng-mocks'
+import { ActivatedRoute } from '@angular/router'
+import { RecipeValidations } from '../util/recipe_validations'
+import { fakeValidations, withField } from '@common/validations/testing'
 
 describe('CreateRecipe should', () => {
   let component: CreateRecipe
@@ -22,7 +29,19 @@ describe('CreateRecipe should', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideApiBaseUrlTesting(),
-        MockProvider(RecipeApi)
+        MockProvider(RecipeApi),
+        MockProvider(ActivatedRoute, {
+          snapshot: fakeSnapshot(
+            withResolvedData(
+              'recipeValidations',
+              new RecipeValidations(
+                fakeValidations([
+                  withField('title').min(1).max(2).required().build()
+                ])
+              )
+            )
+          )
+        })
       ]
     }).compileComponents()
 
@@ -69,15 +88,16 @@ describe('CreateRecipe should', () => {
     expect(btn.disabled).toBeTrue()
 
     const input = byTestAttr<HTMLInputElement>(fixture, 'recipe-title-input')
-    setValue(input, 'Meow Miau Miaow')
+    setValue(input, 'A')
     fixture.detectChanges()
 
     expect(btn.disabled).toBeFalse()
   })
 
-  it('not send http reuqest when form is submitted invalid', async () => {
+  it('not send http request when form is submitted invalid', async () => {
     const form = byTestAttr<HTMLFormElement>(fixture, 'create-recipe-form')
     expect(form.querySelector('[invalid]')).toBeDefined()
+    expect(component['form'].invalid).toBeTrue()
 
     const addAsyncSpy = spyOn(recipeApi, 'newAsync')
 

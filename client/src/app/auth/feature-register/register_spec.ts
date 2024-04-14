@@ -5,7 +5,16 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations'
 
 import { Register } from './register'
 import { provideApiBaseUrlTesting } from '@api'
-import { byTestAttr, setValue } from '@common/testing'
+import {
+  byTestAttr,
+  fakeSnapshot,
+  setValue,
+  withResolvedData
+} from '@common/testing'
+import { MockProvider } from 'ng-mocks'
+import { ActivatedRoute } from '@angular/router'
+import { ChefValidations } from '../utils/chef_validations'
+import { fakeValidations, withField } from '@common/validations/testing'
 
 describe('Register should', () => {
   let component: Register
@@ -18,7 +27,21 @@ describe('Register should', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideNoopAnimations(),
-        provideApiBaseUrlTesting()
+        provideApiBaseUrlTesting(),
+        MockProvider(ActivatedRoute, {
+          snapshot: fakeSnapshot(
+            withResolvedData(
+              'chefValidations',
+              new ChefValidations(
+                fakeValidations([
+                  withField('name').required().min(1).max(100).build(),
+                  withField('password').required().min(1).max(100).build(),
+                  withField('email').min(1).max(100).build()
+                ])
+              )
+            )
+          )
+        })
       ]
     }).compileComponents()
 
@@ -35,8 +58,13 @@ describe('Register should', () => {
     expect(byTestAttr(fixture, 'title')).toBeTruthy()
   })
 
+  it('have invalid register form', () => {
+    expect(component['registerForm'].invalid).toBeTrue()
+  })
+
   it('have disabled submit button', () => {
     const btn = byTestAttr<HTMLButtonElement>(fixture, 'register-submit-button')
+    expect(component['registerForm'].invalid).toBeTrue()
     expect(btn.disabled).toBeTrue()
   })
 

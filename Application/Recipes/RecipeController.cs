@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
+using Common.Validations;
 using Domain;
 using Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Authorization;
@@ -11,15 +12,22 @@ namespace Application.Recipes;
 [Authorize]
 [ApiController]
 [Route("[controller]")]
-public sealed class RecipeController(
-    IRecipeRepository recipeRepository,
-    IRecipeCollection recipeCollection,
-    ILogger<RecipeController> logger
-    ) : ControllerBase
+public sealed class RecipeController : ControllerBase
 {
-    readonly ILogger<RecipeController> _logger = logger;
-    readonly IRecipeRepository _recipeRepository = recipeRepository;
-    readonly IRecipeCollection _recipeCollection = recipeCollection;
+    public RecipeController(
+        IRecipeRepository recipeRepository,
+        IRecipeCollection recipeCollection,
+        ILogger<RecipeController> logger
+        ) : base()
+    {
+        _recipeRepository = recipeRepository;
+        _recipeCollection = recipeCollection;
+        _logger = logger;
+    }
+
+    readonly ILogger<RecipeController> _logger;
+    readonly IRecipeRepository _recipeRepository;
+    readonly IRecipeCollection _recipeCollection;
 
     readonly Func<Recipe, RecipeDto> _toDto = recipe => new RecipeDto()
     {
@@ -92,5 +100,18 @@ public sealed class RecipeController(
         }
 
         return TypedResults.Ok(recipe);
+    }
+
+    [HttpGet(nameof(GetValidations))]
+    public Task<Ok<Dictionary<string, FieldConstraints>>> GetValidations(CancellationToken ct = default)
+    {
+        ct.ThrowIfCancellationRequested();
+
+        return Task.FromResult(TypedResults.Ok(new ValidationsBuilder()
+            .AddField(nameof(NewRecipeRequest.Title))
+            .Required()
+            .Min(RecipeValidations.TITLE_MIN_LENGTH)
+            .Max(RecipeValidations.TITLE_MAX_LENGTH)
+            .Build()));
     }
 }
