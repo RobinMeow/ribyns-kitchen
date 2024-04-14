@@ -8,7 +8,6 @@ import {
 import { AuthService } from './auth_service'
 import { ChefValidations } from './chef_validations'
 
-// TODO specs
 export const chefValidationsResolver: ResolveFn<
   Promise<Readonly<ChefValidations>>
 > = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
