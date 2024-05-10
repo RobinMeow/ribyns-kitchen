@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { assert } from '@common/assertions'
 
-const key: string = 'token'
+const key = 'token'
 
 @Injectable({
   providedIn: 'root'
