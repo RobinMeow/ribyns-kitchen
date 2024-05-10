@@ -113,5 +113,6 @@ jobs:
           working-directory: client
           spec: e2e/src/**/*cy.ts
           browser: chrome
+          config-file: e2e/cypress.config.ts
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
           wait-on-timeout: 150 # wait 150s (dotnet restore can take a while if not cached. Otherwise it usually takes a few seconds)
