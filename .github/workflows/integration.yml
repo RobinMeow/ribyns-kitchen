@@ -93,6 +93,9 @@ jobs:
           cache: 'npm'
           cache-dependency-path: 'client/package-lock.json'
 
+      - name: include nx dependencies
+        uses: nrwl/nx-set-shas@v4
+
       - name: serve Front-End
         working-directory: client
         run: |
