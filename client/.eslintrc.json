@@ -20,11 +20,12 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "@angular-eslint/component-class-suffix": "off",
         "@angular-eslint/directive-selector": [
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": ["app", "core", "auth", "common", "recipe"],
             "style": "camelCase"
           }
         ],
@@ -32,16 +33,54 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": ["app", "core", "auth", "common", "recipe"],
             "style": "kebab-case"
           }
         ]
       }
     },
     {
+      "files": ["*.ts"],
+      "extends": [
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "prettier/prettier": [
+          "warn",
+          {
+            "endOfLine": "auto"
+          }
+        ]
+      }
+    },
+    {
       "files": ["*.html"],
-      "extends": ["plugin:@nx/angular-template"],
+      "extends": [
+        "plugin:@nx/angular-template",
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
       "rules": {}
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "excludedFiles": [
+        "*inline-template-*.component.html"
+      ],
+      "extends": [
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "prettier/prettier": [
+          "warn",
+          {
+            "parser": "angular",
+            "endOfLine": "auto"
+          }
+        ]
+      }
     }
   ]
 }
