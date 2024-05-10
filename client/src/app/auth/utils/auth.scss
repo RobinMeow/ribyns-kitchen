@@ -1,0 +1,9 @@
+@use '../../shared/variables' as *;
+
+.forms-column {
+  display: flex;
+  flex-flow: column;
+  width: 300px;
+  gap: #{$spacing};
+  margin-bottom: #{$spacing};
+}

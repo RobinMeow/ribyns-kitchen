@@ -1,0 +1,36 @@
+<h2 data-test-title>Einloggen</h2>
+
+<form [formGroup]="loginForm" (submit)="onSubmit()" data-test-login-form>
+  <div class="forms-column">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <!-- Brot des Lebens: Ein Spitzname für jemanden, der anderen eine Quelle spiritueller Nahrung ist. -->
+      <!-- Honigtau: Ein Spitzname für jemanden, der süß, sanft und friedlich ist. -->
+      <!-- Salz der Erde: Ein Spitzname für jemanden, der gut und ehrenhaft ist. -->
+      <!-- Weinberg des Herrn: Ein Spitzname für jemanden, der in seinem spirituellen Leben fruchtbar und produktiv ist. -->
+      <!-- Weizen der Ernte: Ein Spitzname für jemanden, der reif ist und von Gott gebraucht werden kann. -->
+      <input
+        matInput
+        [formControl]="chefnameControl"
+        placeholder="Weinberg des Herrn"
+        type="text"
+        data-test-login-name-input
+      />
+      <mat-hint
+        >Zwischen {{ nameValidations.min | notUndefined }} und
+        {{ nameValidations.max | notUndefined }} Zeichen</mat-hint
+      >
+    </mat-form-field>
+
+    <auth-password-input [passwordControl]="loginForm.controls.password" />
+  </div>
+  <button
+    [disabled]="loginForm.invalid"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    data-test-login-submit-button
+  >
+    Einloggen
+  </button>
+</form>

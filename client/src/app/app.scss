@@ -1,0 +1,20 @@
+@use './shared/variables' as *;
+@use './shared/media' as *;
+
+mat-drawer-container {
+	height: 100%;
+}
+
+mat-drawer {
+	padding: 0;
+}
+
+.router-outlet-defaults {
+	margin: #{$spacing};
+}
+
+@include mobile {
+	.menu {
+		width: 100%;
+	}
+}

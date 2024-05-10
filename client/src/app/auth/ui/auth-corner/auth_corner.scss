@@ -1,0 +1,8 @@
+@use '../../../shared/variables' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: #{$spacing};
+  margin: #{$spacing};
+}
