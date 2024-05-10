@@ -18,11 +18,13 @@ node_modules
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
 # misc
 /.sass-cache
@@ -40,3 +42,14 @@ Thumbs.db
 
 .nx/cache
 .angular
+
+# Firebase
+.firebase/
+firebase.json
+.idea
+**/node_modules/*
+**/.firebaserc
+.runtimeconfig.json
+
+# cypress
+cypress/screenshots/**
