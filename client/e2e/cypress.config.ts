@@ -2,6 +2,7 @@
 import { nxE2EPreset } from '@nx/cypress/plugins/cypress-preset'
 import { defineConfig } from 'cypress'
 import { MongoClient } from 'mongodb'
+import { assert } from './common/assert'
 
 export default defineConfig({
   env: {
@@ -19,7 +20,7 @@ export default defineConfig({
     }),
     baseUrl: 'http://localhost:4200',
     experimentalRunAllSpecs: true,
-    specPattern: 'cypress/e2e/**/*_{cy,spec}.{js,jsx,ts,tsx}',
+    specPattern: 'src/e2e/**/*_{cy,spec}.{js,jsx,ts,tsx}',
     async setupNodeEvents(
       on: Cypress.PluginEvents,
       config: Cypress.PluginConfigOptions

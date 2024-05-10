@@ -27,14 +27,14 @@ declare namespace Cypress {
               Cypress.Shadow
           >
         | undefined
-    ): Cypress.Chainable<JQuery<HTMLElement>>;
+    ): Cypress.Chainable<JQuery<HTMLElement>>
 
     /**
      * looks for en existing login token.
      * If none found, tries to register (+login).
      * If the Chefname already exists will do login with those creds.
      */
-    login(): Promise<void>;
+    login(): Promise<void>
   }
 }
 
@@ -54,58 +54,58 @@ function byTestAttr(
       >
     | undefined
 ): Cypress.Chainable<JQuery<HTMLElement>> {
-  return cy.get(`[data-test-${selector}]`);
+  return cy.get(`[data-test-${selector}]`)
 }
 
-Cypress.Commands.add('byTestAttr', byTestAttr);
+Cypress.Commands.add('byTestAttr', byTestAttr)
 
 Cypress.Commands.add('login', () => {
-  const apiBaseUrl = Cypress.env('apiBaseUrl');
+  const apiBaseUrl = Cypress.env('apiBaseUrl')
 
-  cy.fixture('test-user.json').as('user');
+  cy.fixture('test-user.json').as('user')
 
   cy.get('@user').then(async (user) => {
-    const { chefname, password }: any = user;
+    const { chefname, password }: any = user
 
     cy.request({
       method: 'POST',
       url: apiBaseUrl + '/Auth/RegisterAsync',
       body: JSON.stringify({
         name: chefname,
-        password: password,
+        password: password
       }),
       failOnStatusCode: false,
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
+        Accept: 'application/json'
+      }
     }).then((response) => {
       if (!response.isOkStatusCode) {
         if (
           response.status !== 400 &&
           response.body !== 'Chefname ist bereits vergeben.'
         ) {
-          throw new Error('Failed to login');
+          throw new Error('Failed to login')
         }
 
-        cy.log('Testuser already created.');
+        cy.log('Testuser already created.')
       }
-    });
+    })
 
     cy.request({
       method: 'POST',
       url: apiBaseUrl + '/Auth/LoginAsync',
       body: JSON.stringify({
         name: chefname,
-        password: password,
+        password: password
       }),
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
+        Accept: 'application/json'
+      }
     }).then((response) => {
-      const token = response.body;
-      window.localStorage.setItem('token', token);
-    });
-  });
-});
+      const token = response.body
+      window.localStorage.setItem('token', token)
+    })
+  })
+})
