@@ -110,10 +110,8 @@ jobs:
       - name: run cypress e2e
         uses: cypress-io/github-action@v6.6.0
         with:
-          working-directory: client
+          working-directory: client/e2e
           spec: e2e/src/**/*cy.ts
           browser: chrome
-          config-file: e2e/cypress.config.ts
-          support-file: e2e/src/support/e2e.ts
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
           wait-on-timeout: 150 # wait 150s (dotnet restore can take a while if not cached. Otherwise it usually takes a few seconds)
