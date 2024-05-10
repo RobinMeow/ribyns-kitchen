@@ -1,0 +1,49 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "paths": {
+      "@core": [ "src/app/core/index.ts" ],
+      "@auth": [ "src/app/auth/index.ts" ],
+      "@recipe": [ "src/app/recipe/index.ts" ],
+      "@shared/feedback": [ "src/app/shared/feedback/index.ts" ],
+      "@common": [ "src/app/common/index.ts" ],
+      "@common/testing": [ "src/app/common/testing/index.ts" ],
+      "@common/assertions": [ "src/app/common/assertions/index.ts" ],
+      "@common/validations": [ "src/app/common/validations/index.ts" ],
+      "@common/validations/testing": [ "src/app/common/validations/testing/index.ts" ],
+      "@api": [ "src/app/shared/api/index.ts" ]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "exclude": [
+    // https://github.com/microsoft/TypeScript/issues/37053
+    "./cypress.config.ts", 
+    "./cypress"
+  ]
+}

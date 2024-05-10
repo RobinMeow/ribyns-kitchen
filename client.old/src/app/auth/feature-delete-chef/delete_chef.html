@@ -1,0 +1,16 @@
+<h2 data-test-title>Account löschen</h2>
+
+<form [formGroup]="form" (submit)="onSubmit()" data-test-delete-chef-form>
+  <div class="forms-column">
+    <auth-password-input [passwordControl]="form.controls.password" />
+  </div>
+  <button
+    [disabled]="form.invalid"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    data-test-submit-btn
+  >
+    Unwiderruflich löschen
+  </button>
+</form>

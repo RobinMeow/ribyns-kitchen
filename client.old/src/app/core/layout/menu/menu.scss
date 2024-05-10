@@ -1,0 +1,40 @@
+@use '../../../../../node_modules/@angular/material/toolbar/toolbar-variables';
+@use '../../../shared/media' as *;
+
+:host {
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	flex-direction: column;
+
+	min-width: 250px;
+
+	@include desktop {
+		max-width: 600px;
+	}
+}
+
+.close-menu-flex {
+	display: flex;
+	padding: 0 16px;
+	width: 100%;
+	box-sizing: border-box;
+	flex-direction: row-reverse;
+	align-items: center;
+	white-space: nowrap;
+
+	height: toolbar-variables.$height-mobile;
+
+	@include desktop {
+		height: toolbar-variables.$height-desktop;
+	}
+}
+
+.menu-buttons {
+	flex-grow: 1; // stretch in height
+}
+
+recipe-create-menu-button {
+	height: 3rem;
+}

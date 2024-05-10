@@ -1,0 +1,36 @@
+<h2 data-test-title>Rezept hinzufügen</h2>
+
+<form [formGroup]="form" data-test-create-recipe-form>
+  <div class="forms-column">
+    <mat-form-field>
+      <mat-label>Titel</mat-label>
+      <!-- Brot des Lebens: Ein Spitzname für jemanden, der anderen eine Quelle spiritueller Nahrung ist. -->
+      <!-- Honigtau: Ein Spitzname für jemanden, der süß, sanft und friedlich ist. -->
+      <!-- Salz der Erde: Ein Spitzname für jemanden, der gut und ehrenhaft ist. -->
+      <!-- Weinberg des Herrn: Ein Spitzname für jemanden, der in seinem spirituellen Leben fruchtbar und produktiv ist. -->
+      <!-- Weizen der Ernte: Ein Spitzname für jemanden, der reif ist und von Gott gebraucht werden kann. -->
+      <input
+        matInput
+        [formControl]="form.controls.title"
+        placeholder="Weinberg des Herrn"
+        type="text"
+        data-test-recipe-title-input
+      />
+      <mat-hint
+        >Zwischen {{ titleValidations.min | notUndefined }} und
+        <!-- eslint-disable-next-line prettier/prettier -->{{
+        titleValidations.min | notUndefined }} Zeichen</mat-hint
+      >
+    </mat-form-field>
+  </div>
+  <button
+    [disabled]="form.invalid"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    (click)="onSubmit()"
+    data-test-create-recipe-submit-button
+  >
+    Erstellen
+  </button>
+</form>
