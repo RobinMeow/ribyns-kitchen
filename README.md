@@ -1,6 +1,6 @@
 # Ribyn's Kitchen
 
-Welcome to my kitchen, a community cookbook project where users can share and explore recipes within a specific community (e.g., family and friends).
+Welcome to Ribyn's Kitchen, a place where users can share and explore recipes within a specific community (e.g., family and friends).
 
 ## Project
 
@@ -46,7 +46,7 @@ I might even explore build pipelines using services like ~~Azure or Bitbucket~~ 
 
 ## License
 
-[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobinMeow/CommunityCookbook/blob/master/LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/RobinMeow/ribyns-kitchen/blob/master/LICENSE)
 
 This project is licensed under the terms of the [MIT license](LICENSE).
 

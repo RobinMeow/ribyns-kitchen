@@ -44,7 +44,7 @@ public sealed class MongoDatabase : DbContext
         settings.ServerApi = new ServerApi(ServerApiVersion.V1);
         MongoClient client = new MongoClient(settings);
 
-        string databaseName = Common.Globals.ApplicationNameAbbreviated.ToLower();
+        string databaseName = Common.Globals.AppNameTech.ToLower();
 
         Database = client.GetDatabase(databaseName);
     }

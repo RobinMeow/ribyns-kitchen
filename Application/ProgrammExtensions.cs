@@ -84,7 +84,7 @@ public static class ProgrammExtensions
                 License = new OpenApiLicense()
                 {
                     Name = "MIT License",
-                    Url = new Uri("https://github.com/RobinMeow/CommunityCookbook/blob/master/LICENSE")
+                    Url = new Uri("https://github.com/RobinMeow/ribyns-kitchen/blob/master/LICENSE")
                 }
             });
 
