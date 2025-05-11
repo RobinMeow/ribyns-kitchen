@@ -34,8 +34,6 @@
  * const value: { name: string; } | null = null
  * assert(value !== null, 'Value may not be null.') // will throw an error
  * console.log(value.name); // Non-null assertion operator not required onwards
- *
- * @__PURE__
  */
 export function assert(condition: unknown, msg: string): asserts condition {
   if (!condition) throw new Error(msg)

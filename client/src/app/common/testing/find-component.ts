@@ -14,8 +14,6 @@ import { By } from '@angular/platform-browser'
  * const fixture = TestBed.createComponent(ParentComponent);
  * fixture.detectChanges();
  * const childComponent = findComponent(fixture, ChildComponent);
- *
- * @__PURE__
  */
 export function findComponent<T>(
   fixture: ComponentFixture<unknown>,
