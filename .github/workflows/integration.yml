@@ -24,7 +24,7 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Run .NET Web API Tests
-        run: dotnet test
+        run: dotnet test --no-restore --no-build
 
   client:
     runs-on: ubuntu-22.04
