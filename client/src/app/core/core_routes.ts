@@ -4,7 +4,7 @@ export const coreRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadComponent: async () => (await import('./feature-home/home')).Home,
+    loadComponent: async () => (await import('./home-view/home.view')).HomeView,
     title: 'Startseite'
   },
   {
