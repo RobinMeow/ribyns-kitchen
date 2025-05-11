@@ -1,6 +1,5 @@
 import { Component, viewChild } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
-import { AsyncPipe } from '@angular/common'
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { Header, Menu } from 'src/app/core'
 
@@ -8,7 +7,7 @@ import { Header, Menu } from 'src/app/core'
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
-  imports: [AsyncPipe, RouterOutlet, MatSidenavModule, Menu, Header]
+  imports: [RouterOutlet, MatSidenavModule, Menu, Header]
 })
 export class App {
   private readonly drawer = viewChild.required(MatDrawer)
