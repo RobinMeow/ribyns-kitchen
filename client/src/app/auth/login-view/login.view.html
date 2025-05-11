@@ -16,21 +16,12 @@
         type="text"
         data-test-login-name-input
       />
-      <mat-hint
-        >Zwischen {{ nameValidations.min | notUndefined }} und
-        {{ nameValidations.max | notUndefined }} Zeichen</mat-hint
-      >
+      <mat-hint>Zwischen {{ nameValidations.min }} und {{ nameValidations.max }} Zeichen</mat-hint>
     </mat-form-field>
 
     <auth-password-input [passwordControl]="loginForm.controls.password" />
   </div>
-  <button
-    [disabled]="loginForm.invalid"
-    mat-raised-button
-    color="primary"
-    type="submit"
-    data-test-login-submit-button
-  >
+  <button [disabled]="loginForm.invalid" mat-raised-button color="primary" type="submit" data-test-login-submit-button>
     Einloggen
   </button>
 </form>

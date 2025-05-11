@@ -162,6 +162,8 @@
   },
   "cli": {
     "schematicCollections": [
+      "angular-eslint",
+      "typescript-eslint",
       "@schematics/angular",
       "@cypress/schematic",
       "@angular-eslint/schematics"

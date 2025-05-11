@@ -1,9 +1,22 @@
 {
   "git.ignoreLimitWarning": true,
+  "editor.formatOnSave": true,
   "files.exclude": {
     "**/.git": false,
   },
   "terminal.integrated.cwd": "${workspaceFolder}/client",
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
+  "[html][scss][typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+      "source.sortImports": "explicit",
+    },
+    "files.trimTrailingWhitespace": false,
+  },
+  "[{*.md,*.ts}]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "eslint.enable": true
 }
