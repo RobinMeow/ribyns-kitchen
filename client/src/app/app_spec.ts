@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { App } from './app'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
-import { Header, provideAppName } from 'src/app/core'
+import { Header } from 'src/app/core'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { provideApiBaseUrlTesting } from './shared/api/provide_api_base_url_testing'
 import { provideRouter } from '@angular/router'
@@ -21,7 +21,6 @@ describe('App should', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideRouter([]),
-        provideAppName(),
         provideNoopAnimations(),
         provideApiBaseUrlTesting()
       ]

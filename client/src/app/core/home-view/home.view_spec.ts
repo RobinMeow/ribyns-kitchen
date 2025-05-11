@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { HomeView } from './home.view'
-import { provideAppName } from 'src/app/core'
 import { byTestAttr } from '@common/testing'
 
 describe('Home should', () => {
@@ -10,8 +9,7 @@ describe('Home should', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HomeView],
-      providers: [provideAppName()]
+      imports: [HomeView]
     })
     fixture = TestBed.createComponent(HomeView)
     component = fixture.componentInstance
