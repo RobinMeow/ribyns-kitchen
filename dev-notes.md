@@ -4,9 +4,9 @@ To start the Back and Front End, you can use the VSCode Run Task `Run Back + Fro
 
 Or do it manually:
 
-1. `cd ui` > `npm run fireauth-emu`
-2. `cd api` > `dotnet run`
-3. `cd ui` > `ng serve`
+1. `cd client` > `npm run fireauth-emu`
+2. `cd Application` > `dotnet run` or `dotnet run --project Application`
+3. `cd client` > `ng serve`
 
 ## MongoDB Local
 
@@ -51,6 +51,6 @@ It will create a few Recipes (locally only) with the use of `mongoose` and `fake
 3. Open up a terminal.
 4. Navigate to `api` with `cd api` and build the project to get rid of missing dependency errors: `dotnet build`.
 5. Do the same for `api-tests` with `cd ../api-tests` and `dotnet build`.
-6. Navigate to `ui` with `cd ../ui` and install all the packages with `npm install` (All errors should be gone now).
+6. Navigate to `client` with `cd ../client` and install all the packages with `npm ci`.
 7. Navigate to `seed-mongo-db` with `cd ../seed-mongo-db` and `npm install` (optionally run the seeding => Run Task).
 8. If you haven't done so yet, install MongoDB server. Otherwise, you are likely to get HTTP errors when you `ng serve`.

@@ -12,7 +12,7 @@
 			},
 			"problemMatcher": "$jshint",
 			"args": [
-				"./server.js"
+				"./seed-mongo-db/server.js"
 			]
 		},
 		{
@@ -24,7 +24,7 @@
 			},
 			"problemMatcher": "$jshint",
 			"args": [
-				"./server.js",
+				"./seed-mongo-db/server.js",
 				"-p 27020"
 			]
 		}

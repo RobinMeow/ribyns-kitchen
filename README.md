@@ -1,6 +1,6 @@
-# Noah's Kitchen (Subject to change)
+# Ribyn's Kitchen
 
-Welcome to Gemeinschaftskochbuch, a community cookbook project where users can share and explore recipes within a specific community (e.g., family and friends).
+Welcome to my kitchen, a community cookbook project where users can share and explore recipes within a specific community (e.g., family and friends).
 
 ## Project
 
