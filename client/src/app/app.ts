@@ -1,10 +1,10 @@
 import { Component, viewChild } from '@angular/core'
-import { RouterOutlet } from '@angular/router'
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
+import { RouterOutlet } from '@angular/router'
 import { Header, Menu } from 'src/app/core'
 
 @Component({
-  selector: 'app-root',
+  selector: 'rk-app',
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
   imports: [RouterOutlet, MatSidenavModule, Menu, Header]
@@ -13,6 +13,6 @@ export class App {
   private readonly drawer = viewChild.required(MatDrawer)
 
   protected onOpenMenuClick() {
-    this.drawer().open()
+    void this.drawer().open()
   }
 }

@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { MatDrawer } from '@angular/material/sidenav'
-import { MatIconModule } from '@angular/material/icon'
+import { ChangeDetectionStrategy, Component, input } from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
+import { MatIconModule } from '@angular/material/icon'
+import { MatDrawer } from '@angular/material/sidenav'
 import { AuthCorner } from 'src/app/auth'
-import { CreateRecipeMenuButton } from './create-recipe-menu-button/create_recipe_menu_button'
+import { CreateRecipeMenuButton } from './create-recipe-menu-button/create-recipe.menu-button'
 
 @Component({
   selector: 'core-menu',
@@ -22,7 +22,7 @@ import { CreateRecipeMenuButton } from './create-recipe-menu-button/create_recip
 export class Menu {
   readonly drawer = input.required<MatDrawer>()
 
-  protected onArrowBackClick() {
-    this.drawer().toggle()
+  protected async onArrowBackClick(): Promise<void> {
+    await this.drawer().toggle()
   }
 }

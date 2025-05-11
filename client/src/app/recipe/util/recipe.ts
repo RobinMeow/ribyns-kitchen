@@ -1,4 +1,4 @@
-import { RecipeDto } from './recipe_dto'
+import { RecipeDto } from './recipe.dto'
 
 export class Recipe {
   constructor(dto: RecipeDto) {

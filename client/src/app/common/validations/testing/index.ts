@@ -1,2 +1,2 @@
-export * from './fake_validations'
-export * from './with_field'
+export * from './fake.validations'
+export * from './with-field'

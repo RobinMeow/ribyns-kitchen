@@ -1,0 +1,88 @@
+import { CommonModule } from '@angular/common'
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
+import {
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms'
+import { MatButtonModule } from '@angular/material/button'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
+import { MatTooltipModule } from '@angular/material/tooltip'
+import { ActivatedRoute, Router } from '@angular/router'
+import { ValidatorsFactory } from '@common/validations'
+import { PasswordInput } from '../ui/password-input/password-input'
+import { AuthService } from '../utils/auth.service'
+import { ChefValidations } from '../utils/chef.validations'
+import { RegisterChef } from '../utils/register-chef'
+
+@Component({
+  selector: 'auth-register',
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    PasswordInput
+  ],
+  templateUrl: './register.view.html',
+  styleUrls: ['../utils/auth.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class RegisterView {
+  private readonly authService = inject(AuthService)
+  private readonly router = inject(Router)
+  private readonly nnfb = inject(NonNullableFormBuilder)
+  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
+
+  private readonly chefValidations = this.activatedRouteSnapshot.data[
+    'chefValidations'
+  ] as Readonly<ChefValidations>
+
+  protected readonly nameValidations = this.chefValidations.name()
+  protected readonly passwordValidations = this.chefValidations.password()
+  protected readonly emailValidations = this.chefValidations.email()
+
+  private readonly validatorsFactory = new ValidatorsFactory()
+
+  protected readonly registerForm = this.nnfb.group({
+    chefname: ['', this.validatorsFactory.create('string', this.nameValidations)],
+    password: [
+      '',
+      this.validatorsFactory.create('string', this.passwordValidations)
+    ],
+    email: [
+      '',
+      [
+        ...this.validatorsFactory.create('string', this.emailValidations),
+        Validators.email
+      ]
+    ]
+  })
+
+  protected hidePassword = true
+
+  protected getInvalidEmailMessage() {
+    return this.registerForm.controls.email.hasError('email')
+      ? 'Ungültige E-Mail'
+      : ''
+  }
+
+  protected async onSubmit(): Promise<void> {
+    await this.registerAndLogin()
+  }
+
+  protected async registerAndLogin(): Promise<void> {
+    const chef: RegisterChef = {
+      name: this.registerForm.controls.chefname.value,
+      password: this.registerForm.controls.password.value,
+      email: this.registerForm.controls.email.value
+    }
+    await this.authService.signUpAsync(chef)
+    await this.router.navigateByUrl('/')
+  }
+}

@@ -1,1 +1,1 @@
-export * from './with_routes'
+export * from './common.providers'

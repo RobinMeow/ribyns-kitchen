@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { App } from './app'
-import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
-import { Header } from 'src/app/core'
-import { provideNoopAnimations } from '@angular/platform-browser/animations'
-import { provideApiBaseUrlTesting } from './shared/api/provide_api_base_url_testing'
-import { provideRouter } from '@angular/router'
-import { MockComponent } from 'ng-mocks'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { MatDrawer } from '@angular/material/sidenav'
+import { provideNoopAnimations } from '@angular/platform-browser/animations'
+import { provideRouter } from '@angular/router'
 import { findComponent } from '@common/testing'
+import { MockComponent } from 'ng-mocks'
+import { Header } from 'src/app/core'
+import { App } from './app'
+import { provideApiBaseUrlTesting } from './shared/api/api.testing.providers'
 
 describe('App should', () => {
   let fixture: ComponentFixture<App>
@@ -55,9 +55,9 @@ describe('App should', () => {
     expect(findComponent(fixture, MatDrawer).opened).toBeTrue()
   })
 
-  it('open the menu on openMenu event emission', () => {
+  it('open the menu on openMenu event emission', async () => {
     const drawer: MatDrawer = findComponent(fixture, MatDrawer)
-    drawer.close()
+    await drawer.close()
     expect(drawer.opened).toBeFalse()
 
     const spy = spyOn(drawer, 'open').and.callThrough()

@@ -68,7 +68,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment_development.ts"
+                  "with": "src/environments/environment.development.ts"
                 }
               ]
             }
@@ -162,6 +162,8 @@
   },
   "cli": {
     "schematicCollections": [
+      "angular-eslint",
+      "typescript-eslint",
       "@schematics/angular",
       "@cypress/schematic",
       "@angular-eslint/schematics"

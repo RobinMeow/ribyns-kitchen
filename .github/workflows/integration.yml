@@ -44,6 +44,9 @@ jobs:
       - name: install dependencies
         run: npm ci
 
+      - name: typescript compile
+        run: npx tsc
+
       - name: lint
         run: npm run lint
 
@@ -83,12 +86,15 @@ jobs:
           dotnet build ./Application/Application.csproj
           dotnet run --no-restore --no-build --project ./Application &
 
-      - name: Ensure apps are listening
-        run: npx wait-on tcp:localhost:5126 http://localhost:4200 --timeout 5000
+      - name: Ensure server is ready
+        run: npx wait-on tcp:localhost:5126 --timeout 10000
+
+      - name: Ensure client is ready
+        run: npx wait-on http://localhost:4200 --timeout 10000
 
       - name: run cypress e2e
         uses: cypress-io/github-action@v6.6.0
         with:
           working-directory: client
-          spec: cypress/e2e/**/*cy.ts
+          spec: cypress/e2e/**/*spec.ts
           browser: chrome
