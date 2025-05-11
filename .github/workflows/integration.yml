@@ -10,8 +10,8 @@ jobs:
 
     defaults:
       run:
-        shell: bash
-        working-directory: ./
+        shell: powershell
+        working-directory: .\
 
     steps:
       - name: Checkout
@@ -22,14 +22,10 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Restore NuGet packages
-        run: dotnet restore
-
-      - name: Build .NET Web API
-        run: dotnet build --no-restore
-
-      - name: Run .NET Web API Tests
-        run: dotnet test --no-restore --no-build
+      - name: Build & Test
+        run: |
+          dotnet build
+          dotnet test --no-restore --no-build
 
   client:
     runs-on: ubuntu-22.04
