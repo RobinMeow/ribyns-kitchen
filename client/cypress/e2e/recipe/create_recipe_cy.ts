@@ -1,7 +1,7 @@
 describe('create-recipe should', () => {
   it(`redirect to recipe/{recipeId} recipe is created sucessfully`, () => {
     cy.task('db:reset')
-    cy.login()
+    cy.auth('register-and-login')
 
     cy.visit('/create-recipe')
 

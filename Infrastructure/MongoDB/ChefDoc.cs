@@ -22,7 +22,6 @@ public sealed record ChefDoc : Document
             Name = chef.Name,
             PasswordHash = chef.PasswordHash,
             Email = chef.Email,
-            CreatedAt = chef.CreatedAt,
-        };
+            CreatedAt = DateTime.UtcNow,        };
     }
 }

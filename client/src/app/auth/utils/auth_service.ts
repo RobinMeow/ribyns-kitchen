@@ -108,12 +108,18 @@ export class AuthService extends AuthApi {
     return this.currentUserSignal.asReadonly()
   }
 
-  async removeAsync(credentials: Credentials): Promise<void> {
+  async removeAsync(credentials: Credentials): Promise<'success' | 'error'> {
     assert(credentials.name, 'Chefname may not be empty.')
     assert(credentials.password, 'Chef password may not be empty.')
 
-    await super.deleteAsync(credentials)
-    this.logout()
+    try {
+      await super.deleteAsync(credentials)
+      this.logout()
+      return 'success'
+    } catch (error) {
+      console.error(error)
+      return 'error'
+    }
   }
 
   override async getValidationsAsync(): Promise<Readonly<ChefValidations>> {

@@ -41,7 +41,7 @@ Jasmine:
 
 Cypress:
 
-- run `yarn run cypress open` and follow the browser to test e2e or component
+- run `npm run cypress:open` and follow the browser to test e2e or component
 
 ## scss angular problems
 

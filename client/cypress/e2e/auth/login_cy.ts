@@ -1,8 +1,11 @@
 describe('login', () => {
   describe('when unauthorized should', () => {
+    let user: { chefname: string; password: string }
+
     beforeEach(() => {
       cy.task('db:reset')
       cy.visit('/login')
+      cy.fixture('test-user.json').then((usr) => (user = usr))
     })
 
     it('not log in with empty inputs', () => {
@@ -11,20 +14,22 @@ describe('login', () => {
     })
 
     it('work with enter', () => {
-      cy.byTestAttr('login-name-input').type('Cypress Testuser')
-      cy.byTestAttr('password-input').type('iLoveJesus<3!{enter}')
+      cy.auth('register-only')
+      cy.byTestAttr('login-name-input').type(user.chefname)
+      cy.byTestAttr('password-input').type(`${user.password}{enter}`)
     })
 
     it('work with submit button', () => {
-      cy.byTestAttr('login-name-input').type('Cypress Testuser')
-      cy.byTestAttr('password-input').type('iLoveJesus<3!{enter}')
+      cy.auth('register-only')
+      cy.byTestAttr('login-name-input').type(user.chefname)
+      cy.byTestAttr('password-input').type(user.password)
       cy.byTestAttr('login-submit-button').click()
     })
   })
 
   describe('when authorized should', () => {
     it('redirect', () => {
-      cy.login()
+      cy.auth('register-and-login')
       cy.visit('/login')
       cy.url().should('not.include', 'login')
     })
