@@ -1,4 +1,4 @@
-name: Build, UnitTests and End-2-end tests
+name: pipeline
 on:
   push:
     branches-ignore:
