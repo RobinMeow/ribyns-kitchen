@@ -12,7 +12,6 @@ import { MatInputModule } from '@angular/material/input'
 
 @Component({
   selector: 'auth-password-input',
-  standalone: true,
   imports: [
     MatFormFieldModule,
     ReactiveFormsModule,

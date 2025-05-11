@@ -8,7 +8,6 @@ import { Header, Menu } from 'src/app/core'
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
-  standalone: true,
   imports: [AsyncPipe, RouterOutlet, MatSidenavModule, Menu, Header]
 })
 export class App {

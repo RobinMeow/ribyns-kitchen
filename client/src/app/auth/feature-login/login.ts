@@ -18,7 +18,6 @@ import { NotUndefinedPipe } from '@common/assertions'
 
 @Component({
   selector: 'auth-login',
-  standalone: true,
   imports: [
     CommonModule,
     MatFormFieldModule,

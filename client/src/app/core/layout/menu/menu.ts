@@ -8,7 +8,6 @@ import { CreateRecipeMenuButton } from './create-recipe-menu-button/create_recip
 
 @Component({
   selector: 'core-menu',
-  standalone: true,
   imports: [
     CommonModule,
     MatIconModule,

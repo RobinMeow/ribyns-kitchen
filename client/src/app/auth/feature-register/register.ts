@@ -19,7 +19,6 @@ import { ChefValidations } from '../utils/chef_validations'
 
 @Component({
   selector: 'auth-register',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

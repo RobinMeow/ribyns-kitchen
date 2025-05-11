@@ -23,7 +23,6 @@ import { assert } from '@common/assertions'
 
 @Component({
   selector: 'auth-delete-chef',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

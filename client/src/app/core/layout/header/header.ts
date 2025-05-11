@@ -14,7 +14,6 @@ import { APP_NAME } from 'src/app/core'
 
 @Component({
   selector: 'core-header',
-  standalone: true,
   imports: [MatIconModule, MatToolbarModule, MatButtonModule, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.scss',
