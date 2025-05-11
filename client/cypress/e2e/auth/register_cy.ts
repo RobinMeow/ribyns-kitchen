@@ -23,7 +23,7 @@ describe('register', () => {
 
     it('register with submit button', () => {
       cy.byTestAttr('register-name-input').type('Cypress Testuser')
-      cy.byTestAttr('password-input').type('iLoveJesus<3!{enter}')
+      cy.byTestAttr('password-input').type('iLoveJesus<3!')
       cy.byTestAttr('register-submit-button').click()
     })
 
@@ -31,7 +31,6 @@ describe('register', () => {
       cy.byTestAttr('register-name-input').type('Cypress Testuser')
       cy.byTestAttr('email-input').type('be.blessed@nd.loved')
       cy.byTestAttr('password-input').type('iLoveJesus<3!{enter}')
-      cy.byTestAttr('register-submit-button').click()
     })
   })
 
