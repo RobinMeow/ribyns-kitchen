@@ -1,5 +1,8 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http'
-import { importProvidersFrom } from '@angular/core'
+import {
+  importProvidersFrom,
+  provideExperimentalZonelessChangeDetection
+} from '@angular/core'
 import { ApplicationConfig } from '@angular/core'
 import { provideAnimations } from '@angular/platform-browser/animations'
 import { provideRouter } from '@angular/router'
@@ -14,6 +17,7 @@ import { withRoutes } from '@common'
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideExperimentalZonelessChangeDetection(),
     provideAppName(),
     provideApiBaseUrl(),
     provideHttpClient(
