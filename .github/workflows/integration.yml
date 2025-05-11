@@ -80,7 +80,7 @@ jobs:
 
       - name: Build and Run Back-End
         run: |
-          dotnet build
+          dotnet build ./Application/Application.csproj
           dotnet run --no-restore --no-build --project ./Application &
 
       - name: Ensure apps are listening
