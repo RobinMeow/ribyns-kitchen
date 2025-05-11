@@ -88,7 +88,7 @@ jobs:
           dotnet run --no-restore --no-build --project ./Application &
 
       - name: Ensure apps are listening
-        run: npx wait-on tcp:localhost:5126 http://localhost:4200 --timeout 10000
+        run: npx wait-on tcp:localhost:5126 http://localhost:4200 --timeout 5000
 
       - name: run cypress e2e
         uses: cypress-io/github-action@v6.6.0
