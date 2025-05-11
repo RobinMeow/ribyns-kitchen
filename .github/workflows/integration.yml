@@ -5,7 +5,7 @@ on:
       - 'master'
 jobs:
 
-  build-server:
+  server:
     runs-on: ubuntu-22.04
 
     steps:
@@ -23,32 +23,10 @@ jobs:
       - name: Build .NET Web API
         run: dotnet build
 
-  run-server-tests:
-    runs-on: ubuntu-22.04
-    
-    defaults:
-      run:
-        working-directory: './'
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Restore NuGet packages
-        run: dotnet restore
-
-      - name: Build .NET Web API
-        run: dotnet build
-
       - name: Run .NET Web API Tests
         run: dotnet test
 
-  lint-and-build-and-test-client:
+  client:
     runs-on: ubuntu-22.04
     
     defaults:
@@ -79,7 +57,7 @@ jobs:
       - name: run jasmine tests
         run: npm run cli-test
 
-  cypress-e2e-tests-on-google-chrome:
+  e2e-google-chrome:
     runs-on: ubuntu-22.04
 
     steps:
