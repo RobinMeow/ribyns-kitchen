@@ -3,9 +3,7 @@ import { assert } from '@common/assertions'
 
 const key: string = 'token'
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class TokenStorage {
   store(token: string): void {
     assert(token, 'Token is required.')

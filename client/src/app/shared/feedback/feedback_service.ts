@@ -3,9 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { FeedbackSnackBar } from './feedback-snackbar/feedback_snack_bar'
 import { FeedbackData } from './feedback_data'
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class FeedbackService {
   private readonly snackBar = inject(MatSnackBar)
 
