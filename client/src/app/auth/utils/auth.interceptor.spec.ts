@@ -8,11 +8,11 @@ import {
   provideHttpClient
 } from '@angular/common/http'
 
-import { authInterceptor } from './auth_interceptor'
+import { authInterceptor } from './auth.interceptor'
 import { firstValueFrom, of } from 'rxjs'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { API_BASE_URL } from '@api'
-import { TokenStorage } from './token_storage'
+import { TokenStorage } from './token.storage'
 
 describe('authInterceptor should', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>

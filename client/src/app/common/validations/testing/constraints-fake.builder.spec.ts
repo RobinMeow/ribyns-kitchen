@@ -1,4 +1,4 @@
-import { ConstraintsFakeBuilder } from './constraints_fake_builder'
+import { ConstraintsFakeBuilder } from './constraints-fake.builder'
 
 describe('ConstraintsFakeBuilder should', () => {
   let builder: ConstraintsFakeBuilder

@@ -1,4 +1,4 @@
-import { NotUndefinedPipe } from './not_undefined_pipe'
+import { NotUndefinedPipe } from './not-undefined.pipe'
 
 describe('NotUndefinedPipe should', () => {
   let pipe: NotUndefinedPipe

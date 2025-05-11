@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing'
-
-import { AppTitleStrategy } from './app_title_strategy'
+import { AppTitleStrategy } from './app-title.strategy'
 import { RouterStateSnapshot } from '@angular/router'
 import { Title } from '@angular/platform-browser'
 

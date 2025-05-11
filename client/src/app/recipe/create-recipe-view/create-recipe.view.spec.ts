@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
-import { CreateRecipe } from './create_recipe'
+import { CreateRecipeView } from './create-recipe.view'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideHttpClient } from '@angular/common/http'
-import { RecipeApi } from '../util/recipe_api'
+import { RecipeApi } from '../util/recipe.api'
 import { provideApiBaseUrlTesting } from '@api'
 import {
   byTestAttr,
@@ -13,17 +13,17 @@ import {
 } from '@common/testing'
 import { MockProvider } from 'ng-mocks'
 import { ActivatedRoute } from '@angular/router'
-import { RecipeValidations } from '../util/recipe_validations'
+import { RecipeValidations } from '../util/recipe.validations'
 import { fakeValidations, withField } from '@common/validations/testing'
 
 describe('CreateRecipe should', () => {
-  let component: CreateRecipe
+  let component: CreateRecipeView
   let recipeApi: RecipeApi
-  let fixture: ComponentFixture<CreateRecipe>
+  let fixture: ComponentFixture<CreateRecipeView>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateRecipe],
+      imports: [CreateRecipeView],
       providers: [
         provideNoopAnimations(),
         provideHttpClient(),
@@ -45,7 +45,7 @@ describe('CreateRecipe should', () => {
       ]
     }).compileComponents()
 
-    fixture = TestBed.createComponent(CreateRecipe)
+    fixture = TestBed.createComponent(CreateRecipeView)
     component = fixture.componentInstance
     fixture.detectChanges()
     recipeApi = TestBed.inject(RecipeApi)

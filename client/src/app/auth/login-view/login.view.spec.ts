@@ -12,7 +12,7 @@ import {
 } from '@common/testing'
 import { MockProvider } from 'ng-mocks'
 import { ActivatedRoute } from '@angular/router'
-import { ChefValidations } from '../utils/chef_validations'
+import { ChefValidations } from '../utils/chef.validations'
 import { fakeValidations, withField } from '@common/validations/testing'
 
 describe('LoginView should', () => {

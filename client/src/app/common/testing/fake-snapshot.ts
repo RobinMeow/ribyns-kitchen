@@ -1,5 +1,5 @@
 import { ActivatedRouteSnapshot } from '@angular/router'
-import { ResolvedDataFake } from './with_resolved_data'
+import { ResolvedDataFake } from './with-resolved-data'
 
 export function fakeSnapshot(
   ...resolvedData: ResolvedDataFake<unknown>[]

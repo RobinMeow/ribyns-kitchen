@@ -5,11 +5,11 @@ import {
 } from '@angular/common/http/testing'
 import { TestBed } from '@angular/core/testing'
 import { API_BASE_URL, provideApiBaseUrlTesting } from '@api'
-import { RecipeApi } from './recipe_api'
-import { RecipeDto } from './recipe_dto'
+import { RecipeApi } from './recipe.api'
+import { RecipeDto } from './recipe.dto'
 import { Recipe } from './recipe'
 import { MockProvider } from 'ng-mocks'
-import { TokenStorage } from 'src/app/auth/utils/token_storage'
+import { TokenStorage } from 'src/app/auth/utils/token.storage'
 
 describe('RecipeApi should', () => {
   let recipeApi: RecipeApi

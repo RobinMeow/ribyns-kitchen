@@ -1,5 +1,5 @@
-import { FieldConstaintsFake } from './constraints_fake_builder'
-import { fakeValidations } from './fake_validations'
+import { FieldConstaintsFake } from './constraints-fake.builder'
+import { fakeValidations } from './fake.validations'
 
 describe('fakeValidations should', () => {
   it('return empty validations when no constraints provided', () => {

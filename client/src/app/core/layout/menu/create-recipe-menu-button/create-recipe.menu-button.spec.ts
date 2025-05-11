@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-
-import { CreateRecipeMenuButton } from './create_recipe_menu_button'
+import { CreateRecipeMenuButton } from './create-recipe.menu-button'
 import { Router } from '@angular/router'
 import { byTestAttr } from '@common/testing'
 

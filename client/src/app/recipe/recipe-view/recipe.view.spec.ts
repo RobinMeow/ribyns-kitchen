@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ViewRecipe } from './view_recipe'
+import { RecipeView } from './recipe.view'
 import { byTestAttr } from '@common/testing'
 import { ActivatedRoute } from '@angular/router'
 import { Recipe } from '../util/recipe'
 
-describe('Recipe should', () => {
-  let component: ViewRecipe
-  let fixture: ComponentFixture<ViewRecipe>
+describe('RecipeView should', () => {
+  let component: RecipeView
+  let fixture: ComponentFixture<RecipeView>
   const recipeMock: Recipe = {
     id: '123',
     title: 'recipetitle'
@@ -15,7 +15,7 @@ describe('Recipe should', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ViewRecipe],
+      imports: [RecipeView],
       providers: [
         {
           provide: ActivatedRoute,
@@ -30,7 +30,7 @@ describe('Recipe should', () => {
       ]
     }).compileComponents()
 
-    fixture = TestBed.createComponent(ViewRecipe)
+    fixture = TestBed.createComponent(RecipeView)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

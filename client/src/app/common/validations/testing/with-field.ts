@@ -1,4 +1,4 @@
-import { ConstraintsFakeBuilder } from './constraints_fake_builder'
+import { ConstraintsFakeBuilder } from './constraints-fake.builder'
 
 /** @__PURE__ */
 export function withField(fieldName: string): ConstraintsFakeBuilder {

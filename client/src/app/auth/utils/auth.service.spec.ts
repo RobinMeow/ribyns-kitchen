@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing'
-import { AuthService } from './auth_service'
+import { AuthService } from './auth.service'
 import {
   HttpTestingController,
   provideHttpClientTesting
@@ -8,9 +8,9 @@ import { provideHttpClient } from '@angular/common/http'
 import { API_BASE_URL, provideApiBaseUrlTesting } from '@api'
 import { WritableSignal, isSignal } from '@angular/core'
 import { MockProvider } from 'ng-mocks'
-import { TokenStorage } from './token_storage'
+import { TokenStorage } from './token.storage'
 import { Chef } from '@auth'
-import { RegisterChef } from './register_chef'
+import { RegisterChef } from './register-chef'
 import { Validations } from '@common/validations'
 
 describe('AuthService', () => {

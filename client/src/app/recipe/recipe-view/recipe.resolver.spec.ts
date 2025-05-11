@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing'
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { Recipe } from '../util/recipe'
-import { recipeResolver } from './recipe_resolver'
-import { RecipeApi } from '../util/recipe_api'
+import { recipeResolver } from './recipe.resolver'
+import { RecipeApi } from '../util/recipe.api'
 import { MockProvider } from 'ng-mocks'
 
 describe('recipeResolver shoul', () => {
