@@ -77,7 +77,7 @@ jobs:
         run: npm run build
 
       - name: run jasmine tests
-        run: npm run test --browsers ChromeHeadless --watch false
+        run: npm run cli-test
 
   cypress-e2e-tests-on-google-chrome:
     runs-on: ubuntu-22.04
