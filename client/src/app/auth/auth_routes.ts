@@ -18,7 +18,7 @@ export const authRoutes: Route[] = [
     path: 'register',
     canActivate: [unauthorizedGuard],
     loadComponent: async () =>
-      (await import('./feature-register/register')).Register,
+      (await import('./register-view/register.view')).RegisterView,
     title: 'Registrieren',
     resolve: {
       chefValidations: chefValidationsResolver

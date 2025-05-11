@@ -3,7 +3,7 @@ import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 
-import { Register } from './register'
+import { RegisterView } from './register.view'
 import { provideApiBaseUrlTesting } from '@api'
 import {
   byTestAttr,
@@ -16,13 +16,13 @@ import { ActivatedRoute } from '@angular/router'
 import { ChefValidations } from '../utils/chef_validations'
 import { fakeValidations, withField } from '@common/validations/testing'
 
-describe('Register should', () => {
-  let component: Register
-  let fixture: ComponentFixture<Register>
+describe('RegisterView should', () => {
+  let component: RegisterView
+  let fixture: ComponentFixture<RegisterView>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Register],
+      imports: [RegisterView],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -45,7 +45,7 @@ describe('Register should', () => {
       ]
     }).compileComponents()
 
-    fixture = TestBed.createComponent(Register)
+    fixture = TestBed.createComponent(RegisterView)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

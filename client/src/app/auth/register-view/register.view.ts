@@ -29,11 +29,11 @@ import { ChefValidations } from '../utils/chef_validations'
     MatTooltipModule,
     PasswordInput
   ],
-  templateUrl: './register.html',
+  templateUrl: './register.view.html',
   styleUrls: ['../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Register {
+export class RegisterView {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   private readonly nnfb = inject(NonNullableFormBuilder)
