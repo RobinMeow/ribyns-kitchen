@@ -28,25 +28,20 @@ export class AuthService extends AuthApi {
     return token !== null && token !== undefined
   })
 
-  private readonly onTokenChanged: EffectRef = effect(
-    () => {
-      const token = this.tokenSignal()
+  private readonly onTokenChanged: EffectRef = effect(() => {
+    const token = this.tokenSignal()
 
-      if (token === undefined) return
+    if (token === undefined) return
 
-      if (token !== null) {
-        const decodedToken: DecodedToken = this.tokenDecoder.decode(token)
-        this.currentUserSignal.set(new Chef(decodedToken))
-        this.tokenStorage.store(token)
-      } else {
-        this.tokenStorage.clear()
-        this.currentUserSignal.set(null)
-      }
-    },
-    {
-      allowSignalWrites: true
+    if (token !== null) {
+      const decodedToken: DecodedToken = this.tokenDecoder.decode(token)
+      this.currentUserSignal.set(new Chef(decodedToken))
+      this.tokenStorage.store(token)
+    } else {
+      this.tokenStorage.clear()
+      this.currentUserSignal.set(null)
     }
-  )
+  })
 
   private readonly currentUserSignal: WritableSignal<Chef | null> = signal(null)
 
