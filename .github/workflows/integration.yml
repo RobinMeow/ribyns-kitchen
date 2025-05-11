@@ -85,10 +85,10 @@ jobs:
       - name: Build and Run Back-End
         run: | 
           dotnet build
-          dotnet run --project ./Application &
+          dotnet run --no-restore --no-build --project ./Application &
 
       - name: Ensure Server is listening
-        run: npx wait-on http://localhost:5126/swagger/index.html http://localhost:4200
+        run: npx wait-on http://localhost:5126/swagger/index.html http://localhost:4200 --timeout 10000
 
       - name: run cypress e2e
         uses: cypress-io/github-action@v6.6.0
