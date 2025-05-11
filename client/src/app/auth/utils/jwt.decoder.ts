@@ -7,8 +7,6 @@ export class JwtDecoder {
   private readonly jwtHelperService = new JwtHelperService() // thrid party library.
 
   decode(token: string): DecodedToken {
-    const untypedDecodedToken = this.jwtHelperService.decodeToken(token)
-    const decodedToken: DecodedToken = untypedDecodedToken
-    return decodedToken
+    return this.jwtHelperService.decodeToken(token) as DecodedToken
   }
 }

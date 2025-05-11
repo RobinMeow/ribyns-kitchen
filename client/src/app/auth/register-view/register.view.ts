@@ -1,21 +1,21 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { AuthService } from '../utils/auth.service'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatInputModule } from '@angular/material/input'
-import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
 import { MatTooltipModule } from '@angular/material/tooltip'
-import { PasswordInput } from '../ui/password-input/password-input'
-import { RegisterChef } from '../utils/register-chef'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ValidatorsFactory } from '@common/validations'
+import { PasswordInput } from '../ui/password-input/password-input'
+import { AuthService } from '../utils/auth.service'
 import { ChefValidations } from '../utils/chef.validations'
+import { RegisterChef } from '../utils/register-chef'
 
 @Component({
   selector: 'auth-register',
@@ -39,8 +39,9 @@ export class RegisterView {
   private readonly nnfb = inject(NonNullableFormBuilder)
   private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
 
-  private readonly chefValidations: Readonly<ChefValidations> =
-    this.activatedRouteSnapshot.data['chefValidations']
+  private readonly chefValidations = this.activatedRouteSnapshot.data[
+    'chefValidations'
+  ] as Readonly<ChefValidations>
 
   protected readonly nameValidations = this.chefValidations.name()
   protected readonly passwordValidations = this.chefValidations.password()
@@ -49,10 +50,7 @@ export class RegisterView {
   private readonly validatorsFactory = new ValidatorsFactory()
 
   protected readonly registerForm = this.nnfb.group({
-    chefname: [
-      '',
-      this.validatorsFactory.create('string', this.nameValidations)
-    ],
+    chefname: ['', this.validatorsFactory.create('string', this.nameValidations)],
     password: [
       '',
       this.validatorsFactory.create('string', this.passwordValidations)

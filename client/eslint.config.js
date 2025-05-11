@@ -43,6 +43,8 @@ module.exports = tseslint.config(
 
       // typescript
       "@typescript-eslint/no-floating-promises": "warn",
+      "@typescript-eslint/unbound-method": "off",
+      "@typescript-eslint/prefer-promise-reject-errors": "off",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {

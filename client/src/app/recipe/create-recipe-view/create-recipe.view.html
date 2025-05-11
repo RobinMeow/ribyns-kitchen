@@ -16,11 +16,7 @@
         type="text"
         data-test-recipe-title-input
       />
-      <mat-hint
-        >Zwischen {{ titleValidations.min | notUndefined }} und
-        <!-- eslint-disable-next-line prettier/prettier -->{{
-        titleValidations.min | notUndefined }} Zeichen</mat-hint
-      >
+      <mat-hint>Zwischen {{ titleValidations.min }} und {{ titleValidations.min }} Zeichen</mat-hint>
     </mat-form-field>
   </div>
   <button

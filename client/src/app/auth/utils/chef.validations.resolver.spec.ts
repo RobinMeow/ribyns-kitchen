@@ -4,10 +4,10 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router'
+import { fakeValidations, withField } from '@common/validations/testing'
 import { MockProvider } from 'ng-mocks'
 import { AuthService } from './auth.service'
 import { ChefValidations } from './chef.validations'
-import { fakeValidations, withField } from '@common/validations/testing'
 import { chefValidationsResolver } from './chef.validations.resolver'
 
 describe('chefValidationsResolver should', () => {
@@ -51,7 +51,7 @@ describe('chefValidationsResolver should', () => {
 
     await TestBed.runInInjectionContext(async () => {
       const promise = chefValidationsResolver(route, state)
-      await expectAsync((promise as Promise<unknown>)).toBeRejectedWith(null)
+      await expectAsync(promise as Promise<unknown>).toBeRejectedWith(null)
     })
 
     expect(apiSpy).toHaveBeenCalledOnceWith()

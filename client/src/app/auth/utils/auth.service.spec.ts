@@ -1,17 +1,17 @@
-import { TestBed } from '@angular/core/testing'
-import { AuthService } from './auth.service'
+import { provideHttpClient } from '@angular/common/http'
 import {
   HttpTestingController,
   provideHttpClientTesting
 } from '@angular/common/http/testing'
-import { provideHttpClient } from '@angular/common/http'
-import { API_BASE_URL, provideApiBaseUrlTesting } from '@api'
 import { WritableSignal, isSignal } from '@angular/core'
-import { MockProvider } from 'ng-mocks'
-import { TokenStorage } from './token.storage'
+import { TestBed } from '@angular/core/testing'
+import { API_BASE_URL, provideApiBaseUrlTesting } from '@api'
 import { Chef } from '@auth'
-import { RegisterChef } from './register-chef'
 import { Validations } from '@common/validations'
+import { MockProvider } from 'ng-mocks'
+import { AuthService } from './auth.service'
+import { RegisterChef } from './register-chef'
+import { TokenStorage } from './token.storage'
 
 describe('AuthService', () => {
   let authService: AuthService
@@ -94,7 +94,7 @@ describe('AuthService', () => {
     describe('trim', () => {
       let promise: Promise<unknown>
 
-      it('the email', async () => {
+      it('the email', () => {
         promise = authService.signUpAsync({
           name: 'Chefname',
           email: ' TrimMe ',
@@ -106,12 +106,10 @@ describe('AuthService', () => {
         )
         registerRequest.flush(null)
 
-        expect((registerRequest.request.body as RegisterChef).email).toBe(
-          'TrimMe'
-        )
+        expect((registerRequest.request.body as RegisterChef).email).toBe('TrimMe')
       })
 
-      it('the name', async () => {
+      it('the name', () => {
         promise = authService.signUpAsync({
           name: ' TrimMe ',
           password: 'valid'
@@ -225,7 +223,7 @@ describe('AuthService', () => {
   })
 
   describe('currentUser should', () => {
-    it('return readonly signal', async () => {
+    it('return readonly signal', () => {
       const signal = authService.currentUser()
       expect(signal).toBeTruthy()
       expect(isSignal(signal)).toBeTrue()

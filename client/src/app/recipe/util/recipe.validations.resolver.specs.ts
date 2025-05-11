@@ -4,8 +4,8 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router'
-import { MockProvider } from 'ng-mocks'
 import { fakeValidations, withField } from '@common/validations/testing'
+import { MockProvider } from 'ng-mocks'
 import { RecipeApi } from './recipe.api'
 import { RecipeValidations } from './recipe.validations'
 import { recipeValidationsResolver } from './recipe.validations.resolver'
@@ -35,10 +35,7 @@ describe('chefValidationsResolver should', () => {
 
     let actual: RecipeValidations
     await TestBed.runInInjectionContext(async () => {
-      actual = (await recipeValidationsResolver(
-        route,
-        state
-      )) as RecipeValidations
+      actual = (await recipeValidationsResolver(route, state)) as RecipeValidations
     })
 
     expect(actual!).toEqual(expectedValidations)
@@ -48,13 +45,14 @@ describe('chefValidationsResolver should', () => {
   // TODO e2e test which covers feedback on rejected resolver
 
   it('rejects when api rejects as well', async () => {
+    const err = new Error('dummy')
     const apiSpy = spyOn(recipeApi, 'getValidationsAsync').and.returnValue(
-      Promise.reject(null)
+      Promise.reject(err)
     )
 
     await TestBed.runInInjectionContext(async () => {
       const promise = recipeValidationsResolver(route, state)
-      await expectAsync((promise as Promise<unknown>)).toBeRejectedWith(null)
+      await expectAsync(promise as Promise<unknown>).toBeRejectedWith(err)
     })
 
     expect(apiSpy).toHaveBeenCalledOnceWith()

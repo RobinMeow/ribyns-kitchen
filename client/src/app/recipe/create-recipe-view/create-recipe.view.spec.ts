@@ -1,9 +1,8 @@
+import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
-import { CreateRecipeView } from './create-recipe.view'
-import { provideHttpClientTesting } from '@angular/common/http/testing'
-import { provideHttpClient } from '@angular/common/http'
-import { RecipeApi } from '../util/recipe.api'
+import { ActivatedRoute } from '@angular/router'
 import { provideApiBaseUrlTesting } from '@api'
 import {
   byTestAttr,
@@ -11,10 +10,11 @@ import {
   setValue,
   withResolvedData
 } from '@common/testing'
-import { MockProvider } from 'ng-mocks'
-import { ActivatedRoute } from '@angular/router'
-import { RecipeValidations } from '../util/recipe.validations'
 import { fakeValidations, withField } from '@common/validations/testing'
+import { MockProvider } from 'ng-mocks'
+import { RecipeApi } from '../util/recipe.api'
+import { RecipeValidations } from '../util/recipe.validations'
+import { CreateRecipeView } from './create-recipe.view'
 
 describe('CreateRecipe should', () => {
   let component: CreateRecipeView
@@ -72,18 +72,12 @@ describe('CreateRecipe should', () => {
   })
 
   it('have disabled submit button by default', () => {
-    const btn = byTestAttr<HTMLButtonElement>(
-      fixture,
-      'create-recipe-submit-button'
-    )
+    const btn = byTestAttr<HTMLButtonElement>(fixture, 'create-recipe-submit-button')
     expect(btn.disabled).toBeTrue()
   })
 
   it('enable submit button after valid inputs', () => {
-    const btn = byTestAttr<HTMLButtonElement>(
-      fixture,
-      'create-recipe-submit-button'
-    )
+    const btn = byTestAttr<HTMLButtonElement>(fixture, 'create-recipe-submit-button')
     expect(btn).toBeTruthy()
     expect(btn.disabled).toBeTrue()
 
@@ -94,7 +88,7 @@ describe('CreateRecipe should', () => {
     expect(btn.disabled).toBeFalse()
   })
 
-  it('not send http request when form is submitted invalid', async () => {
+  it('not send http request when form is submitted invalid', () => {
     const form = byTestAttr<HTMLFormElement>(fixture, 'create-recipe-form')
     expect(form.querySelector('[invalid]')).toBeDefined()
     expect(component['form'].invalid).toBeTrue()

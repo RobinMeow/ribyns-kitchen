@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing'
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
-import { Recipe } from '../util/recipe'
-import { recipeResolver } from './recipe.resolver'
-import { RecipeApi } from '../util/recipe.api'
 import { MockProvider } from 'ng-mocks'
+import { Recipe } from '../util/recipe'
+import { RecipeApi } from '../util/recipe.api'
+import { recipeResolver } from './recipe.resolver'
 
 describe('recipeResolver shoul', () => {
   let recipeApi: RecipeApi
@@ -50,20 +50,18 @@ describe('recipeResolver shoul', () => {
   // recipe remotely deleted by other user + cached view on current user
   it('handle when server doesnt send a recipe', async () => {
     const paramMapSpy = spyOn(route.paramMap, 'get').and.returnValue('123')
-    const apiSpy = spyOn(recipeApi, 'getAsync').and.returnValue(
-      Promise.reject(null)
-    )
+    const apiSpy = spyOn(recipeApi, 'getAsync').and.returnValue(Promise.reject(null))
 
     await TestBed.runInInjectionContext(async () => {
       const promise = recipeResolver(route, state)
-      await expectAsync((promise as Promise<Recipe>)).toBeRejectedWith(null)
+      await expectAsync(promise as Promise<Recipe>).toBeRejectedWith(null)
     })
 
     expect(paramMapSpy).toHaveBeenCalledOnceWith('recipeId')
     expect(apiSpy).toHaveBeenCalledOnceWith('123')
   })
 
-  it('throw an error when recipeId is missing in route', async () => {
+  it('throw an error when recipeId is missing in route', () => {
     TestBed.runInInjectionContext(() =>
       expect(() => recipeResolver(route, state)).toThrowError(
         'recipeResolver requires recipeId in paramMap.'

@@ -13,6 +13,6 @@ export class CreateRecipeMenuButton {
   private readonly router = inject(Router)
 
   protected onClick() {
-    this.router.navigate(['/create-recipe'])
+    void this.router.navigate(['/create-recipe'])
   }
 }

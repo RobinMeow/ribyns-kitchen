@@ -12,7 +12,7 @@ export const unauthorizedGuard: CanActivateFn = (route, state) => {
   const isAuthorized = inject(AuthService).isAuthorized()()
 
   if (isAuthorized) {
-    router.navigateByUrl('/')
+    void router.navigateByUrl('/')
   }
 
   return !isAuthorized

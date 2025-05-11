@@ -19,5 +19,5 @@ export function findComponent<T>(
   fixture: ComponentFixture<unknown>,
   type: Type<T>
 ): T {
-  return fixture.debugElement.query(By.directive(type)).componentInstance
+  return fixture.debugElement.query(By.directive(type)).componentInstance as T
 }

@@ -5,10 +5,9 @@ import {
   input,
   output
 } from '@angular/core'
+import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatToolbarModule } from '@angular/material/toolbar'
-
-import { MatButtonModule } from '@angular/material/button'
 import { Router, RouterLink } from '@angular/router'
 
 @Component({
@@ -29,6 +28,6 @@ export class Header {
   }
 
   protected onTitleClick() {
-    this.router.navigate([''])
+    void this.router.navigate([''])
   }
 }

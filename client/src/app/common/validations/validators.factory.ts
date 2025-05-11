@@ -1,6 +1,6 @@
 import { ValidatorFn, Validators } from '@angular/forms'
-import { FieldConstraints } from './field.constraints'
 import { assert } from '@common/assertions'
+import { FieldConstraints } from './field.constraints'
 
 type CreateValidatorFn = (
   fieldConstraints: Readonly<FieldConstraints>
@@ -33,10 +33,7 @@ export class ValidatorsFactory {
   private static readonly _creators: ReadonlyMap<string, CreateValidatorFn> =
     new Map<string, CreateValidatorFn>([['string', string_creator]])
 
-  create(
-    dataType: 'string',
-    fieldConstraints: FieldConstraints
-  ): ValidatorFn[] {
+  create(dataType: 'string', fieldConstraints: FieldConstraints): ValidatorFn[] {
     const creator = ValidatorsFactory._creators.get(dataType)
     assert(creator, `No Validators Creator found for dataType: '${dataType}'`)
     return creator(fieldConstraints)

@@ -1,16 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms'
+import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
-import { MatButtonModule } from '@angular/material/button'
 import { ActivatedRoute, Router } from '@angular/router'
-import { RecipeApi } from '../util/recipe.api'
+import { FieldConstraints, ValidatorsFactory } from '@common/validations'
 import { NewRecipe } from '../util/new-recipe'
 import { Recipe } from '../util/recipe'
+import { RecipeApi } from '../util/recipe.api'
 import { RecipeValidations } from '../util/recipe.validations'
-import { FieldConstraints, ValidatorsFactory } from '@common/validations'
-import { NotUndefinedPipe } from '@common/assertions'
 
 @Component({
   imports: [
@@ -18,8 +17,7 @@ import { NotUndefinedPipe } from '@common/assertions'
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    NotUndefinedPipe
+    MatButtonModule
   ],
   templateUrl: './create-recipe.view.html',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -29,8 +27,9 @@ export class CreateRecipeView {
   private readonly recipeApi = inject(RecipeApi)
   private readonly router = inject(Router)
   private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
-  private readonly recipeValidations: Readonly<RecipeValidations> =
-    this.activatedRouteSnapshot.data['recipeValidations']
+  private readonly recipeValidations = this.activatedRouteSnapshot.data[
+    'recipeValidations'
+  ] as Readonly<RecipeValidations>
   private readonly validatorsFactory = new ValidatorsFactory()
 
   protected readonly titleValidations: Readonly<FieldConstraints> =

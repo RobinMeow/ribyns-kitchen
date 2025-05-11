@@ -19,5 +19,6 @@ export function byTestAttr<T>(
   fixture: ComponentFixture<unknown>,
   selector: string
 ): T {
-  return fixture.nativeElement.querySelector(`[data-test-${selector}]`)
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  return fixture.nativeElement.querySelector(`[data-test-${selector}]`) as T
 }

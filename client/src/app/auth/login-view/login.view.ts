@@ -1,20 +1,19 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { MatFormFieldModule } from '@angular/material/form-field'
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import {
   FormControl,
   NonNullableFormBuilder,
   ReactiveFormsModule
 } from '@angular/forms'
-import { MatIconModule } from '@angular/material/icon'
-import { ActivatedRoute, Router } from '@angular/router'
-import { AuthService } from '../utils/auth.service'
-import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
-import { PasswordInput } from '../ui/password-input/password-input'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ValidatorsFactory } from '@common/validations'
+import { PasswordInput } from '../ui/password-input/password-input'
+import { AuthService } from '../utils/auth.service'
 import { ChefValidations } from '../utils/chef.validations'
-import { NotUndefinedPipe } from '@common/assertions'
 
 @Component({
   selector: 'auth-login',
@@ -25,8 +24,7 @@ import { NotUndefinedPipe } from '@common/assertions'
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    PasswordInput,
-    NotUndefinedPipe
+    PasswordInput
   ],
   templateUrl: './login.view.html',
   styleUrls: ['../utils/auth.scss'],
@@ -38,8 +36,9 @@ export class LoginView {
   private readonly nnfb = inject(NonNullableFormBuilder)
   private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
 
-  private readonly chefValidations: Readonly<ChefValidations> =
-    this.activatedRouteSnapshot.data['chefValidations']
+  private readonly chefValidations = this.activatedRouteSnapshot.data[
+    'chefValidations'
+  ] as Readonly<ChefValidations>
 
   protected readonly nameValidations = this.chefValidations.name()
   private readonly passwordValidations = this.chefValidations.password()
@@ -47,14 +46,8 @@ export class LoginView {
   private readonly validatorsFactory = new ValidatorsFactory()
 
   protected readonly loginForm = this.nnfb.group({
-    chefname: [
-      '',
-      this.validatorsFactory.create('string', this.nameValidations)
-    ],
-    password: [
-      '',
-      this.validatorsFactory.create('string', this.passwordValidations)
-    ]
+    chefname: ['', this.validatorsFactory.create('string', this.nameValidations)],
+    password: ['', this.validatorsFactory.create('string', this.passwordValidations)]
   })
 
   protected readonly chefnameControl: FormControl<string> =
