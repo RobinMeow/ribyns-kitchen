@@ -8,12 +8,12 @@ import {
 } from '@angular/forms'
 import { MatIconModule } from '@angular/material/icon'
 import { ActivatedRoute, Router } from '@angular/router'
-import { AuthService } from '../utils/auth_service'
+import { AuthService } from '../utils/auth.service'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { PasswordInput } from '../ui/password-input/password-input'
 import { ValidatorsFactory } from '@common/validations'
-import { ChefValidations } from '../utils/chef_validations'
+import { ChefValidations } from '../utils/chef.validations'
 import { NotUndefinedPipe } from '@common/assertions'
 
 @Component({

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { AuthService } from '../utils/auth_service'
+import { AuthService } from '../utils/auth.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import {
   NonNullableFormBuilder,
@@ -13,9 +13,9 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { PasswordInput } from '../ui/password-input/password-input'
-import { RegisterChef } from '../utils/register_chef'
+import { RegisterChef } from '../utils/register-chef'
 import { ValidatorsFactory } from '@common/validations'
-import { ChefValidations } from '../utils/chef_validations'
+import { ChefValidations } from '../utils/chef.validations'
 
 @Component({
   selector: 'auth-register',

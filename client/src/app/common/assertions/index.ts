@@ -1,2 +1,2 @@
 export * from './assert'
-export * from './not_undefined_pipe'
+export * from './not-undefined.pipe'

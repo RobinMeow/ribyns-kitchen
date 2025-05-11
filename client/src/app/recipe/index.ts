@@ -1,1 +1,1 @@
-export * from './recipe_routes'
+export * from './recipe.routes'
