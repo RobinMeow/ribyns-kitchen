@@ -28,11 +28,11 @@ import { NotUndefinedPipe } from '@common/assertions'
     PasswordInput,
     NotUndefinedPipe
   ],
-  templateUrl: './login.html',
+  templateUrl: './login.view.html',
   styleUrls: ['../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Login {
+export class LoginView {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   private readonly nnfb = inject(NonNullableFormBuilder)

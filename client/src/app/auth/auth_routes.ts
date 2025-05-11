@@ -7,7 +7,8 @@ export const authRoutes: Route[] = [
   {
     path: 'login',
     canActivate: [unauthorizedGuard],
-    loadComponent: async () => (await import('./feature-login/login')).Login,
+    loadComponent: async () =>
+      (await import('./login-view/login.view')).LoginView,
     title: 'Einloggen',
     resolve: {
       chefValidations: chefValidationsResolver
@@ -27,7 +28,7 @@ export const authRoutes: Route[] = [
     path: 'delete-chef',
     canActivate: [authorizedGuard],
     loadComponent: async () =>
-      (await import('./feature-delete-chef/delete_chef')).DeleteChef,
+      (await import('./delete-chef-view/delete-chef.view')).DeleteChefView,
     title: 'Account löschen'
   }
 ]

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { Login } from './login'
+import { LoginView } from './login.view'
 import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
@@ -15,13 +15,13 @@ import { ActivatedRoute } from '@angular/router'
 import { ChefValidations } from '../utils/chef_validations'
 import { fakeValidations, withField } from '@common/validations/testing'
 
-describe('Login should', () => {
-  let component: Login
-  let fixture: ComponentFixture<Login>
+describe('LoginView should', () => {
+  let component: LoginView
+  let fixture: ComponentFixture<LoginView>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Login],
+      imports: [LoginView],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -44,7 +44,7 @@ describe('Login should', () => {
       ]
     }).compileComponents()
 
-    fixture = TestBed.createComponent(Login)
+    fixture = TestBed.createComponent(LoginView)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

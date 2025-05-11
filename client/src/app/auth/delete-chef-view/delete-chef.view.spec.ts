@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
-import { DeleteChef } from './delete_chef'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
 import { provideApiBaseUrlTesting } from '@api'
 import { byTestAttr, setValue } from '@common/testing'
 import { AuthService } from '../utils/auth_service'
 import { Router } from '@angular/router'
 import { MockProvider } from 'ng-mocks'
+import { DeleteChefView } from './delete-chef.view'
 
-describe('DeleteChef should', () => {
-  let component: DeleteChef
-  let fixture: ComponentFixture<DeleteChef>
+describe('DeleteChefView should', () => {
+  let component: DeleteChefView
+  let fixture: ComponentFixture<DeleteChefView>
   let authService: AuthService
   let router: Router
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DeleteChef],
+      imports: [DeleteChefView],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -27,7 +27,7 @@ describe('DeleteChef should', () => {
       ]
     }).compileComponents()
 
-    fixture = TestBed.createComponent(DeleteChef)
+    fixture = TestBed.createComponent(DeleteChefView)
     authService = TestBed.inject(AuthService)
     router = TestBed.inject(Router)
     component = fixture.componentInstance
