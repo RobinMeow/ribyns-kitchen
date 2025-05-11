@@ -18,7 +18,7 @@ import { Credentials } from '../utils/credentials'
 import { Router } from '@angular/router'
 import { Chef } from '../utils/chef'
 import { MatInputModule } from '@angular/material/input'
-import { PasswordInput } from '../ui/password/password_input'
+import { PasswordInput } from '../ui/password-input/password-input'
 import { assert } from '@common/assertions'
 
 @Component({

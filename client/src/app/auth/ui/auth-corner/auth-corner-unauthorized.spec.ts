@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 
-import { AuthCorner } from './auth_corner'
+import { AuthCorner } from './auth-corner'
 import { AuthService } from '../../utils/auth_service'
 import { Router, provideRouter } from '@angular/router'
 import { MockProvider } from 'ng-mocks'

@@ -12,8 +12,8 @@ import { AuthService } from '../../utils/auth_service'
 @Component({
   selector: 'auth-corner',
   imports: [CommonModule, MatButtonModule, RouterLink],
-  templateUrl: './auth_corner.html',
-  styleUrl: './auth_corner.scss',
+  templateUrl: './auth-corner.html',
+  styleUrl: './auth-corner.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthCorner {
