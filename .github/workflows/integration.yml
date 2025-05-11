@@ -87,6 +87,9 @@ jobs:
           dotnet build
           dotnet run --project ./Application &
 
+      - name: Ensure Server is listening
+        run: npx wait-on http://localhost:5126/swagger/index.html http://localhost:4200
+
       - name: run cypress e2e
         uses: cypress-io/github-action@v6.6.0
         with:
@@ -94,4 +97,3 @@ jobs:
           spec: cypress/e2e/**/*cy.ts
           browser: chrome
           wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
-          wait-on-timeout: 150 # wait 150s (dotnet restore can take a while if not cached. Otherwise it usually takes a few seconds)
