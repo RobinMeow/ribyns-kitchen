@@ -2,5 +2,6 @@ namespace Common;
 
 public static class Globals
 {
-    public const string ApplicationNameAbbreviated = "CommunityCookbook";
+    public const string AppNameTech = "ribyns-kitchen";
+    public const string AppName = "Ribyn's Kitchen";
 }

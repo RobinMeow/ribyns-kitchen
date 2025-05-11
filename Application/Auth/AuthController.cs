@@ -84,7 +84,7 @@ public sealed class AuthController : ControllerBase
         [Required, FromBody] CredentialsDto credentials,
         CancellationToken ct = default)
     {
-        ct.ThrowIfCancellationRequested(); // make middle where which does this. This is only for case when cancelation is requested before the request is reached
+        ct.ThrowIfCancellationRequested(); // make middleware which does this. This is only for case when cancelation is requested before the request is reached
         Chef? chef = await _chefRepository.GetByNameAsync(credentials.Name, ct);
 
         if (chef == null)

@@ -23,7 +23,6 @@ import { assert } from '@common/assertions'
 
 @Component({
   selector: 'auth-delete-chef',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -60,8 +59,8 @@ export class DeleteChef {
       password: this.form.controls.password.value
     }
 
-    await this.authService.removeAsync(credentials)
+    const result = await this.authService.removeAsync(credentials)
 
-    await this.router.navigateByUrl('/')
+    if (result === 'success') await this.router.navigateByUrl('/')
   }
 }

@@ -22,7 +22,7 @@ export default defineConfig({
 
           try {
             await client.connect()
-            const db = client.db('communitycookbook')
+            const db = client.db('ribyns-kitchen')
             await db.dropDatabase()
           } catch (error) {
             console.error('Error purging database:', error)
@@ -49,7 +49,7 @@ export default defineConfig({
             }
 
             await client.connect()
-            const db = client.db('communitycookbook')
+            const db = client.db('ribyns-kitchen')
             const collection = db.collection<Recipe>('recipes')
             await collection.insertOne({
               _id: id,

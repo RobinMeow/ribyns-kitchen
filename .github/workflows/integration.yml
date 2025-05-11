@@ -1,11 +1,11 @@
-name: Build, UnitTests and End-2-end tests
+name: pipeline
 on:
   push:
     branches-ignore:
       - 'master'
 jobs:
 
-  build-server:
+  server:
     runs-on: ubuntu-22.04
 
     steps:
@@ -17,40 +17,14 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Restore NuGet packages
-        run: dotnet restore
+      - name: Build & Test
+        run: |
+          dotnet build
+          dotnet test --no-restore --no-build
 
-      - name: Build .NET Web API
-        run: dotnet build
-
-  run-server-tests:
+  client:
     runs-on: ubuntu-22.04
-    
-    defaults:
-      run:
-        working-directory: './'
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Restore NuGet packages
-        run: dotnet restore
-
-      - name: Build .NET Web API
-        run: dotnet build
-
-      - name: Run .NET Web API Tests
-        run: dotnet test
-
-  lint-and-build-and-test-client:
-    runs-on: ubuntu-22.04
-    
     defaults:
       run:
         shell: bash
@@ -64,22 +38,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.11.1'
-          cache: 'yarn'
-          cache-dependency-path: 'client/yarn.lock'
-  
+          cache: 'npm'
+          cache-dependency-path: 'client/package-lock.json'
+
       - name: install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: lint
-        run: yarn lint
+        run: npm run lint
 
       - name: build
-        run: yarn run build
+        run: npm run build
 
       - name: run jasmine tests
-        run: yarn run test --browsers ChromeHeadless --watch false
+        run: npm run cli-test
 
-  cypress-e2e-tests-on-google-chrome:
+  e2e-google-chrome:
     runs-on: ubuntu-22.04
 
     steps:
@@ -90,14 +64,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.11.1'
-          cache: 'yarn'
-          cache-dependency-path: 'client/yarn.lock'
+          cache: 'npm'
+          cache-dependency-path: 'client/package-lock.json'
 
       - name: serve Front-End
         working-directory: client
         run: |
-          yarn install --frozen-lockfile
-          yarn start &
+          npm ci
+          npm start &
 
       - name: start MongoDB
         uses: supercharge/mongodb-github-action@1.10.0 # already includes "Waiting for MongoDB to accept connections" at the end
@@ -105,7 +79,12 @@ jobs:
           mongodb-version: '6.0'
 
       - name: Build and Run Back-End
-        run: dotnet build && dotnet run --project ./Application &
+        run: |
+          dotnet build ./Application/Application.csproj
+          dotnet run --no-restore --no-build --project ./Application &
+
+      - name: Ensure apps are listening
+        run: npx wait-on tcp:localhost:5126 http://localhost:4200 --timeout 5000
 
       - name: run cypress e2e
         uses: cypress-io/github-action@v6.6.0
@@ -113,5 +92,3 @@ jobs:
           working-directory: client
           spec: cypress/e2e/**/*cy.ts
           browser: chrome
-          wait-on: 'http://localhost:5126/swagger/index.html, http://localhost:4200'
-          wait-on-timeout: 150 # wait 150s (dotnet restore can take a while if not cached. Otherwise it usually takes a few seconds)

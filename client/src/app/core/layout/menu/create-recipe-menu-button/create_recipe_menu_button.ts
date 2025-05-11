@@ -4,7 +4,6 @@ import { Router } from '@angular/router'
 
 @Component({
   selector: 'recipe-create-menu-button',
-  standalone: true,
   imports: [MatButtonModule],
   templateUrl: './create_recipe_menu_button.html',
   styleUrl: './create_recipe_menu_button.scss',

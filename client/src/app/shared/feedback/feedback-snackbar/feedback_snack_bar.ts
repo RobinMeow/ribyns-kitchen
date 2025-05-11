@@ -5,7 +5,6 @@ import { FeedbackData } from '../feedback_data'
 
 @Component({
   selector: 'common-feedback-snackbar',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './feedback_snack_bar.html',
   changeDetection: ChangeDetectionStrategy.OnPush

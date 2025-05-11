@@ -1,0 +1,76 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "seed mongo db",
+			"command": "node",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": "$jshint",
+			"args": [
+				"./seed-mongo-db/server.js"
+			]
+		},
+		{
+			"label": "seed dockerized mongo db",
+			"command": "node",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": "$jshint",
+			"args": [
+				"./seed-mongo-db/server.js",
+				"-p 27020"
+			]
+		},
+
+		// client
+		{
+      "type": "npm",
+			"options": {
+				"cwd": "${workspaceFolder}/client"
+			},
+      "script": "start",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": {
+            "regexp": "(.*?)"
+          },
+          "endsPattern": {
+            "regexp": "bundle generation complete"
+          }
+        }
+      }
+    },
+		{
+      "type": "npm",
+			"options": {
+				"cwd": "${workspaceFolder}/client"
+			},
+      "script": "test",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": {
+            "regexp": "(.*?)"
+          },
+          "endsPattern": {
+            "regexp": "bundle generation complete"
+          }
+        }
+      }
+    }
+	]
+}

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "CommunityCookbook": {
+    "ribyns-kitchen": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -28,12 +28,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/community-cookbook",
+            "outputPath": "dist/ribyns-kitchen",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -81,10 +79,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "CommunityCookbook:build:production"
+              "buildTarget": "ribyns-kitchen:build:production"
             },
             "development": {
-              "buildTarget": "CommunityCookbook:build:development"
+              "buildTarget": "ribyns-kitchen:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -117,11 +115,11 @@
         "cypress-run": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "CommunityCookbook:serve"
+            "devServerTarget": "ribyns-kitchen:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "CommunityCookbook:serve:production"
+              "devServerTarget": "ribyns-kitchen:serve:production"
             }
           }
         },
@@ -135,27 +133,27 @@
         "ct": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "CommunityCookbook:serve",
+            "devServerTarget": "ribyns-kitchen:serve",
             "watch": true,
             "headless": false,
             "testingType": "component"
           },
           "configurations": {
             "development": {
-              "devServerTarget": "CommunityCookbook:serve:development"
+              "devServerTarget": "ribyns-kitchen:serve:development"
             }
           }
         },
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "CommunityCookbook:serve",
+            "devServerTarget": "ribyns-kitchen:serve",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "CommunityCookbook:serve:production"
+              "devServerTarget": "ribyns-kitchen:serve:production"
             }
           }
         }

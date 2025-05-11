@@ -1,19 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { Home } from './home'
-import { provideAppName } from 'src/app/core'
+import { HomeView } from './home.view'
 import { byTestAttr } from '@common/testing'
 
 describe('Home should', () => {
-  let component: Home
-  let fixture: ComponentFixture<Home>
+  let component: HomeView
+  let fixture: ComponentFixture<HomeView>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [Home],
-      providers: [provideAppName()]
+      imports: [HomeView]
     })
-    fixture = TestBed.createComponent(Home)
+    fixture = TestBed.createComponent(HomeView)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

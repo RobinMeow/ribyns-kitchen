@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router'
 import { Recipe } from '../util/recipe'
 
 @Component({
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './view_recipe.html',
   changeDetection: ChangeDetectionStrategy.OnPush

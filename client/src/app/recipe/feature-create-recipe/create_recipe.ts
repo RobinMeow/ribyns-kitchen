@@ -13,7 +13,6 @@ import { FieldConstraints, ValidatorsFactory } from '@common/validations'
 import { NotUndefinedPipe } from '@common/assertions'
 
 @Component({
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

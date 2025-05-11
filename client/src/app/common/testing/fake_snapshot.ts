@@ -1,7 +1,6 @@
 import { ActivatedRouteSnapshot } from '@angular/router'
 import { ResolvedDataFake } from './with_resolved_data'
 
-/** @__PURE__ */
 export function fakeSnapshot(
   ...resolvedData: ResolvedDataFake<unknown>[]
 ): ActivatedRouteSnapshot {

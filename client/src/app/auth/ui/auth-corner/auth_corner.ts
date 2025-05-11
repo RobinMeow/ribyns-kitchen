@@ -11,7 +11,6 @@ import { AuthService } from '../../utils/auth_service'
 
 @Component({
   selector: 'auth-corner',
-  standalone: true,
   imports: [CommonModule, MatButtonModule, RouterLink],
   templateUrl: './auth_corner.html',
   styleUrl: './auth_corner.scss',
