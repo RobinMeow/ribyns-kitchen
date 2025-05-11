@@ -5,7 +5,7 @@ import { FieldConstaintsFake } from './constraints-fake.builder'
 export function fakeValidations(
   fieldConstaints: FieldConstaintsFake[]
 ): Readonly<Validations> {
-  const validations: { [fieldName: string]: FieldConstraints } = {}
+  const validations: Record<string, FieldConstraints> = {}
 
   for (const fieldConstaint of fieldConstaints) {
     validations[fieldConstaint.fieldName] = Object.freeze({
@@ -15,5 +15,5 @@ export function fakeValidations(
     } satisfies FieldConstraints)
   }
 
-  return Object.freeze(<Validations>validations)
+  return Object.freeze((validations as Validations))
 }

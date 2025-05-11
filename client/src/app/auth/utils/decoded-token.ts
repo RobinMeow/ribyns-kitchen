@@ -1,5 +1,3 @@
 import { TokenKey } from './token-key'
 
-export type DecodedToken = {
-  [key in TokenKey]: string
-}
+export type DecodedToken = Record<TokenKey, string>

@@ -4,7 +4,7 @@ import { ResolvedDataFake } from './with-resolved-data'
 export function fakeSnapshot(
   ...resolvedData: ResolvedDataFake<unknown>[]
 ): ActivatedRouteSnapshot {
-  const data: { [key: string]: unknown } = {}
+  const data: Record<string, unknown> = {}
   for (const fake of resolvedData) {
     data[fake.key] = fake.data
   }

@@ -1,3 +1,3 @@
-export type FeedbackData = {
+export interface FeedbackData {
   message: string
 }

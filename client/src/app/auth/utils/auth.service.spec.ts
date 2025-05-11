@@ -106,7 +106,7 @@ describe('AuthService', () => {
         )
         registerRequest.flush(null)
 
-        expect((<RegisterChef>registerRequest.request.body).email).toBe(
+        expect((registerRequest.request.body as RegisterChef).email).toBe(
           'TrimMe'
         )
       })
@@ -122,7 +122,7 @@ describe('AuthService', () => {
         )
         registerRequest.flush(null)
 
-        expect((<RegisterChef>registerRequest.request.body).name).toBe('TrimMe')
+        expect((registerRequest.request.body as RegisterChef).name).toBe('TrimMe')
       })
 
       afterEach(async () => {
@@ -230,7 +230,7 @@ describe('AuthService', () => {
       expect(signal).toBeTruthy()
       expect(isSignal(signal)).toBeTrue()
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      expect(() => (<WritableSignal<any>>signal).set(null)).toThrowError()
+      expect(() => (signal as WritableSignal<any>).set(null)).toThrowError()
     })
 
     it('return null', () => {

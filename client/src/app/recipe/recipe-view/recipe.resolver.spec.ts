@@ -56,7 +56,7 @@ describe('recipeResolver shoul', () => {
 
     await TestBed.runInInjectionContext(async () => {
       const promise = recipeResolver(route, state)
-      await expectAsync(<Promise<Recipe>>promise).toBeRejectedWith(null)
+      await expectAsync((promise as Promise<Recipe>)).toBeRejectedWith(null)
     })
 
     expect(paramMapSpy).toHaveBeenCalledOnceWith('recipeId')

@@ -54,7 +54,7 @@ describe('chefValidationsResolver should', () => {
 
     await TestBed.runInInjectionContext(async () => {
       const promise = recipeValidationsResolver(route, state)
-      await expectAsync(<Promise<unknown>>promise).toBeRejectedWith(null)
+      await expectAsync((promise as Promise<unknown>)).toBeRejectedWith(null)
     })
 
     expect(apiSpy).toHaveBeenCalledOnceWith()

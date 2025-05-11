@@ -1,5 +1,3 @@
 import { FieldConstraints } from './field.constraints'
 
-export interface Validations {
-  readonly [fieldName: string]: FieldConstraints
-}
+export type Validations = Readonly<Record<string, FieldConstraints>>;

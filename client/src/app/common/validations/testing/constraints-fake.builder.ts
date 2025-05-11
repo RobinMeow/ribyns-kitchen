@@ -1,4 +1,4 @@
-export type FieldConstaintsFake = {
+export interface FieldConstaintsFake {
   fieldName: string
   min?: number
   max?: number
