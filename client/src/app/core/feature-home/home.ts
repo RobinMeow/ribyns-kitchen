@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
-import { APP_NAME } from 'src/app/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 
 @Component({
   standalone: true,
@@ -7,6 +6,4 @@ import { APP_NAME } from 'src/app/core'
   styleUrls: ['./home.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Home {
-  protected readonly appName = inject(APP_NAME)
-}
+export class Home {}

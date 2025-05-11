@@ -10,7 +10,6 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 
 import { MatButtonModule } from '@angular/material/button'
 import { Router, RouterLink } from '@angular/router'
-import { APP_NAME } from 'src/app/core'
 
 @Component({
   selector: 'core-header',
@@ -24,8 +23,6 @@ export class Header {
 
   readonly hideMenuButton = input.required<boolean>()
   readonly openMenu = output()
-
-  protected readonly appName = inject(APP_NAME)
 
   protected onMenuClick(): void {
     this.openMenu.emit()

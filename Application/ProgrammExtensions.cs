@@ -73,7 +73,7 @@ public static class ProgrammExtensions
             // Avoid having to type out the "Bearer " https://stackoverflow.com/a/64899768
             o.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "Community Cookbook",
+                Title = "Ribyn's Kitchen",
                 Version = "v1",
                 Contact = new OpenApiContact()
                 {
