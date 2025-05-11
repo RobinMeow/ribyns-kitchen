@@ -32,11 +32,11 @@ import { assert } from '@common/assertions'
     MatInputModule,
     PasswordInput
   ],
-  templateUrl: './delete_chef.html',
+  templateUrl: './delete-chef.view.html',
   styleUrls: ['../utils/auth.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DeleteChef {
+export class DeleteChefView {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   private readonly nnfb = inject(NonNullableFormBuilder)
