@@ -11,12 +11,12 @@
       <!-- Weizen der Ernte: Ein Spitzname für jemanden, der reif ist und von Gott gebraucht werden kann. -->
       <input
         matInput
-        [formControl]="form.controls.title"
+        [formControl]="form.controls.name"
         placeholder="Weinberg des Herrn"
         type="text"
-        data-test-recipe-title-input
+        data-test-recipe-name-input
       />
-      <mat-hint>Zwischen {{ titleValidations.min }} und {{ titleValidations.min }} Zeichen</mat-hint>
+      <mat-hint>Zwischen {{ nameValidations.min }} und {{ nameValidations.min }} Zeichen</mat-hint>
     </mat-form-field>
   </div>
   <button

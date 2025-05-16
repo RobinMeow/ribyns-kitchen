@@ -32,18 +32,18 @@ export class CreateRecipeView {
   ] as Readonly<RecipeValidations>
   private readonly validatorsFactory = new ValidatorsFactory()
 
-  protected readonly titleValidations: Readonly<FieldConstraints> =
-    this.recipeValidations.title()
+  protected readonly nameValidations: Readonly<FieldConstraints> =
+    this.recipeValidations.name()
 
   protected readonly form = this.nnfb.group({
-    title: ['', this.validatorsFactory.create('string', this.titleValidations)]
+    name: ['', this.validatorsFactory.create('string', this.nameValidations)]
   })
 
   protected async onSubmit(): Promise<void> {
     if (this.form.invalid) return
 
     const newRecipe: NewRecipe = {
-      title: this.form.controls.title.value
+      name: this.form.controls.name.value
     }
 
     const recipe: Recipe = await this.recipeApi.newAsync(newRecipe)

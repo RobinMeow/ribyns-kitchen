@@ -35,9 +35,7 @@ describe('CreateRecipe should', () => {
             withResolvedData(
               'recipeValidations',
               new RecipeValidations(
-                fakeValidations([
-                  withField('title').min(1).max(2).required().build()
-                ])
+                fakeValidations([withField('name').min(1).max(2).required().build()])
               )
             )
           )
@@ -63,8 +61,8 @@ describe('CreateRecipe should', () => {
     expect(byTestAttr(fixture, 'create-recipe-form')).toBeTruthy()
   })
 
-  it('render recipe-title-input', () => {
-    expect(byTestAttr(fixture, 'recipe-title-input')).toBeTruthy()
+  it('render recipe-name-input', () => {
+    expect(byTestAttr(fixture, 'recipe-name-input')).toBeTruthy()
   })
 
   it('render submit button', () => {
@@ -81,7 +79,7 @@ describe('CreateRecipe should', () => {
     expect(btn).toBeTruthy()
     expect(btn.disabled).toBeTrue()
 
-    const input = byTestAttr<HTMLInputElement>(fixture, 'recipe-title-input')
+    const input = byTestAttr<HTMLInputElement>(fixture, 'recipe-name-input')
     setValue(input, 'A')
     fixture.detectChanges()
 

@@ -5,9 +5,9 @@ describe('create-recipe should', () => {
 
     cy.visit('/create-recipe')
 
-    const recipeTitle = 'valid recipe title'
+    const recipeName = 'valid recipe name'
 
-    cy.byTestAttr('recipe-title-input').type(recipeTitle)
+    cy.byTestAttr('recipe-name-input').type(recipeName)
 
     cy.intercept({
       path: '/Recipe/AddAsync',

@@ -5,11 +5,11 @@ import {
 } from '@angular/common/http/testing'
 import { TestBed } from '@angular/core/testing'
 import { API_BASE_URL, provideApiBaseUrlTesting } from '@api'
-import { RecipeApi } from './recipe.api'
-import { RecipeDto } from './recipe.dto'
-import { Recipe } from './recipe'
 import { MockProvider } from 'ng-mocks'
 import { TokenStorage } from 'src/app/auth/utils/token.storage'
+import { Recipe } from './recipe'
+import { RecipeApi } from './recipe.api'
+import { RecipeDto } from './recipe.dto'
 
 describe('RecipeApi should', () => {
   let recipeApi: RecipeApi
@@ -45,7 +45,7 @@ describe('RecipeApi should', () => {
   describe('newAsync', () => {
     it('create a new recipe successfully', async () => {
       const promise = recipeApi.newAsync({
-        title: ''
+        name: ''
       })
       const dtoMock = {} as RecipeDto
 
@@ -56,7 +56,7 @@ describe('RecipeApi should', () => {
 
     it('reject on http error', async () => {
       const promise = recipeApi.newAsync({
-        title: ''
+        name: ''
       })
 
       httpTestingController

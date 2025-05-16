@@ -7,7 +7,7 @@ export class RecipeValidations {
     this.validations = validations
   }
 
-  title(): Readonly<FieldConstraints> {
-    return this.validations['title']
+  name(): Readonly<FieldConstraints> {
+    return this.validations['name']
   }
 }
