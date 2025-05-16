@@ -8,14 +8,14 @@ public sealed record RecipeDoc : Document
 
     public override ushort ModelVersion { get; set; } = MODEL_VERSION;
 
-    public required string Title { get; set; }
+    public required string Name { get; set; }
 
     public static RecipeDoc Create(Recipe recipe)
     {
         return new RecipeDoc()
         {
             Id = recipe.Id.ToString(),
-            Title = recipe.Title,
+            Name = recipe.Name,
             CreatedAt = recipe.CreatedAt,
         };
     }

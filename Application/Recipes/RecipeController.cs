@@ -33,14 +33,14 @@ public sealed class RecipeController : ControllerBase
     {
         Id = recipe.Id.Id,
         CreatedAt = recipe.CreatedAt,
-        Title = recipe.Title,
+        Name = recipe.Name,
     };
 
     readonly Expression<Func<RecipeDoc, RecipeDto>> _dtoProjection = doc => new RecipeDto()
     {
         Id = doc.Id,
         CreatedAt = doc.CreatedAt,
-        Title = doc.Title,
+        Name = doc.Name,
     };
 
     /// <summary>add a new recipe.</summary>
@@ -56,23 +56,12 @@ public sealed class RecipeController : ControllerBase
         if (!newRecipeSpecification.IsSatisfied())
             return TypedResults.BadRequest(newRecipe);
 
-        Recipe recipe = Create(newRecipe);
+        Recipe recipe = newRecipe.ToRecipe();
 
         cancellationToken.ThrowIfCancellationRequested();
         await _recipeRepository.AddAsync(recipe, cancellationToken);
 
         return TypedResults.Created(nameof(AddAsync), _toDto(recipe));
-    }
-
-    static Recipe Create(NewRecipeRequest newRecipe)
-    {
-        System.Diagnostics.Debug.Assert(newRecipe.Title != null);
-        return new Recipe()
-        {
-            Id = EntityId.New(),
-            CreatedAt = DateTime.UtcNow,
-            Title = newRecipe.Title!
-        };
     }
 
     /// <summary>retrieve all recipes.</summary>
@@ -108,10 +97,10 @@ public sealed class RecipeController : ControllerBase
         ct.ThrowIfCancellationRequested();
 
         return Task.FromResult(TypedResults.Ok(new ValidationsBuilder()
-            .AddField(nameof(NewRecipeRequest.Title))
+            .AddField(nameof(NewRecipeRequest.Name))
             .Required()
-            .Min(RecipeValidations.TITLE_MIN_LENGTH)
-            .Max(RecipeValidations.TITLE_MAX_LENGTH)
+            .Min(RecipeValidations.NAME_MIN_LENGTH)
+            .Max(RecipeValidations.NAME_MAX_LENGTH)
             .Build()));
     }
 }

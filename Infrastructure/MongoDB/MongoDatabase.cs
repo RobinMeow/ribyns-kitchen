@@ -10,8 +10,8 @@ public sealed class MongoDatabase : DbContext
 {
     public IMongoDatabase Database { get; }
 
-    public MongoDatabase(IOptions<PersistenceSettings> persistenceSettings)
-    : base()
+    public MongoDatabase(string connectionString)
+        : base()
     {
         ConventionPack camelCaseConvention = new ConventionPack {
             new CamelCaseElementNameConvention()
@@ -40,13 +40,18 @@ public sealed class MongoDatabase : DbContext
             });
         }
 
-        MongoClientSettings settings = MongoClientSettings.FromConnectionString(persistenceSettings.Value.ConnectionString);
+        MongoClientSettings settings = MongoClientSettings.FromConnectionString(connectionString);
         settings.ServerApi = new ServerApi(ServerApiVersion.V1);
         MongoClient client = new MongoClient(settings);
 
         string databaseName = Common.Globals.AppNameTech.ToLower();
 
         Database = client.GetDatabase(databaseName);
+    }
+
+    public MongoDatabase(IOptions<PersistenceSettings> persistenceSettings)
+    : this(persistenceSettings.Value.ConnectionString)
+    {
     }
 }
 

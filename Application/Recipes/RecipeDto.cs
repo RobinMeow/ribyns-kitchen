@@ -2,5 +2,5 @@ namespace Application.Recipes;
 
 public sealed record RecipeDto : EntityDto
 {
-    public string Title { get; init; } = null!;
+    public string Name { get; init; } = null!;
 }

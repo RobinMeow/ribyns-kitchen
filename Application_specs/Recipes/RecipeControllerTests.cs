@@ -29,7 +29,7 @@ public sealed class RecipeControllerTests
     {
         var requestDto = new NewRecipeRequest()
         {
-            Title = "My Recipe",
+            Name = "My Recipe",
         };
 
         Results<BadRequest<NewRecipeRequest>, Created<RecipeDto>> createdResult = await _recipeController.AddAsync(requestDto);
@@ -37,7 +37,7 @@ public sealed class RecipeControllerTests
         var actual = createdResult.Result as Created<RecipeDto>;
         NotNull(actual);
         NotNull(actual.Value);
-        Equal("My Recipe", actual.Value.Title);
+        Equal("My Recipe", actual.Value.Name);
     }
 
     [Theory]
@@ -47,7 +47,7 @@ public sealed class RecipeControllerTests
     {
         var requestDto = new NewRecipeRequest()
         {
-            Title = title!,
+            Name = title!,
         };
 
         Results<BadRequest<NewRecipeRequest>, Created<RecipeDto>> result = await _recipeController.AddAsync(requestDto);
@@ -85,13 +85,13 @@ public sealed class RecipeControllerTests
         Recipe recipe = new Recipe()
         {
             Id = EntityId.New(),
-            Title = ""
+            Name = ""
         };
 
         RecipeDto dto = new RecipeDto()
         {
             Id = recipe.Id.ToString(),
-            Title = "",
+            Name = "",
         };
 
         _recipeCollection

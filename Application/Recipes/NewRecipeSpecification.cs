@@ -17,19 +17,19 @@ public sealed class NewRecipeSpecification
     /// <summary>Validates the fields and returns true if the data is valid.</summary>
     public bool IsSatisfied()
     {
-        ValidateTitle(_newRecipe.Title);
+        ValidateName(_newRecipe.Name);
 
         return !_newRecipe.HasErrors();
     }
 
-    void ValidateTitle(string? title)
+    void ValidateName(string? name)
     {
-        string fieldName = nameof(NewRecipeRequest.Title);
-        if (title == null)
+        string fieldName = nameof(NewRecipeRequest.Name);
+        if (name == null)
             _newRecipe.AddErrorMessage($"{fieldName} is required.");
-        else if (title.Length < RecipeValidations.TITLE_MIN_LENGTH)
-            _newRecipe.AddErrorMessage($"{fieldName} has to be greater than {RecipeValidations.TITLE_MIN_LENGTH - 1}.");
-        else if (title.Length > RecipeValidations.TITLE_MAX_LENGTH)
-            _newRecipe.AddErrorMessage($"{fieldName} has to be less than {RecipeValidations.TITLE_MAX_LENGTH + 1}.");
+        else if (name.Length < RecipeValidations.NAME_MIN_LENGTH)
+            _newRecipe.AddErrorMessage($"{fieldName} has to be greater than {RecipeValidations.NAME_MIN_LENGTH - 1}.");
+        else if (name.Length > RecipeValidations.NAME_MAX_LENGTH)
+            _newRecipe.AddErrorMessage($"{fieldName} has to be less than {RecipeValidations.NAME_MAX_LENGTH + 1}.");
     }
 }

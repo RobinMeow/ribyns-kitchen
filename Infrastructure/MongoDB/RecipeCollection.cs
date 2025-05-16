@@ -8,9 +8,11 @@ public sealed class RecipeCollection : Collection, IRecipeRepository, IRecipeCol
 {
     readonly IMongoCollection<RecipeDoc> _collection;
 
+    public static string Name { get; } = "recipes";
+
     public RecipeCollection(MongoDatabase mongo) : base()
     {
-        _collection = mongo.Database.GetCollection<RecipeDoc>("recipes");
+        _collection = mongo.Database.GetCollection<RecipeDoc>(Name);
     }
 
     public ValueTask AddAsync(Recipe recipe, CancellationToken cancellationToken = default)
