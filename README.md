@@ -4,12 +4,9 @@ Welcome to Ribyn's Kitchen, a place where users can share and explore recipes wi
 
 ## Project
 
-- [ASP.NET Core API](server/README.md) - Backend.
-- [ASP.NET Core Unit Tests](server.tests/README.md) - Unit Tests.
-- [Angular](client/README.md) - Frontend.
+- [Angular](client/README.md) - Frontend
+- [Web API](./Application/README.md) Server
 - [Seed MongoDB](seed-mongo-db/README.md) - seeding script for local development.
-
-> For developers, refer to [Development Notes](dev-notes.md).
 
 ## Requirements
 
@@ -24,25 +21,6 @@ Welcome to Ribyn's Kitchen, a place where users can share and explore recipes wi
 - Consider implementing a *Like/Dislike system* for recipes. Only positive likes should be public, while dislikes remain for private use.
 
 > Note/ToDo: There are additional requirements documented in Confluence => Which are now avilable in the pdf located in the root of this repository.
-
-## Project Structure
-
-The projects share the same Git repository for convenience, but they are still decoupled. The exception is the seeding Express app, which may contain references (relative paths) to the (Angular)TypeScript models to facilitate automated seeding in the future.
-
-The Source Code contains a bunch of links, refering to external site, like MSDN or MongoDB. Usually provided as a source for reasonings behind decisions. This should leave the source code (before deployment) at some point and move into the Confluence.
-
-Keep all commits you do, always prefer fast-forward merge into dev. Only merge dev into main, using squash, forming a single commit describing the change.
-Keep the commit references in the commit message (they refer to the commit hashes in dev).
-
----
-
-## Motivation
-
-One part is being able to share recipes with my family and friends easily.
-
-Another part is personal growth through learning various up-to-date technologies that I haven't had experience with. I intend to implement the entire infrastructure as a learning exercise. Additionally, I want to address any unknowns early in the project to avoid getting stuck during development. I point this out, because this does not reflect the way I usually would start a new project.
-
-I might even explore build pipelines using services like ~~Azure or Bitbucket~~ (most likely) Jenkis, although the availability of free options is essential for this project.
 
 ## License
 
