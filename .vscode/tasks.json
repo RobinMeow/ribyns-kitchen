@@ -71,6 +71,38 @@
           }
         }
       }
+    },
+
+		// docker mongodb
+		{
+      "label": "docker compose mongo up",
+      "type": "shell",
+      "command": "docker compose -f ./Application/docker-compose.mongo-container.yml up -d",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+		{
+      "label": "docker compose mongo up",
+      "type": "shell",
+      "command": "docker compose -f ./Application/docker-compose.mongo-container.yml stop",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+		{
+      "label": "docker compose mongo up",
+      "type": "shell",
+      "command": "docker compose -f ./Application/docker-compose.mongo-container.yml down",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
     }
 	]
 }

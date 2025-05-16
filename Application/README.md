@@ -64,8 +64,16 @@ Initially, I attempted to use `appsettings.json` as the default name and file fo
 
 ### Docker
 
-To simplify production deployment using Docker, utilize the `docker-compose.yml` file and execute `docker-compose build` instead of a lengthy `docker run` command.
-Using `docker-compose` instead of `docker build .` is mandatory as the `docker-compose.yml` file contains crucial values.
+#### local dev
+
+1. in the ./Applications folder
+2. run `docker compose -f ./docker-compose.mongo-container.yml up -d` _(-f flag belongs to the docker compose cmd, and -d to the up command)_
+3. run `docker ps` to confirm the container is up and running
+4. run `docker compose -f ./docker-compose.mongo-container.yml stop` to stop it
+5. run `docker ps` to confirm the container is not running anymore
+6. run `docker compose -f ./docker-compose.mongo-container.yml down` to get rid of its containers, networks, volumes and images (if desired, like resetting the db)
+
+#### deployment
 
 - Copy the `docker-compose.template.yml` file and rename it as `docker-compose.yml` in your local development environment.
 - Replace the sample data in your newly created `docker-compose.yml` file with your own sensitive information.

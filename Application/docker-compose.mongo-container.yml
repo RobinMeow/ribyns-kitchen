@@ -1,8 +1,15 @@
-version: '3.8'
+# Use root/example as user/password credentials
+
 services:
-  mongodb:
+  mongo:
     image: mongo
     container_name: mongo-container
-    # restart: unless-stopped
     ports:
-      - "27020:27017"
+      - "27020:27017" # listening on port 27017 inside the container, on 27020 on the outside
+    #restart: always
+
+  #mongo-express:
+  #image: mongo-express
+  #restart: always
+  #ports:
+  #- 27020:27017
