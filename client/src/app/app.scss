@@ -1,5 +1,4 @@
-@use './shared/variables' as *;
-@use './shared/media' as *;
+@use 'breakpoints' as *;
 
 mat-drawer-container {
   height: 100%;
@@ -10,11 +9,11 @@ mat-drawer {
 }
 
 .router-outlet-defaults {
-  margin: #{$spacing};
+  margin: 1rem;
 }
 
-@include mobile {
-  .menu {
+@include MaxWidth600 {
+  mat-drawer {
     width: 100%;
   }
 }
