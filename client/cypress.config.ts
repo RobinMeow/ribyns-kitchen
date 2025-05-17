@@ -58,7 +58,7 @@ export default defineConfig({
             })
           } catch (error) {
             console.error(
-              `Failed to see recipe with id '${id}' and title '${name}'.`,
+              `Failed to see recipe with id '${id}' and name '${name}'.`,
               error
             )
           } finally {
