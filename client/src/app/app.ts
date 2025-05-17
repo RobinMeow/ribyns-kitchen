@@ -1,4 +1,11 @@
-import { Component, computed, effect, inject, viewChild } from '@angular/core'
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  untracked,
+  viewChild
+} from '@angular/core'
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router'
 import { BreakpointObserver } from '@angular/cdk/layout'
@@ -29,10 +36,12 @@ export class App {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd))
   )
 
-  private readonly _closeMenuOnNavigation = effect(() => {
-    this.navigationEnd()
-    void this.drawer().close()
-  })
+  constructor() {
+    effect(() => {
+      this.navigationEnd()
+      void untracked(() => this.drawer()).close()
+    })
+  }
 
   protected onOpenMenuClick() {
     void this.drawer().open()
