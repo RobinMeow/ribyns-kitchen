@@ -12,7 +12,8 @@ describe('register', () => {
 
   describe('when unauthorized should', () => {
     beforeEach(() => {
-      cy.wrap(cy.task('db:reset')).then(() => cy.visit('/register'))
+      cy.task('db:reset')
+      cy.visit('/register')
     })
 
     it('register with enter', () => {
