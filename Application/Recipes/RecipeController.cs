@@ -43,10 +43,9 @@ public sealed class RecipeController : ControllerBase
         Name = doc.Name,
     };
 
-    /// <summary>add a new recipe.</summary>
-    /// <param name="newRecipe">the recipe to add.</param>
-    /// <param name="cancellationToken"></param>
-    /// <returns>the newly created recipe.</returns>
+    /// <summary>Add a new recipe.</summary>
+    /// <param name="newRecipe">The recipe to add.</param>
+    /// <returns>The newly created recipe.</returns>
     [HttpPost(nameof(AddAsync))]
     public async Task<Results<BadRequest<NewRecipeRequest>, Created<RecipeDto>>> AddAsync([Required] NewRecipeRequest newRecipe, CancellationToken cancellationToken = default)
     {
@@ -64,9 +63,6 @@ public sealed class RecipeController : ControllerBase
         return TypedResults.Created(nameof(AddAsync), _toDto(recipe));
     }
 
-    /// <summary>retrieve all recipes.</summary>
-    /// <param name="ct"></param>
-    /// <returns>all recipes.</returns>
     [HttpGet(nameof(GetAllAsync))]
     public async Task<Ok<IQueryable<RecipeDto>>> GetAllAsync(CancellationToken ct = default)
     {
@@ -80,7 +76,6 @@ public sealed class RecipeController : ControllerBase
     public async Task<Results<Ok<RecipeDto>, NotFound>> GetAsync([FromQuery] string recipeId, CancellationToken ct = default)
     {
         ct.ThrowIfCancellationRequested();
-        // TODO consider using nullable return type, instead of NotFound
         RecipeDto? recipe = await _recipeCollection.GetAsync(recipeId, _dtoProjection, ct);
 
         if (recipe == null)

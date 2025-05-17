@@ -94,10 +94,6 @@ public static class ProgrammExtensions
 
             o.OperationFilter<SecurityRequirementsOperationFilter>();
 
-            // https://github.com/vernou/Vernou.Swashbuckle.HttpResultsAdapter
-            // not working for me sadly.
-            // TypedResults metadata are not inferred for API Controllers: https://github.com/dotnet/aspnetcore/issues/44988
-
             o.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
             {
                 Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
