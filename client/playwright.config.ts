@@ -28,7 +28,7 @@ export default defineConfig({
   },
 
   webServer: {
-    command: 'npx ng serve',
+    command: 'npx ng serve -c ',
     url: baseUrl,
     stdout: 'pipe',
     reuseExistingServer: true

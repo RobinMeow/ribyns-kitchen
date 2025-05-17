@@ -60,7 +60,7 @@
               ],
               "outputHashing": "all"
             },
-            "development": {
+            "dev": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
@@ -68,7 +68,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
+                  "with": "src/environments/environment.dev.ts"
                 }
               ]
             }
@@ -81,11 +81,11 @@
             "production": {
               "buildTarget": "ribyns-kitchen:build:production"
             },
-            "development": {
-              "buildTarget": "ribyns-kitchen:build:development"
+            "dev": {
+              "buildTarget": "ribyns-kitchen:build:dev"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "dev"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -139,21 +139,8 @@
             "testingType": "component"
           },
           "configurations": {
-            "development": {
-              "devServerTarget": "ribyns-kitchen:serve:development"
-            }
-          }
-        },
-        "e2e": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "ribyns-kitchen:serve",
-            "watch": true,
-            "headless": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ribyns-kitchen:serve:production"
+            "dev": {
+              "devServerTarget": "ribyns-kitchen:serve:dev"
             }
           }
         }
