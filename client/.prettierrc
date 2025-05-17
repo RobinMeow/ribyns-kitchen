@@ -9,13 +9,13 @@
       "files": "*.html",
       "options": {
         "parser": "angular",
-        "printWidth": 120
+        "printWidth": 100
       }
     },
     {
       "files": "*.ts",
       "options": {
-        "printWidth": 85
+        "printWidth": 80
       }
     }
   ]
