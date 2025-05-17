@@ -9,7 +9,7 @@ namespace Seeding;
 
 internal class Program
 {
-    static IPasswordHasher _passwordHasher = new AspPasswordHasher();
+    static readonly IPasswordHasher _passwordHasher = new AspPasswordHasher();
     static readonly Faker _faker = new ("de");
     static MongoDatabase _mongodb = null!;
     const int CHEF_COUNT = 50;
