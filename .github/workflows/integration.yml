@@ -87,6 +87,11 @@ jobs:
           dotnet build ./Application/Application.csproj
           dotnet run --no-restore --no-build --project ./Application &
 
+      - name: Seed mongodb
+        run: |
+          dotnet build ./Seeding/Seeding.csproj
+          dotnet run --no-restore --no-build --project ./Seeding --port 27020
+
       - name: Ensure server is ready
         run: npx wait-on tcp:localhost:5126 --timeout 10000
 
