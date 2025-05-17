@@ -39,5 +39,8 @@ test('chef register and login', async ({ page, isMobile }) => {
   await page.getByTestId('password-input').fill(password)
   await page.getByTestId('password-input').press('Enter')
 
+  // when redirected to main page, you are logged in
+  await page.waitForURL('/')
+
   await page.context().storageState({ path: chefFile })
 })

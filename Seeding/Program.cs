@@ -14,15 +14,44 @@ internal class Program
     static readonly Faker _faker = new ("de");
     static MongoDatabase _mongodb = null!;
     const int CHEF_COUNT = 50;
+    static bool _ci = false;
+
     static async Task Main(string[] args)
     {
         try
         {
             Randomizer.Seed = new Random(20250517);
             Console.ForegroundColor = ConsoleColor.Green;
-            // TODO make two kind of seedings, one for lots of data and development, one small for e2e testing regular
-            int port = int.Parse(args.FirstOrDefault(static a => a == "port", defaultValue: "27020"));
-            string connectionString = $"mongodb://127.0.0.1:{port}";
+            
+            Func<int> getPort = () => 
+            {
+                for (int i = 0; i < args.Length; i++)
+                    if (args[i] == "--port" || args[i] == "-p")
+                        return int.Parse(args[i + 1]);
+
+                return 27020;
+            };
+
+            Func<bool> isCI = () =>
+            {
+                for (int i = 0; i < args.Length; i++)
+                    if (args[i] == "--ci")
+                        return (args.Length - 1 > i && args[i + 1].StartsWith("-")) || bool.Parse(args[i + 1]);
+
+                return false;
+            };
+            _ci = isCI();
+
+            Func<bool> isOnlyDrop = () =>
+            {
+                for (int i = 0; i < args.Length; i++)
+                    if (args[i] == "--only-drop")
+                        return (args.Length - 1 > i && args[i + 1].StartsWith("-")) || bool.Parse(args[i + 1]);
+
+                return false;
+            };
+
+            string connectionString = $"mongodb://127.0.0.1:{getPort()}";
 
             Console.WriteLine($"Connecting to MongoDB on {connectionString}");
             _mongodb = new MongoDatabase(connectionString);
@@ -31,7 +60,7 @@ internal class Program
             Console.WriteLine($"Dropping database '{dbName}'.");
             await _mongodb.Database.Client.DropDatabaseAsync(dbName);
 
-            if (args.Any(static a => a == "only-drop"))
+            if (isOnlyDrop())
             {
                 Console.WriteLine($"Database dropped.");
                 return;
@@ -64,13 +93,14 @@ internal class Program
         Console.WriteLine($"SEEDING casual user 'Ribyn'");
         await chefCollection.AddAsync(FakeChef(name: "Ribyn", email: "ribyn@ribyn.dev"));
 
-        Console.Write($"SEEDING: 0/{CHEF_COUNT}");
-        for (int i = 0; i < CHEF_COUNT; i++)
+        var count = _ci ? CHEF_COUNT * 0.1 : CHEF_COUNT;
+        Console.Write($"SEEDING: 0/{count}");
+        for (int i = 0; i < count; i++)
         {
             await chefCollection.AddAsync(FakeChef());
 
             Console.SetCursorPosition(0, Console.CursorTop);
-            Console.Write($"SEEDING: {i + 1}/{CHEF_COUNT}");
+            Console.Write($"SEEDING: {i + 1}/{count}");
         }
     }
 
@@ -89,7 +119,7 @@ internal class Program
     static async ValueTask SeedRecipesAsync()
     {
         var recipeCollection = new RecipeCollection(_mongodb);
-        const int recipeCount = CHEF_COUNT * 50; // like in: each chef has 50 recipes (TODO make more realistic and make 5-100 randomized)
+        int recipeCount = CHEF_COUNT * (_ci ? 10 : 50);
         Console.Write($"SEEDING: 0/{recipeCount}");
         for (int i = 0; i < recipeCount; i++)
         {

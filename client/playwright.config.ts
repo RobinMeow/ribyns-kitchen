@@ -18,9 +18,9 @@ export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
   forbidOnly: !!process.env['CI'], // Fail the build on CI if you accidentally left test.only in the source code.
-  retries: process.env['CI'] ? 2 : 0, // Retry on CI only
+  retries: 0,
   workers: process.env['CI'] ? 1 : undefined, // Opt out of parallel tests on CI.
-  reporter: 'line', // Reporter to use. See https://playwright.dev/docs/test-reporters
+  reporter: process.env['CI'] ? 'github' : 'list', // Reporter to use. See https://playwright.dev/docs/test-reporters
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -36,11 +36,16 @@ export default defineConfig({
     reuseExistingServer: true
   },
   timeout: 5000,
+  maxFailures: 0,
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chef-auth',
-      testMatch: /chef-auth\.setup\.ts/
+      name: 'chef-setup',
+      testMatch: /chef\.setup\.ts/
+    },
+    {
+      name: 'chef-teardown',
+      testMatch: /chef\.teardown\.ts/
     },
 
     {
@@ -49,7 +54,7 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         storageState: chefFile
       },
-      dependencies: ['chef-auth']
+      dependencies: ['chef-setup']
     },
 
     {
@@ -58,7 +63,7 @@ export default defineConfig({
         ...devices['Desktop Firefox'],
         storageState: chefFile
       },
-      dependencies: ['chef-auth']
+      dependencies: ['chef-setup']
     },
 
     {
@@ -68,7 +73,7 @@ export default defineConfig({
         storageState: chefFile,
         ignoreHTTPSErrors: true
       },
-      dependencies: ['chef-auth']
+      dependencies: ['chef-setup']
     },
 
     /* Test against mobile viewports. */
@@ -78,7 +83,7 @@ export default defineConfig({
         ...devices['Pixel 5'],
         storageState: chefFile
       },
-      dependencies: ['chef-auth']
+      dependencies: ['chef-setup']
     },
     {
       name: 'Mobile Safari',
@@ -87,7 +92,7 @@ export default defineConfig({
         storageState: chefFile,
         ignoreHTTPSErrors: true
       },
-      dependencies: ['chef-auth']
+      dependencies: ['chef-setup']
     }
   ]
 

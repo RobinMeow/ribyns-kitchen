@@ -6,7 +6,7 @@
 		{
       "label": "seed mongodb [bogus C#]",
       "type": "shell",
-      "command": "dotnet run ${input:rebuild} --port ${input:mongodbPort} ${input:onlyDrop}",
+      "command": "dotnet run ${input:rebuild} --port ${input:mongodbPort} --only-drop ${input:onlyDrop} --ci ${input:ci}",
       "options": {
         "cwd": "${workspaceFolder}/Seeding/",
       },
@@ -141,10 +141,20 @@
         "type": "pickString",
         "description": "Do you want to only drop the mongodb?",
         "options": [
-            "",
-            "only-drop"
+            "true",
+            "false"
         ],
-        "default": ""
+        "default": "false"
+    },
+    {
+        "id": "ci",
+        "type": "pickString",
+        "description": "Run fast (smaller) seeding? (intended for ci)",
+        "options": [
+          "false",
+          "true"
+        ],
+        "default": "true"
     }
   ]
 }
