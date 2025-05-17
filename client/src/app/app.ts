@@ -36,25 +36,13 @@ export class App {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd))
   )
 
-  private initialLoad = true
-
   constructor() {
     effect(() => {
-      // ensures, that the menu is closed on inital load for mobiles, but not for desktops
-      if (this.navigationEnd() === undefined) return
+      // ensures, that the menu is closed on navigation for mobiles
+      const isMobile = this.maxWidth600()?.matches ?? false
+      if (this.navigationEnd() === undefined || !isMobile) return
 
-      const drawer = untracked(() => this.drawer())
-
-      if (this.initialLoad) {
-        this.initialLoad = false
-
-        const isMobile = untracked(() => this.maxWidth600())?.matches ?? false
-        if (isMobile) void drawer.close()
-
-        return
-      }
-
-      void drawer.close()
+      if (isMobile) void untracked(() => this.drawer()).close()
     })
   }
 
