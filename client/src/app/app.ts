@@ -1,9 +1,10 @@
-import { Component, computed, inject, viewChild } from '@angular/core'
+import { Component, computed, effect, inject, viewChild } from '@angular/core'
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
-import { RouterOutlet } from '@angular/router'
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router'
 import { BreakpointObserver } from '@angular/cdk/layout'
 import { Header, Menu } from 'src/app/core'
 import { toSignal } from '@angular/core/rxjs-interop'
+import { filter } from 'rxjs'
 
 @Component({
   selector: 'rk-app',
@@ -14,6 +15,7 @@ import { toSignal } from '@angular/core/rxjs-interop'
 export class App {
   private readonly drawer = viewChild.required(MatDrawer)
   private readonly breakpoints$ = inject(BreakpointObserver)
+  private readonly router = inject(Router)
 
   private readonly maxWidth600 = toSignal(
     this.breakpoints$.observe('(max-width: 599.98px)')
@@ -22,6 +24,15 @@ export class App {
   protected readonly drawerMode = computed<'side' | 'over'>(() =>
     this.maxWidth600()?.matches ? 'over' : 'side'
   )
+
+  private readonly navigationEnd = toSignal(
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd))
+  )
+
+  private readonly _closeMenuOnNavigation = effect(() => {
+    this.navigationEnd()
+    void this.drawer().close()
+  })
 
   protected onOpenMenuClick() {
     void this.drawer().open()
