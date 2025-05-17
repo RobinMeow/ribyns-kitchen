@@ -4,65 +4,22 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "seed mongo db [faker.js]",
-			"command": "node",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": "$jshint",
-			"args": [
-				"./seed-mongo-db/server.js"
-			]
-		},
-		{
-			"label": "seed dockerized mongodb [faker.js]",
-			"command": "node",
-			"presentation": {
-				"reveal": "always",
-				"panel": "new"
-			},
-			"problemMatcher": "$jshint",
-			"args": [
-				"./seed-mongo-db/server.js",
-				"-p 27020"
-			]
-		},
-		{
-      "label": "seed dockerized mongodb [bogus C#]",
+      "label": "seed mongodb [bogus C#]",
       "type": "shell",
       "command": "dotnet",
       "args": [
-          "run",
-          "--",
-          "27020"
+        "run",
+        "--port ${input:mongodbPort}",
+        "${input:onlyDropFlag}"
       ],
       "options": {
-          "cwd": "${workspaceFolder}/Seeding/"
+        "cwd": "${workspaceFolder}/Seeding/"
       },
       "problemMatcher": [],
       "group": {
-          "kind": "build",
-          "isDefault": true
-      },
-    },
-		{
-      "label": "seed local mongodb [bogus C#]",
-      "type": "shell",
-      "command": "dotnet",
-      "args": [
-          "run",
-          "--",
-          "27017"
-      ],
-      "options": {
-          "cwd": "${workspaceFolder}/Seeding/"
-      },
-      "problemMatcher": [],
-      "group": {
-          "kind": "build",
-          "isDefault": true
-      },
+        "kind": "build",
+        "isDefault": true
+      }
     },
 
 		// client
@@ -140,5 +97,49 @@
       },
       "problemMatcher": []
     }
-	]
+    
+		// {
+		// 	"label": "seed mongo db [faker.js]",
+		// 	"command": "node",
+		// 	"presentation": {
+		// 		"reveal": "always",
+		// 		"panel": "new"
+		// 	},
+		// 	"problemMatcher": "$jshint",
+		// 	"args": [
+		// 		"./seed-mongo-db/server.js"
+		// 	]
+		// },
+		// {
+		// 	"label": "seed dockerized mongodb [faker.js]",
+		// 	"command": "node",
+		// 	"presentation": {
+		// 		"reveal": "always",
+		// 		"panel": "new"
+		// 	},
+		// 	"problemMatcher": "$jshint",
+		// 	"args": [
+		// 		"./seed-mongo-db/server.js",
+		// 		"-p 27020"
+		// 	]
+		// },
+	],
+  "inputs": [
+    {
+      "id": "mongodbPort",
+      "type": "promptString",
+      "description": "Enter MongoDB port (default: 27020 for Dockerized, 27017 for local)",
+      "default": "27020"
+    },
+    {
+        "id": "onlyDropFlag",
+        "type": "pickString",
+        "description": "Do you want to only drop the mongodb?",
+        "options": [
+            "",
+            "only-drop"
+        ],
+        "default": ""
+    }
+  ]
 }

@@ -1,4 +1,5 @@
-﻿using Application.Recipes;
+﻿using System.Linq;
+using Application.Recipes;
 using Bogus;
 using Common;
 using Domain;
@@ -20,7 +21,7 @@ internal class Program
             Randomizer.Seed = new Random(20250517);
             Console.ForegroundColor = ConsoleColor.Green;
 
-            int port = args.Length > 0 ? int.Parse(args[0]) : 27020;
+            int port = int.Parse(args.FirstOrDefault(static a => a == "port", defaultValue: "27020"));
             string connectionString = $"mongodb://127.0.0.1:{port}";
 
             Console.WriteLine($"Connecting to MongoDB on {connectionString}");
@@ -30,12 +31,17 @@ internal class Program
             Console.WriteLine($"Dropping database '{dbName}'.");
             await _mongodb.Database.Client.DropDatabaseAsync(dbName);
 
+            if (args.Any(static a => a == "only-drop"))
+            {
+                Console.WriteLine($"Database dropped.");
+                return;
+            }
 
             await SeedChefAsync();
             Console.Write("\n");
             await SeedRecipesAsync();
 
-            Console.WriteLine($"\nSEEDING COMPLETED. Press any key to exit.");
+            Console.WriteLine($"\nSeeding done.");
         }
         catch(Exception ex)
         {
@@ -45,7 +51,6 @@ internal class Program
         finally
         {
             Console.ResetColor();
-            Console.ReadKey();
         }
     }
 

@@ -12,9 +12,9 @@ test('chef login', async ({ page }) => {
       'CHEF_USERNAME and/or CHEF_PASSWORD environment variables not found for login.'
     )
 
-  await page.goto('/login')
+  await page.goto('/register')
 
-  await page.getByTestId('login-name-input').fill(chefname)
+  await page.getByTestId('register-name-input').fill(chefname)
 
   await page.getByTestId('password-input').fill(password)
   await page.getByTestId('password-input').press('Enter')
