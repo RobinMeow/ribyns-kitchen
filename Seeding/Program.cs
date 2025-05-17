@@ -35,8 +35,15 @@ internal class Program
             Func<bool> isCI = () =>
             {
                 for (int i = 0; i < args.Length; i++)
+                {
                     if (args[i] == "--ci")
-                        return (args.Length - 1 > i && args[i + 1].StartsWith("-")) || bool.Parse(args[i + 1]);
+                    {
+                        if (args.Length > (i + 1) && args[i + 1].StartsWith("-"))
+                            return true;
+                        else
+                            return bool.Parse(args[i + 1]);
+                    }
+                }
 
                 return false;
             };
@@ -46,7 +53,12 @@ internal class Program
             {
                 for (int i = 0; i < args.Length; i++)
                     if (args[i] == "--only-drop")
-                        return (args.Length - 1 > i && args[i + 1].StartsWith("-")) || bool.Parse(args[i + 1]);
+                    {
+                        if (args.Length > (i + 1) && args[i + 1].StartsWith("-"))
+                            return true;
+                        else
+                            return bool.Parse(args[i + 1]);
+                    }
 
                 return false;
             };
