@@ -1,17 +1,19 @@
 ﻿using Application.Recipes;
 using Bogus;
 using Domain;
+using Infrastructure;
 using Infrastructure.MongoDB;
 
 namespace Seeding;
 
 internal class Program
 {
-    private static RecipeCollection _recipeCollection = null!;
-    private static ChefCollection _chefCollection = null!;
-    private static Faker _faker = new ("de");
+    static IPasswordHasher _passwordHasher = new AspPasswordHasher();
+    static Faker _faker = new ("de");
+    static MongoDatabase _mongodb = null!;
+    const int CHEF_COUNT = 50;
 
-    public static async Task Main(string[] args)
+    static async Task Main(string[] args)
     {
         try
         {
@@ -21,14 +23,12 @@ internal class Program
             string connectionString = $"mongodb://127.0.0.1:{port}";
 
             Console.WriteLine($"Connecting to MongoDB on {connectionString}");
-            var mongodb = new MongoDatabase(connectionString);
+            _mongodb = new MongoDatabase(connectionString);
 
             string dbName = Common.Globals.AppNameTech.ToLower();
             Console.WriteLine($"Dropping database '{dbName}'.");
-            await mongodb.Database.Client.DropDatabaseAsync(dbName);
+            await _mongodb.Database.Client.DropDatabaseAsync(dbName);
 
-            _recipeCollection = new RecipeCollection(mongodb);
-            _chefCollection = new ChefCollection(mongodb);
 
             await SeedChefAsync();
             Console.Write("\n");
@@ -48,27 +48,27 @@ internal class Program
         }
     }
 
-    private static IPasswordHasher _passwordHasher = new Infrastructure.AspPasswordHasher();
-    private const int CHEF_COUNT = 50;
-    private static async Task SeedChefAsync()
+    static async ValueTask SeedChefAsync()
     {
 
+        var chefCollection = new ChefCollection(_mongodb);
+
         Console.WriteLine($"SEEDING admin");
-        await _chefCollection.AddAsync(FakeChef(username: "admin", email: "admin@ribyn.dev"));
+        await chefCollection.AddAsync(FakeChef(username: "admin", email: "admin@ribyn.dev"));
         Console.WriteLine($"SEEDING casual user 'Ribyn'");
-        await _chefCollection.AddAsync(FakeChef(username: "Ribyn", email: "ribyn@ribyn.dev"));
+        await chefCollection.AddAsync(FakeChef(username: "Ribyn", email: "ribyn@ribyn.dev"));
 
         Console.Write($"SEEDING: 0/{CHEF_COUNT}");
         for (int i = 0; i < CHEF_COUNT; i++)
         {
-            await _chefCollection.AddAsync(FakeChef());
+            await chefCollection.AddAsync(FakeChef());
 
             Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write($"SEEDING: {i + 1}/{CHEF_COUNT}");
         }
     }
 
-    private static Chef FakeChef(string? username = null, string? email = null)
+    static Chef FakeChef(string? username = null, string? email = null)
     {
         username ??= _faker.Person.UserName;
         email ??= _faker.Person.Email;
@@ -82,21 +82,22 @@ internal class Program
         return chef;
     }
 
-    private static async ValueTask SeedRecipesAsync()
+    static async ValueTask SeedRecipesAsync()
     {
+        var recipeCollection = new RecipeCollection(_mongodb);
         const int recipeCount = CHEF_COUNT * 50; // like in: each chef has 50 recipes (TODO make more realistic and make 5-100 randomized)
         Console.Write($"SEEDING: 0/{recipeCount}");
         for (int i = 0; i < recipeCount; i++)
         {
             var fakeRecipe = FakeRecipe();
-            await _recipeCollection.AddAsync(fakeRecipe);
+            await recipeCollection.AddAsync(fakeRecipe);
 
             Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write($"SEEDING: {i + 1}/{recipeCount}");
         }
     }
 
-    private static Recipe FakeRecipe()
+    static Recipe FakeRecipe()
     {
         return new NewRecipeRequest()
         {
