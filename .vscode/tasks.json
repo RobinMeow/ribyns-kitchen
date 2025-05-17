@@ -4,7 +4,7 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "seed mongo db",
+			"label": "seed mongo db [faker.js]",
 			"command": "node",
 			"presentation": {
 				"reveal": "always",
@@ -16,7 +16,7 @@
 			]
 		},
 		{
-			"label": "seed dockerized mongo db",
+			"label": "seed dockerized mongodb [faker.js]",
 			"command": "node",
 			"presentation": {
 				"reveal": "always",
@@ -28,6 +28,42 @@
 				"-p 27020"
 			]
 		},
+		{
+      "label": "seed dockerized mongodb [bogus C#]",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+          "run",
+          "--",
+          "27020"
+      ],
+      "options": {
+          "cwd": "${workspaceFolder}/Seeding/"
+      },
+      "problemMatcher": [],
+      "group": {
+          "kind": "build",
+          "isDefault": true
+      },
+    },
+		{
+      "label": "seed local mongodb [bogus C#]",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+          "run",
+          "--",
+          "27017"
+      ],
+      "options": {
+          "cwd": "${workspaceFolder}/Seeding/"
+      },
+      "problemMatcher": [],
+      "group": {
+          "kind": "build",
+          "isDefault": true
+      },
+    },
 
 		// client
 		{
@@ -85,7 +121,7 @@
       "problemMatcher": []
     },
 		{
-      "label": "docker compose mongo up",
+      "label": "docker compose mongo stop",
       "type": "shell",
       "command": "docker compose -f ./Application/docker-compose.mongo-container.yml stop",
       "group": {
@@ -95,7 +131,7 @@
       "problemMatcher": []
     },
 		{
-      "label": "docker compose mongo up",
+      "label": "docker compose mongo down",
       "type": "shell",
       "command": "docker compose -f ./Application/docker-compose.mongo-container.yml down",
       "group": {
