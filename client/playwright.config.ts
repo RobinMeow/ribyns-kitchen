@@ -43,10 +43,6 @@ export default defineConfig({
       name: 'chef-setup',
       testMatch: /chef\.setup\.ts/
     },
-    {
-      name: 'chef-teardown',
-      testMatch: /chef\.teardown\.ts/
-    },
 
     {
       name: 'chromium',
@@ -54,7 +50,8 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         storageState: chefFile
       },
-      dependencies: ['chef-setup']
+      dependencies: ['chef-setup'],
+      teardown: 'chef-teardown'
     },
 
     {
@@ -63,7 +60,8 @@ export default defineConfig({
         ...devices['Desktop Firefox'],
         storageState: chefFile
       },
-      dependencies: ['chef-setup']
+      dependencies: ['chef-setup'],
+      teardown: 'chef-teardown'
     },
 
     {
@@ -73,7 +71,8 @@ export default defineConfig({
         storageState: chefFile,
         ignoreHTTPSErrors: true
       },
-      dependencies: ['chef-setup']
+      dependencies: ['chef-setup'],
+      teardown: 'chef-teardown'
     },
 
     /* Test against mobile viewports. */
@@ -83,7 +82,8 @@ export default defineConfig({
         ...devices['Pixel 5'],
         storageState: chefFile
       },
-      dependencies: ['chef-setup']
+      dependencies: ['chef-setup'],
+      teardown: 'chef-teardown'
     },
     {
       name: 'Mobile Safari',
@@ -92,7 +92,13 @@ export default defineConfig({
         storageState: chefFile,
         ignoreHTTPSErrors: true
       },
-      dependencies: ['chef-setup']
+      dependencies: ['chef-setup'],
+      teardown: 'chef-teardown'
+    },
+
+    {
+      name: 'chef-teardown',
+      testMatch: /chef\.teardown\.ts/
     }
   ]
 })

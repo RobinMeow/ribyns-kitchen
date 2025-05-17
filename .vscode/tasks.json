@@ -4,13 +4,39 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-      "label": "seed mongodb [bogus C#]",
+      "label": "seed mongodb",
       "type": "shell",
       "command": "dotnet run ${input:rebuild} --port ${input:mongodbPort} --only-drop ${input:onlyDrop} --ci ${input:ci}",
       "options": {
         "cwd": "${workspaceFolder}/Seeding/",
       },
       "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },{
+      "label": "seed mongodb CI",
+      "type": "shell",
+      "command": "dotnet run ${input:rebuild} --port ${input:mongodbPort} --ci",
+      "options": {
+        "cwd": "${workspaceFolder}/Seeding/",
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "npm run e2e",
+      "type": "shell",
+      "command": "npm run e2e",
+      "options": {
+        "cwd": "${workspaceFolder}/client/",
+      },
+      "problemMatcher": [],
+      "dependsOn": ["seed mongodb CI"],
       "group": {
         "kind": "build",
         "isDefault": true
