@@ -9,10 +9,11 @@ namespace Seeding;
 
 internal class Program
 {
+    const int CHEF_COUNT = 50;
+
     static readonly IPasswordHasher _passwordHasher = new AspPasswordHasher();
     static readonly Faker _faker = new ("de");
     static MongoDatabase _mongodb = null!;
-    const int CHEF_COUNT = 50;
     static bool _ci = false;
 
     static async Task Main(string[] args)
