@@ -49,9 +49,6 @@ firebase.json
 **/.firebaserc
 .runtimeconfig.json
 
-# cypress
-cypress/screenshots/**
-
 # Playwright
 node_modules/
 /test-results/

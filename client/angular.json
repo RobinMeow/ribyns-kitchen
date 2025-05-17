@@ -111,38 +111,6 @@
               "src/**/*.html"
             ]
           }
-        },
-        "cypress-run": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "ribyns-kitchen:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ribyns-kitchen:serve:production"
-            }
-          }
-        },
-        "cypress-open": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "watch": true,
-            "headless": false
-          }
-        },
-        "ct": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "ribyns-kitchen:serve",
-            "watch": true,
-            "headless": false,
-            "testingType": "component"
-          },
-          "configurations": {
-            "dev": {
-              "devServerTarget": "ribyns-kitchen:serve:dev"
-            }
-          }
         }
       }
     }
@@ -152,7 +120,6 @@
       "angular-eslint",
       "typescript-eslint",
       "@schematics/angular",
-      "@cypress/schematic",
       "@angular-eslint/schematics"
     ]
   }
