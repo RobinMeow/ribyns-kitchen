@@ -38,8 +38,10 @@ export class App {
 
   constructor() {
     effect(() => {
+      // this also closes it on initial page load. which is okay
       this.navigationEnd()
-      void untracked(() => this.drawer()).close()
+      const drawer = untracked(() => this.drawer())
+      void drawer.close()
     })
   }
 
