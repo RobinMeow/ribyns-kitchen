@@ -7,7 +7,7 @@ const chefFile = path.join(__dirname, './.auth/chef.json')
 // should logout
 // should login
 
-test('should delete chef', async ({ page, isMobile, browser }) => {
+test('should delete chef', async ({ page, isMobile }) => {
   const chefname = process.env['CHEF_USERNAME']
   const password = process.env['CHEF_PASSWORD']
 
