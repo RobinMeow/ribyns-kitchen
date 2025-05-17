@@ -106,7 +106,7 @@ internal class Program
 
         Console.WriteLine($"SEEDING admin");
         await chefCollection.AddAsync(FakeChef(name: "admin", email: "admin@ribyn.dev"));
-        Console.WriteLine($"SEEDING casual user 'Ribyn'");
+        Console.WriteLine($"SEEDING chef 'Ribyn'");
         await chefCollection.AddAsync(FakeChef(name: "Ribyn", email: "ribyn@ribyn.dev"));
 
         var count = _ci ? CHEF_COUNT * 0.1 : CHEF_COUNT;
