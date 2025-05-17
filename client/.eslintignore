@@ -1,2 +1,0 @@
-**/infrastructure/open-api/**
-# **cy.ts // move the pattern out of the eslintrc file. this is the single point of truth

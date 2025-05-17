@@ -1,15 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router'
-import { Recipe } from '../util/recipe'
+import {
+  ActivatedRouteSnapshot,
+  ResolveFn,
+  RouterStateSnapshot
+} from '@angular/router'
 import { inject } from '@angular/core'
 import { RecipeApi } from '../util/recipe.api'
 import { assert } from '@common/assertions'
+import { Recipe } from '../util/recipe'
 
 export const recipeResolver: ResolveFn<Promise<Recipe>> = (
   route: ActivatedRouteSnapshot,
-  _: unknown
+  _state: RouterStateSnapshot
 ) => {
-  const api = inject(RecipeApi)
+  const recipeApi = inject(RecipeApi)
 
   const id: string | null = route.paramMap.get('recipeId')
 
@@ -18,5 +21,5 @@ export const recipeResolver: ResolveFn<Promise<Recipe>> = (
     'recipeResolver requires recipeId in paramMap.'
   )
 
-  return api.getAsync(id)
+  return recipeApi.get(id)
 }

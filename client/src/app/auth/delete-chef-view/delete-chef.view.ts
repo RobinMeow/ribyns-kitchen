@@ -4,7 +4,6 @@ import {
   Signal,
   inject
 } from '@angular/core'
-import { CommonModule } from '@angular/common'
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
@@ -24,7 +23,6 @@ import { assert } from '@common/assertions'
 @Component({
   selector: 'auth-delete-chef',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatButtonModule,

@@ -1,0 +1,57 @@
+// _breakpoints.scss
+// Material Design Breakpoint Mixins
+
+@mixin MaxWidth600 {
+  @media (max-width: 599.98px) {
+    @content;
+  }
+}
+
+@mixin MinWidth600 {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin MaxWidth960 {
+  @media (max-width: 959.98px) {
+    @content;
+  }
+}
+
+@mixin MinWidth960 {
+  @media (min-width: 960px) {
+    @content;
+  }
+}
+
+@mixin MaxWidth1280 {
+  @media (max-width: 1279.98px) {
+    @content;
+  }
+}
+
+@mixin MinWidth1280 {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin MaxWidth1920 {
+  @media (max-width: 1919.98px) {
+    @content;
+  }
+}
+
+@mixin MinWidth1920 {
+  @media (min-width: 1920px) {
+    @content;
+  }
+}
+
+// values taken from google design team: https://material.angular.io/cdk/layout/overview https://m1.material.io/layout/responsive-ui.html#responsive-ui-breakpoints
+// XSmall    (max-width: 599.98px)
+// Small    (min-width: 600px) and (max-width: 959.98px)
+// Medium    (min-width: 960px) and (max-width: 1279.98px)
+// Large    (min-width: 1280px) and (max-width: 1919.98px)
+// XLarge    (min-width: 1920px)

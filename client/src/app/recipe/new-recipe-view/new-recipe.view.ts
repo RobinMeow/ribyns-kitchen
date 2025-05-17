@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import {
   NonNullableFormBuilder,
@@ -15,16 +14,15 @@ import { RecipeApi } from '../util/recipe.api'
 
 @Component({
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
   ],
-  templateUrl: './create-recipe.view.html',
+  templateUrl: './new-recipe.view.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateRecipeView {
+export class NewRecipeView {
   private readonly nnfb = inject(NonNullableFormBuilder)
   private readonly recipeApi = inject(RecipeApi)
   private readonly router = inject(Router)

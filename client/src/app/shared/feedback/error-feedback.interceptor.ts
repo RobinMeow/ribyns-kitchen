@@ -20,7 +20,8 @@ export const errorFeedbackInterceptor: HttpInterceptorFn = (
     tap({
       error: (err) => {
         if (err instanceof HttpErrorResponse) {
-          const notifications = (err.error as NotificationResponse).notifications
+          const notifications = (err.error as NotificationResponse)
+            .notifications
           if (notifications) {
             notifications.forEach((notification: string) => {
               feedbackService.show(notification)

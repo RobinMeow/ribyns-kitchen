@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using Common.Validations;
 using Domain;
 using Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Authorization;

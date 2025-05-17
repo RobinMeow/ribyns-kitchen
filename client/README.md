@@ -1,4 +1,4 @@
-# UI
+# Client
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
 
@@ -31,17 +31,20 @@ As well as `ui`'s (usually dumb components, reuseable) and utils which usually c
 
 in `.eslintrc` add the prefixes to the `@angular-eslint` properties.
 
-## Testing jasmine and Cypress
+## Unit tests and e2e tests
 
 Jasmine:
 
 - run `ng test` to run all spec.ts files
-- for intellisense, go to `tsconfig.json`, scroll to the bottom and follow the comments to enable jasmine types (this will disable cypress types, because the conflict each other)
-- use --include filepath to run specified files
+- use --include filepath to run specified files `npx ng test --include **/auth-corner.spec.ts`
 
-Cypress:
+Playwright:
 
-- run `npm run cypress:open` and follow the browser to test e2e or component
+- run `npx playwright test` and follow the browser to test e2e or component
+- append `--ui` flag to open the tests in ui mode (execute auth manually, before executing auth depending specs)
+
+> dont forget to enable the projects in the filters
+> the cli will run the auth on its own, based on the project defined dependecies in playwright.config
 
 ## scss angular problems
 

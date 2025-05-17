@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Seeding": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 27020 --only-drop false --ci true"
+    }
+  }
+}

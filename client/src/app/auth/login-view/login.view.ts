@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import {
   FormControl,
@@ -17,7 +16,6 @@ import { AuthService } from '../utils/auth.service'
 @Component({
   selector: 'auth-login',
   imports: [
-    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
@@ -39,8 +37,10 @@ export class LoginView {
     password: ['', Validators.required]
   })
 
-  protected readonly chefnameCtl: FormControl<string> = this.form.controls.chefname
-  protected readonly passwordCtl: FormControl<string> = this.form.controls.password
+  protected readonly chefnameCtl: FormControl<string> =
+    this.form.controls.chefname
+  protected readonly passwordCtl: FormControl<string> =
+    this.form.controls.password
 
   protected async onSubmit(): Promise<void> {
     if (this.form.invalid) return

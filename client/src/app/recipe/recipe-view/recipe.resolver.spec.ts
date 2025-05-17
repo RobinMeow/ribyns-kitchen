@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing'
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { MockProvider } from 'ng-mocks'
-import { Recipe } from '../util/recipe'
 import { RecipeApi } from '../util/recipe.api'
 import { recipeResolver } from './recipe.resolver'
+import { Recipe } from '../util/recipe'
 
 describe('recipeResolver shoul', () => {
   let recipeApi: RecipeApi
@@ -30,9 +30,9 @@ describe('recipeResolver shoul', () => {
 
   it('resolve to a Recipe when a valid recipeId is provided', async () => {
     spyOn(route.paramMap, 'get').and.returnValue('123')
-    const expectedRecipe: Recipe = {} as Recipe
+    const expectedRecipe = {} as Recipe
 
-    const spy = spyOn(recipeApi, 'getAsync').and.returnValue(
+    const spy = spyOn(recipeApi, 'get').and.returnValue(
       Promise.resolve(expectedRecipe)
     )
 
@@ -50,7 +50,7 @@ describe('recipeResolver shoul', () => {
   // recipe remotely deleted by other user + cached view on current user
   it('handle when server doesnt send a recipe', async () => {
     const paramMapSpy = spyOn(route.paramMap, 'get').and.returnValue('123')
-    const apiSpy = spyOn(recipeApi, 'getAsync').and.returnValue(Promise.reject(null))
+    const apiSpy = spyOn(recipeApi, 'get').and.returnValue(Promise.reject(null))
 
     await TestBed.runInInjectionContext(async () => {
       const promise = recipeResolver(route, state)

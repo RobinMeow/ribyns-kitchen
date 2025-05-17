@@ -10,7 +10,7 @@ describe('RecipeView should', () => {
   let fixture: ComponentFixture<RecipeView>
   const recipeMock: Recipe = {
     id: '123',
-    title: 'recipetitle'
+    name: 'recipetitle'
   }
 
   beforeEach(async () => {

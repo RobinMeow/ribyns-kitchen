@@ -1,6 +1,6 @@
-<h2 data-test-title>Account erstellen</h2>
+<h2 data-test="title">Account erstellen</h2>
 
-<form [formGroup]="form" (submit)="onSubmit()" data-test-register-form>
+<form [formGroup]="form" (submit)="onSubmit()" data-test="register-form">
   <div class="forms-column">
     <mat-form-field>
       <mat-label>Name</mat-label>
@@ -15,9 +15,12 @@
         placeholder="Weinberg des Herrn"
         [required]="true"
         type="text"
-        data-test-register-name-input
+        data-test="register-name-input"
       />
-      <mat-hint>Zwischen {{ chefname_min_length }} und {{ chefname_max_length }} Zeichen</mat-hint>
+      <mat-hint
+        >Zwischen {{ chefname_min_length }} und
+        {{ chefname_max_length }} Zeichen</mat-hint
+      >
     </mat-form-field>
 
     <auth-password-input [passwordControl]="form.controls.password" showHint />
@@ -29,7 +32,7 @@
         [formControl]="form.controls.email"
         required="false"
         placeholder="be.blessed@nd.loved"
-        data-test-email-input
+        data-test="email-input"
       />
       <mat-hint
         matTooltip="Wird eventuell zukünftig verwendet um Benachritigungen zu schicken. (Welche Benachrichtungen werden dann frei wählbar sein)"
@@ -41,7 +44,13 @@
       }
     </mat-form-field>
   </div>
-  <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit" data-test-register-submit-button>
+  <button
+    [disabled]="form.invalid"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    data-test="register-submit-button"
+  >
     Registrieren
   </button>
 </form>

@@ -1,41 +1,31 @@
 import { Injectable } from '@angular/core'
 import { BaseApi } from '@api'
-import { firstValueFrom, map } from 'rxjs'
+import { firstValueFrom } from 'rxjs'
 import { NewRecipe } from './new-recipe'
 import { Recipe } from './recipe'
-import { RecipeDto } from './recipe.dto'
 
 @Injectable({ providedIn: 'root' })
 export class RecipeApi extends BaseApi {
-  private readonly URL = this.BASE_URL + '/Recipe/'
+  private readonly baseUrl = this.BASE_URL + '/Recipe/'
 
-  newAsync(recipe: NewRecipe): Promise<RecipeDto> {
+  newAsync(recipe: NewRecipe): Promise<Recipe> {
     const headers = this.defaultHeadersWithAuth()
-    const url = this.URL + 'AddAsync'
+    const url = this.baseUrl + 'AddAsync'
 
-    const request$ = this.httpClient
-      .post<RecipeDto>(url, recipe, {
+    return firstValueFrom(
+      this.httpClient.post<Recipe>(url, recipe, {
         headers: headers
       })
-      .pipe(map(toRecipe))
-
-    return firstValueFrom(request$)
+    )
   }
 
-  getAsync(id: string): Promise<Recipe> {
-    const headers = this.defaultHeadersWithAuth()
-    const url = this.URL + 'GetAsync?recipeId=' + id
+  get(id: string): Promise<Recipe> {
+    const headers = this.defaultHeadersWithAuth() // TODO why am I not relying on my interceptor?
 
-    const request$ = this.httpClient
-      .get<RecipeDto>(url, {
+    return firstValueFrom(
+      this.httpClient.get<Recipe>(`${this.baseUrl}GetAsync?recipeId=${id}`, {
         headers: headers
       })
-      .pipe(map(toRecipe))
-
-    return firstValueFrom(request$)
+    )
   }
-}
-
-function toRecipe(dto: RecipeDto): Recipe {
-  return new Recipe(dto)
 }

@@ -6,7 +6,8 @@ export const authRoutes: Route[] = [
   {
     path: 'login',
     canActivate: [unauthorizedGuard],
-    loadComponent: async () => (await import('./login-view/login.view')).LoginView,
+    loadComponent: async () =>
+      (await import('./login-view/login.view')).LoginView,
     title: 'Einloggen'
   },
   {
