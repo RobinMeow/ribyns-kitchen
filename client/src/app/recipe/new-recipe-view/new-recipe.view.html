@@ -1,6 +1,6 @@
 <h2 data-test="title">Rezept hinzufügen</h2>
 
-<form [formGroup]="form" data-test="create-recipe-form">
+<form [formGroup]="form" data-test="new-recipe-form">
   <div class="forms-column">
     <mat-form-field>
       <mat-label>Titel</mat-label>
@@ -27,7 +27,7 @@
     color="primary"
     type="submit"
     (click)="onSubmit()"
-    data-test="create-recipe-submit-button"
+    data-test="new-recipe-submit-button"
   >
     Erstellen
   </button>

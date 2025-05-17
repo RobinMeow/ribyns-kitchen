@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { MatDrawer } from '@angular/material/sidenav'
 import { AuthCorner } from 'src/app/auth'
-import { CreateRecipeMenuButton } from './create-recipe-menu-button/create-recipe.menu-button'
+import { NewRecipeMenuButton } from './new-recipe-menu-button/new-recipe.menu-button'
 
 @Component({
   selector: 'core-menu',
@@ -13,7 +13,7 @@ import { CreateRecipeMenuButton } from './create-recipe-menu-button/create-recip
     MatIconModule,
     MatButtonModule,
     AuthCorner,
-    CreateRecipeMenuButton
+    NewRecipeMenuButton
   ],
   templateUrl: './menu.html',
   styleUrls: ['./menu.scss'],

@@ -3,16 +3,16 @@ import { MatButtonModule } from '@angular/material/button'
 import { Router } from '@angular/router'
 
 @Component({
-  selector: 'recipe-create-menu-button',
+  selector: 'recipe-new-menu-button',
   imports: [MatButtonModule],
-  templateUrl: './create-recipe.menu-button.html',
-  styleUrl: './create-recipe.menu-button.scss',
+  templateUrl: './new-recipe.menu-button.html',
+  styleUrl: './new-recipe.menu-button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateRecipeMenuButton {
+export class NewRecipeMenuButton {
   private readonly router = inject(Router)
 
   protected onClick() {
-    void this.router.navigate(['/create-recipe'])
+    void this.router.navigate(['/new-recipe'])
   }
 }

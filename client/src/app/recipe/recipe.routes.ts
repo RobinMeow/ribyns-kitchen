@@ -4,11 +4,10 @@ import { recipeResolver } from './recipe-view/recipe.resolver'
 
 export const recipeRoutes: Route[] = [
   {
-    path: 'create-recipe',
+    path: 'new-recipe',
     canActivate: [authorizedGuard],
     loadComponent: async () =>
-      (await import('./create-recipe-view/create-recipe.view'))
-        .CreateRecipeView,
+      (await import('./new-recipe-view/new-recipe.view')).NewRecipeView,
     title: 'Rezept hinzufügen'
   },
   {
