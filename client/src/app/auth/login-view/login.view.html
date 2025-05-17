@@ -14,13 +14,13 @@
         [formControl]="chefnameCtl"
         placeholder="Weinberg des Herrn"
         type="text"
-        data-test-login-name-input
+        data-test="login-name-input"
       />
     </mat-form-field>
 
     <auth-password-input [passwordControl]="form.controls.password" />
   </div>
-  <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit" data-test-login-submit-button>
+  <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit" data-test="login-submit-button">
     Einloggen
   </button>
 </form>

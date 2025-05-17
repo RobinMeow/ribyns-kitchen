@@ -24,21 +24,27 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: baseUrl,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
+    testIdAttribute: 'data-test'
   },
-
   webServer: {
-    command: 'npx ng serve -c ',
+    command: 'npx ng serve -c dev',
     url: baseUrl,
     stdout: 'pipe',
     reuseExistingServer: true
   },
-
+  timeout: 5000,
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'chef-auth',
+      testMatch: /chef-auth\.setup\.ts/
+    },
+
+    {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
+      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['chef-auth']
     }
 
     // {

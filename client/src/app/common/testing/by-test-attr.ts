@@ -6,7 +6,7 @@ import { ComponentFixture } from '@angular/core/testing'
  * with custom data-test attributes for testing purposes.
  *
  * @param fixture The ComponentFixture representing the component under test.
- * @param selector The value of the test attribute to search for, without the 'data-test-' prefix.
+ * @param testid The value of the test attribute to search for, without the 'data-test-' prefix.
  * @returns The first matching element found in the component's template, or null if not found.
  *
  * @example
@@ -17,8 +17,15 @@ import { ComponentFixture } from '@angular/core/testing'
  */
 export function byTestAttr<T>(
   fixture: ComponentFixture<unknown>,
-  selector: string
+  testid: string
 ): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  return fixture.nativeElement.querySelector(`[data-test-${selector}]`) as T
+  let element = fixture.nativeElement.querySelector(`[data-test-${testid}]`) as T
+
+  if (!element) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    element = fixture.nativeElement.querySelector(`[data-test="${testid}"]`) as T
+  }
+
+  return element
 }
