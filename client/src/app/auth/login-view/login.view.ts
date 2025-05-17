@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import {
   FormControl,
@@ -17,7 +16,6 @@ import { AuthService } from '../utils/auth.service'
 @Component({
   selector: 'auth-login',
   imports: [
-    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,

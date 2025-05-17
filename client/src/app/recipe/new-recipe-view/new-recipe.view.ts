@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import {
   NonNullableFormBuilder,
@@ -15,7 +14,6 @@ import { RecipeApi } from '../util/recipe.api'
 
 @Component({
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,

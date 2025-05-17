@@ -6,7 +6,7 @@
 		{
       "label": "seed mongodb",
       "type": "shell",
-      "command": "dotnet run ${input:rebuild} --port ${input:mongodbPort} --only-drop ${input:onlyDrop} --ci ${input:ci}",
+      "command": "dotnet run --no-restore --no-build --port ${input:mongodbPort} --only-drop ${input:onlyDrop} --ci ${input:ci}",
       "options": {
         "cwd": "${workspaceFolder}/Seeding/",
       },
@@ -18,7 +18,7 @@
     },{
       "label": "seed mongodb CI",
       "type": "shell",
-      "command": "dotnet run ${input:rebuild} --port ${input:mongodbPort} --ci",
+      "command": "dotnet run --no-restore --no-build --port ${input:mongodbPort} --ci",
       "options": {
         "cwd": "${workspaceFolder}/Seeding/",
       },
@@ -151,16 +151,6 @@
       "type": "promptString",
       "description": "Enter MongoDB port (default: 27020 for Dockerized, 27017 for local)",
       "default": "27020"
-    },
-    {
-      "id": "rebuild",
-      "type": "pickString",
-      "description": "Rebuild?",
-      "options": [
-        "--no-restore --no-build",
-        "--restore --build"
-      ],
-      "default": "--no-build --no-restore",
     },
     {
         "id": "onlyDrop",

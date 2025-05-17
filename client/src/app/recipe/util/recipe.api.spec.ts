@@ -9,7 +9,6 @@ import { MockProvider } from 'ng-mocks'
 import { TokenStorage } from 'src/app/auth/utils/token.storage'
 import { Recipe } from './recipe'
 import { RecipeApi } from './recipe.api'
-import { RecipeDto } from './recipe.dto'
 
 describe('RecipeApi should', () => {
   let recipeApi: RecipeApi
@@ -47,11 +46,11 @@ describe('RecipeApi should', () => {
       const promise = recipeApi.newAsync({
         name: ''
       })
-      const dtoMock = {} as RecipeDto
+      const dtoMock = {} as Recipe
 
       httpTestingController.expectOne(baseUrl + 'AddAsync').flush(dtoMock)
 
-      await expectAsync(promise).toBeResolvedTo(new Recipe(dtoMock))
+      await expectAsync(promise).toBeResolvedTo(dtoMock)
     })
 
     it('reject on http error', async () => {
@@ -70,20 +69,20 @@ describe('RecipeApi should', () => {
   describe('getAsync should', () => {
     it('resolve to recipe', async () => {
       const recipeId = '123'
-      const promise = recipeApi.getAsync(recipeId)
+      const promise = recipeApi.get(recipeId)
 
-      const dtoMock = {} as RecipeDto
+      const dtoMock = {} as Recipe
 
       httpTestingController
         .expectOne(baseUrl + 'GetAsync?recipeId=' + recipeId)
         .flush(dtoMock)
 
-      await expectAsync(promise).toBeResolvedTo(new Recipe(dtoMock))
+      await expectAsync(promise).toBeResolvedTo(dtoMock)
     })
 
     it('reject on http error', async () => {
       const recipeId = '123'
-      const promise = recipeApi.getAsync(recipeId)
+      const promise = recipeApi.get(recipeId)
 
       httpTestingController
         .expectOne(baseUrl + 'GetAsync?recipeId=' + recipeId)
