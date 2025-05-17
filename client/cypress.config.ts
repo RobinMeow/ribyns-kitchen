@@ -18,7 +18,7 @@ export default defineConfig({
     ) {
       on('task', {
         async 'db:reset'() {
-          const client = new MongoClient('mongodb://127.0.0.1:27017')
+          const client = new MongoClient('mongodb://127.0.0.1:27020')
 
           try {
             await client.connect()
