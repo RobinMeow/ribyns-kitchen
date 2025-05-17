@@ -35,3 +35,8 @@ Feel free to reach out to me by sending an email to [robinmeow97@gmail.com](mail
 If you appreciate my efforts and would like to support me, you can show your appreciation by [buying me a coffee](https://ko-fi.com/ribyn)! ☕️
 
 > Just as Jesus broke bread with his disciples, may you find fellowship and connection in sharing meals, and may your culinary endeavors be a reflection of love and unity.
+
+## Fun
+
+Fun to watch what has been done in the project: [gource](https://gource.io/)
+> `gource -1280x720 --seconds-per-day 1 --auto-skip-seconds 2 --file-idle-time 0 --max-file-lag 0.5 --title "Ribyn's Kitchen"`
