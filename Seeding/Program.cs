@@ -36,13 +36,13 @@ internal class Program
             {
                 for (int i = 0; i < args.Length; i++)
                 {
-                    if (args[i] == "--ci")
-                    {
-                        if (args.Length > (i + 1) && args[i + 1].StartsWith("-"))
-                            return true;
-                        else
-                            return bool.Parse(args[i + 1]);
-                    }
+                    if (args[i] != "--ci") continue;
+
+                    int nextIndex = i + 1;
+
+                    if (args.Length <= nextIndex) return true; // --ci is used as standalone flag
+
+                    return args[nextIndex].StartsWith("-") || bool.Parse(args[nextIndex]);
                 }
 
                 return false;
@@ -52,13 +52,15 @@ internal class Program
             Func<bool> isOnlyDrop = () =>
             {
                 for (int i = 0; i < args.Length; i++)
-                    if (args[i] == "--only-drop")
-                    {
-                        if (args.Length > (i + 1) && args[i + 1].StartsWith("-"))
-                            return true;
-                        else
-                            return bool.Parse(args[i + 1]);
-                    }
+                {
+                    if (args[i] != "--only-drop") continue;
+
+                    int nextIndex = i + 1;
+
+                    if (args.Length <= nextIndex) return true; // --ci is used as standalone flag
+
+                    return args[nextIndex].StartsWith("-") || bool.Parse(args[nextIndex]);
+                }
 
                 return false;
             };
@@ -121,8 +123,8 @@ internal class Program
         var chef = new Chef()
         {
             Id = EntityId.New(),
-            Name = name ??= _faker.Person.UserName,
-            Email = email ?? _faker.Person.Email,
+            Name = name ??= _faker.Internet.UserName(),
+            Email = email ?? _faker.Internet.Email(),
         };
         chef.SetPassword(name, _passwordHasher);
         return chef;
