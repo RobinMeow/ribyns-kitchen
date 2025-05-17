@@ -2,22 +2,18 @@
   "editor.formatOnSave": false,
   "redhat.telemetry.enabled": false,
   "editor.tabSize": 2,
-  "[html][typescript][json][scss][sass][css][javascript][markdown]": {
-    "editor.tabSize": 2
+  "[{*.html, *.typescript, *.ts, *.json, *.scss, *.sass, *.css, *.javascript, *.js, *.markdown}]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.sortImports": "explicit",
+      "source.fixAll.eslint": "explicit",
+    },
+    "files.trimTrailingWhitespace": true,
   },
   "[csharp]": {
     "editor.tabSize": 4
   },
-  "[html][scss][typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
-    },
-    "files.trimTrailingWhitespace": true
-  },
   "eslint.enable": true,
-  "[xml]": {
-    "editor.formatOnSave": false
-  },
-  "markdown.occurrencesHighlight.enabled": true
 }
