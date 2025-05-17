@@ -1,20 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
-
-import { RegisterView } from './register.view'
 import { provideApiBaseUrlTesting } from '@api'
-import {
-  byTestAttr,
-  fakeSnapshot,
-  setValue,
-  withResolvedData
-} from '@common/testing'
-import { MockProvider } from 'ng-mocks'
-import { ActivatedRoute } from '@angular/router'
-import { ChefValidations } from '../utils/chef.validations'
-import { fakeValidations, withField } from '@common/validations/testing'
+import { byTestAttr, setValue } from '@common/testing'
+import { RegisterView } from './register.view'
 
 describe('RegisterView should', () => {
   let component: RegisterView
@@ -27,21 +17,7 @@ describe('RegisterView should', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideNoopAnimations(),
-        provideApiBaseUrlTesting(),
-        MockProvider(ActivatedRoute, {
-          snapshot: fakeSnapshot(
-            withResolvedData(
-              'chefValidations',
-              new ChefValidations(
-                fakeValidations([
-                  withField('name').required().min(1).max(100).build(),
-                  withField('password').required().min(1).max(100).build(),
-                  withField('email').min(1).max(100).build()
-                ])
-              )
-            )
-          )
-        })
+        provideApiBaseUrlTesting()
       ]
     }).compileComponents()
 
@@ -59,12 +35,12 @@ describe('RegisterView should', () => {
   })
 
   it('have invalid register form', () => {
-    expect(component['registerForm'].invalid).toBeTrue()
+    expect(component['form'].invalid).toBeTrue()
   })
 
   it('have disabled submit button', () => {
     const btn = byTestAttr<HTMLButtonElement>(fixture, 'register-submit-button')
-    expect(component['registerForm'].invalid).toBeTrue()
+    expect(component['form'].invalid).toBeTrue()
     expect(btn.disabled).toBeTrue()
   })
 
@@ -72,19 +48,13 @@ describe('RegisterView should', () => {
     const btn = byTestAttr<HTMLButtonElement>(fixture, 'register-submit-button')
     expect(btn.disabled).toBeTrue()
 
-    const nameInput = byTestAttr<HTMLInputElement>(
-      fixture,
-      'register-name-input'
-    )
+    const nameInput = byTestAttr<HTMLInputElement>(fixture, 'register-name-input')
     setValue(nameInput, 'Weinberg des Herrn')
 
     fixture.detectChanges()
     expect(btn.disabled).toBeTrue()
 
-    const passwordInput = byTestAttr<HTMLInputElement>(
-      fixture,
-      'password-input'
-    )
+    const passwordInput = byTestAttr<HTMLInputElement>(fixture, 'password-input')
     setValue(passwordInput, 'iLoveJesus<3')
 
     fixture.detectChanges()

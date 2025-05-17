@@ -3,17 +3,16 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import {
   FormControl,
   NonNullableFormBuilder,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  Validators
 } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
-import { ActivatedRoute, Router } from '@angular/router'
-import { ValidatorsFactory } from '@common/validations'
+import { Router } from '@angular/router'
 import { PasswordInput } from '../ui/password-input/password-input'
 import { AuthService } from '../utils/auth.service'
-import { ChefValidations } from '../utils/chef.validations'
 
 @Component({
   selector: 'auth-login',
@@ -34,35 +33,22 @@ export class LoginView {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   private readonly nnfb = inject(NonNullableFormBuilder)
-  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
 
-  private readonly chefValidations = this.activatedRouteSnapshot.data[
-    'chefValidations'
-  ] as Readonly<ChefValidations>
-
-  protected readonly nameValidations = this.chefValidations.name()
-  private readonly passwordValidations = this.chefValidations.password()
-
-  private readonly validatorsFactory = new ValidatorsFactory()
-
-  protected readonly loginForm = this.nnfb.group({
-    chefname: ['', this.validatorsFactory.create('string', this.nameValidations)],
-    password: ['', this.validatorsFactory.create('string', this.passwordValidations)]
+  protected readonly form = this.nnfb.group({
+    chefname: ['', Validators.required],
+    password: ['', Validators.required]
   })
 
-  protected readonly chefnameControl: FormControl<string> =
-    this.loginForm.controls.chefname
-
-  protected readonly passwordControl: FormControl<string> =
-    this.loginForm.controls.password
+  protected readonly chefnameCtl: FormControl<string> = this.form.controls.chefname
+  protected readonly passwordCtl: FormControl<string> = this.form.controls.password
 
   protected async onSubmit(): Promise<void> {
-    if (this.loginForm.invalid) return
+    if (this.form.invalid) return
 
     await this.authService.signInAsync({
-      name: this.chefnameControl.value,
-      password: this.passwordControl.value
+      name: this.chefnameCtl.value,
+      password: this.passwordCtl.value
     })
-    await this.router.navigateByUrl('/')
+    void this.router.navigateByUrl('/')
   }
 }

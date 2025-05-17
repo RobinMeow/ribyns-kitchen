@@ -1,28 +1,20 @@
 import { Route } from '@angular/router'
-import { unauthorizedGuard } from './utils/unauthorized.guard'
 import { authorizedGuard } from './utils/authorized.guard'
-import { chefValidationsResolver } from './utils/chef.validations.resolver'
+import { unauthorizedGuard } from './utils/unauthorized.guard'
 
 export const authRoutes: Route[] = [
   {
     path: 'login',
     canActivate: [unauthorizedGuard],
-    loadComponent: async () =>
-      (await import('./login-view/login.view')).LoginView,
-    title: 'Einloggen',
-    resolve: {
-      chefValidations: chefValidationsResolver
-    }
+    loadComponent: async () => (await import('./login-view/login.view')).LoginView,
+    title: 'Einloggen'
   },
   {
     path: 'register',
     canActivate: [unauthorizedGuard],
     loadComponent: async () =>
       (await import('./register-view/register.view')).RegisterView,
-    title: 'Registrieren',
-    resolve: {
-      chefValidations: chefValidationsResolver
-    }
+    title: 'Registrieren'
   },
   {
     path: 'delete-chef',

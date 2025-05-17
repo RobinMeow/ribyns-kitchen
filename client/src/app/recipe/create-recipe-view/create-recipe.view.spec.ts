@@ -2,18 +2,10 @@ import { provideHttpClient } from '@angular/common/http'
 import { provideHttpClientTesting } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { provideNoopAnimations } from '@angular/platform-browser/animations'
-import { ActivatedRoute } from '@angular/router'
 import { provideApiBaseUrlTesting } from '@api'
-import {
-  byTestAttr,
-  fakeSnapshot,
-  setValue,
-  withResolvedData
-} from '@common/testing'
-import { fakeValidations, withField } from '@common/validations/testing'
+import { byTestAttr, setValue } from '@common/testing'
 import { MockProvider } from 'ng-mocks'
 import { RecipeApi } from '../util/recipe.api'
-import { RecipeValidations } from '../util/recipe.validations'
 import { CreateRecipeView } from './create-recipe.view'
 
 describe('CreateRecipe should', () => {
@@ -29,17 +21,7 @@ describe('CreateRecipe should', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         provideApiBaseUrlTesting(),
-        MockProvider(RecipeApi),
-        MockProvider(ActivatedRoute, {
-          snapshot: fakeSnapshot(
-            withResolvedData(
-              'recipeValidations',
-              new RecipeValidations(
-                fakeValidations([withField('name').min(1).max(2).required().build()])
-              )
-            )
-          )
-        })
+        MockProvider(RecipeApi)
       ]
     }).compileComponents()
 
@@ -80,7 +62,7 @@ describe('CreateRecipe should', () => {
     expect(btn.disabled).toBeTrue()
 
     const input = byTestAttr<HTMLInputElement>(fixture, 'recipe-name-input')
-    setValue(input, 'A')
+    setValue(input, 'ABC')
     fixture.detectChanges()
 
     expect(btn.disabled).toBeFalse()

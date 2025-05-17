@@ -1,12 +1,9 @@
-import { firstValueFrom, map } from 'rxjs'
-
-import { Credentials } from '@auth'
 import { BaseApi } from '@api'
-import { RegisterChef } from './register-chef'
+import { Credentials } from '@auth'
+import { firstValueFrom } from 'rxjs'
 import { ChefDto } from './chef.dto'
 import { JwtToken } from './jwt-token'
-import { ChefValidations } from './chef.validations'
-import { Validations } from '@common/validations'
+import { RegisterChef } from './register-chef'
 
 export abstract class AuthApi extends BaseApi {
   private readonly URL = this.BASE_URL + '/Auth/'
@@ -37,20 +34,6 @@ export abstract class AuthApi extends BaseApi {
     const request$ = this.httpClient.post<void>(url, credentials, {
       headers: this.defaultHeaders
     })
-
-    return firstValueFrom(request$)
-  }
-
-  protected getValidationsAsync(): Promise<Readonly<ChefValidations>> {
-    const url = this.URL + 'GetValidationsAsync'
-
-    const request$ = this.httpClient
-      .get<Validations>(url, {
-        headers: this.defaultHeaders
-      })
-      .pipe(
-        map((validations) => Object.freeze(new ChefValidations(validations)))
-      )
 
     return firstValueFrom(request$)
   }

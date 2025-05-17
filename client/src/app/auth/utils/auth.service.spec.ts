@@ -7,7 +7,6 @@ import { WritableSignal, isSignal } from '@angular/core'
 import { TestBed } from '@angular/core/testing'
 import { API_BASE_URL, provideApiBaseUrlTesting } from '@api'
 import { Chef } from '@auth'
-import { Validations } from '@common/validations'
 import { MockProvider } from 'ng-mocks'
 import { AuthService } from './auth.service'
 import { RegisterChef } from './register-chef'
@@ -273,32 +272,6 @@ describe('AuthService', () => {
   describe('logout should', () => {
     it('throw for unauthorized', () => {
       expect(() => authService.logout()).toThrowError()
-    })
-  })
-
-  describe('getValidationsAsync should', () => {
-    it('reject invalid validations from http get', async () => {
-      const promise = authService.getValidationsAsync()
-      const validValidations: Validations = {}
-
-      const req = httpCtrl.expectOne(url + 'GetValidationsAsync')
-      req.flush(validValidations)
-      await expectAsync(promise).toBeRejectedWithError()
-    })
-
-    it('resolve validations from http get', async () => {
-      const promise = authService.getValidationsAsync()
-      const validValidations: Validations = {
-        // requires at least one field
-        meow: {
-          // satisfy constraints compiler
-          required: false
-        }
-      }
-
-      const req = httpCtrl.expectOne(url + 'GetValidationsAsync')
-      req.flush(validValidations)
-      await expectAsync(promise).toBeResolved()
     })
   })
 })
