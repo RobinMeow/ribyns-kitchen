@@ -1,6 +1,6 @@
-<h2 data-test-title>Rezept hinzufügen</h2>
+<h2 data-test="title">Rezept hinzufügen</h2>
 
-<form [formGroup]="form" data-test-create-recipe-form>
+<form [formGroup]="form" data-test="create-recipe-form">
   <div class="forms-column">
     <mat-form-field>
       <mat-label>Titel</mat-label>
@@ -14,7 +14,7 @@
         [formControl]="form.controls.name"
         placeholder="Weinberg des Herrn"
         type="text"
-        data-test-recipe-name-input
+        data-test="recipe-name-input"
       />
       <mat-hint
         >Zwischen {{ name_min_length }} und {{ name_max_length }} Zeichen</mat-hint
@@ -27,7 +27,7 @@
     color="primary"
     type="submit"
     (click)="onSubmit()"
-    data-test-create-recipe-submit-button
+    data-test="create-recipe-submit-button"
   >
     Erstellen
   </button>
