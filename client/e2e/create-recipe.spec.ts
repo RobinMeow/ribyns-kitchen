@@ -1,7 +1,8 @@
-import { expect, test } from '@playwright/test'
+import { test } from '@playwright/test'
 
-test('should create recipe', async ({ page }) => {
+test('should create recipe and redirect to recipe view', async ({ page }) => {
   await page.goto('/new-recipe')
-  await page.waitForURL('/')
-  await expect(page).toHaveURL('/')
+  await page.getByTestId('recipe-name-input').fill('New Recipe')
+  await page.getByTestId('new-recipe-submit-button').click()
+  await page.waitForURL('/recipe/*')
 })
