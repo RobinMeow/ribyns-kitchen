@@ -85,17 +85,4 @@ public sealed class RecipeController : ControllerBase
 
         return TypedResults.Ok(recipe);
     }
-
-    [HttpGet(nameof(GetValidations))]
-    public Task<Ok<Dictionary<string, FieldConstraints>>> GetValidations(CancellationToken ct = default)
-    {
-        ct.ThrowIfCancellationRequested();
-
-        return Task.FromResult(TypedResults.Ok(new ValidationsBuilder()
-            .AddField(nameof(NewRecipeRequest.Name))
-            .Required()
-            .Min(RecipeValidations.NAME_MIN_LENGTH)
-            .Max(RecipeValidations.NAME_MAX_LENGTH)
-            .Build()));
-    }
 }

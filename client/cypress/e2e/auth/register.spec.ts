@@ -34,8 +34,8 @@ describe('register', () => {
     })
   })
 
-  it('should redirect when authorized', () => {
-    cy.auth('register-and-login')
+  it('should redirect when authorized', async () => {
+    await cy.auth('register-and-login')
     cy.visit('/register')
     cy.url().should('not.include', 'register')
   })

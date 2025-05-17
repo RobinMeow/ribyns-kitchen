@@ -1,5 +1,6 @@
 ﻿using Application.Recipes;
 using Bogus;
+using Common;
 using Domain;
 using Infrastructure;
 using Infrastructure.MongoDB;
@@ -9,7 +10,7 @@ namespace Seeding;
 internal class Program
 {
     static IPasswordHasher _passwordHasher = new AspPasswordHasher();
-    static Faker _faker = new ("de");
+    static readonly Faker _faker = new ("de");
     static MongoDatabase _mongodb = null!;
     const int CHEF_COUNT = 50;
 
@@ -25,7 +26,7 @@ internal class Program
             Console.WriteLine($"Connecting to MongoDB on {connectionString}");
             _mongodb = new MongoDatabase(connectionString);
 
-            string dbName = Common.Globals.AppNameTech.ToLower();
+            string dbName = Globals.AppNameTech.ToLower();
             Console.WriteLine($"Dropping database '{dbName}'.");
             await _mongodb.Database.Client.DropDatabaseAsync(dbName);
 
@@ -54,9 +55,9 @@ internal class Program
         var chefCollection = new ChefCollection(_mongodb);
 
         Console.WriteLine($"SEEDING admin");
-        await chefCollection.AddAsync(FakeChef(username: "admin", email: "admin@ribyn.dev"));
+        await chefCollection.AddAsync(FakeChef(name: "admin", email: "admin@ribyn.dev"));
         Console.WriteLine($"SEEDING casual user 'Ribyn'");
-        await chefCollection.AddAsync(FakeChef(username: "Ribyn", email: "ribyn@ribyn.dev"));
+        await chefCollection.AddAsync(FakeChef(name: "Ribyn", email: "ribyn@ribyn.dev"));
 
         Console.Write($"SEEDING: 0/{CHEF_COUNT}");
         for (int i = 0; i < CHEF_COUNT; i++)
@@ -68,17 +69,15 @@ internal class Program
         }
     }
 
-    static Chef FakeChef(string? username = null, string? email = null)
+    static Chef FakeChef(string? name = null, string? email = null)
     {
-        username ??= _faker.Person.UserName;
-        email ??= _faker.Person.Email;
         var chef = new Chef()
         {
             Id = EntityId.New(),
-            Name = _faker.Person.UserName,
-            Email = _faker.Person.Email,
+            Name = name ??= _faker.Person.UserName,
+            Email = email ?? _faker.Person.Email,
         };
-        chef.SetPassword(_faker.Person.UserName, _passwordHasher);
+        chef.SetPassword(name, _passwordHasher);
         return chef;
     }
 

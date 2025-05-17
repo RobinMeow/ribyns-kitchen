@@ -8,15 +8,14 @@ import {
   inject,
   signal
 } from '@angular/core'
-import { Credentials } from './credentials'
-import { Chef } from './chef'
-import { JwtDecoder } from './jwt.decoder'
-import { DecodedToken } from './decoded-token'
-import { AuthApi } from './auth.api'
-import { RegisterChef } from './register-chef'
-import { JwtToken } from './jwt-token'
 import { assert } from '@common/assertions'
-import { ChefValidations } from './chef.validations'
+import { AuthApi } from './auth.api'
+import { Chef } from './chef'
+import { Credentials } from './credentials'
+import { DecodedToken } from './decoded-token'
+import { JwtToken } from './jwt-token'
+import { JwtDecoder } from './jwt.decoder'
+import { RegisterChef } from './register-chef'
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends AuthApi {
@@ -120,9 +119,5 @@ export class AuthService extends AuthApi {
       console.error(error)
       return 'error'
     }
-  }
-
-  override async getValidationsAsync(): Promise<Readonly<ChefValidations>> {
-    return await super.getValidationsAsync()
   }
 }

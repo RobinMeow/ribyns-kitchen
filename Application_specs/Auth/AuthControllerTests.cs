@@ -46,13 +46,4 @@ public sealed class AuthControllerTests
     {
         await ThrowsAnyAsync<NullReferenceException>(async () => await _authController.RegisterAsync(null!));
     }
-
-    [Fact]
-    public async Task GetValidations_returns_OK()
-    {
-        Ok<Dictionary<string, FieldConstraints>> validations = await _authController.GetValidationsAsync();
-        Equal(200, validations.StatusCode);
-        NotNull(validations.Value);
-        True(validations.Value.Count > 0);
-    }
 }

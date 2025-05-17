@@ -10,11 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input'
 import { MatTooltipModule } from '@angular/material/tooltip'
-import { ActivatedRoute, Router } from '@angular/router'
-import { ValidatorsFactory } from '@common/validations'
+import { Router } from '@angular/router'
 import { PasswordInput } from '../ui/password-input/password-input'
 import { AuthService } from '../utils/auth.service'
-import { ChefValidations } from '../utils/chef.validations'
 import { RegisterChef } from '../utils/register-chef'
 
 @Component({
@@ -37,39 +35,37 @@ export class RegisterView {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   private readonly nnfb = inject(NonNullableFormBuilder)
-  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
 
-  private readonly chefValidations = this.activatedRouteSnapshot.data[
-    'chefValidations'
-  ] as Readonly<ChefValidations>
+  protected readonly chefname_min_length = 3
+  protected readonly chefname_max_length = 20
 
-  protected readonly nameValidations = this.chefValidations.name()
-  protected readonly passwordValidations = this.chefValidations.password()
-  protected readonly emailValidations = this.chefValidations.email()
+  protected readonly password_min_length = 4
+  protected readonly password_max_length = 50
 
-  private readonly validatorsFactory = new ValidatorsFactory()
-
-  protected readonly registerForm = this.nnfb.group({
-    chefname: ['', this.validatorsFactory.create('string', this.nameValidations)],
-    password: [
-      '',
-      this.validatorsFactory.create('string', this.passwordValidations)
-    ],
-    email: [
+  protected readonly form = this.nnfb.group({
+    chefname: [
       '',
       [
-        ...this.validatorsFactory.create('string', this.emailValidations),
-        Validators.email
+        Validators.required,
+        Validators.minLength(this.chefname_min_length),
+        Validators.maxLength(this.chefname_max_length)
       ]
-    ]
+    ],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(this.password_min_length),
+        Validators.maxLength(this.password_max_length)
+      ]
+    ],
+    email: ['', [Validators.email]]
   })
 
   protected hidePassword = true
 
   protected getInvalidEmailMessage() {
-    return this.registerForm.controls.email.hasError('email')
-      ? 'Ungültige E-Mail'
-      : ''
+    return this.form.controls.email.hasError('email') ? 'Ungültige E-Mail' : ''
   }
 
   protected async onSubmit(): Promise<void> {
@@ -78,11 +74,11 @@ export class RegisterView {
 
   protected async registerAndLogin(): Promise<void> {
     const chef: RegisterChef = {
-      name: this.registerForm.controls.chefname.value,
-      password: this.registerForm.controls.password.value,
-      email: this.registerForm.controls.email.value
+      name: this.form.controls.chefname.value,
+      password: this.form.controls.password.value,
+      email: this.form.controls.email.value
     }
     await this.authService.signUpAsync(chef)
-    await this.router.navigateByUrl('/')
+    void this.router.navigateByUrl('/')
   }
 }

@@ -3,6 +3,8 @@ import { defineConfig } from 'cypress'
 import { MongoClient } from 'mongodb'
 import { assert } from './src/app/common/assertions/assert'
 
+const conString = 'mongodb://127.0.0.1:27020'
+
 export default defineConfig({
   env: {
     apiBaseUrl: 'http://localhost:5126',
@@ -17,8 +19,8 @@ export default defineConfig({
       config: Cypress.PluginConfigOptions
     ) {
       on('task', {
-        async 'db:reset'() {
-          const client = new MongoClient('mongodb://127.0.0.1:27017')
+        async 'db:reset'(): Promise<null> {
+          const client = new MongoClient(conString)
 
           try {
             await client.connect()
@@ -31,19 +33,16 @@ export default defineConfig({
           }
           return Promise.resolve(null)
         },
-        async 'db:seed:recipe'({ id, title }) {
+        async 'db:seed:recipe'({ id, name }): Promise<null> {
           assert(id && typeof id === 'string', 'Id required to create recipe.')
-          assert(
-            title && typeof title === 'string',
-            'Title required to create recipe.'
-          )
+          assert(name && typeof name === 'string', 'Name required to create recipe.')
 
-          const client = new MongoClient('mongodb://127.0.0.1:27017')
+          const client = new MongoClient(conString)
 
           try {
             type Recipe = {
               _id: string
-              title: string
+              name: string
               createdAt: Date
               __v: number
             }
@@ -55,11 +54,11 @@ export default defineConfig({
               _id: id,
               __v: 0,
               createdAt: new Date(new Date().toISOString()),
-              title: title
+              name: name
             })
           } catch (error) {
             console.error(
-              `Failed to see recipe with id '${id}' and title '${title}'.`,
+              `Failed to see recipe with id '${id}' and name '${name}'.`,
               error
             )
           } finally {

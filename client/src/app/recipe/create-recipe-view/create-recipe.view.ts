@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common'
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
-import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms'
+import {
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
-import { ActivatedRoute, Router } from '@angular/router'
-import { FieldConstraints, ValidatorsFactory } from '@common/validations'
+import { Router } from '@angular/router'
 import { NewRecipe } from '../util/new-recipe'
 import { Recipe } from '../util/recipe'
 import { RecipeApi } from '../util/recipe.api'
-import { RecipeValidations } from '../util/recipe.validations'
 
 @Component({
   imports: [
@@ -26,17 +28,18 @@ export class CreateRecipeView {
   private readonly nnfb = inject(NonNullableFormBuilder)
   private readonly recipeApi = inject(RecipeApi)
   private readonly router = inject(Router)
-  private readonly activatedRouteSnapshot = inject(ActivatedRoute).snapshot
-  private readonly recipeValidations = this.activatedRouteSnapshot.data[
-    'recipeValidations'
-  ] as Readonly<RecipeValidations>
-  private readonly validatorsFactory = new ValidatorsFactory()
 
-  protected readonly nameValidations: Readonly<FieldConstraints> =
-    this.recipeValidations.name()
-
+  protected readonly name_min_length = 3
+  protected readonly name_max_length = 120
   protected readonly form = this.nnfb.group({
-    name: ['', this.validatorsFactory.create('string', this.nameValidations)]
+    name: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(this.name_min_length),
+        Validators.maxLength(this.name_max_length)
+      ]
+    ]
   })
 
   protected async onSubmit(): Promise<void> {
@@ -46,7 +49,7 @@ export class CreateRecipeView {
       name: this.form.controls.name.value
     }
 
-    const recipe: Recipe = await this.recipeApi.newAsync(newRecipe)
+    const recipe: Recipe = await this.recipeApi.newAsync(newRecipe) // TODO should only return the id, so we dont have to worry about state management?
     void this.router.navigate(['/recipe', recipe.id])
   }
 }

@@ -60,7 +60,7 @@ public sealed class AuthController : ControllerBase
             Name = chefname,
             Email = newChef.Email
         };
-            
+
         chef.SetPassword(newChef.Password, _passwordHasher);
 
         ct.ThrowIfCancellationRequested();
@@ -123,26 +123,6 @@ public sealed class AuthController : ControllerBase
         await _chefRepository.RemoveAsync(credentials.Name, ct);
 
         return TypedResults.Ok();
-    }
-
-    [HttpGet(nameof(GetValidationsAsync))]
-    public Task<Ok<Dictionary<string, FieldConstraints>>> GetValidationsAsync()
-    {
-        return Task.FromResult(TypedResults.Ok(new ValidationsBuilder()
-            .AddField(nameof(RegisterChefRequest.Name))
-            .Required()
-            .Min(ChefValidations.NameMinLength)
-            .Max(ChefValidations.NameMaxLength)
-
-            .AddField(nameof(RegisterChefRequest.Password))
-            .Required()
-            .Min(ChefValidations.PasswordMinLength)
-            .Max(ChefValidations.PasswordMaxLength)
-
-            .AddField(nameof(RegisterChefRequest.Email))
-            .Min(ChefValidations.EmailMinLength)
-            .Max(ChefValidations.EmailMaxLength)
-            .Build()));
     }
 
     private BadRequest<string> UserNotFound()
