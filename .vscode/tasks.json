@@ -6,14 +6,9 @@
 		{
       "label": "seed mongodb [bogus C#]",
       "type": "shell",
-      "command": "dotnet",
-      "args": [
-        "run",
-        "--port ${input:mongodbPort}",
-        "${input:onlyDropFlag}"
-      ],
+      "command": "dotnet run ${input:rebuild} --port ${input:mongodbPort} ${input:onlyDrop}",
       "options": {
-        "cwd": "${workspaceFolder}/Seeding/"
+        "cwd": "${workspaceFolder}/Seeding/",
       },
       "problemMatcher": [],
       "group": {
@@ -132,7 +127,17 @@
       "default": "27020"
     },
     {
-        "id": "onlyDropFlag",
+      "id": "rebuild",
+      "type": "pickString",
+      "description": "Rebuild?",
+      "options": [
+        "--no-restore --no-build",
+        "--restore --build"
+      ],
+      "default": "--no-build --no-restore",
+    },
+    {
+        "id": "onlyDrop",
         "type": "pickString",
         "description": "Do you want to only drop the mongodb?",
         "options": [

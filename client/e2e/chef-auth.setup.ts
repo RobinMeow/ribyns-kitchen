@@ -19,11 +19,8 @@ test('chef login', async ({ page }) => {
   await page.getByTestId('password-input').fill(password)
   await page.getByTestId('password-input').press('Enter')
 
-  // when the logout button becomes visible, we are logged in
-  await page.getByTestId('logout-button').waitFor({
-    state: 'visible',
-    timeout: 5000
-  })
+  // when redirected to main page, you are logged in
+  await page.waitForURL('/')
 
   await page.context().storageState({ path: chefFile })
 })
