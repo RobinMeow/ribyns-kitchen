@@ -13,11 +13,11 @@ internal class Program
     static readonly Faker _faker = new ("de");
     static MongoDatabase _mongodb = null!;
     const int CHEF_COUNT = 50;
-
     static async Task Main(string[] args)
     {
         try
         {
+            Randomizer.Seed = new Random(20250517);
             Console.ForegroundColor = ConsoleColor.Green;
 
             int port = args.Length > 0 ? int.Parse(args[0]) : 27020;
