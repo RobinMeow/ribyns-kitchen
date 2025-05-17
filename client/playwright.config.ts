@@ -11,6 +11,8 @@ dotenv.config({ path: dotEnvPath })
 const baseUrl = process.env['CLIENT_BASE_URL']
 if (!baseUrl) throw new Error('CLIENT_BASE_URL not set in .env file.')
 
+const chefFile = 'e2e/.auth/chef.json'
+
 /** See https://playwright.dev/docs/test-configuration. */
 export default defineConfig({
   testDir: './e2e',
@@ -43,39 +45,50 @@ export default defineConfig({
 
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: chefFile
+      },
       dependencies: ['chef-auth']
-    }
+    },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] }
-    // },
+    {
+      name: 'firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: chefFile
+      },
+      dependencies: ['chef-auth']
+    },
 
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] }
-    // }
+    {
+      name: 'webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: chefFile,
+        ignoreHTTPSErrors: true
+      },
+      dependencies: ['chef-auth']
+    },
 
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    {
+      name: 'Mobile Chrome',
+      use: {
+        ...devices['Pixel 5'],
+        storageState: chefFile
+      },
+      dependencies: ['chef-auth']
+    },
+    {
+      name: 'Mobile Safari',
+      use: {
+        ...devices['iPhone 12'],
+        storageState: chefFile,
+        ignoreHTTPSErrors: true
+      },
+      dependencies: ['chef-auth']
+    }
   ]
 
   /* Run your local dev server before starting the tests */
