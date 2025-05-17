@@ -7,7 +7,8 @@ export const recipeRoutes: Route[] = [
     path: 'create-recipe',
     canActivate: [authorizedGuard],
     loadComponent: async () =>
-      (await import('./create-recipe-view/create-recipe.view')).CreateRecipeView,
+      (await import('./create-recipe-view/create-recipe.view'))
+        .CreateRecipeView,
     title: 'Rezept hinzufügen'
   },
   {

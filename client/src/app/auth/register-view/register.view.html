@@ -17,7 +17,10 @@
         type="text"
         data-test-register-name-input
       />
-      <mat-hint>Zwischen {{ chefname_min_length }} und {{ chefname_max_length }} Zeichen</mat-hint>
+      <mat-hint
+        >Zwischen {{ chefname_min_length }} und
+        {{ chefname_max_length }} Zeichen</mat-hint
+      >
     </mat-form-field>
 
     <auth-password-input [passwordControl]="form.controls.password" showHint />
@@ -41,7 +44,13 @@
       }
     </mat-form-field>
   </div>
-  <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit" data-test-register-submit-button>
+  <button
+    [disabled]="form.invalid"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    data-test-register-submit-button
+  >
     Registrieren
   </button>
 </form>

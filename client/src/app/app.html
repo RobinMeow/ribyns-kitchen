@@ -3,10 +3,7 @@
     <core-menu [drawer]="drawer" />
   </mat-drawer>
 
-  <core-header
-    [hideMenuButton]="drawer.opened"
-    (openMenu)="onOpenMenuClick()"
-  />
+  <core-header [hideMenuButton]="drawer.opened" (openMenu)="onOpenMenuClick()" />
 
   <div class="router-outlet-defaults">
     <router-outlet />

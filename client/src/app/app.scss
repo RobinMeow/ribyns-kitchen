@@ -2,19 +2,19 @@
 @use './shared/media' as *;
 
 mat-drawer-container {
-	height: 100%;
+  height: 100%;
 }
 
 mat-drawer {
-	padding: 0;
+  padding: 0;
 }
 
 .router-outlet-defaults {
-	margin: #{$spacing};
+  margin: #{$spacing};
 }
 
 @include mobile {
-	.menu {
-		width: 100%;
-	}
+  .menu {
+    width: 100%;
+  }
 }

@@ -20,7 +20,13 @@
 
     <auth-password-input [passwordControl]="form.controls.password" />
   </div>
-  <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit" data-test="login-submit-button">
+  <button
+    [disabled]="form.invalid"
+    mat-raised-button
+    color="primary"
+    type="submit"
+    data-test="login-submit-button"
+  >
     Einloggen
   </button>
 </form>

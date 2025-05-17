@@ -20,11 +20,15 @@ export function byTestAttr<T>(
   testid: string
 ): T {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  let element = fixture.nativeElement.querySelector(`[data-test-${testid}]`) as T
+  let element = fixture.nativeElement.querySelector(
+    `[data-test-${testid}]`
+  ) as T
 
   if (!element) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-    element = fixture.nativeElement.querySelector(`[data-test="${testid}"]`) as T
+    element = fixture.nativeElement.querySelector(
+      `[data-test="${testid}"]`
+    ) as T
   }
 
   return element

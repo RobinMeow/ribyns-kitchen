@@ -1,6 +1,12 @@
 @if (isAuthorizedSignal()) {
-  <button mat-stroked-button color="accent" (click)="logout()" data-test="logout-button">Ausloggen</button>
+  <button mat-stroked-button color="accent" (click)="logout()" data-test="logout-button">
+    Ausloggen
+  </button>
 } @else {
-  <button mat-flat-button color="accent" routerLink="/register" data-test-register-button>Account erstellen</button>
-  <button mat-raised-button color="accent" routerLink="/login" data-test-login-button>Einloggen</button>
+  <button mat-flat-button color="accent" routerLink="/register" data-test-register-button>
+    Account erstellen
+  </button>
+  <button mat-raised-button color="accent" routerLink="/login" data-test-login-button>
+    Einloggen
+  </button>
 }

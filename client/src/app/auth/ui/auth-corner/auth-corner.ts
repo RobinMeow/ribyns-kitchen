@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Signal, inject } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Signal,
+  inject
+} from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
 import { RouterLink } from '@angular/router'
 import { AuthService } from '../../utils/auth.service'
