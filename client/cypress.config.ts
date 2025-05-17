@@ -17,7 +17,7 @@ export default defineConfig({
       config: Cypress.PluginConfigOptions
     ) {
       on('task', {
-        async 'db:reset'() {
+        async 'db:reset'(): Promise<null> {
           const client = new MongoClient('mongodb://127.0.0.1:27020')
 
           try {
@@ -31,7 +31,7 @@ export default defineConfig({
           }
           return Promise.resolve(null)
         },
-        async 'db:seed:recipe'({ id, title }) {
+        async 'db:seed:recipe'({ id, title }): Promise<null> {
           assert(id && typeof id === 'string', 'Id required to create recipe.')
           assert(
             title && typeof title === 'string',
