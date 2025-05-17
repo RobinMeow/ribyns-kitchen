@@ -48,13 +48,19 @@ describe('RegisterView should', () => {
     const btn = byTestAttr<HTMLButtonElement>(fixture, 'register-submit-button')
     expect(btn.disabled).toBeTrue()
 
-    const nameInput = byTestAttr<HTMLInputElement>(fixture, 'register-name-input')
+    const nameInput = byTestAttr<HTMLInputElement>(
+      fixture,
+      'register-name-input'
+    )
     setValue(nameInput, 'Weinberg des Herrn')
 
     fixture.detectChanges()
     expect(btn.disabled).toBeTrue()
 
-    const passwordInput = byTestAttr<HTMLInputElement>(fixture, 'password-input')
+    const passwordInput = byTestAttr<HTMLInputElement>(
+      fixture,
+      'password-input'
+    )
     setValue(passwordInput, 'iLoveJesus<3')
 
     fixture.detectChanges()

@@ -39,9 +39,4 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "exclude": [
-    // https://github.com/microsoft/TypeScript/issues/37053
-    "./cypress.config.ts",
-    "./cypress"
-  ]
 }

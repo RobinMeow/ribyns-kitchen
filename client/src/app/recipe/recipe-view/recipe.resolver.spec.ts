@@ -50,7 +50,9 @@ describe('recipeResolver shoul', () => {
   // recipe remotely deleted by other user + cached view on current user
   it('handle when server doesnt send a recipe', async () => {
     const paramMapSpy = spyOn(route.paramMap, 'get').and.returnValue('123')
-    const apiSpy = spyOn(recipeApi, 'getAsync').and.returnValue(Promise.reject(null))
+    const apiSpy = spyOn(recipeApi, 'getAsync').and.returnValue(
+      Promise.reject(null)
+    )
 
     await TestBed.runInInjectionContext(async () => {
       const promise = recipeResolver(route, state)

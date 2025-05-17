@@ -44,7 +44,10 @@ describe('LoginView should', () => {
     const btn = byTestAttr<HTMLButtonElement>(fixture, 'login-submit-button')
     expect(btn.disabled).toBeTrue()
 
-    const chefnameInput = byTestAttr<HTMLInputElement>(fixture, 'login-name-input')
+    const chefnameInput = byTestAttr<HTMLInputElement>(
+      fixture,
+      'login-name-input'
+    )
     setValue(chefnameInput, 'Weinberg des Herrn')
 
     const pwInput = byTestAttr<HTMLInputElement>(fixture, 'password-input')

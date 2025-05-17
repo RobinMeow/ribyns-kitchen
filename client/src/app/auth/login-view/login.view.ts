@@ -39,8 +39,10 @@ export class LoginView {
     password: ['', Validators.required]
   })
 
-  protected readonly chefnameCtl: FormControl<string> = this.form.controls.chefname
-  protected readonly passwordCtl: FormControl<string> = this.form.controls.password
+  protected readonly chefnameCtl: FormControl<string> =
+    this.form.controls.chefname
+  protected readonly passwordCtl: FormControl<string> =
+    this.form.controls.password
 
   protected async onSubmit(): Promise<void> {
     if (this.form.invalid) return

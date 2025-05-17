@@ -42,6 +42,11 @@
               "@angular/material/prebuilt-themes/purple-green.css",
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/scss"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -60,7 +65,7 @@
               ],
               "outputHashing": "all"
             },
-            "development": {
+            "dev": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
@@ -68,7 +73,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
+                  "with": "src/environments/environment.dev.ts"
                 }
               ]
             }
@@ -81,11 +86,11 @@
             "production": {
               "buildTarget": "ribyns-kitchen:build:production"
             },
-            "development": {
-              "buildTarget": "ribyns-kitchen:build:development"
+            "dev": {
+              "buildTarget": "ribyns-kitchen:build:dev"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "dev"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -100,7 +105,12 @@
             ],
             "codeCoverageExclude": [
               "**/*_routes.ts"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/scss"
+              ]
+            }
           }
         },
         "lint": {
@@ -111,51 +121,6 @@
               "src/**/*.html"
             ]
           }
-        },
-        "cypress-run": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "ribyns-kitchen:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ribyns-kitchen:serve:production"
-            }
-          }
-        },
-        "cypress-open": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "watch": true,
-            "headless": false
-          }
-        },
-        "ct": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "ribyns-kitchen:serve",
-            "watch": true,
-            "headless": false,
-            "testingType": "component"
-          },
-          "configurations": {
-            "development": {
-              "devServerTarget": "ribyns-kitchen:serve:development"
-            }
-          }
-        },
-        "e2e": {
-          "builder": "@cypress/schematic:cypress",
-          "options": {
-            "devServerTarget": "ribyns-kitchen:serve",
-            "watch": true,
-            "headless": false
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ribyns-kitchen:serve:production"
-            }
-          }
         }
       }
     }
@@ -165,7 +130,6 @@
       "angular-eslint",
       "typescript-eslint",
       "@schematics/angular",
-      "@cypress/schematic",
       "@angular-eslint/schematics"
     ]
   }

@@ -4,14 +4,13 @@ import {
   Signal,
   inject
 } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { RouterLink } from '@angular/router'
 import { MatButtonModule } from '@angular/material/button'
+import { RouterLink } from '@angular/router'
 import { AuthService } from '../../utils/auth.service'
 
 @Component({
   selector: 'auth-corner',
-  imports: [CommonModule, MatButtonModule, RouterLink],
+  imports: [MatButtonModule, RouterLink],
   templateUrl: './auth-corner.html',
   styleUrl: './auth-corner.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

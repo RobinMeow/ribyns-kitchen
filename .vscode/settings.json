@@ -5,18 +5,20 @@
     "**/.git": false,
   },
   "terminal.integrated.cwd": "${workspaceFolder}/client",
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true,
-  "[html][scss][typescript]": {
+  "redhat.telemetry.enabled": false,
+  "editor.tabSize": 2,
+  "[{*.html, *.typescript, *.ts, *.json, *.scss, *.sass, *.css, *.javascript, *.js, *.markdown}]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit",
       "source.sortImports": "explicit",
+      "source.fixAll.eslint": "explicit",
     },
-    "files.trimTrailingWhitespace": false,
+    "files.trimTrailingWhitespace": true,
   },
-  "[{*.md,*.ts}]": {
-    "files.trimTrailingWhitespace": false
+  "[csharp]": {
+    "editor.tabSize": 4
   },
-  "eslint.enable": true
+  "eslint.enable": true,
 }

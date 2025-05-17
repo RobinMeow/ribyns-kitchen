@@ -1,12 +1,9 @@
 <mat-drawer-container autosize>
-  <mat-drawer #drawer mode="side" opened="true">
+  <mat-drawer #drawer [mode]="drawerMode()" opened="true">
     <core-menu [drawer]="drawer" />
   </mat-drawer>
 
-  <core-header
-    [hideMenuButton]="drawer.opened"
-    (openMenu)="onOpenMenuClick()"
-  />
+  <core-header [hideMenuButton]="drawer.opened" (openMenu)="onOpenMenuClick()" />
 
   <div class="router-outlet-defaults">
     <router-outlet />

@@ -52,12 +52,18 @@ describe('CreateRecipe should', () => {
   })
 
   it('have disabled submit button by default', () => {
-    const btn = byTestAttr<HTMLButtonElement>(fixture, 'create-recipe-submit-button')
+    const btn = byTestAttr<HTMLButtonElement>(
+      fixture,
+      'create-recipe-submit-button'
+    )
     expect(btn.disabled).toBeTrue()
   })
 
   it('enable submit button after valid inputs', () => {
-    const btn = byTestAttr<HTMLButtonElement>(fixture, 'create-recipe-submit-button')
+    const btn = byTestAttr<HTMLButtonElement>(
+      fixture,
+      'create-recipe-submit-button'
+    )
     expect(btn).toBeTruthy()
     expect(btn.disabled).toBeTrue()
 

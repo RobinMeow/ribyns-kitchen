@@ -105,7 +105,9 @@ describe('AuthService', () => {
         )
         registerRequest.flush(null)
 
-        expect((registerRequest.request.body as RegisterChef).email).toBe('TrimMe')
+        expect((registerRequest.request.body as RegisterChef).email).toBe(
+          'TrimMe'
+        )
       })
 
       it('the name', () => {
@@ -119,7 +121,9 @@ describe('AuthService', () => {
         )
         registerRequest.flush(null)
 
-        expect((registerRequest.request.body as RegisterChef).name).toBe('TrimMe')
+        expect((registerRequest.request.body as RegisterChef).name).toBe(
+          'TrimMe'
+        )
       })
 
       afterEach(async () => {
