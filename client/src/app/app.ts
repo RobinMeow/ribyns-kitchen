@@ -36,11 +36,24 @@ export class App {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd))
   )
 
+  private initialLoad = true
+
   constructor() {
     effect(() => {
-      // this also closes it on initial page load. which is okay
-      this.navigationEnd()
+      // ensures, that the menu is closed on inital load for mobiles, but not for desktops
+      if (this.navigationEnd() === undefined) return
+
       const drawer = untracked(() => this.drawer())
+
+      if (this.initialLoad) {
+        this.initialLoad = false
+
+        const isMobile = untracked(() => this.maxWidth600())?.matches ?? false
+        if (isMobile) void drawer.close()
+
+        return
+      }
+
       void drawer.close()
     })
   }
