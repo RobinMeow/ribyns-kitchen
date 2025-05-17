@@ -20,7 +20,7 @@ internal class Program
         {
             Randomizer.Seed = new Random(20250517);
             Console.ForegroundColor = ConsoleColor.Green;
-
+            // TODO make two kind of seedings, one for lots of data and development, one small for e2e testing regular
             int port = int.Parse(args.FirstOrDefault(static a => a == "port", defaultValue: "27020"));
             string connectionString = $"mongodb://127.0.0.1:{port}";
 
