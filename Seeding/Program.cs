@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Application.Recipes;
+﻿using Application.Recipes;
 using Bogus;
 using Common;
 using Domain;
@@ -101,7 +100,6 @@ internal class Program
 
     static async ValueTask SeedChefAsync()
     {
-
         var chefCollection = new ChefCollection(_mongodb);
 
         Console.WriteLine($"SEEDING admin");
