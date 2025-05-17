@@ -10,15 +10,15 @@ Welcome to Ribyn's Kitchen, a place where users can share and explore recipes wi
 
 ## Requirements
 
-- The app should recalculate quantities based on the desired *number of dishes* selected by the user.
-- A *Recipe* is considered unique based on the combination of *Author* and *RecipeName* (composite key).
-- *Ingredients* should be reusable to avoid different spellings for the same *ingredient*. When adding an *Ingredient* to a *Recipe*, the user should be able to select existing *ingredients*. If there is no existing one, it will create a new *ingredient* automatically. (In a later version it might be desired, to have a way of merging ingredients. If there were duplicates created with different spellings.)
-- *Recipes* should be *categorizable* or *taggable* for better *search*- and *filtering*.
-- A *Recipe* can contain *multiple descriptions **and** notes*, which should be displayed accordingly. The ability to reorder the display of *descriptions*, *notes* and *ingredients* through drag and drop may be desirable.
+- The app should recalculate quantities based on the desired _number of dishes_ selected by the user.
+- A _Recipe_ is considered unique based on the combination of _Author_ and _RecipeName_ (composite key).
+- _Ingredients_ should be reusable to avoid different spellings for the same _ingredient_. When adding an _Ingredient_ to a _Recipe_, the user should be able to select existing _ingredients_. If there is no existing one, it will create a new _ingredient_ automatically. (In a later version it might be desired, to have a way of merging ingredients. If there were duplicates created with different spellings.)
+- _Recipes_ should be _categorizable_ or _taggable_ for better _search_- and _filtering_.
+- A _Recipe_ can contain _multiple descriptions **and** notes_, which should be displayed accordingly. The ability to reorder the display of _descriptions_, _notes_ and _ingredients_ through drag and drop may be desirable.
 - The frontend only needs to support the German language; internationalization is not required. (Multiple languages would cause trouble anyways because our culinary skills are multicultural.)
 - Access to the app should be restricted to a specific group of people using a provided "key".
-- Each user should have the ability to *exclude recipes* from *search results* based on the *recipe's author*. This setting should not be visible to other users.
-- Consider implementing a *Like/Dislike system* for recipes. Only positive likes should be public, while dislikes remain for private use.
+- Each user should have the ability to _exclude recipes_ from _search results_ based on the _recipe's author_. This setting should not be visible to other users.
+- Consider implementing a _Like/Dislike system_ for recipes. Only positive likes should be public, while dislikes remain for private use.
 
 > Note/ToDo: There are additional requirements documented in Confluence => Which are now avilable in the pdf located in the root of this repository.
 
@@ -39,4 +39,5 @@ If you appreciate my efforts and would like to support me, you can show your app
 ## Fun
 
 Fun to watch what has been done in the project: [gource](https://gource.io/)
-> `gource -1280x720 --seconds-per-day 1 --auto-skip-seconds 2 --file-idle-time 0 --max-file-lag 0.5 --title "Ribyn's Kitchen"`
+
+> `gource -1600x900 --seconds-per-day 3 --auto-skip-seconds 1 --file-idle-time 0 --max-file-lag 0.5 --title "Ribyn's Kitchen"`
