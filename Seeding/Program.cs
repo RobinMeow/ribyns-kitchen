@@ -1,5 +1,6 @@
 ﻿using Application.Recipes;
 using Bogus;
+using Common;
 using Domain;
 using Infrastructure;
 using Infrastructure.MongoDB;
@@ -9,7 +10,7 @@ namespace Seeding;
 internal class Program
 {
     static IPasswordHasher _passwordHasher = new AspPasswordHasher();
-    static Faker _faker = new ("de");
+    static readonly Faker _faker = new ("de");
     static MongoDatabase _mongodb = null!;
     const int CHEF_COUNT = 50;
 
@@ -25,7 +26,7 @@ internal class Program
             Console.WriteLine($"Connecting to MongoDB on {connectionString}");
             _mongodb = new MongoDatabase(connectionString);
 
-            string dbName = Common.Globals.AppNameTech.ToLower();
+            string dbName = Globals.AppNameTech.ToLower();
             Console.WriteLine($"Dropping database '{dbName}'.");
             await _mongodb.Database.Client.DropDatabaseAsync(dbName);
 
