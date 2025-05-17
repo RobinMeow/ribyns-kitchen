@@ -40,9 +40,10 @@ internal class Program
 
                     int nextIndex = i + 1;
 
-                    if (args.Length <= nextIndex) return true; // --ci is used as standalone flag
+                    if (args.Length <= nextIndex) return true; // flag is used as standalone
 
-                    return args[nextIndex].StartsWith("-") || bool.Parse(args[nextIndex]);
+                    return args[nextIndex].StartsWith("-")  // if true: flag is used as standalone-true
+                    || bool.Parse(args[nextIndex]);
                 }
 
                 return false;
@@ -57,9 +58,10 @@ internal class Program
 
                     int nextIndex = i + 1;
 
-                    if (args.Length <= nextIndex) return true; // --ci is used as standalone flag
+                    if (args.Length <= nextIndex) return true; // flag is used as standalone
 
-                    return args[nextIndex].StartsWith("-") || bool.Parse(args[nextIndex]);
+                    return args[nextIndex].StartsWith("-")  // if true: flag is used as standalone-true
+                    || bool.Parse(args[nextIndex]);
                 }
 
                 return false;
