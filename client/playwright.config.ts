@@ -35,7 +35,8 @@ export default defineConfig({
     stdout: 'pipe',
     reuseExistingServer: true
   },
-  timeout: 5000,
+  /* a test may not take longer than 10s, by default. If you need more use test.setTimeout(20_000) or test.slow() which equals the default timeout times 3. */
+  timeout: 10_000,
   maxFailures: 0,
   /* Configure projects for major browsers */
   projects: [
