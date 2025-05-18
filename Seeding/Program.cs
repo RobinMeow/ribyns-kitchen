@@ -15,6 +15,8 @@ internal class Program
     static readonly Faker _faker = new("de");
     static MongoDatabase _mongodb = null!;
     static bool _ci = false;
+    static readonly string[] portArgs = new string[] { "--port", "-p" };
+    static readonly string[] onlyDropArgs = new string[] { "--only-drop" };
 
     static int GetArgValueInt(string[] args, string[] argNames, int defaultValue = -1)
     {
@@ -35,7 +37,7 @@ internal class Program
 
             if (args.Length <= nextIndex) return true; // flag is used as standalone
 
-            return args[nextIndex].StartsWith("-")  // if true: flag is used as standalone-true
+            return args[nextIndex].StartsWith('-')  // if true: flag is used as standalone-true
             || bool.Parse(args[nextIndex]); // flag is used with true/false string value
         }
 
@@ -51,7 +53,7 @@ internal class Program
 
             _ci = GetArgValueBool(args, new string[] { "--ci" });
 
-            string connectionString = $"mongodb://127.0.0.1:{GetArgValueInt(args, new string[] { "--port", "-p" }, defaultValue: 27020)}";
+            string connectionString = $"mongodb://127.0.0.1:{GetArgValueInt(args, portArgs, defaultValue: 27020)}";
 
             Console.WriteLine($"Connecting to MongoDB on {connectionString}");
             _mongodb = new MongoDatabase(connectionString);
@@ -60,7 +62,7 @@ internal class Program
             Console.WriteLine($"Dropping database '{dbName}'.");
             await _mongodb.Database.Client.DropDatabaseAsync(dbName);
 
-            if (GetArgValueBool(args, new string[] { "--only-drop" }))
+            if (GetArgValueBool(args, onlyDropArgs))
             {
                 Console.WriteLine($"Database dropped.");
                 return;
@@ -88,22 +90,22 @@ internal class Program
         var chefCollection = new ChefCollection(_mongodb);
 
         Console.WriteLine($"SEEDING admin");
-        await chefCollection.AddAsync(FakeChef(-1, name: "admin", email: "admin@ribyn.dev"));
+        await chefCollection.AddAsync(FakeChef(name: "admin", email: "admin@ribyn.dev"));
         Console.WriteLine($"SEEDING chef 'Ribyn'");
-        await chefCollection.AddAsync(FakeChef(-2, name: "Ribyn", email: "ribyn@ribyn.dev"));
+        await chefCollection.AddAsync(FakeChef(name: "Ribyn", email: "ribyn@ribyn.dev"));
 
         var count = _ci ? CHEF_COUNT * 0.1 : CHEF_COUNT;
         Console.Write($"SEEDING: 0/{count}");
         for (int i = 0; i < count; i++)
         {
-            await chefCollection.AddAsync(FakeChef(i));
+            await chefCollection.AddAsync(FakeChef());
 
             Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write($"SEEDING: {i + 1}/{count}");
         }
     }
 
-    static Chef FakeChef(int index, string? name = null, string? email = null)
+    static Chef FakeChef(string? name = null, string? email = null)
     {
         var chef = new Chef()
         {

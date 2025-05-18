@@ -32,9 +32,7 @@ public sealed class AuthController : ControllerBase
     /// <param name="newChef">the data to create an account from.</param>
     /// <param name="ct"></param>
     [HttpPost(nameof(RegisterAsync))]
-    public async Task<Results<Created<ChefDto>, BadRequest<string>, StatusCodeHttpResult>> RegisterAsync(
-        [Required, FromBody] RegisterChefRequest newChef,
-        CancellationToken ct = default)
+    public async Task<Results<Created<ChefDto>, BadRequest<string>, StatusCodeHttpResult>> RegisterAsync([Required, FromBody] RegisterChefRequest newChef, CancellationToken ct = default)
     {
         string chefname = newChef.Name;
         ct.ThrowIfCancellationRequested();
