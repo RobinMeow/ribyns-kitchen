@@ -6,7 +6,6 @@ Welcome to Ribyn's Kitchen, a place where users can share and explore recipes wi
 
 - [Angular](client/README.md) - Frontend
 - [Web API](./Application/README.md) Server
-- [Seed MongoDB](seed-mongo-db/README.md) - seeding script for local development.
 
 ## Requirements
 
