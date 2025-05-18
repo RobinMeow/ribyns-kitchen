@@ -15,7 +15,21 @@
         "kind": "build",
         "isDefault": true
       }
-    },{
+    },
+		{
+      "label": "seed mongodb /w custom seed",
+      "type": "shell",
+      "command": "dotnet run --no-restore --no-build --port ${input:mongodbPort} --only-drop ${input:onlyDrop} --ci ${input:ci} --seed ${input:seed}",
+      "options": {
+        "cwd": "${workspaceFolder}/Seeding/",
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
       "label": "seed mongodb CI",
       "type": "shell",
       "command": "dotnet run --no-restore --no-build --port ${input:mongodbPort} --ci",
@@ -145,6 +159,12 @@
           "true"
         ],
         "default": "true"
-    }
+    },
+    {
+      "id": "seed",
+      "type": "promptString",
+      "description": "Enter seed",
+      "default": ""
+    },
   ]
 }
