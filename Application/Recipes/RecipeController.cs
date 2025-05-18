@@ -44,11 +44,14 @@ public sealed class RecipeController : ControllerBase
 
     /// <summary>Add a new recipe.</summary>
     /// <param name="newRecipe">The recipe to add.</param>
+    /// <param name="ct"></param>
     /// <returns>The newly created recipe.</returns>
     [HttpPost(nameof(AddAsync))]
-    public async Task<Results<BadRequest<NewRecipeRequest>, Created<RecipeDto>>> AddAsync([Required] NewRecipeRequest newRecipe, CancellationToken cancellationToken = default)
+    public async Task<Results<BadRequest<NewRecipeRequest>, Created<RecipeDto>>> AddAsync(
+        [Required] NewRecipeRequest newRecipe,
+        CancellationToken ct = default)
     {
-        cancellationToken.ThrowIfCancellationRequested();
+        ct.ThrowIfCancellationRequested();
 
         var newRecipeSpecification = new NewRecipeSpecification(newRecipe);
         if (!newRecipeSpecification.IsSatisfied())
@@ -56,8 +59,8 @@ public sealed class RecipeController : ControllerBase
 
         Recipe recipe = newRecipe.ToRecipe();
 
-        cancellationToken.ThrowIfCancellationRequested();
-        await _recipeRepository.AddAsync(recipe, cancellationToken);
+        ct.ThrowIfCancellationRequested();
+        await _recipeRepository.AddAsync(recipe, ct);
 
         return TypedResults.Created(nameof(AddAsync), _toDto(recipe));
     }

@@ -1,5 +1,4 @@
 using Application.Recipes;
-using Common.Validations;
 using Domain;
 using Infrastructure.MongoDB;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -13,10 +12,10 @@ public sealed class RecipeControllerTests
 {
     readonly RecipeController _recipeController;
     readonly IRecipeCollection _recipeCollection = Substitute.For<IRecipeCollection>();
-    readonly IRecipeRepository _recipeRepository = Substitute.For<IRecipeRepository>(); 
+    readonly IRecipeRepository _recipeRepository = Substitute.For<IRecipeRepository>();
 
     public RecipeControllerTests()
-    {   
+    {
         _recipeController = new RecipeController(
             _recipeRepository,
             _recipeCollection,
@@ -51,7 +50,7 @@ public sealed class RecipeControllerTests
         };
 
         Results<BadRequest<NewRecipeRequest>, Created<RecipeDto>> result = await _recipeController.AddAsync(requestDto);
-        
+
         IsType<BadRequest<NewRecipeRequest>>(result.Result);
         var actual = result.Result as BadRequest<NewRecipeRequest>;
 
@@ -82,13 +81,13 @@ public sealed class RecipeControllerTests
     [Fact]
     public async Task GetAsync_returns_MockResult()
     {
-        Recipe recipe = new Recipe()
+        Recipe recipe = new()
         {
             Id = EntityId.New(),
             Name = ""
         };
 
-        RecipeDto dto = new RecipeDto()
+        RecipeDto dto = new()
         {
             Id = recipe.Id.ToString(),
             Name = "",
