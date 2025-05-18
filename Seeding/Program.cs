@@ -16,61 +16,43 @@ internal class Program
     static readonly Faker _faker = new ("de");
     static MongoDatabase _mongodb = null!;
     static bool _ci = false;
-    // e2e will not work with a different seed
-    const int _e2e_seed = 20250517;
 
-    static async Task Main(string[] args) // TODO allow different seed
+    static int GetArgValueInt(string[] args, string[] argNames, int defaultValue = -1)
+    {
+        for (int i = 0; i < args.Length; i++)
+            if (argNames.Any(alias => alias == args[i]))
+                return int.Parse(args[i + 1]);
+
+        return defaultValue;
+    }
+
+    static bool GetArgValueBool(string[] args, string[] argNames)
+    {
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (!argNames.Any(alias => alias == args[i])) continue;
+
+            int nextIndex = i + 1;
+
+            if (args.Length <= nextIndex) return true; // flag is used as standalone
+
+            return args[nextIndex].StartsWith("-")  // if true: flag is used as standalone-true
+            || bool.Parse(args[nextIndex]); // flag is used with true/false string value
+        }
+
+        return false;
+    }
+
+    static async Task Main(string[] args)
     {
         try
         {
-            Randomizer.Seed = new Random(_e2e_seed);
+            Randomizer.Seed = new Random(GetArgValueInt(args, new string[] { "--seed", "-s" }, defaultValue: 20250517));
             Console.ForegroundColor = ConsoleColor.Green;
-            
-            Func<int> getPort = () => 
-            {
-                for (int i = 0; i < args.Length; i++)
-                    if (args[i] == "--port" || args[i] == "-p")
-                        return int.Parse(args[i + 1]);
 
-                return 27020;
-            };
+            _ci = GetArgValueBool(args, new string[] { "--ci" });
 
-            Func<bool> isCI = () =>
-            {
-                for (int i = 0; i < args.Length; i++)
-                {
-                    if (args[i] != "--ci") continue;
-
-                    int nextIndex = i + 1;
-
-                    if (args.Length <= nextIndex) return true; // flag is used as standalone
-
-                    return args[nextIndex].StartsWith("-")  // if true: flag is used as standalone-true
-                    || bool.Parse(args[nextIndex]);
-                }
-
-                return false;
-            };
-            _ci = isCI();
-
-            Func<bool> isOnlyDrop = () =>
-            {
-                for (int i = 0; i < args.Length; i++)
-                {
-                    if (args[i] != "--only-drop") continue;
-
-                    int nextIndex = i + 1;
-
-                    if (args.Length <= nextIndex) return true; // flag is used as standalone
-
-                    return args[nextIndex].StartsWith("-")  // if true: flag is used as standalone-true
-                    || bool.Parse(args[nextIndex]);
-                }
-
-                return false;
-            };
-
-            string connectionString = $"mongodb://127.0.0.1:{getPort()}";
+            string connectionString = $"mongodb://127.0.0.1:{GetArgValueInt(args, new string[] { "--port", "-p" }, defaultValue: 27020)}";
 
             Console.WriteLine($"Connecting to MongoDB on {connectionString}");
             _mongodb = new MongoDatabase(connectionString);
@@ -79,7 +61,7 @@ internal class Program
             Console.WriteLine($"Dropping database '{dbName}'.");
             await _mongodb.Database.Client.DropDatabaseAsync(dbName);
 
-            if (isOnlyDrop())
+            if (GetArgValueBool(args, new string[] { "--only-drop" }))
             {
                 Console.WriteLine($"Database dropped.");
                 return;
@@ -122,26 +104,11 @@ internal class Program
         }
     }
 
-    public static Guid GenerateGuidFromSeed(int seed, int index)
-    {
-        using (var sha1 = System.Security.Cryptography.SHA1.Create())
-        {
-            byte[] seedBytes = Encoding.UTF8.GetBytes(seed.ToString() + index.ToString());
-            byte[] hash = sha1.ComputeHash(seedBytes);
-
-            // Create a GUID from the first 16 bytes of the hash
-            hash[6] = (byte)((hash[6] & 0x0F) | 0x50); // Version 5
-            hash[8] = (byte)((hash[8] & 0x3F) | 0x80); // Variant
-
-            return new Guid(hash[..16]);
-        }
-    }
-
     static Chef FakeChef(int index, string? name = null, string? email = null)
     {
         var chef = new Chef()
         {
-            Id = new EntityId(GenerateGuidFromSeed(_e2e_seed, index).ToString()),
+            Id = EntityId.New(),
             Name = name ??= _faker.Internet.UserName(),
             Email = email ?? _faker.Internet.Email(),
         };
