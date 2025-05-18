@@ -476,4 +476,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# I added hits git ignore in the root, because sometimes it generates bin and obj folders in the root. Not sure when.
+# I added this git ignore in the root, because sometimes it generates bin and obj folders in the root. Not sure when.
+
+# temp
+temp/
