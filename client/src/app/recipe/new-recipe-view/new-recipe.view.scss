@@ -1,0 +1,13 @@
+.recipe-layout {
+  // cyan-orange
+  // deeppurple-amber
+  // indigo-pink
+  // megenta-violet
+  // pink-bluegray
+  // purple-green
+  // rose-red
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}

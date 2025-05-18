@@ -1,25 +1,47 @@
 <h2 data-test="title">Rezept hinzufügen</h2>
 
 <form [formGroup]="form" data-test="new-recipe-form">
-  <div class="forms-column">
-    <mat-form-field>
+  <div class="recipe-layout">
+    <mat-form-field floatLabel="always" appearance="outline">
       <mat-label>Titel</mat-label>
-      <!-- Brot des Lebens: Ein Spitzname für jemanden, der anderen eine Quelle spiritueller Nahrung ist. -->
-      <!-- Honigtau: Ein Spitzname für jemanden, der süß, sanft und friedlich ist. -->
-      <!-- Salz der Erde: Ein Spitzname für jemanden, der gut und ehrenhaft ist. -->
-      <!-- Weinberg des Herrn: Ein Spitzname für jemanden, der in seinem spirituellen Leben fruchtbar und produktiv ist. -->
-      <!-- Weizen der Ernte: Ein Spitzname für jemanden, der reif ist und von Gott gebraucht werden kann. -->
       <input
         matInput
         [formControl]="form.controls.name"
-        placeholder="Weinberg des Herrn"
-        type="text"
+        placeholder="Apfelkuchen"
+        type="text" 
         data-test="recipe-name-input"
       />
       <mat-hint
         >Zwischen {{ name_min_length }} und {{ name_max_length }} Zeichen</mat-hint
       >
     </mat-form-field>
+    <mat-form-field floatLabel="always" appearance="outline">
+      <mat-label>Variation</mat-label>
+      <input
+        matInput
+        [formControl]="form.controls.variation"
+        placeholder="mit Zimt"
+        type="text" 
+        data-test="recipe-variation-input"
+      />
+      <mat-hint>Zwischen 3 und 20 Zeichen</mat-hint>
+    </mat-form-field>
+    <mat-form-field floatLabel="always" appearance="outline">
+      <!-- plus btn -->
+      <mat-label>Portionen</mat-label>
+      <input
+        matInput
+        [formControl]="form.controls.portions"
+        placeholder="2"
+        type="number" 
+        data-test="recipe-variation-input"
+      />
+      <!-- minus btn -->
+    </mat-form-field>
+
+    <!-- "Zutaten" -->
+    <!-- "Anweisungen Titel" -->
+    <!-- "+ Anweisung" -->
   </div>
   <button
     [disabled]="form.invalid"
