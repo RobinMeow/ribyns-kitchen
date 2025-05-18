@@ -18,7 +18,10 @@
     "files.trimTrailingWhitespace": true,
   },
   "[csharp]": {
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
+    "files.trimTrailingWhitespace": true,
   },
   "eslint.enable": true,
 }

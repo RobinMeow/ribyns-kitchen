@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Application.Recipes;
+﻿using Application.Recipes;
 using Bogus;
 using Common;
 using Domain;
@@ -13,7 +12,7 @@ internal class Program
     const int CHEF_COUNT = 50;
 
     static readonly IPasswordHasher _passwordHasher = new AspPasswordHasher();
-    static readonly Faker _faker = new ("de");
+    static readonly Faker _faker = new("de");
     static MongoDatabase _mongodb = null!;
     static bool _ci = false;
 
@@ -73,7 +72,7 @@ internal class Program
 
             Console.WriteLine($"\nSeeding done.");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(ex.ToString());

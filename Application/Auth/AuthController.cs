@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Common.Validations;
 using Domain;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
@@ -38,7 +37,6 @@ public sealed class AuthController : ControllerBase
         CancellationToken ct = default)
     {
         string chefname = newChef.Name;
-
         ct.ThrowIfCancellationRequested();
         Chef? chefWithSameName = await _chefRepository.GetByNameAsync(chefname, ct);
 
